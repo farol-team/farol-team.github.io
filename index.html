@@ -1,40 +1,224 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Farol.team — AI Hypothesis Lab</title>
-    <meta name="description" content="Farol is a laboratory for testing AI hypotheses and building products.">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            color: #1a1a2e;
-        }
-        main { max-width: 480px; text-align: center; }
-        h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
-        h1 span { color: #e8b830; }
-        .tagline { color: #888; margin-bottom: 2.5rem; }
-        blockquote { font-style: italic; margin-bottom: 0.5rem; }
-        .attr { color: #888; margin-bottom: 2.5rem; }
-        a { color: #1a1a2e; }
-        footer { position: fixed; bottom: 1.5rem; color: #ccc; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Farol Labs — Hypotheses Board</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏗️</text></svg>">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0a0a0f;
+    color: #e0e0e0;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  header {
+    text-align: center;
+    padding: 48px 20px 32px;
+  }
+
+  header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #6366f1, #a78bfa, #c084fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+
+  header p {
+    color: #888;
+    font-size: 1rem;
+  }
+
+  .board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px 24px 60px;
+  }
+
+  @media (max-width: 768px) {
+    .board { grid-template-columns: 1fr; }
+  }
+
+  .column {
+    background: #13131a;
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px solid #1e1e2e;
+  }
+
+  .column-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #1e1e2e;
+  }
+
+  .column-header .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .col-todo .dot { background: #f59e0b; }
+  .col-progress .dot { background: #3b82f6; }
+  .col-done .dot { background: #22c55e; }
+
+  .column-header h2 {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #999;
+    font-weight: 600;
+  }
+
+  .column-header .count {
+    margin-left: auto;
+    background: #1e1e2e;
+    color: #888;
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+  }
+
+  .card {
+    background: #1a1a24;
+    border: 1px solid #252535;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 12px;
+    transition: transform 0.2s, border-color 0.2s;
+    text-decoration: none;
+    display: block;
+    color: inherit;
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    border-color: #6366f1;
+  }
+
+  .card:last-child { margin-bottom: 0; }
+
+  .card h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #f0f0f0;
+    margin-bottom: 6px;
+  }
+
+  .card .desc {
+    font-size: 0.85rem;
+    color: #777;
+    line-height: 1.5;
+  }
+
+  .card .url {
+    font-size: 0.75rem;
+    color: #6366f1;
+    margin-top: 10px;
+    display: inline-block;
+    opacity: 0.8;
+  }
+
+  .card .tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    padding: 3px 8px;
+    border-radius: 6px;
+    margin-top: 10px;
+    font-weight: 500;
+  }
+
+  .tag-product { background: #1e293b; color: #60a5fa; }
+  .tag-infra { background: #1a2e1a; color: #4ade80; }
+  .tag-platform { background: #2e1a2e; color: #c084fc; }
+
+  footer {
+    text-align: center;
+    padding: 32px;
+    color: #444;
+    font-size: 0.8rem;
+  }
+
+  footer a { color: #6366f1; text-decoration: none; }
+</style>
 </head>
 <body>
-    <main>
-        <h1>Farol<span>.</span>team</h1>
-        <p class="tagline">A laboratory for testing AI hypotheses and building products.</p>
-        <blockquote>"Make it simple, but not simpler."</blockquote>
-        <p class="attr">— Albert Einstein</p>
-        <a href="https://github.com/orgs/farol-team/">GitHub</a>
-    </main>
-    <footer>&copy; 2026 Farol.team</footer>
+
+<header>
+  <h1>Farol Labs</h1>
+  <p>Hypotheses Board</p>
+</header>
+
+<div class="board">
+
+  <!-- TO DO -->
+  <div class="column col-todo">
+    <div class="column-header">
+      <div class="dot"></div>
+      <h2>To Do</h2>
+      <span class="count">1</span>
+    </div>
+    <div class="card">
+      <h3>Skillmart</h3>
+      <div class="desc">Marketplace for AI agent skills — create, share, and monetize agent capabilities</div>
+      <span class="tag tag-platform">platform</span>
+    </div>
+  </div>
+
+  <!-- IN PROGRESS -->
+  <div class="column col-progress">
+    <div class="column-header">
+      <div class="dot"></div>
+      <h2>In Progress</h2>
+      <span class="count">2</span>
+    </div>
+    <a class="card" href="https://getsebastian.app" target="_blank">
+      <h3>Sebastian</h3>
+      <div class="desc">OpenClaw in your Telegram / WhatsApp in one minute. Infrastructure layer for AI agents.</div>
+      <span class="url">getsebastian.app ↗</span><br>
+      <span class="tag tag-infra">infra</span>
+    </a>
+    <a class="card" href="https://cofounder.run" target="_blank">
+      <h3>Ori — AI Co-Founder</h3>
+      <div class="desc">Value layer on top of Sebastian. AI co-founder with memory, workflows, and real execution. No equity.</div>
+      <span class="url">cofounder.run ↗</span><br>
+      <span class="tag tag-product">product</span>
+    </a>
+  </div>
+
+  <!-- DONE -->
+  <div class="column col-done">
+    <div class="column-header">
+      <div class="dot"></div>
+      <h2>Done</h2>
+      <span class="count">1</span>
+    </div>
+    <a class="card" href="https://farol.io" target="_blank">
+      <h3>Farol.io</h3>
+      <div class="desc">Umbrella brand and landing page for Farol Labs</div>
+      <span class="url">farol.io ↗</span><br>
+      <span class="tag tag-infra">infra</span>
+    </a>
+  </div>
+
+</div>
+
+<footer>
+  <a href="https://farol.io">Farol Labs</a> · 2026
+</footer>
+
 </body>
 </html>
