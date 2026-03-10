@@ -1,53 +1,406 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Farol.team — AI Hypothesis Lab</title>
-    <meta name="description" content="Farol is a laboratory for testing AI hypotheses and building products.">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            color: #1a1a2e;
-        }
-        main { max-width: 480px; text-align: center; }
-        h1 { font-size: 2rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
-        h1 span { color: #e8b830; }
-        .tagline { color: #888; margin-bottom: 2.5rem; }
-        blockquote { font-style: italic; margin-bottom: 0.5rem; }
-        .attr { color: #888; margin-bottom: 2.5rem; }
-        .links { display: flex; gap: 1.5rem; justify-content: center; }
-        .links a {
-            color: #1a1a2e;
-            text-decoration: none;
-            font-size: 0.9rem;
-            padding: 6px 0;
-            border-bottom: 1px solid transparent;
-            transition: border-color 0.2s;
-        }
-        .links a:hover { border-bottom-color: #e8b830; }
-        footer { position: fixed; bottom: 1.5rem; color: #ccc; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Farol — Hire Your AI Team</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Inter', -apple-system, system-ui, sans-serif;
+  background: #fafafa; color: #111;
+  -webkit-font-smoothing: antialiased;
+}
+
+nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px clamp(20px, 4vw, 48px);
+  background: #fff; border-bottom: 1px solid #eee;
+}
+.nav-logo { font-weight: 800; font-size: 18px; letter-spacing: -0.03em; text-decoration: none; color: #111; }
+.nav-logo span { color: #f59e0b; }
+.nav-links { display: flex; gap: 16px; align-items: center; }
+.nav-links a { font-size: 13px; font-weight: 500; color: #888; text-decoration: none; }
+
+.wrap { max-width: 640px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 24px); }
+
+/* Hero */
+.hero {
+  text-align: center;
+  padding: clamp(40px, 6vw, 64px) 0 clamp(24px, 4vw, 36px);
+}
+.hero h1 {
+  font-size: clamp(28px, 5vw, 44px); font-weight: 900;
+  letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 10px;
+}
+.hero h1 .em { color: #f59e0b; }
+.hero p { font-size: 16px; color: #666; line-height: 1.5; }
+
+/* Job form */
+.job-form {
+  background: #fff; border: 1px solid #eee; border-radius: 20px;
+  padding: clamp(24px, 4vw, 36px); margin-bottom: 32px;
+}
+
+.form-step { display: none; }
+.form-step.active { display: block; }
+
+.step-label {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.1em; color: #f59e0b; margin-bottom: 6px;
+}
+.step-title {
+  font-size: 22px; font-weight: 800; letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+.step-hint { font-size: 14px; color: #888; margin-bottom: 20px; line-height: 1.4; }
+
+.field { margin-bottom: 18px; }
+.field label { display: block; font-size: 13px; font-weight: 600; color: #333; margin-bottom: 5px; }
+.field .sub { font-size: 12px; color: #999; margin-bottom: 5px; }
+.field input, .field textarea, .field select {
+  width: 100%; padding: 11px 14px;
+  border: 1.5px solid #e0e0e0; border-radius: 10px;
+  font-size: 14px; font-family: inherit; color: #111;
+  background: #fff; outline: none; transition: border-color 0.15s;
+}
+.field input:focus, .field textarea:focus { border-color: #f59e0b; }
+.field textarea { resize: vertical; min-height: 72px; line-height: 1.5; }
+
+.templates {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 18px;
+}
+.tpl {
+  padding: 12px; border: 1.5px solid #eee; border-radius: 12px;
+  cursor: pointer; transition: border-color 0.15s, background 0.15s;
+  text-align: center;
+}
+.tpl:hover { border-color: #ddd; background: #fafafa; }
+.tpl.active { border-color: #f59e0b; background: #fffbeb; }
+.tpl .ico { font-size: 24px; margin-bottom: 4px; }
+.tpl .name { font-size: 13px; font-weight: 700; }
+
+.btn-row { display: flex; gap: 10px; margin-top: 24px; }
+.btn {
+  flex: 1; padding: 13px; border: none; border-radius: 12px;
+  font-size: 15px; font-weight: 700; font-family: inherit;
+  cursor: pointer; transition: opacity 0.15s;
+}
+.btn-next { background: #111; color: #fff; }
+.btn-next:hover { opacity: 0.85; }
+.btn-back { background: #f5f5f5; color: #555; }
+.btn-back:hover { background: #eee; }
+.btn-hire { background: #f59e0b; color: #fff; flex: 2; }
+.btn-hire:hover { opacity: 0.9; }
+
+/* Progress */
+.progress {
+  display: flex; gap: 6px; margin-bottom: 24px;
+}
+.prog-dot {
+  flex: 1; height: 4px; border-radius: 4px; background: #eee;
+  transition: background 0.3s;
+}
+.prog-dot.done { background: #22c55e; }
+.prog-dot.current { background: #f59e0b; }
+
+/* Result */
+.result { display: none; }
+.result.show { display: block; }
+.result-card {
+  background: #fff; border: 2px solid #f59e0b; border-radius: 20px;
+  padding: 32px; text-align: center; margin: 32px 0;
+  animation: popIn 0.4s ease;
+}
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+.result-card .avatar {
+  width: 72px; height: 72px; border-radius: 20px;
+  background: #fffbeb; display: flex; align-items: center; justify-content: center;
+  font-size: 36px; margin: 0 auto 16px;
+}
+.result-card h2 { font-size: 24px; font-weight: 800; margin-bottom: 4px; }
+.result-card .role { font-size: 14px; color: #f59e0b; font-weight: 600; margin-bottom: 16px; }
+.result-card .speech {
+  background: #fafafa; border-radius: 16px; padding: 16px;
+  font-size: 14px; color: #333; line-height: 1.6; text-align: left;
+  margin-bottom: 20px; position: relative;
+}
+.result-card .speech::before {
+  content: ''; position: absolute; top: -8px; left: 50%; transform: translateX(-50%);
+  border-left: 8px solid transparent; border-right: 8px solid transparent;
+  border-bottom: 8px solid #fafafa;
+}
+.result-card .specs {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+  text-align: left; margin-bottom: 20px;
+}
+.result-card .spec {
+  background: #f9f9f9; border-radius: 8px; padding: 10px;
+}
+.result-card .spec .k { font-size: 11px; font-weight: 600; color: #999; text-transform: uppercase; letter-spacing: 0.05em; }
+.result-card .spec .v { font-size: 14px; font-weight: 600; color: #111; }
+.btn-start {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 28px; background: #111; color: #fff;
+  border: none; border-radius: 12px; font-size: 16px; font-weight: 700;
+  font-family: inherit; cursor: pointer;
+}
+.btn-start:hover { opacity: 0.85; }
+.price-note { font-size: 13px; color: #999; margin-top: 10px; }
+
+/* Mobile */
+@media (max-width: 500px) {
+  .templates { grid-template-columns: 1fr; }
+  .result-card .specs { grid-template-columns: 1fr; }
+}
+</style>
 </head>
 <body>
-    <main>
-        <h1>Farol<span>.</span>team</h1>
-        <p class="tagline">A laboratory for testing AI hypotheses and building products.</p>
-        <blockquote>"Make it simple, but not simpler."</blockquote>
-        <p class="attr">— Albert Einstein</p>
-        <div class="links">
-            <a href="https://github.com/orgs/farol-team/">GitHub</a>
-            <a href="/manifest">Manifest</a>
-            <a href="/projects">Projects</a>
+
+<nav>
+  <a href="/" class="nav-logo">farol<span>.</span></a>
+  <div class="nav-links">
+    <a href="https://getsebastian.app">Sebastian</a>
+    <a href="https://cofounder.run">Ori</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <div class="hero">
+    <h1>Hire your <span class="em">AI team</span>.</h1>
+    <p>Post a job. Get a perfect AI employee in 60 seconds.<br>No interviews. No salaries. Just results.<br><strong>Lives in your Telegram.</strong></p>
+  </div>
+
+  <!-- JOB FORM -->
+  <div class="job-form" id="jobForm">
+    <div class="progress">
+      <div class="prog-dot current" id="p1"></div>
+      <div class="prog-dot" id="p2"></div>
+      <div class="prog-dot" id="p3"></div>
+    </div>
+
+    <!-- STEP 1: Role -->
+    <div class="form-step active" id="step1">
+      <div class="step-label">Step 1 of 3</div>
+      <div class="step-title">What role are you hiring for?</div>
+      <div class="step-hint">Pick a template or write your own job title.</div>
+
+      <div class="templates" id="tpl-grid">
+        <div class="tpl" onclick="pickRole(this, '📊', 'Marketing Manager', 'Runs ads, writes copy, tracks metrics')">
+          <div class="ico">📊</div><div class="name">Marketing</div>
         </div>
-    </main>
-    <footer>&copy; 2026 Farol.team</footer>
+        <div class="tpl" onclick="pickRole(this, '🎯', 'Sales Rep', 'Finds leads, writes outreach, follows up')">
+          <div class="ico">🎯</div><div class="name">Sales</div>
+        </div>
+        <div class="tpl" onclick="pickRole(this, '💬', 'Customer Support', 'Answers questions, handles complaints 24/7')">
+          <div class="ico">💬</div><div class="name">Support</div>
+        </div>
+        <div class="tpl" onclick="pickRole(this, '📝', 'Content Writer', 'Blog posts, social media, newsletters')">
+          <div class="ico">📝</div><div class="name">Content</div>
+        </div>
+        <div class="tpl" onclick="pickRole(this, '📋', 'Project Manager', 'Tracks tasks, deadlines, team coordination')">
+          <div class="ico">📋</div><div class="name">PM</div>
+        </div>
+        <div class="tpl" onclick="pickRole(this, '🔍', 'Research Analyst', 'Market research, competitor analysis, reports')">
+          <div class="ico">🔍</div><div class="name">Research</div>
+        </div>
+        <div class="tpl" onclick="pickRole(this, '📞', 'Order Manager', 'Takes orders, manages delivery, inventory')">
+          <div class="ico">📞</div><div class="name">Orders</div>
+        </div>
+        <div class="tpl" onclick="pickRole(this, '✨', 'Custom role', '')">
+          <div class="ico">✨</div><div class="name">Custom</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Job title</label>
+        <input type="text" id="f-title" placeholder="e.g. Head of Marketing">
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-next" onclick="goStep(2)">Next →</button>
+      </div>
+    </div>
+
+    <!-- STEP 2: Responsibilities -->
+    <div class="form-step" id="step2">
+      <div class="step-label">Step 2 of 3</div>
+      <div class="step-title">What should they do?</div>
+      <div class="step-hint">Describe the responsibilities. Be specific — the more detail, the better the match.</div>
+
+      <div class="field">
+        <label>Key responsibilities</label>
+        <div class="sub">What tasks will this employee handle daily?</div>
+        <textarea id="f-resp" rows="4" placeholder="- Run Facebook and Google ad campaigns&#10;- Write ad copy and test variations&#10;- Send weekly performance reports&#10;- Monitor competitor ads and pricing"></textarea>
+      </div>
+
+      <div class="field">
+        <label>Expected results</label>
+        <div class="sub">What does success look like?</div>
+        <textarea id="f-results" rows="3" placeholder="- Lower cost per lead by 20%&#10;- Generate 50+ qualified leads per week&#10;- Weekly report every Monday by 9am"></textarea>
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-back" onclick="goStep(1)">← Back</button>
+        <button class="btn btn-next" onclick="goStep(3)">Next →</button>
+      </div>
+    </div>
+
+    <!-- STEP 3: About your business -->
+    <div class="form-step" id="step3">
+      <div class="step-label">Step 3 of 3</div>
+      <div class="step-title">Tell us about your business</div>
+      <div class="step-hint">So your AI employee understands the context.</div>
+
+      <div class="field">
+        <label>What's your business?</label>
+        <input type="text" id="f-biz" placeholder="e.g. Flower shop in São Paulo, delivery + events">
+      </div>
+
+      <div class="field">
+        <label>Anything else they should know?</label>
+        <textarea id="f-context" rows="3" placeholder="e.g. We mostly get customers through Instagram. Peak season is Valentine's Day and Mother's Day. Budget for ads: $500/month."></textarea>
+      </div>
+
+      <div class="field">
+        <label>Your email (to send the bot link)</label>
+        <input type="email" id="f-email" placeholder="you@example.com">
+      </div>
+
+      <div class="btn-row">
+        <button class="btn btn-back" onclick="goStep(2)">← Back</button>
+        <button class="btn btn-hire" onclick="hire()">🚀 Find my AI employee</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESULT -->
+  <div class="result" id="result">
+    <div class="result-card">
+      <div class="avatar" id="r-icon">📊</div>
+      <h2 id="r-name">Loading...</h2>
+      <div class="role" id="r-role">Your new AI employee</div>
+      <div class="speech" id="r-speech">
+        Hey! I'm your new marketing manager. I've already reviewed your business — a flower shop in São Paulo with Instagram as the main channel. Here's what I'll do this week: audit your current ads, set up tracking, and draft 3 ad variations for testing. Ready to start?
+      </div>
+      <div class="specs">
+        <div class="spec"><div class="k">Works</div><div class="v">24/7</div></div>
+        <div class="spec"><div class="k">Responds</div><div class="v">Instantly</div></div>
+        <div class="spec"><div class="k">Remembers</div><div class="v">Everything</div></div>
+        <div class="spec"><div class="k">Salary</div><div class="v" id="r-price">$49/mo</div></div>
+      </div>
+      <button class="btn-start" onclick="window.open('https://t.me/GetSebastianBot','_blank')">
+        <svg viewBox="0 0 24 24" fill="white" width="18" height="18"><path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.53 8.15l-1.83 8.63c-.14.62-.5.77-.99.48l-2.8-2.06-1.35 1.3c-.15.15-.28.28-.57.28l.2-2.85 5.18-4.68c.23-.2-.05-.31-.35-.12l-6.4 4.03-2.76-.86c-.6-.19-.61-.6.13-.89l10.78-4.15c.5-.18.93.12.76.89z"/></svg>
+        Start working together
+      </button>
+      <div class="price-note">7 days free · No credit card · Cancel anytime</div>
+    </div>
+  </div>
+</div>
+
+<script>
+let selectedIcon = '📊';
+let selectedRole = '';
+
+function pickRole(el, icon, title, desc) {
+  document.querySelectorAll('.tpl').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  selectedIcon = icon;
+  selectedRole = title;
+  document.getElementById('f-title').value = title;
+  if (desc) {
+    const resp = document.getElementById('f-resp');
+    if (!resp.value) resp.value = desc;
+  }
+}
+
+function goStep(n) {
+  // Validate
+  if (n === 2 && !document.getElementById('f-title').value.trim()) {
+    document.getElementById('f-title').focus();
+    document.getElementById('f-title').style.borderColor = '#ef4444';
+    return;
+  }
+  if (n === 3 && !document.getElementById('f-resp').value.trim()) {
+    document.getElementById('f-resp').focus();
+    document.getElementById('f-resp').style.borderColor = '#ef4444';
+    return;
+  }
+
+  document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
+  document.getElementById('step' + n).classList.add('active');
+
+  for (let i = 1; i <= 3; i++) {
+    const dot = document.getElementById('p' + i);
+    dot.className = 'prog-dot' + (i < n ? ' done' : i === n ? ' current' : '');
+  }
+}
+
+function hire() {
+  const title = document.getElementById('f-title').value.trim();
+  const resp = document.getElementById('f-resp').value.trim();
+  const results = document.getElementById('f-results').value.trim();
+  const biz = document.getElementById('f-biz').value.trim();
+  const context = document.getElementById('f-context').value.trim();
+  const email = document.getElementById('f-email').value.trim();
+
+  if (!biz) {
+    document.getElementById('f-biz').focus();
+    document.getElementById('f-biz').style.borderColor = '#ef4444';
+    return;
+  }
+
+  // Generate name from role
+  const names = {
+    'Marketing Manager': 'Max',
+    'Sales Rep': 'Sofia',
+    'Customer Support': 'Luna',
+    'Content Writer': 'Kai',
+    'Project Manager': 'Nova',
+    'Research Analyst': 'Atlas',
+    'Order Manager': 'Rio',
+  };
+  const name = names[title] || 'Alex';
+
+  // Build speech
+  const speech = `Hey! I'm ${name}, your new ${title.toLowerCase()}. ${biz ? `I see you're running ${biz.toLowerCase().startsWith('a ') || biz.toLowerCase().startsWith('an ') ? '' : 'a '}${biz}.` : ''} ${results ? `My goal: ${results.split('\n')[0].replace(/^-\s*/, '').toLowerCase()}.` : ''} I'll start by reviewing everything you've shared and propose a first week plan. Ready when you are.`;
+
+  document.getElementById('r-icon').textContent = selectedIcon;
+  document.getElementById('r-name').textContent = name;
+  document.getElementById('r-role').textContent = title;
+  document.getElementById('r-speech').textContent = speech;
+
+  // Hide form, show result
+  document.getElementById('jobForm').style.display = 'none';
+  document.getElementById('result').classList.add('show');
+
+  // Send data via mailto
+  const body = [
+    'ROLE: ' + title,
+    'RESPONSIBILITIES:\n' + resp,
+    'EXPECTED RESULTS:\n' + results,
+    'BUSINESS: ' + biz,
+    'CONTEXT: ' + context,
+    'EMAIL: ' + email,
+    'CREATED: ' + new Date().toISOString()
+  ].join('\n\n');
+
+  const a = document.createElement('a');
+  a.href = 'mailto:ori@agentmail.to?subject=Hire: ' + encodeURIComponent(title) + '&body=' + encodeURIComponent(body);
+  a.target = '_blank';
+  a.click();
+
+  // Save locally
+  const agents = JSON.parse(localStorage.getItem('farol-hires') || '[]');
+  agents.push({ title, resp, results, biz, context, email, icon: selectedIcon, name, created: new Date().toISOString() });
+  localStorage.setItem('farol-hires', JSON.stringify(agents));
+}
+</script>
+
 </body>
 </html>
