@@ -56,7 +56,7 @@
 
   /* ── Dashboard ── */
   .dashboard {
-    display: grid; grid-template-columns: repeat(3, 1fr);
+    display: grid; grid-template-columns: repeat(4, 1fr);
     gap: 1px; background: #e5e5e5; border-radius: 14px; overflow: hidden;
     margin: 32px 0;
   }
@@ -84,6 +84,9 @@
   .stat .label {
     font-size: 11px; font-weight: 600; text-transform: uppercase;
     letter-spacing: 0.06em; color: #999; margin-top: 4px;
+  }
+  .stat .stat-sub {
+    font-size: 10px; color: #bbb; margin-top: 2px;
   }
 
   /* ── Products ── */
@@ -194,14 +197,20 @@
     <div class="stat">
       <div class="num">$1M</div>
       <div class="label">MRR Goal</div>
+      <div class="stat-sub">by Dec 31, 2026</div>
     </div>
     <div class="stat">
-      <div class="num">$0</div>
+      <div class="num red">$0</div>
       <div class="label">MRR Now</div>
     </div>
     <div class="stat">
-      <div class="num blue">2+1</div>
-      <div class="label">Founders</div>
+      <div class="num">$200K</div>
+      <div class="label">Revenue Goal</div>
+      <div class="stat-sub">by May 23, 2026</div>
+    </div>
+    <div class="stat">
+      <div class="num red">$0</div>
+      <div class="label">Revenue Now</div>
     </div>
 
   </div>
