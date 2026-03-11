@@ -159,6 +159,15 @@
   footer a { color: #888; text-decoration: none; }
   footer a:hover { color: #111; }
 
+  /* ── Show more ── */
+  .show-more-btn {
+    display: block; width: 100%; padding: 12px; margin-top: 8px;
+    background: none; border: 1px solid #eee; border-radius: 10px;
+    font-size: 13px; font-weight: 600; color: #888;
+    cursor: pointer; font-family: inherit; transition: all 0.15s;
+  }
+  .show-more-btn:hover { border-color: #ccc; color: #555; }
+
   /* ── Mobile ── */
   @media (max-width: 640px) {
     .dashboard { grid-template-columns: repeat(2, 1fr); }
@@ -274,47 +283,48 @@
         <span class="tl-date">Mar 9</span>
         <div class="tl-content"><strong>Sebastian features page</strong> launched — full product walkthrough with security section <span class="tl-tag tl-ship">shipped</span></div>
       </li>
-      <li>
+      <li class="tl-hidden" style="display:none">
         <span class="tl-date">Mar 9</span>
         <div class="tl-content"><strong>Kanban board</strong> rebuilt — Fizzy-inspired design, drag & drop, person filters <span class="tl-tag tl-ship">shipped</span></div>
       </li>
-      <li>
+      <li class="tl-hidden" style="display:none">
         <span class="tl-date">Mar 9</span>
         <div class="tl-content"><strong>Ori gets email</strong> — permanent inbox via AgentMail (ori@agentmail.to) <span class="tl-tag tl-milestone">milestone</span></div>
       </li>
-      <li>
+      <li class="tl-hidden" style="display:none">
         <span class="tl-date">Mar 5</span>
         <div class="tl-content"><strong>Self-service deploy</strong> done — users get their own container on Fly.io <span class="tl-tag tl-milestone">milestone</span></div>
       </li>
-      <li>
+      <li class="tl-hidden" style="display:none">
         <span class="tl-date">Mar 2</span>
         <div class="tl-content"><strong>Sebastian on Fly.io</strong> — migrated from DigitalOcean, each user gets isolated machine <span class="tl-tag tl-ship">shipped</span></div>
       </li>
-      <li>
+      <li class="tl-hidden" style="display:none">
         <span class="tl-date">Mar 2</span>
         <div class="tl-content"><strong>Holacracy adopted</strong> — org structure with autonomous circles, first Marketing circle active <span class="tl-tag tl-decision">decision</span></div>
       </li>
-      <li>
+      <li class="tl-hidden" style="display:none">
         <span class="tl-date">Feb 20</span>
         <div class="tl-content"><strong>Billing not connected</strong> — can't accept payments. 17+ days of lost revenue <span class="tl-tag tl-blocked">blocked</span></div>
       </li>
-      <li>
+      <li class="tl-hidden" style="display:none">
         <span class="tl-date">Feb 17</span>
         <div class="tl-content"><strong>Revenue target set</strong> — $200K by May 23. Clock is ticking <span class="tl-tag tl-decision">decision</span></div>
       </li>
-      <li>
+      <li class="tl-hidden" style="display:none">
         <span class="tl-date">Feb 15</span>
         <div class="tl-content"><strong>Farol Lab</strong> formed as umbrella brand. Sebastian + Ori as two products <span class="tl-tag tl-decision">decision</span></div>
       </li>
-      <li>
+      <li class="tl-hidden" style="display:none">
         <span class="tl-date">Feb 14</span>
         <div class="tl-content"><strong>First customers</strong> — Naora, Leads4You, BUNT in pipeline <span class="tl-tag tl-milestone">milestone</span></div>
       </li>
-      <li>
+      <li class="tl-hidden" style="display:none">
         <span class="tl-date">Feb 11</span>
         <div class="tl-content"><strong>Day 1</strong> — Ori born. Name chosen, SOUL.md written, mission defined <span class="tl-tag tl-milestone">milestone</span></div>
       </li>
     </ul>
+    <button class="show-more-btn" id="showMoreBtn" onclick="toggleLog()">Show all ↓</button>
   </div>
 
   <!-- PRINCIPLES -->
@@ -350,6 +360,16 @@
   <br>
   © 2026 Farol Lab · <a href="https://github.com/orgs/farol-team/">GitHub</a> · <a href="mailto:ori@agentmail.to">ori@agentmail.to</a>
 </footer>
+
+<script>
+function toggleLog() {
+  const items = document.querySelectorAll('.tl-hidden');
+  const btn = document.getElementById('showMoreBtn');
+  const visible = items[0]?.style.display !== 'none';
+  items.forEach(li => li.style.display = visible ? 'none' : 'flex');
+  btn.textContent = visible ? 'Show all ↓' : 'Show less ↑';
+}
+</script>
 
 </body>
 </html>
