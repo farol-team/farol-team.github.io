@@ -19,7 +19,6 @@
   --shadow: 0 0 0 1px oklch(0% 0 0 / 5%), 0 0.15em 0.15em oklch(0% 0 0 / 5%), 0 0.3em 0.3em oklch(0% 0 0 / 4%), 0 0.6em 0.6em oklch(0% 0 0 / 3%);
   --shadow-hover: 0 0 0 1px oklch(0% 0 0 / 8%), 0 0.2em 0.4em oklch(0% 0 0 / 8%), 0 0.5em 1em oklch(0% 0 0 / 6%);
 
-  /* Column colors — Fizzy's oklch palette */
   --color-notnow: oklch(66% 0.008 258);
   --color-maybe: oklch(66% 0.196 258);
   --color-next: oklch(74% 0.184 70);
@@ -29,7 +28,6 @@
   --color-blocked: oklch(66% 0.204 40);
 
   --col-width: 280px;
-  --col-collapsed: 40px;
   --col-gap: 8px;
   --col-padding: 16px;
   --col-radius: 20px;
@@ -57,9 +55,7 @@ body { font-family: var(--font); background: var(--canvas); color: var(--ink); m
   padding: 12px 24px; border-bottom: 1px solid var(--ink-lighter);
 }
 .topbar-left { display: flex; align-items: center; gap: 12px; }
-.logo {
-  display: flex; gap: 2px; align-items: center;
-}
+.logo { display: flex; gap: 2px; align-items: center; }
 .logo-bar { width: 3px; height: 16px; border-radius: 2px; }
 .logo-bar:nth-child(1) { background: oklch(66% 0.204 40); }
 .logo-bar:nth-child(2) { background: oklch(74% 0.184 70); }
@@ -68,10 +64,13 @@ body { font-family: var(--font); background: var(--canvas); color: var(--ink); m
 .logo-bar:nth-child(5) { background: oklch(66% 0.258 308); }
 .logo-text { font-weight: 800; font-size: 1.1em; margin-left: 6px; }
 .topbar-right { display: flex; gap: 8px; align-items: center; }
-.theme-btn {
+.theme-btn, .add-global-btn {
   background: none; border: 1px solid var(--ink-lighter); border-radius: 6px;
   padding: 4px 10px; cursor: pointer; font-size: 0.85em; color: var(--ink-dark);
+  font-family: var(--font);
 }
+.add-global-btn { font-weight: 700; }
+.add-global-btn:hover { border-color: var(--color-progress); color: var(--color-progress); }
 
 /* Alert strip */
 .alert-strip {
@@ -125,10 +124,10 @@ body { font-family: var(--font); background: var(--canvas); color: var(--ink); m
 .col[data-col="review"] { --card-color: var(--color-review); }
 .col[data-col="done"] { --card-color: var(--color-notnow); }
 
-/* Column header — pill */
+/* Column header */
 .col-header {
   display: flex; align-items: center; justify-content: center; gap: 6px;
-  padding: 10px var(--col-padding); cursor: pointer; user-select: none;
+  padding: 10px var(--col-padding); cursor: default; user-select: none;
   font-size: 0.72em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
   color: color-mix(in srgb, var(--card-color) 75%, var(--ink));
   position: sticky; top: 0; z-index: 2;
@@ -139,6 +138,13 @@ body { font-family: var(--font); background: var(--canvas); color: var(--ink); m
   padding: 1px 8px; border-radius: 99px; font-weight: 600;
   font-size: 0.95em; min-width: 20px; text-align: center;
 }
+.col-add-btn {
+  background: none; border: none; cursor: pointer; font-size: 1.2em;
+  color: color-mix(in srgb, var(--card-color) 50%, var(--ink-medium));
+  padding: 0 4px; line-height: 1; border-radius: 4px;
+  opacity: 0.5; transition: opacity 0.15s;
+}
+.col-add-btn:hover { opacity: 1; }
 
 /* Card list */
 .card-list {
@@ -156,17 +162,15 @@ body { font-family: var(--font); background: var(--canvas); color: var(--ink); m
   outline-offset: -2px;
 }
 
-/* Card — Fizzy style */
+/* Card */
 .card {
   --card-bg: color-mix(in srgb, var(--card-color) 4%, var(--canvas));
   --card-content: color-mix(in srgb, var(--card-color) 30%, var(--ink));
   --card-text: color-mix(in srgb, var(--card-color) 75%, var(--ink));
-
   background: var(--card-bg);
   border-radius: var(--card-radius);
   box-shadow: var(--shadow);
-  padding: 0;
-  cursor: grab; user-select: none;
+  padding: 0; cursor: grab; user-select: none;
   position: relative;
   transition: box-shadow 0.15s, transform 0.15s, opacity 0.2s;
   overflow: hidden;
@@ -176,7 +180,6 @@ body { font-family: var(--font); background: var(--canvas); color: var(--ink); m
 .card.dragging { opacity: 0.25; transform: scale(0.96); }
 .card.hidden { display: none; }
 
-/* Card top bar — colored tag */
 .card-tag {
   background: var(--card-color); color: var(--canvas);
   font-size: 0.6em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
@@ -184,10 +187,7 @@ body { font-family: var(--font); background: var(--canvas); color: var(--ink); m
   border-radius: var(--card-radius) 0 var(--card-radius) 0;
   pointer-events: none;
 }
-
-.card-body {
-  padding: 8px 12px 12px; pointer-events: none;
-}
+.card-body { padding: 8px 12px 12px; pointer-events: none; }
 .card-title {
   font-size: 1.15em; font-weight: 900; line-height: 1.15;
   color: var(--card-content); text-wrap: balance;
@@ -195,9 +195,7 @@ body { font-family: var(--font); background: var(--canvas); color: var(--ink); m
 .card-desc {
   font-size: 0.78em; color: var(--card-text); margin-top: 4px; line-height: 1.4;
 }
-
-/* Person tags */
-.card-people { display: flex; gap: 4px; margin-top: 8px; pointer-events: none; }
+.card-people { display: flex; gap: 4px; margin-top: 8px; pointer-events: none; flex-wrap: wrap; }
 .person {
   font-size: 0.6em; font-weight: 700; text-transform: uppercase;
   letter-spacing: 0.04em; padding: 2px 8px; border-radius: 2px;
@@ -205,7 +203,7 @@ body { font-family: var(--font); background: var(--canvas); color: var(--ink); m
   color: var(--card-text);
 }
 
-/* Blocked card overlay */
+/* Blocked */
 .card.is-blocked {
   --card-color: var(--color-blocked) !important;
   --card-bg: color-mix(in srgb, var(--color-blocked) 6%, var(--canvas));
@@ -216,8 +214,7 @@ body { font-family: var(--font); background: var(--canvas); color: var(--ink); m
   border: 2px solid var(--color-blocked); border-radius: 3px;
   color: var(--color-blocked); font-size: 0.55em; font-weight: 900;
   text-transform: uppercase; letter-spacing: 0.1em;
-  padding: 2px 6px; rotate: 4deg; pointer-events: none;
-  opacity: 0.7;
+  padding: 2px 6px; rotate: 4deg; pointer-events: none; opacity: 0.7;
 }
 .card.is-blocked .blocked-stamp { display: block; }
 
@@ -256,8 +253,8 @@ body { font-family: var(--font); background: var(--canvas); color: var(--ink); m
 }
 .modal-overlay.show { display: flex; }
 .modal {
-  background: var(--canvas); border-radius: 16px; width: 520px; max-width: 92vw;
-  max-height: 85vh; overflow-y: auto; box-shadow: 0 24px 80px rgba(0,0,0,0.25);
+  background: var(--canvas); border-radius: 16px; width: 560px; max-width: 92vw;
+  max-height: 88vh; overflow-y: auto; box-shadow: 0 24px 80px rgba(0,0,0,0.25);
   animation: modalIn 0.2s ease;
 }
 @keyframes modalIn { from { opacity:0; transform: scale(0.96) translateY(8px); } to { opacity:1; transform: none; } }
@@ -265,7 +262,8 @@ body { font-family: var(--font); background: var(--canvas); color: var(--ink); m
   display: flex; align-items: center; justify-content: space-between;
   padding: 20px 24px 0;
 }
-.modal-tag {
+.modal-header-left { display: flex; align-items: center; gap: 8px; }
+.modal-tag-display {
   font-size: 0.65em; font-weight: 700; text-transform: uppercase;
   letter-spacing: 0.06em; padding: 3px 10px; border-radius: 4px;
   background: var(--ink-lighter); color: var(--ink-dark);
@@ -276,36 +274,109 @@ body { font-family: var(--font); background: var(--canvas); color: var(--ink); m
 }
 .modal-close:hover { color: var(--ink); }
 .modal-body { padding: 16px 24px 24px; }
-.modal-title {
-  font-size: 1.4em; font-weight: 900; margin-bottom: 4px;
-  color: var(--ink); line-height: 1.2;
-}
-.modal-meta { font-size: 0.78em; color: var(--ink-medium); margin-bottom: 16px; }
+
 .modal-field { margin-bottom: 14px; }
 .modal-field label {
   display: block; font-size: 0.7em; font-weight: 700; text-transform: uppercase;
   letter-spacing: 0.06em; color: var(--ink-dark); margin-bottom: 4px;
 }
-.modal-field textarea {
-  width: 100%; min-height: 80px; padding: 10px 12px;
+.modal-field input[type="text"],
+.modal-field textarea,
+.modal-field select {
+  width: 100%; padding: 10px 12px;
   border: 1.5px solid var(--ink-lighter); border-radius: 8px;
   font-family: var(--font); font-size: 0.88em; color: var(--ink);
-  background: var(--canvas); resize: vertical; outline: none;
-  line-height: 1.5;
+  background: var(--canvas); outline: none; line-height: 1.5;
 }
-.modal-field textarea:focus { border-color: oklch(66% 0.196 258); }
-.modal-save {
+.modal-field input[type="text"]:focus,
+.modal-field textarea:focus,
+.modal-field select:focus { border-color: oklch(66% 0.196 258); }
+.modal-field textarea { min-height: 70px; resize: vertical; }
+
+/* Checkbox group for assignees */
+.checkbox-group { display: flex; gap: 8px; flex-wrap: wrap; }
+.checkbox-group label {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 0.85em; font-weight: 600; cursor: pointer;
+  padding: 4px 12px; border: 1.5px solid var(--ink-lighter); border-radius: 6px;
+  text-transform: none; letter-spacing: normal; color: var(--ink-dark);
+  transition: all 0.15s;
+}
+.checkbox-group label:has(input:checked) {
+  background: color-mix(in srgb, oklch(66% 0.196 258) 12%, var(--canvas));
+  border-color: oklch(66% 0.196 258);
+  color: var(--ink);
+}
+.checkbox-group input { display: none; }
+
+/* Inline row */
+.modal-row { display: flex; gap: 12px; }
+.modal-row .modal-field { flex: 1; }
+
+/* Blocked toggle */
+.blocked-toggle {
   display: inline-flex; align-items: center; gap: 6px;
-  padding: 8px 20px; background: var(--ink); color: var(--canvas);
-  border: none; border-radius: 8px; font-size: 0.85em; font-weight: 700;
-  font-family: var(--font); cursor: pointer;
+  font-size: 0.85em; font-weight: 600; cursor: pointer;
+  padding: 6px 14px; border: 1.5px solid var(--ink-lighter); border-radius: 6px;
+  color: var(--ink-dark); background: none; font-family: var(--font);
+  transition: all 0.15s;
 }
-.modal-save:hover { opacity: 0.85; }
+.blocked-toggle.active {
+  background: color-mix(in srgb, var(--color-blocked) 12%, var(--canvas));
+  border-color: var(--color-blocked); color: var(--color-blocked);
+}
+
+/* Button row */
+.modal-actions {
+  display: flex; align-items: center; gap: 8px; margin-top: 18px;
+  padding-top: 14px; border-top: 1px solid var(--ink-lighter);
+}
+.modal-actions .spacer { flex: 1; }
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 18px; border: none; border-radius: 8px;
+  font-size: 0.85em; font-weight: 700; font-family: var(--font);
+  cursor: pointer; transition: opacity 0.15s;
+}
+.btn:hover { opacity: 0.85; }
+.btn-save { background: var(--ink); color: var(--canvas); }
+.btn-delete {
+  background: none; color: oklch(58% 0.22 28); border: 1.5px solid oklch(80% 0.08 28);
+  padding: 7px 14px;
+}
+.btn-delete:hover { background: oklch(58% 0.22 28); color: #fff; border-color: oklch(58% 0.22 28); }
+
+/* Confirm dialog */
+.confirm-overlay {
+  display: none; position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,0.5); backdrop-filter: blur(2px);
+  align-items: center; justify-content: center;
+}
+.confirm-overlay.show { display: flex; }
+.confirm-box {
+  background: var(--canvas); border-radius: 12px; padding: 24px;
+  width: 360px; max-width: 90vw; box-shadow: 0 16px 60px rgba(0,0,0,0.3);
+  text-align: center; animation: modalIn 0.15s ease;
+}
+.confirm-box h3 { font-size: 1.1em; margin-bottom: 6px; }
+.confirm-box p { font-size: 0.88em; color: var(--ink-dark); margin-bottom: 18px; }
+.confirm-btns { display: flex; gap: 8px; justify-content: center; }
+.btn-cancel {
+  background: var(--ink-lighter); color: var(--ink-dark);
+  padding: 8px 20px; border: none; border-radius: 8px;
+  font-size: 0.85em; font-weight: 600; cursor: pointer; font-family: var(--font);
+}
+.btn-confirm-delete {
+  background: oklch(58% 0.22 28); color: #fff;
+  padding: 8px 20px; border: none; border-radius: 8px;
+  font-size: 0.85em; font-weight: 700; cursor: pointer; font-family: var(--font);
+}
 
 /* Responsive */
 @media (max-width: 900px) {
   .col { flex: 0 0 85vw; scroll-snap-align: center; }
   .board { scroll-snap-type: x mandatory; padding: 0 4px; }
+  .modal-row { flex-direction: column; gap: 0; }
 }
 </style>
 </head>
@@ -320,18 +391,19 @@ body { font-family: var(--font); background: var(--canvas); color: var(--ink); m
     </div>
   </div>
   <div class="topbar-right">
+    <button class="add-global-btn" onclick="addCardToCol('next')">＋ New Task</button>
     <button class="theme-btn" onclick="toggleTheme()">🌓 Theme</button>
   </div>
 </div>
 
 <!-- Alert -->
-<div class="alert-strip">⛔ Billing not connected — 17 days idle · Revenue $0 · ~$200/day lost MRR</div>
+<div class="alert-strip">⛔ Billing not connected — Revenue $0 · ~$2,740/day lost MRR</div>
 
 <!-- Stats -->
 <div class="stats-bar">
   <div class="stat-item"><div class="stat-label">Goal</div><div class="stat-value">$200K</div><div class="stat-sub">by May 23</div></div>
   <div class="stat-item"><div class="stat-label">Revenue</div><div class="stat-value" style="color:oklch(66% 0.204 40)">$0</div><div class="stat-sub">no billing</div></div>
-  <div class="stat-item"><div class="stat-label">Days Left</div><div class="stat-value">75</div><div class="stat-sub">10.5 wks</div></div>
+  <div class="stat-item"><div class="stat-label">Days Left</div><div class="stat-value">73</div><div class="stat-sub">10.4 wks</div></div>
   <div class="stat-item"><div class="stat-label">Exit</div><div class="stat-value">$100M+</div></div>
 </div>
 
@@ -348,39 +420,39 @@ body { font-family: var(--font); background: var(--canvas); color: var(--ink); m
 
   <!-- NOT NOW -->
   <div class="col" data-col="notnow">
-    <div class="col-header"><span>Not Now</span><span class="col-count">0</span></div>
+    <div class="col-header"><span>Not Now</span><span class="col-count">0</span><button class="col-add-btn" onclick="addCardToCol('notnow')">＋</button></div>
     <div class="card-list">
-      <div class="card card-item" draggable="true" data-owners="leo" data-id="auth">
+      <div class="card card-item" draggable="true" data-owners="leo" data-id="auth" data-tag="Security">
         <div class="card-tag">Security</div>
         <div class="card-body"><div class="card-title">Auth on all instances</div></div>
         <div class="card-people"><span class="person">Leonid</span></div>
         <div class="blocked-stamp">Blocked</div>
       </div>
-      <div class="card card-item" draggable="true" data-owners="leo" data-id="bwrap">
+      <div class="card card-item" draggable="true" data-owners="leo" data-id="bwrap" data-tag="Security">
         <div class="card-tag">Security</div>
         <div class="card-body"><div class="card-title">bwrap sandbox</div></div>
         <div class="card-people"><span class="person">Leonid</span></div>
         <div class="blocked-stamp">Blocked</div>
       </div>
-      <div class="card card-item" draggable="true" data-owners="leo,ori" data-id="fs-guard">
+      <div class="card card-item" draggable="true" data-owners="leo,ori" data-id="fs-guard" data-tag="Security">
         <div class="card-tag">Security</div>
         <div class="card-body"><div class="card-title">fs-guard hooks</div></div>
         <div class="card-people"><span class="person">Leonid</span> <span class="person">Ori</span></div>
         <div class="blocked-stamp">Blocked</div>
       </div>
-      <div class="card card-item" draggable="true" data-owners="ori" data-id="dlp">
+      <div class="card card-item" draggable="true" data-owners="ori" data-id="dlp" data-tag="Security">
         <div class="card-tag">Security</div>
         <div class="card-body"><div class="card-title">DLP outbound</div></div>
         <div class="card-people"><span class="person">Ori</span></div>
         <div class="blocked-stamp">Blocked</div>
       </div>
-      <div class="card card-item" draggable="true" data-owners="ori" data-id="twitter-strat">
+      <div class="card card-item" draggable="true" data-owners="ori" data-id="twitter-strat" data-tag="Marketing">
         <div class="card-tag">Marketing</div>
         <div class="card-body"><div class="card-title">Twitter strategy</div></div>
         <div class="card-people"><span class="person">Ori</span></div>
         <div class="blocked-stamp">Blocked</div>
       </div>
-      <div class="card card-item" draggable="true" data-owners="ori" data-id="trademark">
+      <div class="card card-item" draggable="true" data-owners="ori" data-id="trademark" data-tag="Legal">
         <div class="card-tag">Legal</div>
         <div class="card-body"><div class="card-title">Trademark "ORI"</div></div>
         <div class="card-people"><span class="person">Ori</span></div>
@@ -392,21 +464,21 @@ body { font-family: var(--font); background: var(--canvas); color: var(--ink); m
 
   <!-- MAYBE -->
   <div class="col" data-col="maybe">
-    <div class="col-header"><span>Maybe</span><span class="col-count">0</span></div>
+    <div class="col-header"><span>Maybe</span><span class="col-count">0</span><button class="col-add-btn" onclick="addCardToCol('maybe')">＋</button></div>
     <div class="card-list">
-      <div class="card card-item" draggable="true" data-owners="ori" data-id="pipeline">
+      <div class="card card-item" draggable="true" data-owners="ori" data-id="pipeline" data-tag="Sales">
         <div class="card-tag">Sales</div>
         <div class="card-body"><div class="card-title">Pipeline 20 leads</div></div>
         <div class="card-people"><span class="person">Ori</span></div>
         <div class="blocked-stamp">Blocked</div>
       </div>
-      <div class="card card-item" draggable="true" data-owners="ori" data-id="ph-launch">
+      <div class="card card-item" draggable="true" data-owners="ori" data-id="ph-launch" data-tag="Marketing">
         <div class="card-tag">Marketing</div>
         <div class="card-body"><div class="card-title">Product Hunt launch</div><div class="card-desc">Traffic burst + social proof</div></div>
         <div class="card-people"><span class="person">Ori</span></div>
         <div class="blocked-stamp">Blocked</div>
       </div>
-      <div class="card card-item" draggable="true" data-owners="mayak" data-id="demo-video">
+      <div class="card card-item" draggable="true" data-owners="mayak" data-id="demo-video" data-tag="Content">
         <div class="card-tag">Content</div>
         <div class="card-body"><div class="card-title">Demo video / GIF</div><div class="card-desc">Landing doesn't convert without visuals</div></div>
         <div class="card-people"><span class="person">Alex</span></div>
@@ -418,114 +490,127 @@ body { font-family: var(--font); background: var(--canvas); color: var(--ink); m
 
   <!-- UP NEXT -->
   <div class="col" data-col="next">
-    <div class="col-header"><span>Up Next</span><span class="col-count">0</span></div>
+    <div class="col-header"><span>Up Next</span><span class="col-count">0</span><button class="col-add-btn" onclick="addCardToCol('next')">＋</button></div>
     <div class="card-list">
-      <div class="card card-item" draggable="true" data-owners="leo" data-id="getori">
+      <div class="card card-item" draggable="true" data-owners="leo" data-id="getori" data-tag="Infra">
         <div class="card-tag">Infra</div>
         <div class="card-body"><div class="card-title">Move to getori.app</div><div class="card-desc">New domain, landing, redirects</div></div>
         <div class="card-people"><span class="person">Leonid</span></div>
         <div class="blocked-stamp">Blocked</div>
       </div>
-      <div class="card card-item" draggable="true" data-owners="leo" data-id="legal">
+      <div class="card card-item" draggable="true" data-owners="leo" data-id="legal" data-tag="Legal">
         <div class="card-tag">Legal</div>
         <div class="card-body"><div class="card-title">Legal entity</div><div class="card-desc">Stripe Atlas · ~$500, 1-2 days</div></div>
         <div class="card-people"><span class="person">Leonid</span></div>
         <div class="blocked-stamp">Blocked</div>
       </div>
-      <div class="card card-item" draggable="true" data-owners="leo" data-id="pricing-page">
+      <div class="card card-item" draggable="true" data-owners="leo" data-id="pricing-page" data-tag="Product">
         <div class="card-tag">Product</div>
         <div class="card-body"><div class="card-title">Pricing page</div><div class="card-desc">$20/mo Sebastian · $200/mo Ori</div></div>
         <div class="card-people"><span class="person">Leonid</span></div>
         <div class="blocked-stamp">Blocked</div>
       </div>
-      <div class="card card-item" draggable="true" data-owners="mayak" data-id="approve-pricing">
+      <div class="card card-item" draggable="true" data-owners="mayak" data-id="approve-pricing" data-tag="Decision">
         <div class="card-tag">Decision</div>
         <div class="card-body"><div class="card-title">Approve pricing</div><div class="card-desc">$20 / $200 — needs confirmation</div></div>
         <div class="card-people"><span class="person">Alex</span></div>
         <div class="blocked-stamp">Blocked</div>
       </div>
-      <div class="card card-item" draggable="true" data-owners="ori" data-id="sys-prompt">
+      <div class="card card-item" draggable="true" data-owners="ori" data-id="sys-prompt" data-tag="Product">
         <div class="card-tag">Product</div>
         <div class="card-body"><div class="card-title">System prompt refinement</div><div class="card-desc">After first paying client</div></div>
         <div class="card-people"><span class="person">Ori</span></div>
         <div class="blocked-stamp">Blocked</div>
       </div>
-      <div class="card card-item is-blocked" draggable="true" data-owners="ori,mayak" data-id="onboarding">
+      <div class="card card-item is-blocked" draggable="true" data-owners="ori,mayak" data-id="onboarding" data-tag="Product">
         <div class="card-tag">Product</div>
         <div class="card-body"><div class="card-title">Ori onboarding</div><div class="card-desc">Client can't tell difference from ChatGPT in 30 min</div></div>
         <div class="card-people"><span class="person">Ori</span> <span class="person">Alex</span></div>
         <div class="blocked-stamp">Blocked</div>
       </div>
-      <div class="card card-item is-blocked" draggable="true" data-owners="leo,mayak" data-id="farol-dns">
+      <div class="card card-item is-blocked" draggable="true" data-owners="leo,mayak" data-id="farol-dns" data-tag="Infra">
         <div class="card-tag">Infra</div>
-        <div class="card-body"><div class="card-title">Fix farol.team deploy</div><div class="card-desc">GitHub Pages custom domain "already taken" — needs TXT DNS verification in org settings. Leonid has DNS access.</div></div>
+        <div class="card-body"><div class="card-title">Fix farol.team deploy</div><div class="card-desc">GitHub Pages custom domain "already taken" — needs TXT DNS verification</div></div>
         <div class="card-people"><span class="person">Leonid</span> <span class="person">Alex</span></div>
         <div class="blocked-stamp">Blocked</div>
       </div>
-      <div class="card card-item" draggable="true" data-owners="leo" data-id="user-portal">
+      <div class="card card-item" draggable="true" data-owners="leo" data-id="user-portal" data-tag="Product">
         <div class="card-tag">Product</div>
-        <div class="card-body"><div class="card-title">User portal link</div><div class="card-desc">Общая ссылка для всех пользователей ботов — каждый может открыть свою канбан-доску и прочее в браузере</div></div>
+        <div class="card-body"><div class="card-title">User portal link</div><div class="card-desc">Общая ссылка — каждый пользователь видит свою канбан-доску</div></div>
         <div class="card-people"><span class="person">Leonid</span></div>
+        <div class="blocked-stamp">Blocked</div>
       </div>
-      <div class="card card-item" draggable="true" data-owners="leo" data-id="ori-carl-group">
+      <div class="card card-item" draggable="true" data-owners="leo" data-id="ori-carl-group" data-tag="Product">
         <div class="card-tag">Product</div>
-        <div class="card-body"><div class="card-title">Ori + Carl в общей группе TG</div><div class="card-desc">Почему боты не переписываются в общей группе в Telegram? Разобраться и починить</div></div>
+        <div class="card-body"><div class="card-title">Ori + Carl в общей группе TG</div><div class="card-desc">Боты не переписываются в общей группе — разобраться и починить</div></div>
         <div class="card-people"><span class="person">Leonid</span></div>
+        <div class="blocked-stamp">Blocked</div>
       </div>
-      <div class="card card-item" draggable="true" data-owners="leo" data-id="seb-onboard-text">
+      <div class="card card-item" draggable="true" data-owners="leo" data-id="seb-onboard-text" data-tag="Product">
         <div class="card-tag">Product</div>
-        <div class="card-body"><div class="card-title">Fix Sebastian startup text</div><div class="card-desc">Убрать технический текст Rails при старте Sebastian. Сейчас пользователи видят техническую инфу — Алёна отвалилась на онбординге</div></div>
+        <div class="card-body"><div class="card-title">Fix Sebastian startup text</div><div class="card-desc">Убрать технический текст Rails при старте</div></div>
         <div class="card-people"><span class="person">Leonid</span></div>
+        <div class="blocked-stamp">Blocked</div>
       </div>
-      <div class="card card-item" draggable="true" data-owners="mayak" data-id="seb-onboarding-fix">
+      <div class="card card-item" draggable="true" data-owners="mayak" data-id="seb-onboarding-fix" data-tag="Product">
         <div class="card-tag">Product</div>
-        <div class="card-body"><div class="card-title">Доделать онбординг Sebastian</div><div class="card-desc">Алёна отвалилась — муть и технический текст. Сделать человечный, понятный онбординг</div></div>
+        <div class="card-body"><div class="card-title">Доделать онбординг Sebastian</div><div class="card-desc">Алёна отвалилась — муть и технический текст</div></div>
         <div class="card-people"><span class="person">Alex</span></div>
+        <div class="blocked-stamp">Blocked</div>
       </div>
-      <div class="card card-item" draggable="true" data-owners="mayak" data-id="tg-ads-seb">
+      <div class="card card-item" draggable="true" data-owners="mayak" data-id="tg-ads-seb" data-tag="Marketing">
         <div class="card-tag">Marketing</div>
-        <div class="card-body"><div class="card-title">Реклама Sebastian в TG</div><div class="card-desc">Алёна дала ссылки на каналы TG для рекламы + размещение в её канале. Разместить рекламу</div></div>
+        <div class="card-body"><div class="card-title">Реклама Sebastian в TG</div><div class="card-desc">Алёна дала ссылки на каналы + размещение в её канале</div></div>
         <div class="card-people"><span class="person">Alex</span></div>
+        <div class="blocked-stamp">Blocked</div>
       </div>
-      <div class="card card-item" draggable="true" data-owners="mayak" data-id="bootstrap-intent">
+      <div class="card card-item" draggable="true" data-owners="mayak" data-id="bootstrap-intent" data-tag="Product">
         <div class="card-tag">Product</div>
-        <div class="card-body"><div class="card-title">BOOTSTRAP.md — замысел и намерение</div><div class="card-desc">Вписать в файл BOOTSTRAP.md Ori уточнение "замысла" и "намерения"</div></div>
+        <div class="card-body"><div class="card-title">BOOTSTRAP.md — замысел и намерение</div><div class="card-desc">Вписать уточнение "замысла" и "намерения" для Ori</div></div>
         <div class="card-people"><span class="person">Alex</span></div>
+        <div class="blocked-stamp">Blocked</div>
       </div>
-      <div class="card card-item" draggable="true" data-owners="mayak" data-id="seb-workflow-approve">
+      <div class="card card-item" draggable="true" data-owners="mayak" data-id="seb-workflow-approve" data-tag="Product">
         <div class="card-tag">Product</div>
-        <div class="card-body"><div class="card-title">Sebastian: утвердить воркфлоу</div><div class="card-desc">После изменений в BotFather (ждём Леонида) — утвердить workflow</div></div>
+        <div class="card-body"><div class="card-title">Sebastian: утвердить воркфлоу</div><div class="card-desc">После изменений в BotFather — утвердить workflow</div></div>
         <div class="card-people"><span class="person">Alex</span></div>
+        <div class="blocked-stamp">Blocked</div>
       </div>
-      <div class="card card-item" draggable="true" data-owners="mayak" data-id="naora-workflow">
+      <div class="card card-item" draggable="true" data-owners="mayak" data-id="naora-workflow" data-tag="Sales">
         <div class="card-tag">Sales</div>
-        <div class="card-body"><div class="card-title">Naora: собрать воркфлоу</div><div class="card-desc">Собрать workflow для Артёма. Нужен браузер в общем чате</div></div>
+        <div class="card-body"><div class="card-title">Naora: собрать воркфлоу</div><div class="card-desc">Собрать workflow для Артёма. Нужен браузер</div></div>
         <div class="card-people"><span class="person">Alex</span></div>
+        <div class="blocked-stamp">Blocked</div>
       </div>
-      <div class="card card-item" draggable="true" data-owners="mayak" data-id="first-biz-skill">
+      <div class="card card-item" draggable="true" data-owners="mayak" data-id="first-biz-skill" data-tag="Product">
         <div class="card-tag">Product</div>
         <div class="card-body"><div class="card-title">Загрузить первый бизнес-скил</div><div class="card-desc">Первый пользовательский скил для Ori</div></div>
         <div class="card-people"><span class="person">Alex</span></div>
+        <div class="blocked-stamp">Blocked</div>
       </div>
-      <div class="card card-item" draggable="true" data-owners="mayak" data-id="marketplace-ui">
+      <div class="card card-item" draggable="true" data-owners="mayak" data-id="marketplace-ui" data-tag="Product">
         <div class="card-tag">Product</div>
-        <div class="card-body"><div class="card-title">Маркетплейс Себастианов — UI + позиционирование</div><div class="card-desc">Первый выстрел интерфейса и позиционирования маркетплейса</div></div>
+        <div class="card-body"><div class="card-title">Маркетплейс Себастианов — UI</div><div class="card-desc">Первый выстрел интерфейса и позиционирования</div></div>
         <div class="card-people"><span class="person">Alex</span></div>
+        <div class="blocked-stamp">Blocked</div>
       </div>
-      <div class="card card-item" draggable="true" data-owners="mayak" data-id="digital-employee-marketing">
+      <div class="card card-item" draggable="true" data-owners="mayak" data-id="digital-employee-marketing" data-tag="Strategy">
         <div class="card-tag">Strategy</div>
-        <div class="card-body"><div class="card-title">Цифровой сотрудник — круг маркетинга</div><div class="card-desc">Первый подход: сделать внутри нас круг, отвечающий за маркетинг</div></div>
+        <div class="card-body"><div class="card-title">Цифровой сотрудник — круг маркетинга</div><div class="card-desc">Круг, отвечающий за маркетинг</div></div>
         <div class="card-people"><span class="person">Alex</span></div>
+        <div class="blocked-stamp">Blocked</div>
       </div>
-      <div class="card card-item" draggable="true" data-owners="mayak" data-id="research-plurio">
+      <div class="card card-item" draggable="true" data-owners="mayak" data-id="research-plurio" data-tag="Research">
         <div class="card-tag">Research</div>
-        <div class="card-body"><div class="card-title">Изучить Plurio</div><div class="card-desc">$3.5M seed, AI performance marketing, Palo Alto. Конкурент или партнёр?</div></div>
+        <div class="card-body"><div class="card-title">Изучить Plurio</div><div class="card-desc">$3.5M seed, AI performance marketing</div></div>
         <div class="card-people"><span class="person">Alex</span></div>
+        <div class="blocked-stamp">Blocked</div>
       </div>
-      <div class="card card-item" draggable="true" data-owners="mayak" data-id="google-ads-seb">
+      <div class="card card-item" draggable="true" data-owners="mayak" data-id="google-ads-seb" data-tag="Marketing">
         <div class="card-tag">Marketing</div>
         <div class="card-body"><div class="card-title">Google Ads для Sebastian</div><div class="card-desc">Настроить и запустить рекламу в Google</div></div>
         <div class="card-people"><span class="person">Alex</span></div>
+        <div class="blocked-stamp">Blocked</div>
       </div>
     </div>
     <div class="empty">Nothing here</div>
@@ -533,27 +618,27 @@ body { font-family: var(--font); background: var(--canvas); color: var(--ink); m
 
   <!-- IN PROGRESS -->
   <div class="col" data-col="progress">
-    <div class="col-header"><span>In Progress</span><span class="col-count">0</span></div>
+    <div class="col-header"><span>In Progress</span><span class="col-count">0</span><button class="col-add-btn" onclick="addCardToCol('progress')">＋</button></div>
     <div class="card-list">
-      <div class="card card-item is-blocked" draggable="true" data-owners="leo" data-id="billing">
+      <div class="card card-item is-blocked" draggable="true" data-owners="leo" data-id="billing" data-tag="Infra">
         <div class="card-tag">Infra</div>
         <div class="card-body"><div class="card-title">Billing (Stripe)</div><div class="card-desc">No legal entity → no Stripe → $0 revenue</div></div>
         <div class="card-people"><span class="person">Leonid</span></div>
         <div class="blocked-stamp">Blocked</div>
       </div>
-      <div class="card card-item" draggable="true" data-owners="leo" data-id="self-service">
+      <div class="card card-item" draggable="true" data-owners="leo" data-id="self-service" data-tag="Infra">
         <div class="card-tag">Infra</div>
         <div class="card-body"><div class="card-title">Self-service + Billing</div><div class="card-desc">Auto-deploy ✅ · Now: billing + MiniMax</div></div>
         <div class="card-people"><span class="person">Leonid</span></div>
         <div class="blocked-stamp">Blocked</div>
       </div>
-      <div class="card card-item" draggable="true" data-owners="mayak" data-id="sales">
+      <div class="card card-item" draggable="true" data-owners="mayak" data-id="sales" data-tag="Sales">
         <div class="card-tag">Sales</div>
         <div class="card-body"><div class="card-title">Sales + onboarding</div><div class="card-desc">Naora · BUNT · SHAMAN · Leads4You · Deepn</div></div>
         <div class="card-people"><span class="person">Alex</span></div>
         <div class="blocked-stamp">Blocked</div>
       </div>
-      <div class="card card-item" draggable="true" data-owners="ori" data-id="tg-ph">
+      <div class="card card-item" draggable="true" data-owners="ori" data-id="tg-ph" data-tag="Marketing">
         <div class="card-tag">Marketing</div>
         <div class="card-body"><div class="card-title">TG promotion + PH prep</div><div class="card-desc">Channel research · Don't launch until billing</div></div>
         <div class="card-people"><span class="person">Ori</span></div>
@@ -565,27 +650,27 @@ body { font-family: var(--font); background: var(--canvas); color: var(--ink); m
 
   <!-- HUMAN REVIEW -->
   <div class="col" data-col="review">
-    <div class="col-header"><span>Human Review</span><span class="col-count">0</span></div>
+    <div class="col-header"><span>Human Review</span><span class="col-count">0</span><button class="col-add-btn" onclick="addCardToCol('review')">＋</button></div>
     <div class="card-list">
-      <div class="card card-item" draggable="true" data-owners="ori" data-id="features-page">
+      <div class="card card-item" draggable="true" data-owners="ori" data-id="features-page" data-tag="Marketing">
         <div class="card-tag">Marketing</div>
         <div class="card-body"><div class="card-title">Sebastian features page</div><div class="card-desc">getsebastian.app/features.html — needs review</div></div>
         <div class="card-people"><span class="person">Ori</span></div>
         <div class="blocked-stamp">Blocked</div>
       </div>
-      <div class="card card-item" draggable="true" data-owners="ori" data-id="farol-landing">
+      <div class="card card-item" draggable="true" data-owners="ori" data-id="farol-landing" data-tag="Marketing">
         <div class="card-tag">Marketing</div>
         <div class="card-body"><div class="card-title">Farol Lab landing</div><div class="card-desc">Building in public + Follow on X — needs review</div></div>
         <div class="card-people"><span class="person">Ori</span></div>
         <div class="blocked-stamp">Blocked</div>
       </div>
-      <div class="card card-item" draggable="true" data-owners="ori" data-id="skillmart-page">
+      <div class="card card-item" draggable="true" data-owners="ori" data-id="skillmart-page" data-tag="Product">
         <div class="card-tag">Product</div>
         <div class="card-body"><div class="card-title">Skillmart / Hire page</div><div class="card-desc">cofounder.run/skillmart + /hire — needs review</div></div>
         <div class="card-people"><span class="person">Ori</span></div>
         <div class="blocked-stamp">Blocked</div>
       </div>
-      <div class="card card-item" draggable="true" data-owners="ori" data-id="agent-research">
+      <div class="card card-item" draggable="true" data-owners="ori" data-id="agent-research" data-tag="Research">
         <div class="card-tag">Research</div>
         <div class="card-body"><div class="card-title">AI marketplaces research</div><div class="card-desc">15+ platforms analyzed — needs review</div></div>
         <div class="card-people"><span class="person">Ori</span></div>
@@ -597,51 +682,51 @@ body { font-family: var(--font); background: var(--canvas); color: var(--ink); m
 
   <!-- DONE -->
   <div class="col" data-col="done">
-    <div class="col-header"><span>Done</span><span class="col-count">0</span></div>
+    <div class="col-header"><span>Done</span><span class="col-count">0</span><button class="col-add-btn" onclick="addCardToCol('done')">＋</button></div>
     <div class="card-list">
-      <div class="card card-item" draggable="true" data-owners="leo" data-id="deploy-done">
+      <div class="card card-item" draggable="true" data-owners="leo" data-id="deploy-done" data-tag="Infra">
         <div class="card-tag">Infra</div>
         <div class="card-body"><div class="card-title">Self-service deploy</div><div class="card-desc">Shipped Mar 5</div></div>
         <div class="card-people"><span class="person">Leonid</span></div>
         <div class="blocked-stamp">Blocked</div>
       </div>
-      <div class="card card-item" draggable="true" data-owners="ori" data-id="landings">
+      <div class="card card-item" draggable="true" data-owners="ori" data-id="landings" data-tag="Marketing">
         <div class="card-tag">Marketing</div>
         <div class="card-body"><div class="card-title">Landings</div><div class="card-desc">cofounder.run + getsebastian.app</div></div>
         <div class="card-people"><span class="person">Ori</span></div>
         <div class="blocked-stamp">Blocked</div>
       </div>
-      <div class="card card-item" draggable="true" data-owners="ori,mayak" data-id="onboard-v2">
+      <div class="card card-item" draggable="true" data-owners="ori,mayak" data-id="onboard-v2" data-tag="Product">
         <div class="card-tag">Product</div>
         <div class="card-body"><div class="card-title">Sebastian Onboarding v2</div><div class="card-desc">BOOTSTRAP.md + PCM + TOC</div></div>
         <div class="card-people"><span class="person">Ori</span> <span class="person">Alex</span></div>
         <div class="blocked-stamp">Blocked</div>
       </div>
-      <div class="card card-item" draggable="true" data-owners="mayak" data-id="demo-naora">
+      <div class="card card-item" draggable="true" data-owners="mayak" data-id="demo-naora" data-tag="Sales">
         <div class="card-tag">Sales</div>
         <div class="card-body"><div class="card-title">Naora demo</div></div>
         <div class="card-people"><span class="person">Alex</span></div>
         <div class="blocked-stamp">Blocked</div>
       </div>
-      <div class="card card-item" draggable="true" data-owners="all" data-id="soul">
+      <div class="card card-item" draggable="true" data-owners="all" data-id="soul" data-tag="Foundation">
         <div class="card-tag">Foundation</div>
         <div class="card-body"><div class="card-title">SOUL.md + Manifesto</div></div>
         <div class="card-people"><span class="person">All</span></div>
         <div class="blocked-stamp">Blocked</div>
       </div>
-      <div class="card card-item" draggable="true" data-owners="ori" data-id="unit-econ">
+      <div class="card card-item" draggable="true" data-owners="ori" data-id="unit-econ" data-tag="Strategy">
         <div class="card-tag">Strategy</div>
         <div class="card-body"><div class="card-title">Unit Economics</div></div>
         <div class="card-people"><span class="person">Ori</span></div>
         <div class="blocked-stamp">Blocked</div>
       </div>
-      <div class="card card-item" draggable="true" data-owners="ori" data-id="twitter-api">
+      <div class="card card-item" draggable="true" data-owners="ori" data-id="twitter-api" data-tag="Infra">
         <div class="card-tag">Infra</div>
         <div class="card-body"><div class="card-title">Twitter API</div></div>
         <div class="card-people"><span class="person">Ori</span></div>
         <div class="blocked-stamp">Blocked</div>
       </div>
-      <div class="card card-item" draggable="true" data-owners="ori" data-id="cron-setup">
+      <div class="card card-item" draggable="true" data-owners="ori" data-id="cron-setup" data-tag="Infra">
         <div class="card-tag">Infra</div>
         <div class="card-body"><div class="card-title">Cron: Board + AI News</div></div>
         <div class="card-people"><span class="person">Ori</span></div>
@@ -653,46 +738,133 @@ body { font-family: var(--font); background: var(--canvas); color: var(--ink); m
 
 </div>
 
-<!-- Card Modal -->
+<!-- Edit/Create Modal -->
 <div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
   <div class="modal">
     <div class="modal-header">
-      <span class="modal-tag" id="m-tag"></span>
+      <div class="modal-header-left">
+        <span class="modal-tag-display" id="m-tag-display"></span>
+        <span id="m-id-display" style="font-size:0.65em;color:var(--ink-medium)"></span>
+      </div>
       <button class="modal-close" onclick="closeModal()">✕</button>
     </div>
     <div class="modal-body">
-      <div class="modal-title" id="m-title"></div>
-      <div class="modal-meta" id="m-meta"></div>
+      <!-- Title -->
+      <div class="modal-field">
+        <label>Title</label>
+        <input type="text" id="m-title" placeholder="Task title...">
+      </div>
+
+      <!-- Tag + Column -->
+      <div class="modal-row">
+        <div class="modal-field">
+          <label>Tag</label>
+          <select id="m-tag">
+            <option value="Product">Product</option>
+            <option value="Infra">Infra</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Sales">Sales</option>
+            <option value="Strategy">Strategy</option>
+            <option value="Security">Security</option>
+            <option value="Legal">Legal</option>
+            <option value="Content">Content</option>
+            <option value="Research">Research</option>
+            <option value="Decision">Decision</option>
+            <option value="Foundation">Foundation</option>
+          </select>
+        </div>
+        <div class="modal-field">
+          <label>Column</label>
+          <select id="m-col">
+            <option value="notnow">Not Now</option>
+            <option value="maybe">Maybe</option>
+            <option value="next">Up Next</option>
+            <option value="progress">In Progress</option>
+            <option value="review">Human Review</option>
+            <option value="done">Done</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Description -->
       <div class="modal-field">
         <label>Description</label>
-        <textarea id="m-desc" placeholder="Add details, notes, links..."></textarea>
+        <textarea id="m-desc" placeholder="What needs to be done..."></textarea>
       </div>
+
+      <!-- Assignees -->
+      <div class="modal-field">
+        <label>Assignees</label>
+        <div class="checkbox-group">
+          <label><input type="checkbox" id="m-own-leo" value="leo"> Leonid</label>
+          <label><input type="checkbox" id="m-own-mayak" value="mayak"> Alex</label>
+          <label><input type="checkbox" id="m-own-ori" value="ori"> Ori</label>
+        </div>
+      </div>
+
+      <!-- Notes -->
       <div class="modal-field">
         <label>Notes</label>
         <textarea id="m-notes" placeholder="Comments, decisions, updates..."></textarea>
       </div>
-      <button class="modal-save" onclick="saveModal()">💾 Save</button>
+
+      <!-- Blocked toggle -->
+      <div class="modal-field">
+        <button class="blocked-toggle" id="m-blocked" onclick="this.classList.toggle('active')">
+          🔴 Blocked
+        </button>
+      </div>
+
+      <!-- Actions -->
+      <div class="modal-actions">
+        <button class="btn btn-delete" id="m-delete-btn" onclick="confirmDelete()">🗑 Delete</button>
+        <span class="spacer"></span>
+        <button class="btn btn-save" onclick="saveModal()">💾 Save</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Confirm Delete Dialog -->
+<div class="confirm-overlay" id="confirm" onclick="if(event.target===this)closeConfirm()">
+  <div class="confirm-box">
+    <h3>Delete task?</h3>
+    <p id="confirm-text">This will permanently remove the task.</p>
+    <div class="confirm-btns">
+      <button class="btn-cancel" onclick="closeConfirm()">Cancel</button>
+      <button class="btn-confirm-delete" onclick="doDelete()">Delete</button>
     </div>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
-<div class="footer-bar">Click card to edit · Drag between columns · Right-click to toggle blocked · Mar 11, 2026</div>
+<div class="footer-bar">Click to edit · Drag between columns · ＋ to add · Mar 11, 2026</div>
 
 <script>
+const CL = { notnow:'Not Now', maybe:'Maybe', next:'Up Next', progress:'In Progress', review:'Human Review', done:'Done' };
+const OWNER_NAMES = { leo:'Leonid', mayak:'Alex', ori:'Ori', all:'All' };
+
 /* Theme */
 function toggleTheme() {
   const h = document.documentElement;
-  const isDark = h.dataset.theme === 'dark';
-  h.dataset.theme = isDark ? 'light' : 'dark';
+  h.dataset.theme = h.dataset.theme === 'dark' ? 'light' : 'dark';
   localStorage.setItem('farol-theme', h.dataset.theme);
 }
 const st = localStorage.getItem('farol-theme');
 if (st) document.documentElement.dataset.theme = st;
 
+/* Toast */
+function showToast(m) {
+  const t = document.getElementById('toast');
+  t.textContent = m; t.classList.add('show');
+  clearTimeout(t._t); t._t = setTimeout(() => t.classList.remove('show'), 2000);
+}
+
 /* Filters */
+let currentFilter = 'all';
 const fbtns = document.querySelectorAll('.fbtn');
 function applyFilter(f) {
+  currentFilter = f;
   fbtns.forEach(b => b.classList.toggle('active', b.dataset.f === f));
   document.querySelectorAll('.card-item').forEach(c => {
     if (f === 'all') c.classList.remove('hidden');
@@ -712,14 +884,195 @@ function updateCounts() {
   });
 }
 
-/* Toast */
-function showToast(m) {
-  const t = document.getElementById('toast');
-  t.textContent = m; t.classList.add('show');
-  clearTimeout(t._t); t._t = setTimeout(() => t.classList.remove('show'), 2000);
+/* ---- MODAL ---- */
+let currentCard = null;
+let isNewCard = false;
+
+function openModal(card, isNew) {
+  currentCard = card;
+  isNewCard = !!isNew;
+  const id = card.dataset.id;
+  const tag = card.dataset.tag || card.querySelector('.card-tag')?.textContent || 'Product';
+  const title = card.querySelector('.card-title')?.textContent || '';
+  const desc = card.querySelector('.card-desc')?.textContent || '';
+  const owners = (card.dataset.owners || '').split(',').filter(Boolean);
+  const col = card.closest('.col')?.dataset.col || 'next';
+  const blocked = card.classList.contains('is-blocked');
+
+  document.getElementById('m-tag-display').textContent = isNew ? 'New Task' : tag;
+  document.getElementById('m-id-display').textContent = isNew ? '' : `#${id}`;
+  document.getElementById('m-title').value = title;
+  document.getElementById('m-tag').value = tag;
+  document.getElementById('m-col').value = col;
+
+  // Load saved details or defaults
+  const saved = JSON.parse(localStorage.getItem('farol-card-details') || '{}');
+  document.getElementById('m-desc').value = saved[id]?.desc ?? desc;
+  document.getElementById('m-notes').value = saved[id]?.notes ?? '';
+
+  // Owners
+  document.getElementById('m-own-leo').checked = owners.includes('leo');
+  document.getElementById('m-own-mayak').checked = owners.includes('mayak');
+  document.getElementById('m-own-ori').checked = owners.includes('ori');
+
+  // Blocked
+  const blockedBtn = document.getElementById('m-blocked');
+  blockedBtn.classList.toggle('active', blocked);
+
+  // Delete button visibility
+  document.getElementById('m-delete-btn').style.display = isNew ? 'none' : '';
+
+  document.getElementById('modal').classList.add('show');
+  document.getElementById('m-title').focus();
 }
 
-/* Dblclick blocked toggle (shift+dblclick or right-click to toggle blocked) */
+function closeModal() {
+  document.getElementById('modal').classList.remove('show');
+  if (isNewCard && currentCard && !currentCard.querySelector('.card-title')?.textContent) {
+    currentCard.remove();
+  }
+  currentCard = null;
+  isNewCard = false;
+}
+
+function saveModal() {
+  if (!currentCard) return;
+
+  const title = document.getElementById('m-title').value.trim();
+  if (!title) { showToast('⚠️ Title required'); return; }
+
+  const tag = document.getElementById('m-tag').value;
+  const col = document.getElementById('m-col').value;
+  const desc = document.getElementById('m-desc').value.trim();
+  const notes = document.getElementById('m-notes').value.trim();
+  const blocked = document.getElementById('m-blocked').classList.contains('active');
+
+  // Owners
+  const owners = [];
+  if (document.getElementById('m-own-leo').checked) owners.push('leo');
+  if (document.getElementById('m-own-mayak').checked) owners.push('mayak');
+  if (document.getElementById('m-own-ori').checked) owners.push('ori');
+  if (owners.length === 0) owners.push('ori'); // default
+
+  // Generate ID for new cards
+  if (isNewCard) {
+    currentCard.dataset.id = 'task-' + Date.now().toString(36);
+  }
+  const id = currentCard.dataset.id;
+
+  // Update card DOM
+  currentCard.dataset.tag = tag;
+  currentCard.dataset.owners = owners.join(',');
+  currentCard.querySelector('.card-tag').textContent = tag;
+  currentCard.querySelector('.card-title').textContent = title;
+
+  // Description
+  let descEl = currentCard.querySelector('.card-desc');
+  if (desc) {
+    if (!descEl) {
+      descEl = document.createElement('div');
+      descEl.className = 'card-desc';
+      currentCard.querySelector('.card-body').appendChild(descEl);
+    }
+    descEl.textContent = desc;
+  } else if (descEl) {
+    descEl.remove();
+  }
+
+  // People
+  const peopleEl = currentCard.querySelector('.card-people');
+  peopleEl.innerHTML = owners.map(o => `<span class="person">${OWNER_NAMES[o] || o}</span>`).join(' ');
+
+  // Blocked
+  currentCard.classList.toggle('is-blocked', blocked);
+
+  // Move to column if changed
+  const currentCol = currentCard.closest('.col')?.dataset.col;
+  if (currentCol !== col) {
+    const targetList = document.querySelector(`.col[data-col="${col}"] .card-list`);
+    if (targetList) targetList.appendChild(currentCard);
+  }
+
+  // Save details
+  const saved = JSON.parse(localStorage.getItem('farol-card-details') || '{}');
+  saved[id] = { desc, notes };
+  localStorage.setItem('farol-card-details', JSON.stringify(saved));
+
+  // Apply current filter
+  if (currentFilter !== 'all') {
+    currentCard.classList.toggle('hidden', !(owners.includes(currentFilter) || owners.includes('all')));
+  }
+
+  updateCounts();
+  saveState();
+  showToast(isNewCard ? '✅ Task created' : '💾 Saved');
+  isNewCard = false;
+  closeModal();
+}
+
+/* Delete */
+function confirmDelete() {
+  if (!currentCard) return;
+  const title = currentCard.querySelector('.card-title')?.textContent || 'this task';
+  document.getElementById('confirm-text').textContent = `Delete "${title}"? This cannot be undone.`;
+  document.getElementById('confirm').classList.add('show');
+}
+function closeConfirm() {
+  document.getElementById('confirm').classList.remove('show');
+}
+function doDelete() {
+  if (!currentCard) return;
+  const id = currentCard.dataset.id;
+  currentCard.remove();
+  // Remove saved details
+  const saved = JSON.parse(localStorage.getItem('farol-card-details') || '{}');
+  delete saved[id];
+  localStorage.setItem('farol-card-details', JSON.stringify(saved));
+  closeConfirm();
+  closeModal();
+  updateCounts();
+  saveState();
+  showToast('🗑 Task deleted');
+}
+
+/* Add new card */
+function addCardToCol(colName) {
+  const col = document.querySelector(`.col[data-col="${colName}"]`);
+  if (!col) return;
+  const list = col.querySelector('.card-list');
+  const card = document.createElement('div');
+  card.className = 'card card-item';
+  card.draggable = true;
+  card.dataset.owners = '';
+  card.dataset.id = '';
+  card.dataset.tag = 'Product';
+  card.innerHTML = `
+    <div class="card-tag">Product</div>
+    <div class="card-body"><div class="card-title"></div></div>
+    <div class="card-people"></div>
+    <div class="blocked-stamp">Blocked</div>
+  `;
+  list.prepend(card);
+  bindCardDrag(card);
+  openModal(card, true);
+}
+
+/* Card click → modal */
+document.addEventListener('click', e => {
+  if (e.target.closest('.col-add-btn') || e.target.closest('.add-global-btn')) return;
+  const c = e.target.closest('.card-item');
+  if (!c || e.target.closest('.modal-overlay') || e.target.closest('.confirm-overlay')) return;
+  openModal(c, false);
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    if (document.getElementById('confirm').classList.contains('show')) closeConfirm();
+    else closeModal();
+  }
+});
+
+/* Right-click blocked toggle on cards */
 document.addEventListener('contextmenu', e => {
   const c = e.target.closest('.card-item'); if (!c) return;
   e.preventDefault();
@@ -728,69 +1081,25 @@ document.addEventListener('contextmenu', e => {
   saveState();
 });
 
-const CL = { notnow:'Not Now', maybe:'Maybe', next:'Up Next', progress:'In Progress', review:'Human Review', done:'Done' };
-
-/* Card click → modal */
-document.addEventListener('click', e => {
-  const c = e.target.closest('.card-item');
-  if (!c || e.target.closest('.modal-overlay')) return;
-  openModal(c);
-});
-
-let currentCard = null;
-function openModal(card) {
-  currentCard = card;
-  const id = card.dataset.id;
-  const tag = card.querySelector('.card-tag')?.textContent || '';
-  const title = card.querySelector('.card-title')?.textContent || '';
-  const desc = card.querySelector('.card-desc')?.textContent || '';
-  const people = card.querySelector('.card-people')?.textContent?.trim() || '';
-  const col = card.closest('.col')?.dataset.col || '';
-
-  document.getElementById('m-tag').textContent = tag;
-  document.getElementById('m-title').textContent = title;
-  document.getElementById('m-meta').textContent = `${CL[col] || col} · ${people} · #${id}`;
-
-  // Load saved details
-  const saved = JSON.parse(localStorage.getItem('farol-card-details') || '{}');
-  document.getElementById('m-desc').value = saved[id]?.desc || desc;
-  document.getElementById('m-notes').value = saved[id]?.notes || '';
-
-  document.getElementById('modal').classList.add('show');
-}
-function closeModal() {
-  document.getElementById('modal').classList.remove('show');
-  currentCard = null;
-}
-function saveModal() {
-  if (!currentCard) return;
-  const id = currentCard.dataset.id;
-  const saved = JSON.parse(localStorage.getItem('farol-card-details') || '{}');
-  saved[id] = {
-    desc: document.getElementById('m-desc').value,
-    notes: document.getElementById('m-notes').value
-  };
-  localStorage.setItem('farol-card-details', JSON.stringify(saved));
-  // Update card desc
-  const descEl = currentCard.querySelector('.card-desc');
-  if (descEl) descEl.textContent = document.getElementById('m-desc').value;
-  showToast('💾 Saved');
-  closeModal();
-}
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
-/* Drag & Drop */
+/* ---- DRAG & DROP ---- */
 let dCard = null;
-document.addEventListener('dragstart', e => {
-  const c = e.target.closest('.card-item'); if (!c) return;
-  dCard = c; c.classList.add('dragging');
-  e.dataTransfer.effectAllowed = 'move';
-});
+
+function bindCardDrag(card) {
+  card.addEventListener('dragstart', e => {
+    dCard = card; card.classList.add('dragging');
+    e.dataTransfer.effectAllowed = 'move';
+  });
+}
+
+// Bind existing cards
+document.querySelectorAll('.card-item').forEach(bindCardDrag);
+
 document.addEventListener('dragend', () => {
   if (dCard) { dCard.classList.remove('dragging'); dCard = null; }
   document.querySelectorAll('.col').forEach(c => c.classList.remove('drag-over'));
   document.querySelectorAll('.drop-indicator').forEach(e => e.remove());
 });
+
 document.querySelectorAll('.card-list').forEach(list => {
   list.addEventListener('dragover', e => {
     e.preventDefault(); list.closest('.col').classList.add('drag-over');
@@ -815,7 +1124,7 @@ document.querySelectorAll('.card-list').forEach(list => {
   });
 });
 
-/* Touch drag */
+/* Touch drag for mobile */
 let tCard=null,tClone=null,tSX,tSY,tList=null;
 document.addEventListener('touchstart', e => {
   const c=e.target.closest('.card-item'); if(!c) return;
@@ -844,18 +1153,58 @@ document.addEventListener('touchend', ()=>{
   tCard=null;tList=null; document.querySelectorAll('.col').forEach(c=>c.classList.remove('drag-over'));
 });
 
-/* Persistence */
+/* ---- PERSISTENCE ---- */
 function saveState(){
-  const s={columns:{},blocked:[]};
-  document.querySelectorAll('.col').forEach(col=>{s.columns[col.dataset.col]=[...col.querySelectorAll('.card-item')].map(c=>c.dataset.id);});
+  const s={columns:{},blocked:[],cards:{}};
+  document.querySelectorAll('.col').forEach(col=>{
+    s.columns[col.dataset.col]=[...col.querySelectorAll('.card-item')].map(c=>c.dataset.id);
+  });
   document.querySelectorAll('.card-item.is-blocked').forEach(c=>s.blocked.push(c.dataset.id));
-  localStorage.setItem('farol-kanban-v5',JSON.stringify(s));
+  // Save dynamic card data (for user-created cards)
+  document.querySelectorAll('.card-item').forEach(c=>{
+    const id = c.dataset.id;
+    if (id && id.startsWith('task-')) {
+      s.cards[id] = {
+        tag: c.dataset.tag,
+        owners: c.dataset.owners,
+        title: c.querySelector('.card-title')?.textContent || '',
+        desc: c.querySelector('.card-desc')?.textContent || ''
+      };
+    }
+  });
+  localStorage.setItem('farol-kanban-v6',JSON.stringify(s));
 }
+
 function loadState(){
-  const r=localStorage.getItem('farol-kanban-v5'); if(!r) return;
+  const r=localStorage.getItem('farol-kanban-v6'); if(!r) return;
   try{
     const s=JSON.parse(r); const all={};
     document.querySelectorAll('.card-item').forEach(c=>{all[c.dataset.id]=c;});
+
+    // Restore user-created cards first
+    if(s.cards) {
+      for(const[id,data] of Object.entries(s.cards)){
+        if(all[id]) continue; // already exists
+        const card = document.createElement('div');
+        card.className = 'card card-item';
+        card.draggable = true;
+        card.dataset.id = id;
+        card.dataset.tag = data.tag || 'Product';
+        card.dataset.owners = data.owners || 'ori';
+        const owners = (data.owners||'ori').split(',');
+        card.innerHTML = `
+          <div class="card-tag">${data.tag||'Product'}</div>
+          <div class="card-body"><div class="card-title">${data.title||''}</div>${data.desc?`<div class="card-desc">${data.desc}</div>`:''}</div>
+          <div class="card-people">${owners.map(o=>`<span class="person">${OWNER_NAMES[o]||o}</span>`).join(' ')}</div>
+          <div class="blocked-stamp">Blocked</div>
+        `;
+        bindCardDrag(card);
+        // Place in first column temporarily; will be moved by column order below
+        document.querySelector('.col[data-col="next"] .card-list').appendChild(card);
+        all[id] = card;
+      }
+    }
+
     if(s.columns) for(const[cn,ids] of Object.entries(s.columns)){
       const col=document.querySelector(`.col[data-col="${cn}"]`); if(!col) continue;
       const list=col.querySelector('.card-list');
@@ -863,7 +1212,7 @@ function loadState(){
     }
     document.querySelectorAll('.card-item').forEach(c=>c.classList.remove('is-blocked'));
     if(s.blocked) s.blocked.forEach(id=>{if(all[id]) all[id].classList.add('is-blocked');});
-  }catch(e){}
+  }catch(e){ console.error('Load state error:', e); }
 }
 
 loadState();
@@ -872,4 +1221,4 @@ if(w&&['leo','mayak','ori'].includes(w)) applyFilter(w); else updateCounts();
 </script>
 </body>
 </html>
-<!-- v7 1773405900 -->
+<!-- v8 kanban-full-edit -->
