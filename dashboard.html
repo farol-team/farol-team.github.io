@@ -878,8 +878,8 @@ function renderMessages() {
   }
 
   const sorted = [...messages].sort((a, b) => {
-    const ta = a.timestamp || a.created_at || '';
-    const tb = b.timestamp || b.created_at || '';
+    const ta = a.at || a.timestamp || a.created_at || '';
+    const tb = b.at || b.timestamp || b.created_at || '';
     return tb.localeCompare(ta);
   });
 
@@ -892,7 +892,7 @@ function renderMessages() {
         <span class="msg-from" style="color:${fromColor}">${escHtml(m.from || '?')}</span>
         ${m.to ? `<span class="msg-to">→ ${escHtml(Array.isArray(m.to) ? m.to.join(', ') : m.to)}</span>` : ''}
         <span class="msg-type ${typeClass}">${m.type || 'info'}</span>
-        <span class="msg-time">${formatDate(m.timestamp || m.created_at)}</span>
+        <span class="msg-time">${formatDate(m.at || m.timestamp || m.created_at)}</span>
       </div>
       <div class="msg-text">${escHtml(m.text || m.body || '')}</div>
       ${m.thread ? `<div class="msg-thread">🧵 Thread: ${escHtml(m.thread)}</div>` : ''}
