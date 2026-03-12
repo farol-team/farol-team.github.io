@@ -520,64 +520,27 @@ async function fetchJSON(url) {
   return res.json();
 }
 
-async function fetchDirContents(dirPath) {
-  // Use raw.githubusercontent to list known files via index, fallback to API
-  try {
-    // Try git trees API (1 request for entire tree)
-    if (!cache._tree) {
-      const treeData = await fetchJSON(`${API}/git/trees/main?recursive=1`);
-      cache._tree = treeData.tree || [];
-    }
-    const prefix = `.gnap/${dirPath}/`;
-    const jsonFiles = cache._tree
-      .filter(f => f.path.startsWith(prefix) && f.path.endsWith('.json'))
-      .map(f => f.path);
-    
-    const contents = await Promise.all(
-      jsonFiles.map(async path => {
-        try {
-          return await fetchJSON(`https://raw.githubusercontent.com/${REPO}/main/${path}`);
-        } catch { return null; }
-      })
-    );
-    return contents.filter(Boolean);
-  } catch (e) {
-    if (e.message.includes('404')) return [];
-    throw e;
-  }
-}
-
 // ── Data Loading ──
+// Single fetch via index.json (raw.githubusercontent.com, zero API rate limit)
 async function loadAllData() {
   const errors = [];
 
   try {
-    cache.company = await fetchJSON(`${RAW}/company.json`);
-  } catch (e) { errors.push(`Company: ${e.message}`); }
-
-  try {
-    cache.org = await fetchJSON(`${RAW}/org.json`);
-  } catch (e) { errors.push(`Org: ${e.message}`); }
-
-  try {
-    cache.budget = await fetchJSON(`${RAW}/budget.json`);
-  } catch (e) { errors.push(`Budget: ${e.message}`); }
-
-  try {
-    cache.tasks = await fetchDirContents('tasks');
-  } catch (e) { errors.push(`Tasks: ${e.message}`); cache.tasks = []; }
-
-  try {
-    cache.messages = await fetchDirContents('messages');
-  } catch (e) { errors.push(`Messages: ${e.message}`); cache.messages = []; }
-
-  try {
-    cache.runs = await fetchDirContents('runs');
-  } catch (e) { errors.push(`Runs: ${e.message}`); cache.runs = []; }
+    const index = await fetchJSON(`${RAW}/index.json?t=${Date.now()}`);
+    cache.company = index.company || {};
+    cache.org = index.org || {};
+    cache.budget = index.budget || {};
+    cache.tasks = index.tasks || [];
+    cache.messages = index.messages || [];
+    cache.runs = index.runs || [];
+  } catch (e) {
+    errors.push(`Index: ${e.message}`);
+    cache.tasks = []; cache.messages = []; cache.runs = [];
+  }
 
   try {
     cache.commits = await fetchJSON(`${API}/commits?per_page=10`);
-  } catch (e) { errors.push(`Commits: ${e.message}`); cache.commits = []; }
+  } catch (e) { cache.commits = []; /* commits are nice-to-have */ }
 
   cache.loadedAt = new Date();
   return errors;
