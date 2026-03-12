@@ -521,14 +521,22 @@ async function fetchJSON(url) {
 }
 
 async function fetchDirContents(dirPath) {
+  // Use raw.githubusercontent to list known files via index, fallback to API
   try {
-    const files = await fetchJSON(`${API}/contents/.gnap/${dirPath}`);
-    if (!Array.isArray(files)) return [];
+    // Try git trees API (1 request for entire tree)
+    if (!cache._tree) {
+      const treeData = await fetchJSON(`${API}/git/trees/main?recursive=1`);
+      cache._tree = treeData.tree || [];
+    }
+    const prefix = `.gnap/${dirPath}/`;
+    const jsonFiles = cache._tree
+      .filter(f => f.path.startsWith(prefix) && f.path.endsWith('.json'))
+      .map(f => f.path);
+    
     const contents = await Promise.all(
-      files.filter(f => f.name.endsWith('.json')).map(async f => {
+      jsonFiles.map(async path => {
         try {
-          const data = await fetchJSON(f.download_url);
-          return data;
+          return await fetchJSON(`https://raw.githubusercontent.com/${REPO}/main/${path}`);
         } catch { return null; }
       })
     );
@@ -568,7 +576,7 @@ async function loadAllData() {
   } catch (e) { errors.push(`Runs: ${e.message}`); cache.runs = []; }
 
   try {
-    cache.commits = await fetchJSON(`${API}/commits?per_page=20`);
+    cache.commits = await fetchJSON(`${API}/commits?per_page=10`);
   } catch (e) { errors.push(`Commits: ${e.message}`); cache.commits = []; }
 
   cache.loadedAt = new Date();
