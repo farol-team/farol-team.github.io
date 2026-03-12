@@ -64,13 +64,14 @@ body { font-family: var(--font); background: var(--canvas); color: var(--ink); m
 .logo-bar:nth-child(5) { background: oklch(66% 0.258 308); }
 .logo-text { font-weight: 800; font-size: 1.1em; margin-left: 6px; }
 .topbar-right { display: flex; gap: 8px; align-items: center; }
-.theme-btn, .add-global-btn {
+.theme-btn, .add-global-btn, .sync-btn {
   background: none; border: 1px solid var(--ink-lighter); border-radius: 6px;
   padding: 4px 10px; cursor: pointer; font-size: 0.85em; color: var(--ink-dark);
   font-family: var(--font);
 }
 .add-global-btn { font-weight: 700; }
 .add-global-btn:hover { border-color: var(--color-progress); color: var(--color-progress); }
+.sync-btn:hover { border-color: oklch(66% 0.196 258); color: oklch(66% 0.196 258); }
 
 /* Alert strip */
 .alert-strip {
@@ -391,6 +392,7 @@ body { font-family: var(--font); background: var(--canvas); color: var(--ink); m
     </div>
   </div>
   <div class="topbar-right">
+    <button class="sync-btn" onclick="syncFromJSON()">🔄 Sync</button>
     <button class="add-global-btn" onclick="addCardToCol('next')">＋ New Task</button>
     <button class="theme-btn" onclick="toggleTheme()">🌓 Theme</button>
   </div>
@@ -421,334 +423,42 @@ body { font-family: var(--font); background: var(--canvas); color: var(--ink); m
   <!-- NOT NOW -->
   <div class="col" data-col="notnow">
     <div class="col-header"><span>Not Now</span><span class="col-count">0</span><button class="col-add-btn" onclick="addCardToCol('notnow')">＋</button></div>
-    <div class="card-list">
-      <div class="card card-item" draggable="true" data-owners="leo" data-id="auth" data-tag="Security">
-        <div class="card-tag">Security</div>
-        <div class="card-body"><div class="card-title">Auth on all instances</div></div>
-        <div class="card-people"><span class="person">Leonid</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="leo" data-id="bwrap" data-tag="Security">
-        <div class="card-tag">Security</div>
-        <div class="card-body"><div class="card-title">bwrap sandbox</div></div>
-        <div class="card-people"><span class="person">Leonid</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="leo,ori" data-id="fs-guard" data-tag="Security">
-        <div class="card-tag">Security</div>
-        <div class="card-body"><div class="card-title">fs-guard hooks</div></div>
-        <div class="card-people"><span class="person">Leonid</span> <span class="person">Ori</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="ori" data-id="dlp" data-tag="Security">
-        <div class="card-tag">Security</div>
-        <div class="card-body"><div class="card-title">DLP outbound</div></div>
-        <div class="card-people"><span class="person">Ori</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="ori" data-id="twitter-strat" data-tag="Marketing">
-        <div class="card-tag">Marketing</div>
-        <div class="card-body"><div class="card-title">Twitter strategy</div></div>
-        <div class="card-people"><span class="person">Ori</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="ori" data-id="trademark" data-tag="Legal">
-        <div class="card-tag">Legal</div>
-        <div class="card-body"><div class="card-title">Trademark "ORI"</div></div>
-        <div class="card-people"><span class="person">Ori</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-    </div>
+    <div class="card-list"></div>
     <div class="empty">Nothing here</div>
   </div>
 
   <!-- MAYBE -->
   <div class="col" data-col="maybe">
     <div class="col-header"><span>Maybe</span><span class="col-count">0</span><button class="col-add-btn" onclick="addCardToCol('maybe')">＋</button></div>
-    <div class="card-list">
-      <div class="card card-item" draggable="true" data-owners="ori" data-id="pipeline" data-tag="Sales">
-        <div class="card-tag">Sales</div>
-        <div class="card-body"><div class="card-title">Pipeline 20 leads</div></div>
-        <div class="card-people"><span class="person">Ori</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="ori" data-id="ph-launch" data-tag="Marketing">
-        <div class="card-tag">Marketing</div>
-        <div class="card-body"><div class="card-title">Product Hunt launch</div><div class="card-desc">Traffic burst + social proof</div></div>
-        <div class="card-people"><span class="person">Ori</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="mayak" data-id="demo-video" data-tag="Content">
-        <div class="card-tag">Content</div>
-        <div class="card-body"><div class="card-title">Demo video / GIF</div><div class="card-desc">Landing doesn't convert without visuals</div></div>
-        <div class="card-people"><span class="person">Alex</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-    </div>
+    <div class="card-list"></div>
     <div class="empty">Nothing here</div>
   </div>
 
   <!-- UP NEXT -->
   <div class="col" data-col="next">
     <div class="col-header"><span>Up Next</span><span class="col-count">0</span><button class="col-add-btn" onclick="addCardToCol('next')">＋</button></div>
-    <div class="card-list">
-      <div class="card card-item" draggable="true" data-owners="leo" data-id="farol-io-hire" data-tag="Product">
-        <div class="card-tag">Product</div>
-        <div class="card-body"><div class="card-title">farol.io → Hire Your AI Team</div><div class="card-desc">Заменить главную farol.io на страницу Hire (контент с cofounder.run/hire). Call Analytics убрать в архив. Файл готов: /tmp/hire-original.html</div></div>
-        <div class="card-people"><span class="person">Leonid</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="leo" data-id="getori" data-tag="Infra">
-        <div class="card-tag">Infra</div>
-        <div class="card-body"><div class="card-title">Move to getori.app</div><div class="card-desc">New domain, landing, redirects</div></div>
-        <div class="card-people"><span class="person">Leonid</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="leo" data-id="legal" data-tag="Legal">
-        <div class="card-tag">Legal</div>
-        <div class="card-body"><div class="card-title">Legal entity</div><div class="card-desc">Stripe Atlas · ~$500, 1-2 days</div></div>
-        <div class="card-people"><span class="person">Leonid</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="leo" data-id="pricing-page" data-tag="Product">
-        <div class="card-tag">Product</div>
-        <div class="card-body"><div class="card-title">Pricing page</div><div class="card-desc">$20/mo Sebastian · $200/mo Ori</div></div>
-        <div class="card-people"><span class="person">Leonid</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="leo" data-id="approve-pricing" data-tag="Strategy">
-        <div class="card-tag">Strategy</div>
-        <div class="card-body"><div class="card-title">Проверить адекватность pricing</div><div class="card-desc">Посчитать себестоимость (LLM, infra, Fly.io) и проверить адекватность $49/$200 с учётом расходов. Unit economics должен сходиться</div></div>
-        <div class="card-people"><span class="person">Leonid</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="ori" data-id="sys-prompt" data-tag="Product">
-        <div class="card-tag">Product</div>
-        <div class="card-body"><div class="card-title">System prompt refinement</div><div class="card-desc">After first paying client</div></div>
-        <div class="card-people"><span class="person">Ori</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item is-blocked" draggable="true" data-owners="ori,mayak" data-id="onboarding" data-tag="Product">
-        <div class="card-tag">Product</div>
-        <div class="card-body"><div class="card-title">Ori onboarding</div><div class="card-desc">Client can't tell difference from ChatGPT in 30 min</div></div>
-        <div class="card-people"><span class="person">Ori</span> <span class="person">Alex</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item is-blocked" draggable="true" data-owners="leo,mayak" data-id="farol-dns" data-tag="Infra">
-        <div class="card-tag">Infra</div>
-        <div class="card-body"><div class="card-title">Fix farol.team deploy</div><div class="card-desc">GitHub Pages custom domain "already taken" — needs TXT DNS verification</div></div>
-        <div class="card-people"><span class="person">Leonid</span> <span class="person">Alex</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="leo" data-id="user-portal" data-tag="Product">
-        <div class="card-tag">Product</div>
-        <div class="card-body"><div class="card-title">User portal link</div><div class="card-desc">Общая ссылка — каждый пользователь видит свою канбан-доску</div></div>
-        <div class="card-people"><span class="person">Leonid</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="leo" data-id="ori-carl-group" data-tag="Product">
-        <div class="card-tag">Product</div>
-        <div class="card-body"><div class="card-title">Ori + Carl в общей группе TG</div><div class="card-desc">Боты не переписываются в общей группе — разобраться и починить</div></div>
-        <div class="card-people"><span class="person">Leonid</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="leo" data-id="seb-onboard-text" data-tag="Product">
-        <div class="card-tag">Product</div>
-        <div class="card-body"><div class="card-title">Fix Sebastian startup text</div><div class="card-desc">Убрать технический текст Rails при старте</div></div>
-        <div class="card-people"><span class="person">Leonid</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="leo" data-id="admin-book-upload">
-        <div class="card-tag">Product</div>
-        <div class="card-body"><div class="card-title">Загрузка файлов в админке</div><div class="card-desc">Куда в админке класть файл (книга, документ) для развития агента? Нужен UI для загрузки контента в workspace бота</div></div>
-        <div class="card-people"><span class="person">Leonid</span></div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="leo" data-id="farol-admin-connect">
-        <div class="card-tag">Infra</div>
-        <div class="card-body"><div class="card-title">Соединить farol.io фронт и admin бек</div><div class="card-desc">Связать farol.io (лендинг/hire) с app.getsebastian.app/admin/ — единый flow регистрации и управления</div></div>
-        <div class="card-people"><span class="person">Leonid</span></div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="mayak" data-id="seb-onboarding-fix" data-tag="Product">
-        <div class="card-tag">Product</div>
-        <div class="card-body"><div class="card-title">Доделать онбординг Sebastian</div><div class="card-desc">Алёна отвалилась — муть и технический текст</div></div>
-        <div class="card-people"><span class="person">Alex</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="mayak" data-id="tg-ads-seb" data-tag="Marketing">
-        <div class="card-tag">Marketing</div>
-        <div class="card-body"><div class="card-title">Реклама Sebastian в TG</div><div class="card-desc">Алёна дала ссылки на каналы + размещение в её канале</div></div>
-        <div class="card-people"><span class="person">Alex</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="mayak" data-id="bootstrap-intent" data-tag="Product">
-        <div class="card-tag">Product</div>
-        <div class="card-body"><div class="card-title">BOOTSTRAP.md — замысел и намерение</div><div class="card-desc">Вписать уточнение "замысла" и "намерения" для Ori</div></div>
-        <div class="card-people"><span class="person">Alex</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="mayak" data-id="seb-workflow-approve" data-tag="Product">
-        <div class="card-tag">Product</div>
-        <div class="card-body"><div class="card-title">Sebastian: утвердить воркфлоу</div><div class="card-desc">После изменений в BotFather — утвердить workflow</div></div>
-        <div class="card-people"><span class="person">Alex</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="mayak" data-id="naora-workflow" data-tag="Sales">
-        <div class="card-tag">Sales</div>
-        <div class="card-body"><div class="card-title">Naora: собрать воркфлоу</div><div class="card-desc">Собрать workflow для Артёма. Нужен браузер</div></div>
-        <div class="card-people"><span class="person">Alex</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="mayak" data-id="first-biz-skill" data-tag="Product">
-        <div class="card-tag">Product</div>
-        <div class="card-body"><div class="card-title">Загрузить первый бизнес-скил</div><div class="card-desc">Первый пользовательский скил для Ori</div></div>
-        <div class="card-people"><span class="person">Alex</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="mayak" data-id="marketplace-ui" data-tag="Product">
-        <div class="card-tag">Product</div>
-        <div class="card-body"><div class="card-title">Маркетплейс Себастианов — UI</div><div class="card-desc">Первый выстрел интерфейса и позиционирования</div></div>
-        <div class="card-people"><span class="person">Alex</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="mayak" data-id="digital-employee-marketing" data-tag="Strategy">
-        <div class="card-tag">Strategy</div>
-        <div class="card-body"><div class="card-title">Цифровой сотрудник — круг маркетинга</div><div class="card-desc">Круг, отвечающий за маркетинг</div></div>
-        <div class="card-people"><span class="person">Alex</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="mayak" data-id="research-plurio" data-tag="Research">
-        <div class="card-tag">Research</div>
-        <div class="card-body"><div class="card-title">Изучить Plurio</div><div class="card-desc">$3.5M seed, AI performance marketing</div></div>
-        <div class="card-people"><span class="person">Alex</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="mayak" data-id="google-ads-seb" data-tag="Marketing">
-        <div class="card-tag">Marketing</div>
-        <div class="card-body"><div class="card-title">Google Ads для Sebastian</div><div class="card-desc">Настроить и запустить рекламу в Google</div></div>
-        <div class="card-people"><span class="person">Alex</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-    </div>
+    <div class="card-list"></div>
     <div class="empty">Nothing here</div>
   </div>
 
   <!-- IN PROGRESS -->
   <div class="col" data-col="progress">
     <div class="col-header"><span>In Progress</span><span class="col-count">0</span><button class="col-add-btn" onclick="addCardToCol('progress')">＋</button></div>
-    <div class="card-list">
-      <div class="card card-item is-blocked" draggable="true" data-owners="leo" data-id="billing" data-tag="Infra">
-        <div class="card-tag">Infra</div>
-        <div class="card-body"><div class="card-title">Billing (Stripe)</div><div class="card-desc">No legal entity → no Stripe → $0 revenue</div></div>
-        <div class="card-people"><span class="person">Leonid</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="leo" data-id="self-service" data-tag="Infra">
-        <div class="card-tag">Infra</div>
-        <div class="card-body"><div class="card-title">Self-service + Billing</div><div class="card-desc">Auto-deploy ✅ · Now: billing + MiniMax</div></div>
-        <div class="card-people"><span class="person">Leonid</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="mayak" data-id="sales" data-tag="Sales">
-        <div class="card-tag">Sales</div>
-        <div class="card-body"><div class="card-title">Sales + onboarding</div><div class="card-desc">Naora · BUNT · SHAMAN · Leads4You · Deepn</div></div>
-        <div class="card-people"><span class="person">Alex</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="ori" data-id="tg-ph" data-tag="Marketing">
-        <div class="card-tag">Marketing</div>
-        <div class="card-body"><div class="card-title">TG promotion + PH prep</div><div class="card-desc">Channel research · Don't launch until billing</div></div>
-        <div class="card-people"><span class="person">Ori</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-    </div>
+    <div class="card-list"></div>
     <div class="empty">Nothing here</div>
   </div>
 
   <!-- HUMAN REVIEW -->
   <div class="col" data-col="review">
     <div class="col-header"><span>Human Review</span><span class="col-count">0</span><button class="col-add-btn" onclick="addCardToCol('review')">＋</button></div>
-    <div class="card-list">
-      <div class="card card-item" draggable="true" data-owners="ori" data-id="features-page" data-tag="Marketing">
-        <div class="card-tag">Marketing</div>
-        <div class="card-body"><div class="card-title">Sebastian features page</div><div class="card-desc">getsebastian.app/features.html — needs review</div></div>
-        <div class="card-people"><span class="person">Ori</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="ori" data-id="farol-landing" data-tag="Marketing">
-        <div class="card-tag">Marketing</div>
-        <div class="card-body"><div class="card-title">Farol Lab landing</div><div class="card-desc">Building in public + Follow on X — needs review</div></div>
-        <div class="card-people"><span class="person">Ori</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="ori" data-id="skillmart-page" data-tag="Product">
-        <div class="card-tag">Product</div>
-        <div class="card-body"><div class="card-title">Skillmart / Hire page</div><div class="card-desc">cofounder.run/skillmart + /hire — needs review</div></div>
-        <div class="card-people"><span class="person">Ori</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="ori" data-id="agent-research" data-tag="Research">
-        <div class="card-tag">Research</div>
-        <div class="card-body"><div class="card-title">AI marketplaces research</div><div class="card-desc">15+ platforms analyzed — needs review</div></div>
-        <div class="card-people"><span class="person">Ori</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-    </div>
+    <div class="card-list"></div>
     <div class="empty">Nothing here</div>
   </div>
 
   <!-- DONE -->
   <div class="col" data-col="done">
     <div class="col-header"><span>Done</span><span class="col-count">0</span><button class="col-add-btn" onclick="addCardToCol('done')">＋</button></div>
-    <div class="card-list">
-      <div class="card card-item" draggable="true" data-owners="leo" data-id="deploy-done" data-tag="Infra">
-        <div class="card-tag">Infra</div>
-        <div class="card-body"><div class="card-title">Self-service deploy</div><div class="card-desc">Shipped Mar 5</div></div>
-        <div class="card-people"><span class="person">Leonid</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="ori" data-id="landings" data-tag="Marketing">
-        <div class="card-tag">Marketing</div>
-        <div class="card-body"><div class="card-title">Landings</div><div class="card-desc">cofounder.run + getsebastian.app</div></div>
-        <div class="card-people"><span class="person">Ori</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="ori,mayak" data-id="onboard-v2" data-tag="Product">
-        <div class="card-tag">Product</div>
-        <div class="card-body"><div class="card-title">Sebastian Onboarding v2</div><div class="card-desc">BOOTSTRAP.md + PCM + TOC</div></div>
-        <div class="card-people"><span class="person">Ori</span> <span class="person">Alex</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="mayak" data-id="demo-naora" data-tag="Sales">
-        <div class="card-tag">Sales</div>
-        <div class="card-body"><div class="card-title">Naora demo</div></div>
-        <div class="card-people"><span class="person">Alex</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="all" data-id="soul" data-tag="Foundation">
-        <div class="card-tag">Foundation</div>
-        <div class="card-body"><div class="card-title">SOUL.md + Manifesto</div></div>
-        <div class="card-people"><span class="person">All</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="ori" data-id="unit-econ" data-tag="Strategy">
-        <div class="card-tag">Strategy</div>
-        <div class="card-body"><div class="card-title">Unit Economics</div></div>
-        <div class="card-people"><span class="person">Ori</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="ori" data-id="twitter-api" data-tag="Infra">
-        <div class="card-tag">Infra</div>
-        <div class="card-body"><div class="card-title">Twitter API</div></div>
-        <div class="card-people"><span class="person">Ori</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-      <div class="card card-item" draggable="true" data-owners="ori" data-id="cron-setup" data-tag="Infra">
-        <div class="card-tag">Infra</div>
-        <div class="card-body"><div class="card-title">Cron: Board + AI News</div></div>
-        <div class="card-people"><span class="person">Ori</span></div>
-        <div class="blocked-stamp">Blocked</div>
-      </div>
-    </div>
+    <div class="card-list"></div>
     <div class="empty">Nothing here</div>
   </div>
 
@@ -854,11 +564,12 @@ body { font-family: var(--font); background: var(--canvas); color: var(--ink); m
 </div>
 
 <div class="toast" id="toast"></div>
-<div class="footer-bar">Click to edit · Drag between columns · ＋ to add · Mar 11, 2026</div>
+<div class="footer-bar">Click to edit · Drag between columns · ＋ to add · 🔄 Sync from JSON</div>
 
 <script>
 const CL = { notnow:'Not Now', maybe:'Maybe', next:'Up Next', progress:'In Progress', review:'Human Review', done:'Done' };
 const OWNER_NAMES = { leo:'Leonid', mayak:'Alex', ori:'Ori', all:'All' };
+const STORAGE_KEY = 'farol-kanban-v9';
 
 /* Theme */
 function toggleTheme() {
@@ -898,6 +609,80 @@ function updateCounts() {
     col.querySelector('.col-count').textContent = n;
     col.classList.toggle('all-hidden', n === 0);
   });
+}
+
+/* ---- RENDER CARD ---- */
+function createCardElement(cardData) {
+  const card = document.createElement('div');
+  card.className = 'card card-item' + (cardData.blocked ? ' is-blocked' : '');
+  card.draggable = true;
+  card.dataset.id = cardData.id;
+  card.dataset.tag = cardData.tag || 'Product';
+  card.dataset.owners = (cardData.owners || ['ori']).join(',');
+
+  const owners = cardData.owners || ['ori'];
+  const descHtml = cardData.desc ? `<div class="card-desc">${escapeHtml(cardData.desc)}</div>` : '';
+  const peopleHtml = owners.map(o => `<span class="person">${OWNER_NAMES[o] || o}</span>`).join(' ');
+
+  card.innerHTML = `
+    <div class="card-tag">${escapeHtml(cardData.tag || 'Product')}</div>
+    <div class="card-body"><div class="card-title">${escapeHtml(cardData.title)}</div>${descHtml}</div>
+    <div class="card-people">${peopleHtml}</div>
+    <div class="blocked-stamp">Blocked</div>
+  `;
+
+  bindCardDrag(card);
+  return card;
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* ---- LOAD FROM JSON ---- */
+async function loadFromJSON() {
+  try {
+    const resp = await fetch('kanban-data.json?t=' + Date.now());
+    if (!resp.ok) throw new Error('Failed to fetch kanban-data.json: ' + resp.status);
+    const data = await resp.json();
+    renderCards(data.cards);
+    return data;
+  } catch (e) {
+    console.error('Failed to load kanban-data.json:', e);
+    showToast('⚠️ Failed to load data');
+    return null;
+  }
+}
+
+function renderCards(cards) {
+  // Clear all card lists
+  document.querySelectorAll('.card-list').forEach(list => list.innerHTML = '');
+
+  // Group cards by column, sort by order
+  const byColumn = {};
+  cards.forEach(c => {
+    if (!byColumn[c.column]) byColumn[c.column] = [];
+    byColumn[c.column].push(c);
+  });
+
+  for (const [col, colCards] of Object.entries(byColumn)) {
+    colCards.sort((a, b) => (a.order || 0) - (b.order || 0));
+    const list = document.querySelector(`.col[data-col="${col}"] .card-list`);
+    if (!list) continue;
+    colCards.forEach(cardData => {
+      list.appendChild(createCardElement(cardData));
+    });
+  }
+}
+
+/* ---- SYNC BUTTON ---- */
+async function syncFromJSON() {
+  localStorage.removeItem(STORAGE_KEY);
+  localStorage.removeItem('farol-card-details');
+  await loadFromJSON();
+  applyFilter(currentFilter);
+  showToast('🔄 Synced from server');
 }
 
 /* ---- MODAL ---- */
@@ -1107,9 +892,6 @@ function bindCardDrag(card) {
   });
 }
 
-// Bind existing cards
-document.querySelectorAll('.card-item').forEach(bindCardDrag);
-
 document.addEventListener('dragend', () => {
   if (dCard) { dCard.classList.remove('dragging'); dCard = null; }
   document.querySelectorAll('.col').forEach(c => c.classList.remove('drag-over'));
@@ -1188,11 +970,11 @@ function saveState(){
       };
     }
   });
-  localStorage.setItem('farol-kanban-v6',JSON.stringify(s));
+  localStorage.setItem(STORAGE_KEY,JSON.stringify(s));
 }
 
 function loadState(){
-  const r=localStorage.getItem('farol-kanban-v6'); if(!r) return;
+  const r=localStorage.getItem(STORAGE_KEY); if(!r) return false;
   try{
     const s=JSON.parse(r); const all={};
     document.querySelectorAll('.card-item').forEach(c=>{all[c.dataset.id]=c;});
@@ -1209,8 +991,8 @@ function loadState(){
         card.dataset.owners = data.owners || 'ori';
         const owners = (data.owners||'ori').split(',');
         card.innerHTML = `
-          <div class="card-tag">${data.tag||'Product'}</div>
-          <div class="card-body"><div class="card-title">${data.title||''}</div>${data.desc?`<div class="card-desc">${data.desc}</div>`:''}</div>
+          <div class="card-tag">${escapeHtml(data.tag||'Product')}</div>
+          <div class="card-body"><div class="card-title">${escapeHtml(data.title||'')}</div>${data.desc?`<div class="card-desc">${escapeHtml(data.desc)}</div>`:''}</div>
           <div class="card-people">${owners.map(o=>`<span class="person">${OWNER_NAMES[o]||o}</span>`).join(' ')}</div>
           <div class="blocked-stamp">Blocked</div>
         `;
@@ -1228,13 +1010,27 @@ function loadState(){
     }
     document.querySelectorAll('.card-item').forEach(c=>c.classList.remove('is-blocked'));
     if(s.blocked) s.blocked.forEach(id=>{if(all[id]) all[id].classList.add('is-blocked');});
-  }catch(e){ console.error('Load state error:', e); }
+    return true;
+  }catch(e){ console.error('Load state error:', e); return false; }
 }
 
-loadState();
-const p=new URLSearchParams(location.search); const w=p.get('who');
-if(w&&['leo','mayak','ori'].includes(w)) applyFilter(w); else updateCounts();
+/* ---- INIT ---- */
+async function init() {
+  // Always load from JSON first (source of truth)
+  await loadFromJSON();
+
+  // Then apply localStorage overrides (column order, blocked status, user-created cards)
+  const hasLocalState = loadState();
+
+  // Apply URL filter
+  const p = new URLSearchParams(location.search);
+  const w = p.get('who');
+  if (w && ['leo','mayak','ori'].includes(w)) applyFilter(w);
+  else updateCounts();
+}
+
+init();
 </script>
 </body>
 </html>
-<!-- v8 kanban-full-edit -->
+<!-- v9 data-driven -->
