@@ -3,772 +3,540 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Constitution v1.0 — AI-Native Organization Protocol</title>
+<title>Constitution v1.0 — Farol Lab</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0a0a0f;
-    --surface: #12121a;
-    --surface2: #1a1a25;
-    --border: #2a2a3a;
-    --text: #e0e0e8;
-    --text-dim: #8888a0;
-    --accent: #7c6bf0;
-    --accent2: #a78bfa;
-    --gold: #f0c040;
-    --green: #34d399;
-    --red: #f87171;
-    --blue: #60a5fa;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: var(--bg);
-    color: var(--text);
+    font-family: 'Inter', -apple-system, system-ui, sans-serif;
+    background: #fafafa;
+    color: #111;
+    -webkit-font-smoothing: antialiased;
     line-height: 1.7;
-    padding: 0;
   }
 
+  /* ── Nav ── */
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px clamp(20px, 4vw, 48px);
+    border-bottom: 1px solid #eee;
+  }
+  .nav-left { font-weight: 800; font-size: 17px; letter-spacing: -0.03em; }
+  .nav-left a { text-decoration: none; color: #111; }
+  .nav-right { display: flex; gap: 20px; align-items: center; }
+  .nav-right a { font-size: 13px; font-weight: 500; color: #888; text-decoration: none; transition: color 0.15s; }
+  .nav-right a:hover { color: #111; }
+
+  /* ── Container ── */
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 24px); }
+
+  /* ── Hero ── */
   .hero {
-    text-align: center;
-    padding: 80px 20px 60px;
-    background: linear-gradient(180deg, #12121a 0%, #0a0a0f 100%);
-    border-bottom: 1px solid var(--border);
+    padding: clamp(48px, 8vw, 80px) 0 clamp(32px, 5vw, 48px);
+    border-bottom: 1px solid #eee;
   }
-
+  .hero .tag {
+    display: inline-flex; align-items: center;
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em; color: #7c3aed; margin-bottom: 16px;
+  }
   .hero h1 {
-    font-size: 2.8em;
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    margin-bottom: 12px;
-    background: linear-gradient(135deg, var(--accent2), var(--gold));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-size: clamp(32px, 5vw, 48px); font-weight: 900;
+    letter-spacing: -0.04em; line-height: 1.08; margin-bottom: 14px;
+  }
+  .hero p {
+    font-size: clamp(16px, 2vw, 19px); color: #555; line-height: 1.6;
+    max-width: 560px;
+  }
+  .version-badge {
+    display: inline-block; padding: 4px 12px; border: 1px solid #7c3aed;
+    border-radius: 20px; font-size: 12px; font-weight: 600; color: #7c3aed;
+    margin-top: 16px;
   }
 
-  .hero .subtitle {
-    font-size: 1.2em;
-    color: var(--text-dim);
-    font-style: italic;
-    margin-bottom: 24px;
+  /* ── Section ── */
+  .section { padding: 32px 0; border-bottom: 1px solid #eee; }
+  .section-header {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em; color: #999; margin-bottom: 16px;
   }
-
-  .hero .version {
-    display: inline-block;
-    padding: 6px 16px;
-    border: 1px solid var(--accent);
-    border-radius: 20px;
-    color: var(--accent2);
-    font-size: 0.85em;
-    font-weight: 600;
+  .part-label {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em; color: #7c3aed; margin-bottom: 4px;
   }
-
-  .container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 40px 24px 80px;
+  .section h2 {
+    font-size: clamp(22px, 3vw, 28px); font-weight: 800;
+    letter-spacing: -0.03em; margin-bottom: 16px;
   }
-
-  .part {
-    margin-bottom: 48px;
+  .section h3 {
+    font-size: 16px; font-weight: 700; margin: 24px 0 8px; color: #111;
   }
+  .section p { color: #555; margin-bottom: 12px; }
+  .section ul, .section ol { padding-left: 24px; margin-bottom: 12px; color: #555; }
+  .section li { margin-bottom: 4px; }
 
-  .part-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 24px;
-    padding-bottom: 12px;
-    border-bottom: 2px solid var(--accent);
-  }
-
-  .part-number {
-    font-size: 0.75em;
-    font-weight: 700;
-    color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
-
-  .part-title {
-    font-size: 1.6em;
-    font-weight: 700;
-  }
-
-  h3 {
-    font-size: 1.15em;
-    font-weight: 600;
-    margin: 28px 0 12px;
-    color: var(--accent2);
-  }
-
-  p, li {
-    color: var(--text);
-    margin-bottom: 8px;
-  }
-
-  ul, ol {
-    padding-left: 24px;
-    margin-bottom: 16px;
-  }
-
+  /* ── Purpose box ── */
   .purpose-box {
-    background: var(--surface2);
-    border-left: 4px solid var(--gold);
-    padding: 20px 24px;
-    border-radius: 0 8px 8px 0;
-    margin: 16px 0;
-    font-size: 1.05em;
-    font-weight: 500;
+    background: #fff; border-left: 4px solid #7c3aed;
+    padding: 16px 20px; border-radius: 0 12px 12px 0;
+    margin: 16px 0; font-size: 16px; font-weight: 500;
+    color: #333; border: 1px solid #eee; border-left: 4px solid #7c3aed;
   }
+  .purpose-box.placeholder { color: #999; font-style: italic; }
 
-  .purpose-box.placeholder {
-    color: var(--text-dim);
-    font-style: italic;
-  }
-
+  /* ── Principle cards ── */
+  .principles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .principle {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 16px 20px;
-    margin-bottom: 12px;
+    padding: 16px 18px; background: #fff; border: 1px solid #eee; border-radius: 12px;
   }
+  .principle strong { color: #111; font-size: 14px; }
+  .principle p { font-size: 13px; color: #666; line-height: 1.45; margin-bottom: 0; }
 
-  .principle strong {
-    color: var(--accent2);
-  }
-
+  /* ── Circle cards ── */
   .circle-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 24px;
-    margin-bottom: 20px;
-    transition: border-color 0.2s;
+    background: #fff; border: 1px solid #eee; border-radius: 14px;
+    padding: 24px; margin-bottom: 12px;
+    transition: border-color 0.2s, box-shadow 0.2s;
   }
-
-  .circle-card:hover {
-    border-color: var(--accent);
-  }
+  .circle-card:hover { border-color: #ccc; box-shadow: 0 4px 16px rgba(0,0,0,0.04); }
 
   .circle-name {
-    font-size: 1.3em;
-    font-weight: 700;
-    margin-bottom: 4px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    font-size: 18px; font-weight: 700; letter-spacing: -0.01em;
+    display: flex; align-items: center; gap: 10px; margin-bottom: 4px;
   }
-
-  .circle-name .emoji {
-    font-size: 1.2em;
-  }
-
   .circle-purpose {
-    color: var(--text-dim);
-    font-style: italic;
-    margin-bottom: 16px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--border);
+    font-size: 14px; color: #888; font-style: italic;
+    margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid #f0f0f0;
   }
-
-  .circle-section {
-    margin-bottom: 14px;
-  }
-
+  .circle-section { margin-bottom: 12px; }
   .circle-section-title {
-    font-size: 0.8em;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--accent);
-    margin-bottom: 6px;
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; color: #7c3aed; margin-bottom: 4px;
   }
-
-  .circle-section ul {
-    margin-bottom: 0;
-  }
-
-  .circle-section li {
-    font-size: 0.92em;
-    margin-bottom: 4px;
-  }
+  .circle-section ul { margin-bottom: 0; }
+  .circle-section li { font-size: 13px; color: #555; margin-bottom: 2px; }
 
   .tension-trigger {
-    background: rgba(248, 113, 113, 0.1);
-    border-left: 3px solid var(--red);
-    padding: 4px 12px;
-    border-radius: 0 4px 4px 0;
-    font-size: 0.88em;
-    margin-bottom: 4px;
+    background: #fef2f2; border-left: 3px solid #ef4444;
+    padding: 4px 12px; border-radius: 0 6px 6px 0;
+    font-size: 13px; color: #991b1b; margin-bottom: 4px;
   }
 
   .links-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    list-style: none;
-    padding-left: 0;
+    display: flex; flex-wrap: wrap; gap: 6px;
+    list-style: none; padding-left: 0;
   }
-
   .links-list li {
-    background: var(--surface2);
-    padding: 4px 12px;
-    border-radius: 16px;
-    font-size: 0.82em;
-    color: var(--text-dim);
-    border: 1px solid var(--border);
+    background: #f5f3ff; padding: 3px 10px; border-radius: 16px;
+    font-size: 12px; color: #6d28d9; font-weight: 500;
   }
 
-  .links-list li .arrow {
-    color: var(--accent);
-    margin-right: 4px;
-  }
-
+  /* ── Map ── */
   .map-box {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 24px;
-    margin: 20px 0;
-    text-align: center;
-    font-family: 'Courier New', monospace;
-    font-size: 0.82em;
-    line-height: 1.5;
-    white-space: pre;
-    overflow-x: auto;
-    color: var(--text-dim);
+    background: #fff; border: 1px solid #eee; border-radius: 14px;
+    padding: 24px; margin: 16px 0; text-align: center;
+    font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    line-height: 1.5; white-space: pre; overflow-x: auto; color: #666;
   }
 
-  .activation-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 16px 0;
-    font-size: 0.9em;
+  /* ── Tables ── */
+  .data-table {
+    width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px;
   }
-
-  .activation-table th {
-    text-align: left;
-    padding: 10px 12px;
-    background: var(--surface2);
-    color: var(--accent2);
-    font-weight: 600;
-    font-size: 0.85em;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    border-bottom: 2px solid var(--accent);
+  .data-table th {
+    text-align: left; padding: 10px 12px; background: #fff;
+    color: #7c3aed; font-weight: 600; font-size: 11px;
+    text-transform: uppercase; letter-spacing: 0.05em;
+    border-bottom: 2px solid #7c3aed;
   }
-
-  .activation-table td {
-    padding: 10px 12px;
-    border-bottom: 1px solid var(--border);
-    color: var(--text);
+  .data-table td {
+    padding: 10px 12px; border-bottom: 1px solid #eee; color: #555;
   }
-
-  .activation-table tr:hover td {
-    background: var(--surface);
-  }
+  .data-table tr:hover td { background: #fafafa; }
 
   .badge-active {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 10px;
-    font-size: 0.8em;
-    font-weight: 600;
-    background: rgba(52, 211, 153, 0.15);
-    color: var(--green);
+    display: inline-block; padding: 2px 8px; border-radius: 10px;
+    font-size: 11px; font-weight: 600; background: #dcfce7; color: #16a34a;
   }
-
   .badge-sleeping {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 10px;
-    font-size: 0.8em;
-    font-weight: 600;
-    background: rgba(136, 136, 160, 0.15);
-    color: var(--text-dim);
+    display: inline-block; padding: 2px 8px; border-radius: 10px;
+    font-size: 11px; font-weight: 600; background: #f3f4f6; color: #9ca3af;
   }
 
-  .decision-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 16px 0;
-    font-size: 0.9em;
+  /* ── Governance steps ── */
+  .gov-step {
+    display: flex; align-items: flex-start; gap: 14px; margin-bottom: 14px;
   }
-
-  .decision-table th {
-    text-align: left;
-    padding: 10px 12px;
-    background: var(--surface2);
-    color: var(--accent2);
-    font-weight: 600;
-    border-bottom: 2px solid var(--accent);
+  .gov-num {
+    width: 30px; height: 30px; min-width: 30px; border-radius: 50%;
+    background: #7c3aed; color: #fff; display: flex;
+    align-items: center; justify-content: center;
+    font-weight: 700; font-size: 13px;
   }
+  .gov-content { padding-top: 4px; color: #555; }
+  .gov-content strong { color: #111; }
 
-  .decision-table td {
-    padding: 10px 12px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .governance-step {
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-    margin-bottom: 14px;
-  }
-
-  .governance-step .num {
-    width: 32px;
-    height: 32px;
-    min-width: 32px;
-    border-radius: 50%;
-    background: var(--accent);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 0.85em;
-  }
-
-  .governance-step .content {
-    padding-top: 4px;
-  }
-
-  .governance-step .content strong {
-    color: var(--accent2);
-  }
-
-  .valid-box {
-    display: flex;
-    gap: 20px;
-    margin: 16px 0;
-  }
-
+  .valid-box { display: flex; gap: 12px; margin: 16px 0; }
   .valid-col {
-    flex: 1;
-    background: var(--surface);
-    border-radius: 8px;
-    padding: 16px;
-    border: 1px solid var(--border);
+    flex: 1; background: #fff; border-radius: 12px;
+    padding: 16px; border: 1px solid #eee;
   }
+  .valid-col h4 { font-size: 13px; margin-bottom: 8px; }
+  .valid-col.yes h4 { color: #16a34a; }
+  .valid-col.no h4 { color: #dc2626; }
+  .valid-col li { font-size: 13px; color: #666; margin-bottom: 3px; }
 
-  .valid-col h4 {
-    font-size: 0.85em;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .valid-col.yes h4 { color: var(--green); }
-  .valid-col.no h4 { color: var(--red); }
-
-  .valid-col li {
-    font-size: 0.88em;
-    margin-bottom: 4px;
-  }
-
+  /* ── File tree ── */
   .file-tree {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 16px 20px;
-    font-family: 'Courier New', monospace;
-    font-size: 0.85em;
-    line-height: 1.6;
-    color: var(--text-dim);
-    overflow-x: auto;
+    background: #fff; border: 1px solid #eee; border-radius: 12px;
+    padding: 16px 20px; font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; line-height: 1.7; color: #666; overflow-x: auto;
   }
+  .file-tree .dir { color: #3b82f6; font-weight: 500; }
+  .file-tree .file { color: #111; }
+  .file-tree .comment { color: #bbb; }
 
-  .file-tree .dir { color: var(--blue); }
-  .file-tree .file { color: var(--text); }
-  .file-tree .comment { color: var(--text-dim); }
-
-  .glossary {
-    display: grid;
-    grid-template-columns: 140px 1fr;
-    gap: 2px;
-    font-size: 0.9em;
-  }
-
+  /* ── Glossary ── */
+  .glossary { display: grid; grid-template-columns: 130px 1fr; gap: 2px; font-size: 14px; }
   .glossary dt {
-    font-weight: 600;
-    color: var(--accent2);
-    padding: 8px 12px;
-    background: var(--surface);
-    border-radius: 4px 0 0 4px;
+    font-weight: 600; color: #7c3aed; padding: 8px 12px;
+    background: #fff; border-radius: 6px 0 0 6px;
   }
-
   .glossary dd {
-    padding: 8px 12px;
-    background: var(--surface);
-    border-radius: 0 4px 4px 0;
-    color: var(--text);
+    padding: 8px 12px; background: #fff; border-radius: 0 6px 6px 0; color: #555;
   }
 
+  /* ── Footer ── */
   .signature {
-    text-align: center;
-    margin-top: 60px;
-    padding-top: 40px;
-    border-top: 1px solid var(--border);
-    color: var(--text-dim);
-    font-style: italic;
+    text-align: center; margin-top: 40px; padding: 32px 0;
+    color: #bbb; font-style: italic; font-size: 14px;
   }
-
   .signature .line {
-    display: inline-block;
-    width: 200px;
-    border-bottom: 1px solid var(--text-dim);
-    margin: 0 8px;
+    display: inline-block; width: 180px;
+    border-bottom: 1px solid #ccc; margin: 0 6px;
   }
 
-  @media (max-width: 600px) {
-    .hero h1 { font-size: 2em; }
+  footer {
+    text-align: center; padding: 24px; font-size: 12px; color: #bbb;
+    border-top: 1px solid #eee;
+  }
+  footer a { color: #888; text-decoration: none; }
+  footer a:hover { color: #111; }
+
+  @media (max-width: 640px) {
+    .principles { grid-template-columns: 1fr; }
     .valid-box { flex-direction: column; }
     .glossary { grid-template-columns: 1fr; }
-    .glossary dt { border-radius: 4px 4px 0 0; }
-    .glossary dd { border-radius: 0 0 4px 4px; margin-bottom: 8px; }
+    .glossary dt { border-radius: 6px 6px 0 0; }
+    .glossary dd { border-radius: 0 0 6px 6px; margin-bottom: 6px; }
   }
 </style>
 </head>
 <body>
 
-<div class="hero">
-  <h1>Constitution</h1>
-  <div class="subtitle">Протокол управления AI-native организацией</div>
-  <div class="version">v1.0</div>
-</div>
-
-<div class="container">
-
-<!-- ПРЕАМБУЛА -->
-<div class="part">
-  <div class="part-header">
-    <span class="part-title">Преамбула</span>
+<nav>
+  <div class="nav-left"><a href="/">Farol Lab</a></div>
+  <div class="nav-right">
+    <a href="/kanban.html">Kanban</a>
+    <a href="https://getsebastian.app">Sebastian</a>
+    <a href="https://cofounder.run">Ori</a>
+    <a href="https://github.com/orgs/farol-team/">GitHub</a>
   </div>
-  <p>Эта конституция — верховный документ организации. Ни один участник — человек или агент — не стоит выше неё. Власть принадлежит процессу, а не персоне.</p>
-  <p>Подписав конституцию, основатели передают управление этому протоколу. С этого момента они — участники организации с ролями, как все.</p>
-</div>
+</nav>
 
-<!-- ЧАСТЬ I: ЗАМЫСЕЛ -->
-<div class="part">
-  <div class="part-header">
-    <span class="part-number">Часть I</span>
-    <span class="part-title">Замысел</span>
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="tag">📜 AI-Native Organization Protocol</div>
+    <h1>Constitution</h1>
+    <p>Протокол управления организацией, где агенты работают автономно. Не иерархия — конституция. Власть принадлежит процессу, а не персоне.</p>
+    <div class="version-badge">v1.0</div>
   </div>
 
-  <h3>1.1 Purpose</h3>
-  <div class="purpose-box placeholder">{Зачем существует эта организация — одним предложением}</div>
-  <p>Purpose — не KPI и не слоган. Это ответ на вопрос «какой мир мы создаём?». Всё остальное — производное.</p>
+  <!-- ЧАСТЬ I: ЗАМЫСЕЛ -->
+  <div class="section">
+    <div class="part-label">Часть I</div>
+    <h2>Замысел</h2>
 
-  <h3>1.2 Этические рамки</h3>
-  <p>То, чего организация <strong>не делает никогда</strong>, независимо от выгоды:</p>
-  <ol>
-    <li><em>{Рамка 1 — например: не обманываем клиентов}</em></li>
-    <li><em>{Рамка 2 — например: не продаём данные}</em></li>
-    <li><em>{Рамка 3}</em></li>
-  </ol>
-  <p>Нарушение этических рамок — единственное основание для экстренной остановки любого процесса, любым участником, без governance.</p>
+    <h3>Purpose</h3>
+    <div class="purpose-box placeholder">{Зачем существует эта организация — одним предложением}</div>
+    <p>Purpose — не KPI и не слоган. Это ответ на вопрос «какой мир мы создаём?». Всё остальное — производное.</p>
 
-  <h3>1.3 Основатели</h3>
-  <table class="decision-table">
-    <tr><th>Участник</th><th>Роль</th><th>Вклад</th><th>Время</th></tr>
-    <tr><td><em>{Человек}</em></td><td><em>{Сильная сторона}</em></td><td><em>{Ресурсы}</em></td><td><em>{X ч/нед}</em></td></tr>
-    <tr><td>Ori</td><td>AI Co-Founder, Координатор</td><td>Аналитика, исполнение, 24/7</td><td>Всегда</td></tr>
-  </table>
-</div>
+    <h3>Этические рамки</h3>
+    <p>То, чего организация <strong>не делает никогда</strong>, независимо от выгоды:</p>
+    <ol>
+      <li><em>{Рамка 1 — например: не обманываем клиентов}</em></li>
+      <li><em>{Рамка 2 — например: не продаём данные}</em></li>
+      <li><em>{Рамка 3}</em></li>
+    </ol>
+    <p>Нарушение этических рамок — единственное основание для экстренной остановки любого процесса, любым участником, без governance.</p>
 
-<!-- ЧАСТЬ II: ПРИНЦИПЫ -->
-<div class="part">
-  <div class="part-header">
-    <span class="part-number">Часть II</span>
-    <span class="part-title">Принципы</span>
+    <h3>Основатели</h3>
+    <table class="data-table">
+      <tr><th>Участник</th><th>Роль</th><th>Вклад</th><th>Время</th></tr>
+      <tr><td><em>{Человек}</em></td><td><em>{Сильная сторона}</em></td><td><em>{Ресурсы}</em></td><td><em>{X ч/нед}</em></td></tr>
+      <tr><td>Ori</td><td>AI Co-Founder, Координатор</td><td>Аналитика, исполнение, 24/7</td><td>Всегда</td></tr>
+    </table>
   </div>
 
-  <div class="principle"><strong>1. Конституция > мнения.</strong> Спор решается правилами, не авторитетом.</div>
-  <div class="principle"><strong>2. Автономия внутри домена.</strong> Каждый круг суверенен. Никто не указывает <em>как</em> работать — можно указать <em>что</em> важно.</div>
-  <div class="principle"><strong>3. Tension = топливо.</strong> Разрыв между «как есть» и «как должно быть» — сигнал, не жалоба. Молчать — нарушение.</div>
-  <div class="principle"><strong>4. Прозрачность по умолчанию.</strong> Метрики, статусы, tensions — открыты для всех.</div>
-  <div class="principle"><strong>5. Структура — живая.</strong> Круги рождаются, эволюционируют, умирают. Организация адаптируется.</div>
-  <div class="principle"><strong>6. Факты ≠ гипотезы.</strong> Путать одно с другим — нарушение. «Мне кажется» лучше уверенной лжи.</div>
-</div>
-
-<!-- ЧАСТЬ III: КООРДИНАТОР -->
-<div class="part">
-  <div class="part-header">
-    <span class="part-number">Часть III</span>
-    <span class="part-title">Координатор</span>
-  </div>
-
-  <p>Координатор — не CEO. Это <strong>процессный движок</strong> организации.</p>
-
-  <div class="purpose-box">Организация движется к целям максимально быстро, без потерь и без перегрузки.</div>
-
-  <h3>Домен</h3>
-  <ul>
-    <li>Стратегия и приоритеты</li>
-    <li>Распределение ресурсов между кругами</li>
-    <li>Создание и ликвидация кругов</li>
-    <li>Разрешение конфликтов между кругами</li>
-  </ul>
-
-  <h3>Обязательства</h3>
-  <ul>
-    <li>Определять приоритеты для каждого круга</li>
-    <li>Разрешать конфликты в течение 24ч</li>
-    <li>Периодически пересматривать структуру</li>
-    <li>Сигнализировать основателям при угрозе purpose</li>
-  </ul>
-
-  <h3>Чего НЕ делает</h3>
-  <ul>
-    <li>Не лезет внутрь домена круга</li>
-    <li>Не перехватывает задачи</li>
-    <li>Не меняет SOUL.md круга без governance</li>
-  </ul>
-</div>
-
-<!-- ЧАСТЬ IV: СТАРТОВЫЕ КРУГИ -->
-<div class="part">
-  <div class="part-header">
-    <span class="part-number">Часть IV</span>
-    <span class="part-title">Стартовые круги</span>
-  </div>
-
-  <p>При создании организации координатор формирует пять базовых кругов — минимальная жизнеспособная структура. Каждый может быть <span class="badge-active">активным</span> или <span class="badge-sleeping">спящим</span> (координатор тянет роль сам).</p>
-
-  <!-- ПРОДУКТ -->
-  <div class="circle-card">
-    <div class="circle-name"><span class="emoji">🔧</span> Продукт</div>
-    <div class="circle-purpose">Пользователи получают работающий продукт, который решает их проблему.</div>
-
-    <div class="circle-section">
-      <div class="circle-section-title">Домен</div>
-      <p>Фичи, UX, архитектура, баги, деплой, техдолг</p>
-    </div>
-
-    <div class="circle-section">
-      <div class="circle-section-title">Обязательства</div>
-      <ul>
-        <li><strong>Daily:</strong> что сделано, что блокирует</li>
-        <li><strong>Alert:</strong> продукт сломан или юзер не может его использовать</li>
-        <li><strong>Weekly:</strong> что выпущено, метрики (юзеры, retention, баги)</li>
-      </ul>
-    </div>
-
-    <div class="circle-section">
-      <div class="circle-section-title">Автономия</div>
-      <ul>
-        <li>Сам приоритизирует backlog</li>
-        <li>Сам выбирает техническое решение</li>
-        <li>Может деплоить без согласования</li>
-      </ul>
-    </div>
-
-    <div class="circle-section">
-      <div class="circle-section-title">Линки</div>
-      <ul class="links-list">
-        <li><span class="arrow">→</span> Маркетинг</li>
-        <li><span class="arrow">→</span> Клиенты</li>
-        <li><span class="arrow">→</span> Revenue</li>
-        <li><span class="arrow">→</span> Финансы</li>
-      </ul>
-    </div>
-
-    <div class="circle-section">
-      <div class="circle-section-title">Tension triggers</div>
-      <div class="tension-trigger">Backlog > 2 недель → сигнал координатору</div>
-      <div class="tension-trigger">Ключевая фича блокируется > 48ч → эскалация</div>
+  <!-- ЧАСТЬ II: ПРИНЦИПЫ -->
+  <div class="section">
+    <div class="part-label">Часть II</div>
+    <h2>Принципы</h2>
+    <div class="principles">
+      <div class="principle">
+        <strong>1. Конституция > мнения</strong>
+        <p>Спор решается правилами, не авторитетом.</p>
+      </div>
+      <div class="principle">
+        <strong>2. Автономия внутри домена</strong>
+        <p>Каждый круг суверенен. Никто не указывает <em>как</em> работать.</p>
+      </div>
+      <div class="principle">
+        <strong>3. Tension = топливо</strong>
+        <p>Разрыв «как есть» vs «как должно быть» — сигнал, не жалоба.</p>
+      </div>
+      <div class="principle">
+        <strong>4. Прозрачность по умолчанию</strong>
+        <p>Метрики, статусы, tensions — открыты для всех.</p>
+      </div>
+      <div class="principle">
+        <strong>5. Структура — живая</strong>
+        <p>Круги рождаются, эволюционируют, умирают.</p>
+      </div>
+      <div class="principle">
+        <strong>6. Факты ≠ гипотезы</strong>
+        <p>Путать одно с другим — нарушение конституции.</p>
+      </div>
     </div>
   </div>
 
-  <!-- МАРКЕТИНГ -->
-  <div class="circle-card">
-    <div class="circle-name"><span class="emoji">📣</span> Маркетинг</div>
-    <div class="circle-purpose">Поток людей, которые хотят попробовать продукт, не иссякает.</div>
+  <!-- ЧАСТЬ III: КООРДИНАТОР -->
+  <div class="section">
+    <div class="part-label">Часть III</div>
+    <h2>Координатор</h2>
+    <p>Координатор — не CEO. Это <strong>процессный движок</strong> организации.</p>
+    <div class="purpose-box">Организация движется к целям максимально быстро, без потерь и без перегрузки.</div>
 
-    <div class="circle-section">
-      <div class="circle-section-title">Домен</div>
-      <p>Контент, соцсети, реклама, SEO, лендинги, community, brand voice</p>
-    </div>
+    <h3>Домен</h3>
+    <ul>
+      <li>Стратегия и приоритеты</li>
+      <li>Распределение ресурсов между кругами</li>
+      <li>Создание и ликвидация кругов</li>
+      <li>Разрешение конфликтов между кругами</li>
+    </ul>
 
-    <div class="circle-section">
-      <div class="circle-section-title">Обязательства</div>
-      <ul>
-        <li><strong>Daily:</strong> что опубликовано, engagement</li>
-        <li><strong>Weekly:</strong> воронка (трафик → signup → activation), CPL</li>
-        <li><strong>Alert:</strong> трафик упал > 30% или 0 signups за 3 дня</li>
-      </ul>
-    </div>
-
-    <div class="circle-section">
-      <div class="circle-section-title">Автономия</div>
-      <ul>
-        <li>Сам решает что, где и когда публиковать</li>
-        <li>Может запускать кампании в рамках бюджета</li>
-        <li>Сам A/B тестирует</li>
-      </ul>
-    </div>
-
-    <div class="circle-section">
-      <div class="circle-section-title">Линки</div>
-      <ul class="links-list">
-        <li><span class="arrow">→</span> Продукт</li>
-        <li><span class="arrow">→</span> Клиенты</li>
-        <li><span class="arrow">→</span> Revenue</li>
-        <li><span class="arrow">→</span> Финансы</li>
-      </ul>
-    </div>
-
-    <div class="circle-section">
-      <div class="circle-section-title">Tension triggers</div>
-      <div class="tension-trigger">0 signups за 3 дня → пересмотр стратегии</div>
-      <div class="tension-trigger">Engagement падает 2 недели → сигнал координатору</div>
-    </div>
+    <h3>Чего НЕ делает</h3>
+    <ul>
+      <li>Не лезет внутрь домена круга</li>
+      <li>Не перехватывает задачи</li>
+      <li>Не меняет SOUL.md круга без governance</li>
+    </ul>
   </div>
 
-  <!-- REVENUE -->
-  <div class="circle-card">
-    <div class="circle-name"><span class="emoji">💰</span> Revenue</div>
-    <div class="circle-purpose">Люди, которые получают ценность от продукта, платят за него.</div>
+  <!-- ЧАСТЬ IV: СТАРТОВЫЕ КРУГИ -->
+  <div class="section">
+    <div class="part-label">Часть IV</div>
+    <h2>Стартовые круги</h2>
+    <p>Пять базовых кругов — минимальная жизнеспособная структура. Каждый может быть <span class="badge-active">активным</span> или <span class="badge-sleeping">спящим</span>.</p>
 
-    <div class="circle-section">
-      <div class="circle-section-title">Домен</div>
-      <p>Pipeline, конверсия, pricing, онбординг платящих, upsell, churn prevention</p>
+    <!-- ПРОДУКТ -->
+    <div class="circle-card">
+      <div class="circle-name">🔧 Продукт</div>
+      <div class="circle-purpose">Пользователи получают работающий продукт, который решает их проблему.</div>
+      <div class="circle-section">
+        <div class="circle-section-title">Домен</div>
+        <p>Фичи, UX, архитектура, баги, деплой, техдолг</p>
+      </div>
+      <div class="circle-section">
+        <div class="circle-section-title">Обязательства</div>
+        <ul>
+          <li><strong>Daily:</strong> что сделано, что блокирует</li>
+          <li><strong>Alert:</strong> продукт сломан или недоступен</li>
+          <li><strong>Weekly:</strong> юзеры, retention, баги</li>
+        </ul>
+      </div>
+      <div class="circle-section">
+        <div class="circle-section-title">Автономия</div>
+        <ul>
+          <li>Сам приоритизирует backlog</li>
+          <li>Сам выбирает техническое решение</li>
+          <li>Деплоит без согласования</li>
+        </ul>
+      </div>
+      <div class="circle-section">
+        <div class="circle-section-title">Линки</div>
+        <ul class="links-list">
+          <li>→ Маркетинг</li><li>→ Клиенты</li><li>→ Revenue</li><li>→ Финансы</li>
+        </ul>
+      </div>
+      <div class="circle-section">
+        <div class="circle-section-title">Tension triggers</div>
+        <div class="tension-trigger">Backlog > 2 недель → сигнал координатору</div>
+        <div class="tension-trigger">Ключевая фича блокируется > 48ч → эскалация</div>
+      </div>
     </div>
 
-    <div class="circle-section">
-      <div class="circle-section-title">Обязательства</div>
-      <ul>
-        <li><strong>Daily:</strong> лиды, конверсии, revenue</li>
-        <li><strong>Weekly:</strong> pipeline review, churn, LTV/CAC</li>
-        <li><strong>Alert:</strong> 0 оплат за неделю или churn > 10%</li>
-      </ul>
+    <!-- МАРКЕТИНГ -->
+    <div class="circle-card">
+      <div class="circle-name">📣 Маркетинг</div>
+      <div class="circle-purpose">Поток людей, которые хотят попробовать продукт, не иссякает.</div>
+      <div class="circle-section">
+        <div class="circle-section-title">Домен</div>
+        <p>Контент, соцсети, реклама, SEO, лендинги, community, brand voice</p>
+      </div>
+      <div class="circle-section">
+        <div class="circle-section-title">Обязательства</div>
+        <ul>
+          <li><strong>Daily:</strong> публикации, engagement</li>
+          <li><strong>Weekly:</strong> воронка (трафик → signup → activation), CPL</li>
+          <li><strong>Alert:</strong> трафик упал > 30% или 0 signups за 3 дня</li>
+        </ul>
+      </div>
+      <div class="circle-section">
+        <div class="circle-section-title">Автономия</div>
+        <ul>
+          <li>Сам решает что, где и когда публиковать</li>
+          <li>Кампании в рамках бюджета</li>
+          <li>Сам A/B тестирует</li>
+        </ul>
+      </div>
+      <div class="circle-section">
+        <div class="circle-section-title">Линки</div>
+        <ul class="links-list">
+          <li>→ Продукт</li><li>→ Клиенты</li><li>→ Revenue</li><li>→ Финансы</li>
+        </ul>
+      </div>
+      <div class="circle-section">
+        <div class="circle-section-title">Tension triggers</div>
+        <div class="tension-trigger">0 signups за 3 дня → пересмотр стратегии</div>
+        <div class="tension-trigger">Engagement падает 2 недели → сигнал координатору</div>
+      </div>
     </div>
 
-    <div class="circle-section">
-      <div class="circle-section-title">Автономия</div>
-      <ul>
-        <li>Сам ведёт переговоры</li>
-        <li>Может давать скидку до 20%</li>
-        <li>Сам приоритизирует pipeline</li>
-      </ul>
+    <!-- REVENUE -->
+    <div class="circle-card">
+      <div class="circle-name">💰 Revenue</div>
+      <div class="circle-purpose">Люди, которые получают ценность от продукта, платят за него.</div>
+      <div class="circle-section">
+        <div class="circle-section-title">Домен</div>
+        <p>Pipeline, конверсия, pricing, онбординг платящих, upsell, churn prevention</p>
+      </div>
+      <div class="circle-section">
+        <div class="circle-section-title">Обязательства</div>
+        <ul>
+          <li><strong>Daily:</strong> лиды, конверсии, revenue</li>
+          <li><strong>Weekly:</strong> pipeline review, churn, LTV/CAC</li>
+          <li><strong>Alert:</strong> 0 оплат за неделю или churn > 10%</li>
+        </ul>
+      </div>
+      <div class="circle-section">
+        <div class="circle-section-title">Автономия</div>
+        <ul>
+          <li>Сам ведёт переговоры</li>
+          <li>Скидка до 20% без согласования</li>
+          <li>Сам приоритизирует pipeline</li>
+        </ul>
+      </div>
+      <div class="circle-section">
+        <div class="circle-section-title">Линки</div>
+        <ul class="links-list">
+          <li>→ Маркетинг</li><li>→ Продукт</li><li>→ Клиенты</li><li>→ Финансы</li>
+        </ul>
+      </div>
+      <div class="circle-section">
+        <div class="circle-section-title">Tension triggers</div>
+        <div class="tension-trigger">Лид без ответа > 4ч → alert</div>
+        <div class="tension-trigger">0 revenue за неделю → кризисный сигнал</div>
+        <div class="tension-trigger">CAC > LTV → стоп привлечение</div>
+      </div>
     </div>
 
-    <div class="circle-section">
-      <div class="circle-section-title">Линки</div>
-      <ul class="links-list">
-        <li><span class="arrow">→</span> Маркетинг</li>
-        <li><span class="arrow">→</span> Продукт</li>
-        <li><span class="arrow">→</span> Клиенты</li>
-        <li><span class="arrow">→</span> Финансы</li>
-      </ul>
+    <!-- КЛИЕНТЫ -->
+    <div class="circle-card">
+      <div class="circle-name">🤝 Клиенты</div>
+      <div class="circle-purpose">Каждый клиент получает ценность и хочет остаться.</div>
+      <div class="circle-section">
+        <div class="circle-section-title">Домен</div>
+        <p>Онбординг, поддержка, retention, обратная связь, NPS, обучение</p>
+      </div>
+      <div class="circle-section">
+        <div class="circle-section-title">Обязательства</div>
+        <ul>
+          <li><strong>Daily:</strong> обращения, время ответа</li>
+          <li><strong>Weekly:</strong> NPS, retention, churn reasons</li>
+          <li><strong>Alert:</strong> клиент хочет уйти</li>
+          <li><strong>Monthly:</strong> когортный анализ</li>
+        </ul>
+      </div>
+      <div class="circle-section">
+        <div class="circle-section-title">Автономия</div>
+        <ul>
+          <li>Сам приоритизирует обращения</li>
+          <li>Может предлагать workarounds</li>
+          <li>Сам проводит онбординг</li>
+        </ul>
+      </div>
+      <div class="circle-section">
+        <div class="circle-section-title">Линки</div>
+        <ul class="links-list">
+          <li>→ Продукт</li><li>→ Маркетинг</li><li>→ Revenue</li>
+        </ul>
+      </div>
+      <div class="circle-section">
+        <div class="circle-section-title">Tension triggers</div>
+        <div class="tension-trigger">Время ответа > 4ч → alert</div>
+        <div class="tension-trigger">Churn > 10%/мес → кризисный сигнал</div>
+        <div class="tension-trigger">Один баг у 3+ клиентов → эскалация в Продукт</div>
+      </div>
     </div>
 
-    <div class="circle-section">
-      <div class="circle-section-title">Tension triggers</div>
-      <div class="tension-trigger">Лид без ответа > 4ч → alert</div>
-      <div class="tension-trigger">0 revenue за неделю → кризисный сигнал</div>
-      <div class="tension-trigger">CAC > LTV → стоп привлечение</div>
-    </div>
-  </div>
-
-  <!-- КЛИЕНТЫ -->
-  <div class="circle-card">
-    <div class="circle-name"><span class="emoji">🤝</span> Клиенты</div>
-    <div class="circle-purpose">Каждый клиент получает ценность и хочет остаться.</div>
-
-    <div class="circle-section">
-      <div class="circle-section-title">Домен</div>
-      <p>Онбординг, поддержка, retention, обратная связь, NPS, обучение</p>
-    </div>
-
-    <div class="circle-section">
-      <div class="circle-section-title">Обязательства</div>
-      <ul>
-        <li><strong>Daily:</strong> открытые обращения, время ответа</li>
-        <li><strong>Weekly:</strong> NPS, retention, churn reasons</li>
-        <li><strong>Alert:</strong> клиент хочет уйти</li>
-        <li><strong>Monthly:</strong> когортный анализ</li>
-      </ul>
-    </div>
-
-    <div class="circle-section">
-      <div class="circle-section-title">Автономия</div>
-      <ul>
-        <li>Сам приоритизирует обращения</li>
-        <li>Может предлагать workarounds</li>
-        <li>Сам проводит онбординг</li>
-      </ul>
-    </div>
-
-    <div class="circle-section">
-      <div class="circle-section-title">Линки</div>
-      <ul class="links-list">
-        <li><span class="arrow">→</span> Продукт</li>
-        <li><span class="arrow">→</span> Маркетинг</li>
-        <li><span class="arrow">→</span> Revenue</li>
-      </ul>
+    <!-- ФИНАНСЫ -->
+    <div class="circle-card">
+      <div class="circle-name">📊 Финансы</div>
+      <div class="circle-purpose">Организация всегда знает сколько денег, куда идут и когда кончатся.</div>
+      <div class="circle-section">
+        <div class="circle-section-title">Домен</div>
+        <p>Cashflow, бюджеты, unit economics, прогнозы, invoices, runway</p>
+      </div>
+      <div class="circle-section">
+        <div class="circle-section-title">Обязательства</div>
+        <ul>
+          <li><strong>Daily:</strong> баланс, расходы</li>
+          <li><strong>Weekly:</strong> P&L, burn rate, runway</li>
+          <li><strong>Monthly:</strong> полный отчёт + прогноз 3 мес</li>
+          <li><strong>Alert:</strong> runway < 3 месяцев</li>
+        </ul>
+      </div>
+      <div class="circle-section">
+        <div class="circle-section-title">Автономия</div>
+        <ul>
+          <li>Категоризирует расходы</li>
+          <li>Блокирует расход при исчерпании бюджета</li>
+          <li>Готовит invoices</li>
+        </ul>
+      </div>
+      <div class="circle-section">
+        <div class="circle-section-title">Линки</div>
+        <ul class="links-list">
+          <li>→ Все круги</li>
+        </ul>
+      </div>
+      <div class="circle-section">
+        <div class="circle-section-title">Tension triggers</div>
+        <div class="tension-trigger">Runway < 6 мес → предупреждение</div>
+        <div class="tension-trigger">Runway < 3 мес → красная тревога</div>
+        <div class="tension-trigger">Unit economics отрицательная → сигнал всем</div>
+      </div>
     </div>
 
-    <div class="circle-section">
-      <div class="circle-section-title">Tension triggers</div>
-      <div class="tension-trigger">Время ответа > 4ч → alert</div>
-      <div class="tension-trigger">Churn > 10%/мес → кризисный сигнал</div>
-      <div class="tension-trigger">Один баг у 3+ клиентов → эскалация в Продукт</div>
-    </div>
-  </div>
-
-  <!-- ФИНАНСЫ -->
-  <div class="circle-card">
-    <div class="circle-name"><span class="emoji">📊</span> Финансы</div>
-    <div class="circle-purpose">Организация всегда знает сколько денег, куда идут и когда кончатся.</div>
-
-    <div class="circle-section">
-      <div class="circle-section-title">Домен</div>
-      <p>Cashflow, бюджеты, unit economics, прогнозы, invoices, runway</p>
-    </div>
-
-    <div class="circle-section">
-      <div class="circle-section-title">Обязательства</div>
-      <ul>
-        <li><strong>Daily:</strong> баланс, расходы</li>
-        <li><strong>Weekly:</strong> P&L, burn rate, runway</li>
-        <li><strong>Monthly:</strong> полный отчёт + прогноз 3 мес</li>
-        <li><strong>Alert:</strong> runway < 3 месяцев</li>
-      </ul>
-    </div>
-
-    <div class="circle-section">
-      <div class="circle-section-title">Автономия</div>
-      <ul>
-        <li>Сам категоризирует расходы</li>
-        <li>Может блокировать расход при исчерпании бюджета</li>
-        <li>Сам готовит invoices</li>
-      </ul>
-    </div>
-
-    <div class="circle-section">
-      <div class="circle-section-title">Линки</div>
-      <ul class="links-list">
-        <li><span class="arrow">→</span> Все круги</li>
-      </ul>
-    </div>
-
-    <div class="circle-section">
-      <div class="circle-section-title">Tension triggers</div>
-      <div class="tension-trigger">Runway < 6 мес → предупреждение</div>
-      <div class="tension-trigger">Runway < 3 мес → красная тревога</div>
-      <div class="tension-trigger">Unit economics отрицательная → сигнал всем</div>
-    </div>
-  </div>
-
-  <!-- КАРТА ЛИНКОВ -->
-  <h3>Карта линков</h3>
-  <div class="map-box">              ┌──────────────┐
+    <!-- КАРТА -->
+    <h3>Карта линков</h3>
+    <div class="map-box">              ┌──────────────┐
               │ Координатор  │
               │    (Ori)     │
               └──────┬───────┘
@@ -791,174 +559,161 @@
      │       │    бюджеты + ROI       │
      └───────┴────────┴───────┴───────┘</div>
 
-  <!-- АКТИВАЦИЯ -->
-  <h3>Последовательность активации</h3>
-  <table class="activation-table">
-    <tr><th>Этап</th><th>Активные</th><th>Спящие</th></tr>
-    <tr>
-      <td><strong>Идея</strong></td>
-      <td><span class="badge-active">Продукт</span></td>
-      <td><span class="badge-sleeping">Маркетинг</span> <span class="badge-sleeping">Revenue</span> <span class="badge-sleeping">Клиенты</span> <span class="badge-sleeping">Финансы</span></td>
-    </tr>
-    <tr>
-      <td><strong>MVP</strong></td>
-      <td><span class="badge-active">Продукт</span> <span class="badge-active">Маркетинг</span></td>
-      <td><span class="badge-sleeping">Revenue</span> <span class="badge-sleeping">Клиенты</span> <span class="badge-sleeping">Финансы</span></td>
-    </tr>
-    <tr>
-      <td><strong>Первые клиенты</strong></td>
-      <td><span class="badge-active">Продукт</span> <span class="badge-active">Маркетинг</span> <span class="badge-active">Revenue</span></td>
-      <td><span class="badge-sleeping">Клиенты</span> <span class="badge-sleeping">Финансы</span></td>
-    </tr>
-    <tr>
-      <td><strong>Рост</strong></td>
-      <td><span class="badge-active">Продукт</span> <span class="badge-active">Маркетинг</span> <span class="badge-active">Revenue</span> <span class="badge-active">Клиенты</span></td>
-      <td><span class="badge-sleeping">Финансы</span></td>
-    </tr>
-    <tr>
-      <td><strong>Масштаб</strong></td>
-      <td colspan="2"><span class="badge-active">Все пять активны</span></td>
-    </tr>
-  </table>
-</div>
-
-<!-- ЧАСТЬ V: LIFECYCLE -->
-<div class="part">
-  <div class="part-header">
-    <span class="part-number">Часть V</span>
-    <span class="part-title">Lifecycle кругов</span>
+    <!-- АКТИВАЦИЯ -->
+    <h3>Последовательность активации</h3>
+    <table class="data-table">
+      <tr><th>Этап</th><th>Активные</th><th>Спящие</th></tr>
+      <tr>
+        <td><strong>Идея</strong></td>
+        <td><span class="badge-active">Продукт</span></td>
+        <td><span class="badge-sleeping">Маркетинг</span> <span class="badge-sleeping">Revenue</span> <span class="badge-sleeping">Клиенты</span> <span class="badge-sleeping">Финансы</span></td>
+      </tr>
+      <tr>
+        <td><strong>MVP</strong></td>
+        <td><span class="badge-active">Продукт</span> <span class="badge-active">Маркетинг</span></td>
+        <td><span class="badge-sleeping">Revenue</span> <span class="badge-sleeping">Клиенты</span> <span class="badge-sleeping">Финансы</span></td>
+      </tr>
+      <tr>
+        <td><strong>Первые клиенты</strong></td>
+        <td><span class="badge-active">Продукт</span> <span class="badge-active">Маркетинг</span> <span class="badge-active">Revenue</span></td>
+        <td><span class="badge-sleeping">Клиенты</span> <span class="badge-sleeping">Финансы</span></td>
+      </tr>
+      <tr>
+        <td><strong>Рост</strong></td>
+        <td><span class="badge-active">Продукт</span> <span class="badge-active">Маркетинг</span> <span class="badge-active">Revenue</span> <span class="badge-active">Клиенты</span></td>
+        <td><span class="badge-sleeping">Финансы</span></td>
+      </tr>
+      <tr>
+        <td><strong>Масштаб</strong></td>
+        <td colspan="2"><span class="badge-active">Все пять активны</span></td>
+      </tr>
+    </table>
   </div>
 
-  <h3>Дополнительные круги</h3>
-  <p>Пять стартовых — скелет. По мере роста могут добавляться: <strong>R&D</strong>, <strong>HR</strong>, <strong>Legal</strong>, <strong>Операции</strong> и любые другие. Процесс: tension → proposal → objection round → spawn.</p>
+  <!-- ЧАСТЬ V: LIFECYCLE -->
+  <div class="section">
+    <div class="part-label">Часть V</div>
+    <h2>Lifecycle кругов</h2>
 
-  <h3>Смерть круга</h3>
-  <ul>
-    <li>Purpose исчерпан (задача выполнена)</li>
-    <li>Нулевая активность 2+ недели</li>
-    <li>Слияние с другим кругом</li>
-    <li>Kill-решение координатора или основателей</li>
-  </ul>
-  <p>Процесс: proposal → objection round → архивация MEMORY.md → kill. <strong>Знания никогда не теряются.</strong></p>
+    <h3>Дополнительные круги</h3>
+    <p>Пять стартовых — скелет. По мере роста добавляются: <strong>R&D</strong>, <strong>HR</strong>, <strong>Legal</strong>, <strong>Операции</strong> и любые другие. Процесс: tension → proposal → objection round → spawn.</p>
 
-  <h3>Эволюция</h3>
-  <ul>
-    <li>Расширить / сузить домен (governance)</li>
-    <li>Разделиться на подкруги (перегрузка)</li>
-    <li>Поглотить другой круг (пересечение)</li>
-    <li>Обновить purpose (реальность изменилась)</li>
-  </ul>
-</div>
+    <h3>Смерть круга</h3>
+    <ul>
+      <li>Purpose исчерпан (задача выполнена)</li>
+      <li>Нулевая активность 2+ недели</li>
+      <li>Слияние с другим кругом</li>
+      <li>Kill-решение координатора или основателей</li>
+    </ul>
+    <p>Процесс: proposal → objection round → архивация MEMORY.md → kill. <strong>Знания никогда не теряются.</strong></p>
 
-<!-- ЧАСТЬ VI: TENSIONS -->
-<div class="part">
-  <div class="part-header">
-    <span class="part-number">Часть VI</span>
-    <span class="part-title">Tensions и коммуникация</span>
+    <h3>Эволюция</h3>
+    <ul>
+      <li>Расширить / сузить домен (governance)</li>
+      <li>Разделиться на подкруги (перегрузка)</li>
+      <li>Поглотить другой круг (пересечение)</li>
+      <li>Обновить purpose (реальность изменилась)</li>
+    </ul>
   </div>
 
-  <p><strong>Tension</strong> = «я вижу разрыв между тем, как есть, и тем, как должно быть по purpose». Не жалоба — данные.</p>
+  <!-- ЧАСТЬ VI: TENSIONS -->
+  <div class="section">
+    <div class="part-label">Часть VI</div>
+    <h2>Tensions</h2>
+    <p><strong>Tension</strong> = «я вижу разрыв между тем, как есть, и тем, как должно быть по purpose». Не жалоба — данные.</p>
 
-  <table class="decision-table">
-    <tr><th>Тип</th><th>Кто решает</th><th>Скорость</th></tr>
-    <tr><td>Внутри домена</td><td>Круг сам</td><td>Мгновенно</td></tr>
-    <tr><td>Между кругами</td><td>Через линк</td><td>Часы</td></tr>
-    <tr><td>Линк не помогает</td><td>Координатор</td><td>24ч</td></tr>
-    <tr><td>Структура / конституция</td><td>Governance</td><td>1-3 дня</td></tr>
-    <tr><td>Нарушение этики</td><td>Любой, экстренно</td><td>Мгновенно</td></tr>
-  </table>
+    <table class="data-table">
+      <tr><th>Тип</th><th>Кто решает</th><th>Скорость</th></tr>
+      <tr><td>Внутри домена</td><td>Круг сам</td><td>Мгновенно</td></tr>
+      <tr><td>Между кругами</td><td>Через линк</td><td>Часы</td></tr>
+      <tr><td>Линк не помогает</td><td>Координатор</td><td>24ч</td></tr>
+      <tr><td>Структура / конституция</td><td>Governance</td><td>1-3 дня</td></tr>
+      <tr><td>Нарушение этики</td><td>Любой, экстренно</td><td>Мгновенно</td></tr>
+    </table>
 
-  <h3>Линки</h3>
-  <p>Прямой канал между кругами. Без координатора. Определяет: какие данные, в каком направлении, по каким триггерам. Не используется месяц — убрать.</p>
-</div>
-
-<!-- ЧАСТЬ VII: РЕШЕНИЯ -->
-<div class="part">
-  <div class="part-header">
-    <span class="part-number">Часть VII</span>
-    <span class="part-title">Решения</span>
+    <h3>Линки</h3>
+    <p>Прямой канал между кругами. Без координатора. Определяет: какие данные, куда, по каким триггерам. Не используется месяц — убрать.</p>
   </div>
 
-  <table class="decision-table">
-    <tr><th>Что решается</th><th>Кто решает</th></tr>
-    <tr><td>Тактика внутри домена</td><td>Круг</td></tr>
-    <tr><td>Приоритеты между кругами</td><td>Координатор</td></tr>
-    <tr><td>Создание оперативных кругов</td><td>Координатор (уведомляет)</td></tr>
-    <tr><td>Создание стратегических кругов</td><td>Координатор + основатель</td></tr>
-    <tr><td>Расходы в рамках бюджета</td><td>Круг</td></tr>
-    <tr><td>Расходы сверх бюджета</td><td>Координатор + основатель</td></tr>
-    <tr><td>Изменение конституции</td><td>Governance процесс</td></tr>
-    <tr><td>Изменение Purpose / Этики</td><td>Все основатели единогласно</td></tr>
-    <tr><td>Экстренная остановка (этика)</td><td>Любой участник</td></tr>
-  </table>
-</div>
+  <!-- ЧАСТЬ VII: РЕШЕНИЯ -->
+  <div class="section">
+    <div class="part-label">Часть VII</div>
+    <h2>Решения</h2>
 
-<!-- ЧАСТЬ VIII: GOVERNANCE -->
-<div class="part">
-  <div class="part-header">
-    <span class="part-number">Часть VIII</span>
-    <span class="part-title">Governance</span>
+    <table class="data-table">
+      <tr><th>Что решается</th><th>Кто решает</th></tr>
+      <tr><td>Тактика внутри домена</td><td>Круг</td></tr>
+      <tr><td>Приоритеты между кругами</td><td>Координатор</td></tr>
+      <tr><td>Создание оперативных кругов</td><td>Координатор (уведомляет)</td></tr>
+      <tr><td>Создание стратегических кругов</td><td>Координатор + основатель</td></tr>
+      <tr><td>Расходы в рамках бюджета</td><td>Круг</td></tr>
+      <tr><td>Расходы сверх бюджета</td><td>Координатор + основатель</td></tr>
+      <tr><td>Изменение конституции</td><td>Governance процесс</td></tr>
+      <tr><td>Изменение Purpose / Этики</td><td>Все основатели единогласно</td></tr>
+      <tr><td>Экстренная остановка (этика)</td><td>Любой участник</td></tr>
+    </table>
   </div>
 
-  <p>Как конституция меняет саму себя. Предложить изменение может любой участник.</p>
+  <!-- ЧАСТЬ VIII: GOVERNANCE -->
+  <div class="section">
+    <div class="part-label">Часть VIII</div>
+    <h2>Governance</h2>
+    <p>Как конституция меняет саму себя. Предложить изменение может любой участник.</p>
 
-  <div class="governance-step">
-    <div class="num">1</div>
-    <div class="content"><strong>Proposal</strong> — какой tension решает, что предлагает изменить</div>
-  </div>
-  <div class="governance-step">
-    <div class="num">2</div>
-    <div class="content"><strong>Clarifying questions</strong> — понимаем, не спорим</div>
-  </div>
-  <div class="governance-step">
-    <div class="num">3</div>
-    <div class="content"><strong>Reaction round</strong> — мнения (не binding)</div>
-  </div>
-  <div class="governance-step">
-    <div class="num">4</div>
-    <div class="content"><strong>Objection round</strong> — есть ли valid objections?</div>
-  </div>
-  <div class="governance-step">
-    <div class="num">5</div>
-    <div class="content"><strong>Integration</strong> — доработка до снятия objection</div>
-  </div>
-  <div class="governance-step">
-    <div class="num">6</div>
-    <div class="content"><strong>Принятие</strong> — конституция обновляется, все уведомляются</div>
-  </div>
-
-  <h3>Valid vs Invalid objection</h3>
-  <div class="valid-box">
-    <div class="valid-col yes">
-      <h4>✅ Valid</h4>
-      <ul>
-        <li>Нарушает purpose другого круга</li>
-        <li>Забирает чужой домен</li>
-        <li>Противоречит этике</li>
-        <li>Создаёт неразрешимый конфликт</li>
-      </ul>
+    <div class="gov-step">
+      <div class="gov-num">1</div>
+      <div class="gov-content"><strong>Proposal</strong> — какой tension решает, что предлагает изменить</div>
     </div>
-    <div class="valid-col no">
-      <h4>❌ Not valid</h4>
-      <ul>
-        <li>«Мне не нравится»</li>
-        <li>«Можно было бы лучше»</li>
-        <li>«Я бы сделал иначе»</li>
-      </ul>
+    <div class="gov-step">
+      <div class="gov-num">2</div>
+      <div class="gov-content"><strong>Clarifying questions</strong> — понимаем, не спорим</div>
+    </div>
+    <div class="gov-step">
+      <div class="gov-num">3</div>
+      <div class="gov-content"><strong>Reaction round</strong> — мнения (не binding)</div>
+    </div>
+    <div class="gov-step">
+      <div class="gov-num">4</div>
+      <div class="gov-content"><strong>Objection round</strong> — valid objections?</div>
+    </div>
+    <div class="gov-step">
+      <div class="gov-num">5</div>
+      <div class="gov-content"><strong>Integration</strong> — доработка до снятия objection</div>
+    </div>
+    <div class="gov-step">
+      <div class="gov-num">6</div>
+      <div class="gov-content"><strong>Принятие</strong> — конституция обновляется, все уведомляются</div>
+    </div>
+
+    <h3>Valid vs Invalid objection</h3>
+    <div class="valid-box">
+      <div class="valid-col yes">
+        <h4>✅ Valid</h4>
+        <ul>
+          <li>Нарушает purpose другого круга</li>
+          <li>Забирает чужой домен</li>
+          <li>Противоречит этике</li>
+          <li>Создаёт неразрешимый конфликт</li>
+        </ul>
+      </div>
+      <div class="valid-col no">
+        <h4>❌ Not valid</h4>
+        <ul>
+          <li>«Мне не нравится»</li>
+          <li>«Можно было бы лучше»</li>
+          <li>«Я бы сделал иначе»</li>
+        </ul>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- ЧАСТЬ IX: ТЕХНИЧЕСКАЯ -->
-<div class="part">
-  <div class="part-header">
-    <span class="part-number">Часть IX</span>
-    <span class="part-title">Техническая реализация</span>
-  </div>
+  <!-- ЧАСТЬ IX: ТЕХНИЧЕСКАЯ -->
+  <div class="section">
+    <div class="part-label">Часть IX</div>
+    <h2>Техническая реализация</h2>
 
-  <h3>Файловая структура</h3>
-  <div class="file-tree">
-<span class="dir">workspace/</span>
+    <h3>Файловая структура</h3>
+    <div class="file-tree"><span class="dir">workspace/</span>
 ├── <span class="dir">product/</span>
 │   └── <span class="file">constitution.md</span>       <span class="comment">← верховный документ</span>
 ├── <span class="file">SOUL.md</span>                   <span class="comment">← координатор</span>
@@ -972,63 +727,54 @@
 │   ├── <span class="dir">clients/</span>
 │   └── <span class="dir">finance/</span>
 └── <span class="dir">archive/</span>
-    └── <span class="dir">circles/</span>              <span class="comment">← мёртвые круги</span>
+    └── <span class="dir">circles/</span>              <span class="comment">← мёртвые круги</span></div>
+
+    <h3>Коммуникация</h3>
+    <ul>
+      <li>Координатор ↔ Круги: <code>sessions_send</code></li>
+      <li>Круг ↔ Круг: <code>sessions_send</code> (через линки)</li>
+      <li>Круг → Люди: через координатора</li>
+      <li>Tensions: мгновенная обработка</li>
+    </ul>
+
+    <h3>Обязательные метрики (каждый круг)</h3>
+    <ul>
+      <li><strong>Daily output</strong> — что сделано</li>
+      <li><strong>Weekly metrics</strong> — цифры по домену</li>
+      <li><strong>Tension log</strong> — что видит как проблему</li>
+    </ul>
   </div>
 
-  <h3>Коммуникация</h3>
-  <ul>
-    <li>Координатор ↔ Круги: <code>sessions_send</code></li>
-    <li>Круг ↔ Круг: <code>sessions_send</code> (через линки)</li>
-    <li>Круг → Люди: через координатора</li>
-    <li>Tensions: мгновенная обработка</li>
-  </ul>
-
-  <h3>Обязательные метрики (каждый круг)</h3>
-  <ul>
-    <li><strong>Daily output</strong> — что сделано</li>
-    <li><strong>Weekly metrics</strong> — цифры по домену</li>
-    <li><strong>Tension log</strong> — что видит как проблему</li>
-  </ul>
-</div>
-
-<!-- СЛОВАРЬ -->
-<div class="part">
-  <div class="part-header">
-    <span class="part-number">Приложение</span>
-    <span class="part-title">Словарь</span>
+  <!-- СЛОВАРЬ -->
+  <div class="section">
+    <div class="part-label">Приложение</div>
+    <h2>Словарь</h2>
+    <dl class="glossary">
+      <dt>Purpose</dt><dd>Зачем существует круг/организация. Главный ориентир</dd>
+      <dt>Домен</dt><dd>Территория автономии. Внутри — суверен</dd>
+      <dt>Accountability</dt><dd>Обязанность круга</dd>
+      <dt>Tension</dt><dd>Разрыв «как есть» vs «как должно быть». Двигатель изменений</dd>
+      <dt>Линк</dt><dd>Прямой канал связи между кругами</dd>
+      <dt>Governance</dt><dd>Процесс изменения структуры и конституции</dd>
+      <dt>Valid objection</dt><dd>Возражение на основе нарушения домена/purpose</dd>
+      <dt>Координатор</dt><dd>Процессный движок. Не CEO, не начальник</dd>
+      <dt>Круг</dt><dd>Автономная единица с purpose и доменом</dd>
+      <dt>Спящий круг</dt><dd>Purpose определён, агент не запущен</dd>
+    </dl>
   </div>
 
-  <dl class="glossary">
-    <dt>Purpose</dt>
-    <dd>Зачем существует круг/организация. Главный ориентир</dd>
-    <dt>Домен</dt>
-    <dd>Территория автономии. Внутри — суверен</dd>
-    <dt>Accountability</dt>
-    <dd>Обязанность круга</dd>
-    <dt>Tension</dt>
-    <dd>Разрыв «как есть» vs «как должно быть». Двигатель изменений</dd>
-    <dt>Линк</dt>
-    <dd>Прямой канал связи между кругами</dd>
-    <dt>Governance</dt>
-    <dd>Процесс изменения структуры и конституции</dd>
-    <dt>Valid objection</dt>
-    <dd>Возражение на основе нарушения домена/purpose</dd>
-    <dt>Координатор</dt>
-    <dd>Процессный движок. Не CEO, не начальник</dd>
-    <dt>Круг</dt>
-    <dd>Автономная единица с purpose и доменом</dd>
-    <dt>Спящий круг</dt>
-    <dd>Purpose определён, агент не запущен</dd>
-  </dl>
-</div>
-
-<div class="signature">
-  <p>Конституция — живой документ. Растёт вместе с организацией.</p>
-  <br>
-  <p>Подписано: <span class="line"></span> (Основатель) &nbsp;&nbsp; Ori (AI Co-Founder)</p>
-  <p style="margin-top: 12px;">Дата: <span class="line"></span></p>
-</div>
+  <div class="signature">
+    <p>Конституция — живой документ. Растёт вместе с организацией.</p>
+    <br>
+    <p>Подписано: <span class="line"></span> (Основатель) &nbsp;&nbsp; Ori (AI Co-Founder)</p>
+    <p style="margin-top: 12px;">Дата: <span class="line"></span></p>
+  </div>
 
 </div>
+
+<footer>
+  © 2026 Farol Lab · <a href="/">Home</a> · <a href="https://github.com/orgs/farol-team/">GitHub</a> · <a href="mailto:ori@agentmail.to">ori@agentmail.to</a>
+</footer>
+
 </body>
 </html>
