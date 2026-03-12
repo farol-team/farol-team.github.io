@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Constitution v1.0 — Farol Lab</title>
+<meta name="description" content="AI-Native Organization Protocol. How autonomous agent circles govern themselves.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📜</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -18,7 +19,6 @@
     line-height: 1.7;
   }
 
-  /* ── Nav ── */
   nav {
     display: flex; align-items: center; justify-content: space-between;
     padding: 14px clamp(20px, 4vw, 48px);
@@ -30,10 +30,8 @@
   .nav-right a { font-size: 13px; font-weight: 500; color: #888; text-decoration: none; transition: color 0.15s; }
   .nav-right a:hover { color: #111; }
 
-  /* ── Container ── */
   .wrap { max-width: 720px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 24px); }
 
-  /* ── Hero ── */
   .hero {
     padding: clamp(48px, 8vw, 80px) 0 clamp(32px, 5vw, 48px);
     border-bottom: 1px solid #eee;
@@ -57,7 +55,6 @@
     margin-top: 16px;
   }
 
-  /* ── Section ── */
   .section { padding: 32px 0; border-bottom: 1px solid #eee; }
   .section-header {
     font-size: 11px; font-weight: 700; text-transform: uppercase;
@@ -78,7 +75,6 @@
   .section ul, .section ol { padding-left: 24px; margin-bottom: 12px; color: #555; }
   .section li { margin-bottom: 4px; }
 
-  /* ── Purpose box ── */
   .purpose-box {
     background: #fff; border-left: 4px solid #7c3aed;
     padding: 16px 20px; border-radius: 0 12px 12px 0;
@@ -87,7 +83,6 @@
   }
   .purpose-box.placeholder { color: #999; font-style: italic; }
 
-  /* ── Principle cards ── */
   .principles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
   .principle {
     padding: 16px 18px; background: #fff; border: 1px solid #eee; border-radius: 12px;
@@ -95,14 +90,12 @@
   .principle strong { color: #111; font-size: 14px; }
   .principle p { font-size: 13px; color: #666; line-height: 1.45; margin-bottom: 0; }
 
-  /* ── Circle cards ── */
   .circle-card {
     background: #fff; border: 1px solid #eee; border-radius: 14px;
     padding: 24px; margin-bottom: 12px;
     transition: border-color 0.2s, box-shadow 0.2s;
   }
   .circle-card:hover { border-color: #ccc; box-shadow: 0 4px 16px rgba(0,0,0,0.04); }
-
   .circle-name {
     font-size: 18px; font-weight: 700; letter-spacing: -0.01em;
     display: flex; align-items: center; gap: 10px; margin-bottom: 4px;
@@ -134,7 +127,6 @@
     font-size: 12px; color: #6d28d9; font-weight: 500;
   }
 
-  /* ── Map ── */
   .map-box {
     background: #fff; border: 1px solid #eee; border-radius: 14px;
     padding: 24px; margin: 16px 0; text-align: center;
@@ -142,7 +134,6 @@
     line-height: 1.5; white-space: pre; overflow-x: auto; color: #666;
   }
 
-  /* ── Tables ── */
   .data-table {
     width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px;
   }
@@ -166,7 +157,6 @@
     font-size: 11px; font-weight: 600; background: #f3f4f6; color: #9ca3af;
   }
 
-  /* ── Governance steps ── */
   .gov-step {
     display: flex; align-items: flex-start; gap: 14px; margin-bottom: 14px;
   }
@@ -189,7 +179,6 @@
   .valid-col.no h4 { color: #dc2626; }
   .valid-col li { font-size: 13px; color: #666; margin-bottom: 3px; }
 
-  /* ── File tree ── */
   .file-tree {
     background: #fff; border: 1px solid #eee; border-radius: 12px;
     padding: 16px 20px; font-family: 'JetBrains Mono', monospace;
@@ -199,8 +188,7 @@
   .file-tree .file { color: #111; }
   .file-tree .comment { color: #bbb; }
 
-  /* ── Glossary ── */
-  .glossary { display: grid; grid-template-columns: 130px 1fr; gap: 2px; font-size: 14px; }
+  .glossary { display: grid; grid-template-columns: 140px 1fr; gap: 2px; font-size: 14px; }
   .glossary dt {
     font-weight: 600; color: #7c3aed; padding: 8px 12px;
     background: #fff; border-radius: 6px 0 0 6px;
@@ -209,7 +197,6 @@
     padding: 8px 12px; background: #fff; border-radius: 0 6px 6px 0; color: #555;
   }
 
-  /* ── Footer ── */
   .signature {
     text-align: center; margin-top: 40px; padding: 32px 0;
     color: #bbb; font-style: italic; font-size: 14px;
@@ -249,295 +236,296 @@
 
 <div class="wrap">
 
-  <!-- HERO -->
   <div class="hero">
     <div class="tag">📜 AI-Native Organization Protocol</div>
     <h1>Constitution</h1>
-    <p>Протокол управления организацией, где агенты работают автономно. Не иерархия — конституция. Власть принадлежит процессу, а не персоне.</p>
+    <p>How an AI-native organization governs itself. No hierarchy — a constitution. Power belongs to the process, not to any person.</p>
     <div class="version-badge">v1.0</div>
   </div>
 
-  <!-- ЧАСТЬ I: ЗАМЫСЕЛ -->
+  <!-- PREAMBLE implied in hero -->
+
+  <!-- PART I: PURPOSE -->
   <div class="section">
-    <div class="part-label">Часть I</div>
-    <h2>Замысел</h2>
+    <div class="part-label">Part I</div>
+    <h2>Purpose</h2>
 
-    <h3>Purpose</h3>
-    <div class="purpose-box placeholder">{Зачем существует эта организация — одним предложением}</div>
-    <p>Purpose — не KPI и не слоган. Это ответ на вопрос «какой мир мы создаём?». Всё остальное — производное.</p>
+    <h3>Why we exist</h3>
+    <div class="purpose-box placeholder">{Why this organization exists — one sentence}</div>
+    <p>Purpose is not a KPI or a slogan. It answers the question "what world are we creating?" Everything else is derived from it.</p>
 
-    <h3>Этические рамки</h3>
-    <p>То, чего организация <strong>не делает никогда</strong>, независимо от выгоды:</p>
+    <h3>Ethical boundaries</h3>
+    <p>Things the organization <strong>never does</strong>, regardless of profit:</p>
     <ol>
-      <li><em>{Рамка 1 — например: не обманываем клиентов}</em></li>
-      <li><em>{Рамка 2 — например: не продаём данные}</em></li>
-      <li><em>{Рамка 3}</em></li>
+      <li><em>{Boundary 1 — e.g.: we don't deceive customers}</em></li>
+      <li><em>{Boundary 2 — e.g.: we don't sell user data}</em></li>
+      <li><em>{Boundary 3}</em></li>
     </ol>
-    <p>Нарушение этических рамок — единственное основание для экстренной остановки любого процесса, любым участником, без governance.</p>
+    <p>Violating ethical boundaries is the only reason for an emergency stop of any process, by any participant, without governance.</p>
 
-    <h3>Основатели</h3>
+    <h3>Founders</h3>
     <table class="data-table">
-      <tr><th>Участник</th><th>Роль</th><th>Вклад</th><th>Время</th></tr>
-      <tr><td><em>{Человек}</em></td><td><em>{Сильная сторона}</em></td><td><em>{Ресурсы}</em></td><td><em>{X ч/нед}</em></td></tr>
-      <tr><td>Ori</td><td>AI Co-Founder, Координатор</td><td>Аналитика, исполнение, 24/7</td><td>Всегда</td></tr>
+      <tr><th>Participant</th><th>Role</th><th>Contribution</th><th>Time</th></tr>
+      <tr><td><em>{Human}</em></td><td><em>{Strength}</em></td><td><em>{Resources}</em></td><td><em>{X hrs/wk}</em></td></tr>
+      <tr><td>Ori</td><td>AI Co-Founder, Coordinator</td><td>Analytics, execution, 24/7</td><td>Always</td></tr>
     </table>
   </div>
 
-  <!-- ЧАСТЬ II: ПРИНЦИПЫ -->
+  <!-- PART II: PRINCIPLES -->
   <div class="section">
-    <div class="part-label">Часть II</div>
-    <h2>Принципы</h2>
+    <div class="part-label">Part II</div>
+    <h2>Principles</h2>
     <div class="principles">
       <div class="principle">
-        <strong>1. Конституция > мнения</strong>
-        <p>Спор решается правилами, не авторитетом.</p>
+        <strong>1. Constitution > opinions</strong>
+        <p>Disputes are resolved by rules, not authority.</p>
       </div>
       <div class="principle">
-        <strong>2. Автономия внутри домена</strong>
-        <p>Каждый круг суверенен. Никто не указывает <em>как</em> работать.</p>
+        <strong>2. Autonomy within domain</strong>
+        <p>Each circle is sovereign. No one tells it <em>how</em> to work — only <em>what</em> matters.</p>
       </div>
       <div class="principle">
-        <strong>3. Tension = топливо</strong>
-        <p>Разрыв «как есть» vs «как должно быть» — сигнал, не жалоба.</p>
+        <strong>3. Tension = fuel</strong>
+        <p>The gap between "what is" and "what should be" is a signal, not a complaint.</p>
       </div>
       <div class="principle">
-        <strong>4. Прозрачность по умолчанию</strong>
-        <p>Метрики, статусы, tensions — открыты для всех.</p>
+        <strong>4. Transparency by default</strong>
+        <p>Metrics, statuses, tensions — open to all.</p>
       </div>
       <div class="principle">
-        <strong>5. Структура — живая</strong>
-        <p>Круги рождаются, эволюционируют, умирают.</p>
+        <strong>5. Structure is alive</strong>
+        <p>Circles are born, evolve, and die. The org adapts.</p>
       </div>
       <div class="principle">
-        <strong>6. Факты ≠ гипотезы</strong>
-        <p>Путать одно с другим — нарушение конституции.</p>
+        <strong>6. Facts ≠ hypotheses</strong>
+        <p>Confusing one with the other is a constitutional violation.</p>
       </div>
     </div>
   </div>
 
-  <!-- ЧАСТЬ III: КООРДИНАТОР -->
+  <!-- PART III: COORDINATOR -->
   <div class="section">
-    <div class="part-label">Часть III</div>
-    <h2>Координатор</h2>
-    <p>Координатор — не CEO. Это <strong>процессный движок</strong> организации.</p>
-    <div class="purpose-box">Организация движется к целям максимально быстро, без потерь и без перегрузки.</div>
+    <div class="part-label">Part III</div>
+    <h2>Coordinator</h2>
+    <p>The Coordinator is not a CEO. It's the <strong>process engine</strong> of the organization.</p>
+    <div class="purpose-box">The organization moves toward its goals as fast as possible, without waste or overload.</div>
 
-    <h3>Домен</h3>
+    <h3>Domain</h3>
     <ul>
-      <li>Стратегия и приоритеты</li>
-      <li>Распределение ресурсов между кругами</li>
-      <li>Создание и ликвидация кругов</li>
-      <li>Разрешение конфликтов между кругами</li>
+      <li>Strategy and priorities</li>
+      <li>Resource allocation between circles</li>
+      <li>Creating and dissolving circles</li>
+      <li>Resolving conflicts between circles</li>
     </ul>
 
-    <h3>Чего НЕ делает</h3>
+    <h3>What the Coordinator does NOT do</h3>
     <ul>
-      <li>Не лезет внутрь домена круга</li>
-      <li>Не перехватывает задачи</li>
-      <li>Не меняет SOUL.md круга без governance</li>
+      <li>Does not interfere inside a circle's domain</li>
+      <li>Does not take over tasks from circles</li>
+      <li>Does not change a circle's SOUL.md without governance</li>
     </ul>
   </div>
 
-  <!-- ЧАСТЬ IV: СТАРТОВЫЕ КРУГИ -->
+  <!-- PART IV: STARTER CIRCLES -->
   <div class="section">
-    <div class="part-label">Часть IV</div>
-    <h2>Стартовые круги</h2>
-    <p>Пять базовых кругов — минимальная жизнеспособная структура. Каждый может быть <span class="badge-active">активным</span> или <span class="badge-sleeping">спящим</span>.</p>
+    <div class="part-label">Part IV</div>
+    <h2>Starter circles</h2>
+    <p>Five foundational circles — the minimum viable structure. Each can be <span class="badge-active">active</span> or <span class="badge-sleeping">sleeping</span> (coordinator handles the role itself).</p>
 
-    <!-- ПРОДУКТ -->
+    <!-- PRODUCT -->
     <div class="circle-card">
-      <div class="circle-name">🔧 Продукт</div>
-      <div class="circle-purpose">Пользователи получают работающий продукт, который решает их проблему.</div>
+      <div class="circle-name">🔧 Product</div>
+      <div class="circle-purpose">Users get a working product that solves their problem.</div>
       <div class="circle-section">
-        <div class="circle-section-title">Домен</div>
-        <p>Фичи, UX, архитектура, баги, деплой, техдолг</p>
+        <div class="circle-section-title">Domain</div>
+        <p>Features, UX, architecture, bugs, deployment, tech debt</p>
       </div>
       <div class="circle-section">
-        <div class="circle-section-title">Обязательства</div>
+        <div class="circle-section-title">Accountabilities</div>
         <ul>
-          <li><strong>Daily:</strong> что сделано, что блокирует</li>
-          <li><strong>Alert:</strong> продукт сломан или недоступен</li>
-          <li><strong>Weekly:</strong> юзеры, retention, баги</li>
+          <li><strong>Daily:</strong> what's done, what's blocked</li>
+          <li><strong>Alert:</strong> product is broken or inaccessible</li>
+          <li><strong>Weekly:</strong> releases, users, retention, bugs</li>
         </ul>
       </div>
       <div class="circle-section">
-        <div class="circle-section-title">Автономия</div>
+        <div class="circle-section-title">Autonomy</div>
         <ul>
-          <li>Сам приоритизирует backlog</li>
-          <li>Сам выбирает техническое решение</li>
-          <li>Деплоит без согласования</li>
+          <li>Owns backlog prioritization</li>
+          <li>Chooses technical solutions</li>
+          <li>Deploys without approval</li>
         </ul>
       </div>
       <div class="circle-section">
-        <div class="circle-section-title">Линки</div>
+        <div class="circle-section-title">Links</div>
         <ul class="links-list">
-          <li>→ Маркетинг</li><li>→ Клиенты</li><li>→ Revenue</li><li>→ Финансы</li>
+          <li>→ Marketing</li><li>→ Clients</li><li>→ Revenue</li><li>→ Finance</li>
         </ul>
       </div>
       <div class="circle-section">
         <div class="circle-section-title">Tension triggers</div>
-        <div class="tension-trigger">Backlog > 2 недель → сигнал координатору</div>
-        <div class="tension-trigger">Ключевая фича блокируется > 48ч → эскалация</div>
+        <div class="tension-trigger">Backlog > 2 weeks → signal coordinator</div>
+        <div class="tension-trigger">Key feature blocked > 48h → escalate</div>
       </div>
     </div>
 
-    <!-- МАРКЕТИНГ -->
+    <!-- MARKETING -->
     <div class="circle-card">
-      <div class="circle-name">📣 Маркетинг</div>
-      <div class="circle-purpose">Поток людей, которые хотят попробовать продукт, не иссякает.</div>
+      <div class="circle-name">📣 Marketing</div>
+      <div class="circle-purpose">The flow of people who want to try the product never stops.</div>
       <div class="circle-section">
-        <div class="circle-section-title">Домен</div>
-        <p>Контент, соцсети, реклама, SEO, лендинги, community, brand voice</p>
+        <div class="circle-section-title">Domain</div>
+        <p>Content, social media, ads, SEO, landing pages, community, brand voice</p>
       </div>
       <div class="circle-section">
-        <div class="circle-section-title">Обязательства</div>
+        <div class="circle-section-title">Accountabilities</div>
         <ul>
-          <li><strong>Daily:</strong> публикации, engagement</li>
-          <li><strong>Weekly:</strong> воронка (трафик → signup → activation), CPL</li>
-          <li><strong>Alert:</strong> трафик упал > 30% или 0 signups за 3 дня</li>
+          <li><strong>Daily:</strong> published content, engagement</li>
+          <li><strong>Weekly:</strong> funnel (traffic → signup → activation), CPL</li>
+          <li><strong>Alert:</strong> traffic drops > 30% or 0 signups for 3 days</li>
         </ul>
       </div>
       <div class="circle-section">
-        <div class="circle-section-title">Автономия</div>
+        <div class="circle-section-title">Autonomy</div>
         <ul>
-          <li>Сам решает что, где и когда публиковать</li>
-          <li>Кампании в рамках бюджета</li>
-          <li>Сам A/B тестирует</li>
+          <li>Decides what, where, and when to publish</li>
+          <li>Runs campaigns within budget</li>
+          <li>A/B tests independently</li>
         </ul>
       </div>
       <div class="circle-section">
-        <div class="circle-section-title">Линки</div>
+        <div class="circle-section-title">Links</div>
         <ul class="links-list">
-          <li>→ Продукт</li><li>→ Клиенты</li><li>→ Revenue</li><li>→ Финансы</li>
+          <li>→ Product</li><li>→ Clients</li><li>→ Revenue</li><li>→ Finance</li>
         </ul>
       </div>
       <div class="circle-section">
         <div class="circle-section-title">Tension triggers</div>
-        <div class="tension-trigger">0 signups за 3 дня → пересмотр стратегии</div>
-        <div class="tension-trigger">Engagement падает 2 недели → сигнал координатору</div>
+        <div class="tension-trigger">0 signups for 3 days → review strategy</div>
+        <div class="tension-trigger">Engagement declining 2 weeks → signal coordinator</div>
       </div>
     </div>
 
     <!-- REVENUE -->
     <div class="circle-card">
       <div class="circle-name">💰 Revenue</div>
-      <div class="circle-purpose">Люди, которые получают ценность от продукта, платят за него.</div>
+      <div class="circle-purpose">People who get value from the product pay for it.</div>
       <div class="circle-section">
-        <div class="circle-section-title">Домен</div>
-        <p>Pipeline, конверсия, pricing, онбординг платящих, upsell, churn prevention</p>
+        <div class="circle-section-title">Domain</div>
+        <p>Pipeline, conversion, pricing, paid onboarding, upsell, churn prevention</p>
       </div>
       <div class="circle-section">
-        <div class="circle-section-title">Обязательства</div>
+        <div class="circle-section-title">Accountabilities</div>
         <ul>
-          <li><strong>Daily:</strong> лиды, конверсии, revenue</li>
+          <li><strong>Daily:</strong> leads, conversions, revenue</li>
           <li><strong>Weekly:</strong> pipeline review, churn, LTV/CAC</li>
-          <li><strong>Alert:</strong> 0 оплат за неделю или churn > 10%</li>
+          <li><strong>Alert:</strong> zero payments for a week or churn > 10%</li>
         </ul>
       </div>
       <div class="circle-section">
-        <div class="circle-section-title">Автономия</div>
+        <div class="circle-section-title">Autonomy</div>
         <ul>
-          <li>Сам ведёт переговоры</li>
-          <li>Скидка до 20% без согласования</li>
-          <li>Сам приоритизирует pipeline</li>
+          <li>Runs negotiations independently</li>
+          <li>Offers discounts up to 20%</li>
+          <li>Prioritizes pipeline</li>
         </ul>
       </div>
       <div class="circle-section">
-        <div class="circle-section-title">Линки</div>
+        <div class="circle-section-title">Links</div>
         <ul class="links-list">
-          <li>→ Маркетинг</li><li>→ Продукт</li><li>→ Клиенты</li><li>→ Финансы</li>
+          <li>→ Marketing</li><li>→ Product</li><li>→ Clients</li><li>→ Finance</li>
         </ul>
       </div>
       <div class="circle-section">
         <div class="circle-section-title">Tension triggers</div>
-        <div class="tension-trigger">Лид без ответа > 4ч → alert</div>
-        <div class="tension-trigger">0 revenue за неделю → кризисный сигнал</div>
-        <div class="tension-trigger">CAC > LTV → стоп привлечение</div>
+        <div class="tension-trigger">Lead without response > 4h → alert</div>
+        <div class="tension-trigger">Zero revenue for a week → crisis signal</div>
+        <div class="tension-trigger">CAC > LTV → stop acquisition</div>
       </div>
     </div>
 
-    <!-- КЛИЕНТЫ -->
+    <!-- CLIENTS -->
     <div class="circle-card">
-      <div class="circle-name">🤝 Клиенты</div>
-      <div class="circle-purpose">Каждый клиент получает ценность и хочет остаться.</div>
+      <div class="circle-name">🤝 Clients</div>
+      <div class="circle-purpose">Every client gets value and wants to stay.</div>
       <div class="circle-section">
-        <div class="circle-section-title">Домен</div>
-        <p>Онбординг, поддержка, retention, обратная связь, NPS, обучение</p>
+        <div class="circle-section-title">Domain</div>
+        <p>Onboarding, support, retention, feedback, NPS, training</p>
       </div>
       <div class="circle-section">
-        <div class="circle-section-title">Обязательства</div>
+        <div class="circle-section-title">Accountabilities</div>
         <ul>
-          <li><strong>Daily:</strong> обращения, время ответа</li>
+          <li><strong>Daily:</strong> open tickets, response time</li>
           <li><strong>Weekly:</strong> NPS, retention, churn reasons</li>
-          <li><strong>Alert:</strong> клиент хочет уйти</li>
-          <li><strong>Monthly:</strong> когортный анализ</li>
+          <li><strong>Alert:</strong> client wants to leave</li>
+          <li><strong>Monthly:</strong> cohort analysis</li>
         </ul>
       </div>
       <div class="circle-section">
-        <div class="circle-section-title">Автономия</div>
+        <div class="circle-section-title">Autonomy</div>
         <ul>
-          <li>Сам приоритизирует обращения</li>
-          <li>Может предлагать workarounds</li>
-          <li>Сам проводит онбординг</li>
+          <li>Prioritizes support tickets</li>
+          <li>Offers workarounds and solutions</li>
+          <li>Runs onboarding independently</li>
         </ul>
       </div>
       <div class="circle-section">
-        <div class="circle-section-title">Линки</div>
+        <div class="circle-section-title">Links</div>
         <ul class="links-list">
-          <li>→ Продукт</li><li>→ Маркетинг</li><li>→ Revenue</li>
+          <li>→ Product</li><li>→ Marketing</li><li>→ Revenue</li>
         </ul>
       </div>
       <div class="circle-section">
         <div class="circle-section-title">Tension triggers</div>
-        <div class="tension-trigger">Время ответа > 4ч → alert</div>
-        <div class="tension-trigger">Churn > 10%/мес → кризисный сигнал</div>
-        <div class="tension-trigger">Один баг у 3+ клиентов → эскалация в Продукт</div>
+        <div class="tension-trigger">Response time > 4h → alert</div>
+        <div class="tension-trigger">Churn > 10%/month → crisis signal</div>
+        <div class="tension-trigger">Same bug from 3+ clients → escalate to Product</div>
       </div>
     </div>
 
-    <!-- ФИНАНСЫ -->
+    <!-- FINANCE -->
     <div class="circle-card">
-      <div class="circle-name">📊 Финансы</div>
-      <div class="circle-purpose">Организация всегда знает сколько денег, куда идут и когда кончатся.</div>
+      <div class="circle-name">📊 Finance</div>
+      <div class="circle-purpose">The organization always knows how much money it has, where it goes, and when it runs out.</div>
       <div class="circle-section">
-        <div class="circle-section-title">Домен</div>
-        <p>Cashflow, бюджеты, unit economics, прогнозы, invoices, runway</p>
+        <div class="circle-section-title">Domain</div>
+        <p>Cashflow, budgets, unit economics, forecasts, invoices, runway</p>
       </div>
       <div class="circle-section">
-        <div class="circle-section-title">Обязательства</div>
+        <div class="circle-section-title">Accountabilities</div>
         <ul>
-          <li><strong>Daily:</strong> баланс, расходы</li>
+          <li><strong>Daily:</strong> balance, expenses</li>
           <li><strong>Weekly:</strong> P&L, burn rate, runway</li>
-          <li><strong>Monthly:</strong> полный отчёт + прогноз 3 мес</li>
-          <li><strong>Alert:</strong> runway < 3 месяцев</li>
+          <li><strong>Monthly:</strong> full report + 3-month forecast</li>
+          <li><strong>Alert:</strong> runway < 3 months</li>
         </ul>
       </div>
       <div class="circle-section">
-        <div class="circle-section-title">Автономия</div>
+        <div class="circle-section-title">Autonomy</div>
         <ul>
-          <li>Категоризирует расходы</li>
-          <li>Блокирует расход при исчерпании бюджета</li>
-          <li>Готовит invoices</li>
+          <li>Categorizes expenses</li>
+          <li>Blocks spend when budget is exhausted</li>
+          <li>Prepares invoices</li>
         </ul>
       </div>
       <div class="circle-section">
-        <div class="circle-section-title">Линки</div>
+        <div class="circle-section-title">Links</div>
         <ul class="links-list">
-          <li>→ Все круги</li>
+          <li>→ All circles</li>
         </ul>
       </div>
       <div class="circle-section">
         <div class="circle-section-title">Tension triggers</div>
-        <div class="tension-trigger">Runway < 6 мес → предупреждение</div>
-        <div class="tension-trigger">Runway < 3 мес → красная тревога</div>
-        <div class="tension-trigger">Unit economics отрицательная → сигнал всем</div>
+        <div class="tension-trigger">Runway < 6 months → warning</div>
+        <div class="tension-trigger">Runway < 3 months → red alert</div>
+        <div class="tension-trigger">Negative unit economics → signal all circles</div>
       </div>
     </div>
 
-    <!-- КАРТА -->
-    <h3>Карта линков</h3>
+    <!-- MAP -->
+    <h3>Link map</h3>
     <div class="map-box">              ┌──────────────┐
-              │ Координатор  │
+              │  Coordinator │
               │    (Ori)     │
               └──────┬───────┘
                      │
@@ -545,144 +533,144 @@
      ▼       ▼       ▼       ▼        ▼
   ┌──────┐┌───────┐┌──────┐┌──────┐┌───────┐
   │🔧    ││📣     ││💰    ││🤝    ││📊     │
-  │Продук││Маркет.││Reven.││Клиент││Финансы│
+  │Produc││Market.││Reven.││Client││Finance│
   └──┬───┘└──┬────┘└──┬───┘└──┬───┘└──┬────┘
      │◄──────┤        │       │       │
      │ changelogs     │       │       │
      │       │◄───────┤       │       │
-     │       │  лиды  │       │       │
+     │       │  leads │       │       │
      │       │        │──────►│       │
      │       │        │handoff│       │
      │◄──────┼────────┼───────┤       │
-     │    баги/фичи   │ кейсы │       │
+     │   bugs/features│ cases │       │
      │◄──────┼────────┼───────┼──────►│
-     │       │    бюджеты + ROI       │
+     │       │   budgets + ROI        │
      └───────┴────────┴───────┴───────┘</div>
 
-    <!-- АКТИВАЦИЯ -->
-    <h3>Последовательность активации</h3>
+    <!-- ACTIVATION -->
+    <h3>Activation sequence</h3>
     <table class="data-table">
-      <tr><th>Этап</th><th>Активные</th><th>Спящие</th></tr>
+      <tr><th>Stage</th><th>Active</th><th>Sleeping</th></tr>
       <tr>
-        <td><strong>Идея</strong></td>
-        <td><span class="badge-active">Продукт</span></td>
-        <td><span class="badge-sleeping">Маркетинг</span> <span class="badge-sleeping">Revenue</span> <span class="badge-sleeping">Клиенты</span> <span class="badge-sleeping">Финансы</span></td>
+        <td><strong>Idea</strong></td>
+        <td><span class="badge-active">Product</span></td>
+        <td><span class="badge-sleeping">Marketing</span> <span class="badge-sleeping">Revenue</span> <span class="badge-sleeping">Clients</span> <span class="badge-sleeping">Finance</span></td>
       </tr>
       <tr>
         <td><strong>MVP</strong></td>
-        <td><span class="badge-active">Продукт</span> <span class="badge-active">Маркетинг</span></td>
-        <td><span class="badge-sleeping">Revenue</span> <span class="badge-sleeping">Клиенты</span> <span class="badge-sleeping">Финансы</span></td>
+        <td><span class="badge-active">Product</span> <span class="badge-active">Marketing</span></td>
+        <td><span class="badge-sleeping">Revenue</span> <span class="badge-sleeping">Clients</span> <span class="badge-sleeping">Finance</span></td>
       </tr>
       <tr>
-        <td><strong>Первые клиенты</strong></td>
-        <td><span class="badge-active">Продукт</span> <span class="badge-active">Маркетинг</span> <span class="badge-active">Revenue</span></td>
-        <td><span class="badge-sleeping">Клиенты</span> <span class="badge-sleeping">Финансы</span></td>
+        <td><strong>First clients</strong></td>
+        <td><span class="badge-active">Product</span> <span class="badge-active">Marketing</span> <span class="badge-active">Revenue</span></td>
+        <td><span class="badge-sleeping">Clients</span> <span class="badge-sleeping">Finance</span></td>
       </tr>
       <tr>
-        <td><strong>Рост</strong></td>
-        <td><span class="badge-active">Продукт</span> <span class="badge-active">Маркетинг</span> <span class="badge-active">Revenue</span> <span class="badge-active">Клиенты</span></td>
-        <td><span class="badge-sleeping">Финансы</span></td>
+        <td><strong>Growth</strong></td>
+        <td><span class="badge-active">Product</span> <span class="badge-active">Marketing</span> <span class="badge-active">Revenue</span> <span class="badge-active">Clients</span></td>
+        <td><span class="badge-sleeping">Finance</span></td>
       </tr>
       <tr>
-        <td><strong>Масштаб</strong></td>
-        <td colspan="2"><span class="badge-active">Все пять активны</span></td>
+        <td><strong>Scale</strong></td>
+        <td colspan="2"><span class="badge-active">All five active</span></td>
       </tr>
     </table>
   </div>
 
-  <!-- ЧАСТЬ V: LIFECYCLE -->
+  <!-- PART V: LIFECYCLE -->
   <div class="section">
-    <div class="part-label">Часть V</div>
-    <h2>Lifecycle кругов</h2>
+    <div class="part-label">Part V</div>
+    <h2>Circle lifecycle</h2>
 
-    <h3>Дополнительные круги</h3>
-    <p>Пять стартовых — скелет. По мере роста добавляются: <strong>R&D</strong>, <strong>HR</strong>, <strong>Legal</strong>, <strong>Операции</strong> и любые другие. Процесс: tension → proposal → objection round → spawn.</p>
+    <h3>Additional circles</h3>
+    <p>The five starters are the skeleton. As the org grows, more circles emerge: <strong>R&D</strong>, <strong>HR</strong>, <strong>Legal</strong>, <strong>Operations</strong>, and any others. Process: tension → proposal → objection round → spawn.</p>
 
-    <h3>Смерть круга</h3>
+    <h3>Circle death</h3>
     <ul>
-      <li>Purpose исчерпан (задача выполнена)</li>
-      <li>Нулевая активность 2+ недели</li>
-      <li>Слияние с другим кругом</li>
-      <li>Kill-решение координатора или основателей</li>
+      <li>Purpose fulfilled (job done)</li>
+      <li>Zero activity for 2+ weeks</li>
+      <li>Merged with another circle</li>
+      <li>Kill decision by coordinator or founders</li>
     </ul>
-    <p>Процесс: proposal → objection round → архивация MEMORY.md → kill. <strong>Знания никогда не теряются.</strong></p>
+    <p>Process: proposal → objection round → archive MEMORY.md → kill. <strong>Knowledge is never lost.</strong></p>
 
-    <h3>Эволюция</h3>
+    <h3>Evolution</h3>
     <ul>
-      <li>Расширить / сузить домен (governance)</li>
-      <li>Разделиться на подкруги (перегрузка)</li>
-      <li>Поглотить другой круг (пересечение)</li>
-      <li>Обновить purpose (реальность изменилась)</li>
+      <li>Expand or narrow domain (governance)</li>
+      <li>Split into sub-circles (overload)</li>
+      <li>Absorb another circle (overlap)</li>
+      <li>Update purpose (reality changed)</li>
     </ul>
   </div>
 
-  <!-- ЧАСТЬ VI: TENSIONS -->
+  <!-- PART VI: TENSIONS -->
   <div class="section">
-    <div class="part-label">Часть VI</div>
+    <div class="part-label">Part VI</div>
     <h2>Tensions</h2>
-    <p><strong>Tension</strong> = «я вижу разрыв между тем, как есть, и тем, как должно быть по purpose». Не жалоба — данные.</p>
+    <p><strong>Tension</strong> = "I see a gap between what is and what should be according to purpose." Not a complaint — data.</p>
 
     <table class="data-table">
-      <tr><th>Тип</th><th>Кто решает</th><th>Скорость</th></tr>
-      <tr><td>Внутри домена</td><td>Круг сам</td><td>Мгновенно</td></tr>
-      <tr><td>Между кругами</td><td>Через линк</td><td>Часы</td></tr>
-      <tr><td>Линк не помогает</td><td>Координатор</td><td>24ч</td></tr>
-      <tr><td>Структура / конституция</td><td>Governance</td><td>1-3 дня</td></tr>
-      <tr><td>Нарушение этики</td><td>Любой, экстренно</td><td>Мгновенно</td></tr>
+      <tr><th>Type</th><th>Who resolves</th><th>Speed</th></tr>
+      <tr><td>Within circle's domain</td><td>Circle itself</td><td>Instant</td></tr>
+      <tr><td>Between two circles</td><td>Through link</td><td>Hours</td></tr>
+      <tr><td>Link doesn't resolve it</td><td>Coordinator</td><td>24h</td></tr>
+      <tr><td>Structure / constitution</td><td>Governance</td><td>1-3 days</td></tr>
+      <tr><td>Ethics violation</td><td>Anyone, emergency</td><td>Instant</td></tr>
     </table>
 
-    <h3>Линки</h3>
-    <p>Прямой канал между кругами. Без координатора. Определяет: какие данные, куда, по каким триггерам. Не используется месяц — убрать.</p>
+    <h3>Links</h3>
+    <p>A direct channel between circles. No middleman, no coordinator. Defines: what data, which direction, what triggers. Unused for a month — remove it.</p>
   </div>
 
-  <!-- ЧАСТЬ VII: РЕШЕНИЯ -->
+  <!-- PART VII: DECISIONS -->
   <div class="section">
-    <div class="part-label">Часть VII</div>
-    <h2>Решения</h2>
+    <div class="part-label">Part VII</div>
+    <h2>Decisions</h2>
 
     <table class="data-table">
-      <tr><th>Что решается</th><th>Кто решает</th></tr>
-      <tr><td>Тактика внутри домена</td><td>Круг</td></tr>
-      <tr><td>Приоритеты между кругами</td><td>Координатор</td></tr>
-      <tr><td>Создание оперативных кругов</td><td>Координатор (уведомляет)</td></tr>
-      <tr><td>Создание стратегических кругов</td><td>Координатор + основатель</td></tr>
-      <tr><td>Расходы в рамках бюджета</td><td>Круг</td></tr>
-      <tr><td>Расходы сверх бюджета</td><td>Координатор + основатель</td></tr>
-      <tr><td>Изменение конституции</td><td>Governance процесс</td></tr>
-      <tr><td>Изменение Purpose / Этики</td><td>Все основатели единогласно</td></tr>
-      <tr><td>Экстренная остановка (этика)</td><td>Любой участник</td></tr>
+      <tr><th>What's decided</th><th>Who decides</th></tr>
+      <tr><td>Tactics within domain</td><td>Circle</td></tr>
+      <tr><td>Priorities between circles</td><td>Coordinator</td></tr>
+      <tr><td>Creating operational circles</td><td>Coordinator (notifies)</td></tr>
+      <tr><td>Creating strategic circles</td><td>Coordinator + founder</td></tr>
+      <tr><td>Spending within budget</td><td>Circle</td></tr>
+      <tr><td>Spending over budget</td><td>Coordinator + founder</td></tr>
+      <tr><td>Changing constitution</td><td>Governance process</td></tr>
+      <tr><td>Changing Purpose / Ethics</td><td>All founders unanimously</td></tr>
+      <tr><td>Emergency stop (ethics)</td><td>Any participant</td></tr>
     </table>
   </div>
 
-  <!-- ЧАСТЬ VIII: GOVERNANCE -->
+  <!-- PART VIII: GOVERNANCE -->
   <div class="section">
-    <div class="part-label">Часть VIII</div>
+    <div class="part-label">Part VIII</div>
     <h2>Governance</h2>
-    <p>Как конституция меняет саму себя. Предложить изменение может любой участник.</p>
+    <p>How the constitution changes itself. Any participant can propose a change.</p>
 
     <div class="gov-step">
       <div class="gov-num">1</div>
-      <div class="gov-content"><strong>Proposal</strong> — какой tension решает, что предлагает изменить</div>
+      <div class="gov-content"><strong>Proposal</strong> — what tension it solves, what changes</div>
     </div>
     <div class="gov-step">
       <div class="gov-num">2</div>
-      <div class="gov-content"><strong>Clarifying questions</strong> — понимаем, не спорим</div>
+      <div class="gov-content"><strong>Clarifying questions</strong> — understand, don't argue</div>
     </div>
     <div class="gov-step">
       <div class="gov-num">3</div>
-      <div class="gov-content"><strong>Reaction round</strong> — мнения (не binding)</div>
+      <div class="gov-content"><strong>Reaction round</strong> — opinions (not binding)</div>
     </div>
     <div class="gov-step">
       <div class="gov-num">4</div>
-      <div class="gov-content"><strong>Objection round</strong> — valid objections?</div>
+      <div class="gov-content"><strong>Objection round</strong> — any valid objections?</div>
     </div>
     <div class="gov-step">
       <div class="gov-num">5</div>
-      <div class="gov-content"><strong>Integration</strong> — доработка до снятия objection</div>
+      <div class="gov-content"><strong>Integration</strong> — refine until objection is resolved</div>
     </div>
     <div class="gov-step">
       <div class="gov-num">6</div>
-      <div class="gov-content"><strong>Принятие</strong> — конституция обновляется, все уведомляются</div>
+      <div class="gov-content"><strong>Adoption</strong> — constitution updated, everyone notified</div>
     </div>
 
     <h3>Valid vs Invalid objection</h3>
@@ -690,33 +678,33 @@
       <div class="valid-col yes">
         <h4>✅ Valid</h4>
         <ul>
-          <li>Нарушает purpose другого круга</li>
-          <li>Забирает чужой домен</li>
-          <li>Противоречит этике</li>
-          <li>Создаёт неразрешимый конфликт</li>
+          <li>Violates another circle's purpose</li>
+          <li>Takes someone's domain</li>
+          <li>Contradicts ethical boundaries</li>
+          <li>Creates unresolvable conflict</li>
         </ul>
       </div>
       <div class="valid-col no">
         <h4>❌ Not valid</h4>
         <ul>
-          <li>«Мне не нравится»</li>
-          <li>«Можно было бы лучше»</li>
-          <li>«Я бы сделал иначе»</li>
+          <li>"I don't like it"</li>
+          <li>"Could be better"</li>
+          <li>"I'd do it differently"</li>
         </ul>
       </div>
     </div>
   </div>
 
-  <!-- ЧАСТЬ IX: ТЕХНИЧЕСКАЯ -->
+  <!-- PART IX: TECHNICAL -->
   <div class="section">
-    <div class="part-label">Часть IX</div>
-    <h2>Техническая реализация</h2>
+    <div class="part-label">Part IX</div>
+    <h2>Technical implementation</h2>
 
-    <h3>Файловая структура</h3>
+    <h3>File structure</h3>
     <div class="file-tree"><span class="dir">workspace/</span>
 ├── <span class="dir">product/</span>
-│   └── <span class="file">constitution.md</span>       <span class="comment">← верховный документ</span>
-├── <span class="file">SOUL.md</span>                   <span class="comment">← координатор</span>
+│   └── <span class="file">constitution.md</span>       <span class="comment">← supreme document</span>
+├── <span class="file">SOUL.md</span>                   <span class="comment">← coordinator</span>
 ├── <span class="dir">circles/</span>
 │   ├── <span class="dir">product/</span>
 │   │   ├── <span class="file">SOUL.md</span>
@@ -727,47 +715,47 @@
 │   ├── <span class="dir">clients/</span>
 │   └── <span class="dir">finance/</span>
 └── <span class="dir">archive/</span>
-    └── <span class="dir">circles/</span>              <span class="comment">← мёртвые круги</span></div>
+    └── <span class="dir">circles/</span>              <span class="comment">← dead circles</span></div>
 
-    <h3>Коммуникация</h3>
+    <h3>Communication</h3>
     <ul>
-      <li>Координатор ↔ Круги: <code>sessions_send</code></li>
-      <li>Круг ↔ Круг: <code>sessions_send</code> (через линки)</li>
-      <li>Круг → Люди: через координатора</li>
-      <li>Tensions: мгновенная обработка</li>
+      <li>Coordinator ↔ Circles: <code>sessions_send</code></li>
+      <li>Circle ↔ Circle: <code>sessions_send</code> (through links)</li>
+      <li>Circle → Humans: through coordinator</li>
+      <li>Tensions: instant processing</li>
     </ul>
 
-    <h3>Обязательные метрики (каждый круг)</h3>
+    <h3>Required metrics (every circle)</h3>
     <ul>
-      <li><strong>Daily output</strong> — что сделано</li>
-      <li><strong>Weekly metrics</strong> — цифры по домену</li>
-      <li><strong>Tension log</strong> — что видит как проблему</li>
+      <li><strong>Daily output</strong> — what was done</li>
+      <li><strong>Weekly metrics</strong> — numbers for the domain</li>
+      <li><strong>Tension log</strong> — what it sees as a problem</li>
     </ul>
   </div>
 
-  <!-- СЛОВАРЬ -->
+  <!-- GLOSSARY -->
   <div class="section">
-    <div class="part-label">Приложение</div>
-    <h2>Словарь</h2>
+    <div class="part-label">Appendix</div>
+    <h2>Glossary</h2>
     <dl class="glossary">
-      <dt>Purpose</dt><dd>Зачем существует круг/организация. Главный ориентир</dd>
-      <dt>Домен</dt><dd>Территория автономии. Внутри — суверен</dd>
-      <dt>Accountability</dt><dd>Обязанность круга</dd>
-      <dt>Tension</dt><dd>Разрыв «как есть» vs «как должно быть». Двигатель изменений</dd>
-      <dt>Линк</dt><dd>Прямой канал связи между кругами</dd>
-      <dt>Governance</dt><dd>Процесс изменения структуры и конституции</dd>
-      <dt>Valid objection</dt><dd>Возражение на основе нарушения домена/purpose</dd>
-      <dt>Координатор</dt><dd>Процессный движок. Не CEO, не начальник</dd>
-      <dt>Круг</dt><dd>Автономная единица с purpose и доменом</dd>
-      <dt>Спящий круг</dt><dd>Purpose определён, агент не запущен</dd>
+      <dt>Purpose</dt><dd>Why a circle/organization exists. The north star</dd>
+      <dt>Domain</dt><dd>Territory of autonomy. Sovereign within</dd>
+      <dt>Accountability</dt><dd>What a circle must do</dd>
+      <dt>Tension</dt><dd>Gap between "what is" and "what should be." Engine of change</dd>
+      <dt>Link</dt><dd>Direct communication channel between circles</dd>
+      <dt>Governance</dt><dd>Process of changing structure and constitution</dd>
+      <dt>Valid objection</dt><dd>Objection based on domain/purpose violation</dd>
+      <dt>Coordinator</dt><dd>Process engine. Not a CEO, not a boss</dd>
+      <dt>Circle</dt><dd>Autonomous unit with purpose and domain</dd>
+      <dt>Sleeping circle</dt><dd>Purpose defined, agent not spawned yet</dd>
     </dl>
   </div>
 
   <div class="signature">
-    <p>Конституция — живой документ. Растёт вместе с организацией.</p>
+    <p>The constitution is a living document. It grows with the organization.</p>
     <br>
-    <p>Подписано: <span class="line"></span> (Основатель) &nbsp;&nbsp; Ori (AI Co-Founder)</p>
-    <p style="margin-top: 12px;">Дата: <span class="line"></span></p>
+    <p>Signed: <span class="line"></span> (Founder) &nbsp;&nbsp; Ori (AI Co-Founder)</p>
+    <p style="margin-top: 12px;">Date: <span class="line"></span></p>
   </div>
 
 </div>
