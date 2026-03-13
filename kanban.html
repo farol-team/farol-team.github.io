@@ -395,6 +395,7 @@ body { font-family: var(--font); background: var(--canvas); color: var(--ink); m
     <button class="sync-btn" onclick="syncFromJSON()">🔄 Sync</button>
     <button class="add-global-btn" onclick="addCardToCol('next')">＋ New Task</button>
     <button class="theme-btn" onclick="toggleTheme()">🌓 Theme</button>
+    <button class="sync-btn" id="gh-btn" onclick="ghToken ? disconnectGitHub() : setupGitHubToken()">🔗 GitHub</button>
   </div>
 </div>
 
@@ -564,7 +565,7 @@ body { font-family: var(--font); background: var(--canvas); color: var(--ink); m
 </div>
 
 <div class="toast" id="toast"></div>
-<div class="footer-bar">Click to edit · Drag between columns · ＋ to add · 🔄 Sync from JSON</div>
+<div class="footer-bar">Click to edit · Drag between columns · ＋ to add · 🔗 GitHub = auto-save</div>
 
 <script>
 const CL = { notnow:'Not Now', maybe:'Maybe', next:'Up Next', progress:'In Progress', review:'Human Review', done:'Done' };
@@ -971,6 +972,142 @@ function saveState(){
     }
   });
   localStorage.setItem(STORAGE_KEY,JSON.stringify(s));
+  // Auto-push to GitHub
+  debouncedPush();
+}
+
+/* ---- AUTO-PUSH TO GITHUB ---- */
+const GH_REPO = 'farol-team/farol-team.github.io';
+const GH_FILE = 'kanban-data.json';
+let pushTimer = null;
+let ghToken = localStorage.getItem('farol-gh-token') || null;
+let lastFileSha = null;
+let isPushing = false;
+
+function debouncedPush() {
+  if (!ghToken) return;
+  clearTimeout(pushTimer);
+  pushTimer = setTimeout(() => pushToGitHub(), 2000);
+}
+
+function exportKanbanJSON() {
+  const columns = Object.keys(CL);
+  const cards = [];
+  const details = JSON.parse(localStorage.getItem('farol-card-details') || '{}');
+
+  columns.forEach(colName => {
+    const col = document.querySelector(`.col[data-col="${colName}"]`);
+    if (!col) return;
+    const cardEls = col.querySelectorAll('.card-item');
+    cardEls.forEach((c, i) => {
+      const id = c.dataset.id;
+      cards.push({
+        id,
+        column: colName,
+        tag: c.dataset.tag || 'Product',
+        title: c.querySelector('.card-title')?.textContent || '',
+        desc: details[id]?.desc || c.querySelector('.card-desc')?.textContent || '',
+        owners: (c.dataset.owners || 'ori').split(','),
+        blocked: c.classList.contains('is-blocked'),
+        order: i
+      });
+    });
+  });
+
+  return {
+    columns,
+    columnNames: { ...CL },
+    cards
+  };
+}
+
+async function pushToGitHub() {
+  if (isPushing || !ghToken) return;
+  isPushing = true;
+  updateSyncIndicator('pushing');
+
+  try {
+    // Get current file SHA
+    const metaResp = await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${GH_FILE}`, {
+      headers: { Authorization: `Bearer ${ghToken}`, Accept: 'application/vnd.github.v3+json' }
+    });
+    if (!metaResp.ok) throw new Error('Failed to get file metadata');
+    const meta = await metaResp.json();
+    lastFileSha = meta.sha;
+
+    // Push updated JSON
+    const content = JSON.stringify(exportKanbanJSON(), null, 2);
+    const b64 = btoa(unescape(encodeURIComponent(content)));
+
+    const putResp = await fetch(`https://api.github.com/repos/${GH_REPO}/contents/${GH_FILE}`, {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${ghToken}`,
+        Accept: 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        message: `kanban: auto-save ${new Date().toISOString().slice(0,16)}`,
+        content: b64,
+        sha: lastFileSha
+      })
+    });
+
+    if (!putResp.ok) {
+      const err = await putResp.json();
+      throw new Error(err.message || 'Push failed');
+    }
+
+    updateSyncIndicator('saved');
+    console.log('✅ Kanban pushed to GitHub');
+  } catch (e) {
+    console.error('Push failed:', e);
+    updateSyncIndicator('error');
+  } finally {
+    isPushing = false;
+  }
+}
+
+function updateSyncIndicator(state) {
+  let el = document.getElementById('sync-status');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'sync-status';
+    el.style.cssText = 'position:fixed;bottom:12px;right:12px;padding:6px 14px;border-radius:20px;font-size:12px;font-weight:600;z-index:9999;transition:all 0.3s;pointer-events:none;';
+    document.body.appendChild(el);
+  }
+  if (state === 'pushing') {
+    el.textContent = '⏳ Saving...';
+    el.style.background = '#fef3c7'; el.style.color = '#92400e';
+  } else if (state === 'saved') {
+    el.textContent = '✅ Saved to server';
+    el.style.background = '#d1fae5'; el.style.color = '#065f46';
+    setTimeout(() => { el.textContent = ''; el.style.background = 'transparent'; }, 3000);
+  } else if (state === 'error') {
+    el.textContent = '❌ Save failed';
+    el.style.background = '#fee2e2'; el.style.color = '#991b1b';
+    setTimeout(() => { el.textContent = ''; el.style.background = 'transparent'; }, 5000);
+  } else if (state === 'connected') {
+    el.textContent = '🟢 Connected';
+    el.style.background = '#d1fae5'; el.style.color = '#065f46';
+    setTimeout(() => { el.textContent = ''; el.style.background = 'transparent'; }, 2000);
+  }
+}
+
+function setupGitHubToken() {
+  const t = prompt('GitHub Personal Access Token (repo scope):\n\nСоздай на github.com/settings/tokens → Fine-grained → farol-team repos → Contents: Read+Write\n\nТокен сохраняется только в localStorage твоего браузера.');
+  if (t && t.trim()) {
+    ghToken = t.trim();
+    localStorage.setItem('farol-gh-token', ghToken);
+    updateSyncIndicator('connected');
+    showToast('🔑 Token saved — changes will auto-sync');
+  }
+}
+
+function disconnectGitHub() {
+  ghToken = null;
+  localStorage.removeItem('farol-gh-token');
+  showToast('🔌 Disconnected — changes are local only');
 }
 
 function loadState(){
@@ -1027,6 +1164,12 @@ async function init() {
   const w = p.get('who');
   if (w && ['leo','mayak','ori'].includes(w)) applyFilter(w);
   else updateCounts();
+
+  // Show GitHub connection status
+  if (ghToken) {
+    updateSyncIndicator('connected');
+    document.getElementById('gh-btn').textContent = '🟢 GitHub';
+  }
 }
 
 init();
