@@ -1,501 +1,505 @@
-{
-  "surfaceId": "gnap-board",
-  "components": [
-    {
-      "id": "root",
-      "component": {
-        "Column": {
-          "children": {
-            "explicitList": [
-              "board-header",
-              "wip-section",
-              "todo-section",
-              "review-section",
-              "done-section"
-            ]
+[
+  {
+    "surfaceUpdate": {
+      "surfaceId": "gnap-board",
+      "components": [
+        {
+          "id": "root",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "board-header",
+                  "wip-section",
+                  "todo-section",
+                  "review-section",
+                  "done-section"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "board-header",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "board-title",
+                  "board-repo"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "board-title",
+          "component": {
+            "Text": {
+              "text": {
+                "literalString": "\ud83d\udccb GNAP Board"
+              },
+              "usageHint": "h2"
+            }
+          }
+        },
+        {
+          "id": "board-repo",
+          "component": {
+            "Text": {
+              "text": {
+                "literalString": "farol-team/gnap \u00b7 main"
+              },
+              "usageHint": "caption"
+            }
+          }
+        },
+        {
+          "id": "wip-section",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "wip-title",
+                  "wip-1",
+                  "wip-2"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "wip-title",
+          "component": {
+            "Text": {
+              "text": {
+                "literalString": "\u25b6 In Progress (2)"
+              },
+              "usageHint": "h3"
+            }
+          }
+        },
+        {
+          "id": "wip-1",
+          "component": {
+            "Card": {
+              "child": "wip-1-col"
+            }
+          }
+        },
+        {
+          "id": "wip-1-col",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "wip-1-title",
+                  "wip-1-meta"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "wip-1-title",
+          "component": {
+            "Text": {
+              "text": {
+                "path": "/wip1/title"
+              },
+              "usageHint": "h4"
+            }
+          }
+        },
+        {
+          "id": "wip-1-meta",
+          "component": {
+            "Text": {
+              "text": {
+                "path": "/wip1/meta"
+              },
+              "usageHint": "caption"
+            }
+          }
+        },
+        {
+          "id": "wip-2",
+          "component": {
+            "Card": {
+              "child": "wip-2-col"
+            }
+          }
+        },
+        {
+          "id": "wip-2-col",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "wip-2-title",
+                  "wip-2-meta"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "wip-2-title",
+          "component": {
+            "Text": {
+              "text": {
+                "path": "/wip2/title"
+              },
+              "usageHint": "h4"
+            }
+          }
+        },
+        {
+          "id": "wip-2-meta",
+          "component": {
+            "Text": {
+              "text": {
+                "path": "/wip2/meta"
+              },
+              "usageHint": "caption"
+            }
+          }
+        },
+        {
+          "id": "todo-section",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "todo-title",
+                  "todo-1",
+                  "todo-2",
+                  "todo-3"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "todo-title",
+          "component": {
+            "Text": {
+              "text": {
+                "literalString": "\u2610 To Do (3)"
+              },
+              "usageHint": "h3"
+            }
+          }
+        },
+        {
+          "id": "todo-1",
+          "component": {
+            "Card": {
+              "child": "todo-1-col"
+            }
+          }
+        },
+        {
+          "id": "todo-1-col",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "todo-1-title",
+                  "todo-1-meta"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "todo-1-title",
+          "component": {
+            "Text": {
+              "text": {
+                "path": "/todo1/title"
+              },
+              "usageHint": "h4"
+            }
+          }
+        },
+        {
+          "id": "todo-1-meta",
+          "component": {
+            "Text": {
+              "text": {
+                "path": "/todo1/meta"
+              },
+              "usageHint": "caption"
+            }
+          }
+        },
+        {
+          "id": "todo-2",
+          "component": {
+            "Card": {
+              "child": "todo-2-col"
+            }
+          }
+        },
+        {
+          "id": "todo-2-col",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "todo-2-title",
+                  "todo-2-meta"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "todo-2-title",
+          "component": {
+            "Text": {
+              "text": {
+                "path": "/todo2/title"
+              },
+              "usageHint": "h4"
+            }
+          }
+        },
+        {
+          "id": "todo-2-meta",
+          "component": {
+            "Text": {
+              "text": {
+                "path": "/todo2/meta"
+              },
+              "usageHint": "caption"
+            }
+          }
+        },
+        {
+          "id": "todo-3",
+          "component": {
+            "Card": {
+              "child": "todo-3-col"
+            }
+          }
+        },
+        {
+          "id": "todo-3-col",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "todo-3-title",
+                  "todo-3-meta"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "todo-3-title",
+          "component": {
+            "Text": {
+              "text": {
+                "path": "/todo3/title"
+              },
+              "usageHint": "h4"
+            }
+          }
+        },
+        {
+          "id": "todo-3-meta",
+          "component": {
+            "Text": {
+              "text": {
+                "path": "/todo3/meta"
+              },
+              "usageHint": "caption"
+            }
+          }
+        },
+        {
+          "id": "review-section",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "review-title",
+                  "review-1"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "review-title",
+          "component": {
+            "Text": {
+              "text": {
+                "literalString": "\ud83d\udc40 Review (1)"
+              },
+              "usageHint": "h3"
+            }
+          }
+        },
+        {
+          "id": "review-1",
+          "component": {
+            "Card": {
+              "child": "review-1-col"
+            }
+          }
+        },
+        {
+          "id": "review-1-col",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "review-1-title",
+                  "review-1-meta"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "review-1-title",
+          "component": {
+            "Text": {
+              "text": {
+                "path": "/review1/title"
+              },
+              "usageHint": "h4"
+            }
+          }
+        },
+        {
+          "id": "review-1-meta",
+          "component": {
+            "Text": {
+              "text": {
+                "path": "/review1/meta"
+              },
+              "usageHint": "caption"
+            }
+          }
+        },
+        {
+          "id": "done-section",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "done-title",
+                  "done-1",
+                  "done-2"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "done-title",
+          "component": {
+            "Text": {
+              "text": {
+                "literalString": "\u2705 Done (2)"
+              },
+              "usageHint": "h3"
+            }
+          }
+        },
+        {
+          "id": "done-1",
+          "component": {
+            "Card": {
+              "child": "done-1-col"
+            }
+          }
+        },
+        {
+          "id": "done-1-col",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "done-1-title",
+                  "done-1-meta"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "done-1-title",
+          "component": {
+            "Text": {
+              "text": {
+                "path": "/done1/title"
+              },
+              "usageHint": "h4"
+            }
+          }
+        },
+        {
+          "id": "done-1-meta",
+          "component": {
+            "Text": {
+              "text": {
+                "path": "/done1/meta"
+              },
+              "usageHint": "caption"
+            }
+          }
+        },
+        {
+          "id": "done-2",
+          "component": {
+            "Card": {
+              "child": "done-2-col"
+            }
+          }
+        },
+        {
+          "id": "done-2-col",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "done-2-title",
+                  "done-2-meta"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "done-2-title",
+          "component": {
+            "Text": {
+              "text": {
+                "path": "/done2/title"
+              },
+              "usageHint": "h4"
+            }
+          }
+        },
+        {
+          "id": "done-2-meta",
+          "component": {
+            "Text": {
+              "text": {
+                "path": "/done2/meta"
+              },
+              "usageHint": "caption"
+            }
           }
         }
-      }
-    },
-    {
-      "id": "board-header",
-      "component": {
-        "Row": {
-          "children": {
-            "explicitList": [
-              "board-title",
-              "board-repo"
-            ]
-          },
-          "alignment": "center"
-        }
-      }
-    },
-    {
-      "id": "board-title",
-      "component": {
-        "Text": {
-          "text": {
-            "literalString": "\ud83d\udccb GNAP Board"
-          },
-          "usageHint": "h2"
-        }
-      }
-    },
-    {
-      "id": "board-repo",
-      "component": {
-        "Text": {
-          "text": {
-            "literalString": "farol-team/gnap \u00b7 main"
-          },
-          "usageHint": "caption"
-        }
-      }
-    },
-    {
-      "id": "wip-section",
-      "component": {
-        "Column": {
-          "children": {
-            "explicitList": [
-              "wip-title",
-              "wip-1",
-              "wip-2"
-            ]
-          }
-        }
-      }
-    },
-    {
-      "id": "wip-title",
-      "component": {
-        "Text": {
-          "text": {
-            "literalString": "\u25b6 In Progress (2)"
-          },
-          "usageHint": "h3"
-        }
-      }
-    },
-    {
-      "id": "wip-1",
-      "component": {
-        "Card": {
-          "child": "wip-1-col"
-        }
-      }
-    },
-    {
-      "id": "wip-1-col",
-      "component": {
-        "Column": {
-          "children": {
-            "explicitList": [
-              "wip-1-title",
-              "wip-1-meta"
-            ]
-          }
-        }
-      }
-    },
-    {
-      "id": "wip-1-title",
-      "component": {
-        "Text": {
-          "text": {
-            "path": "/wip1/title"
-          },
-          "usageHint": "h4"
-        }
-      }
-    },
-    {
-      "id": "wip-1-meta",
-      "component": {
-        "Text": {
-          "text": {
-            "path": "/wip1/meta"
-          },
-          "usageHint": "caption"
-        }
-      }
-    },
-    {
-      "id": "wip-2",
-      "component": {
-        "Card": {
-          "child": "wip-2-col"
-        }
-      }
-    },
-    {
-      "id": "wip-2-col",
-      "component": {
-        "Column": {
-          "children": {
-            "explicitList": [
-              "wip-2-title",
-              "wip-2-meta"
-            ]
-          }
-        }
-      }
-    },
-    {
-      "id": "wip-2-title",
-      "component": {
-        "Text": {
-          "text": {
-            "path": "/wip2/title"
-          },
-          "usageHint": "h4"
-        }
-      }
-    },
-    {
-      "id": "wip-2-meta",
-      "component": {
-        "Text": {
-          "text": {
-            "path": "/wip2/meta"
-          },
-          "usageHint": "caption"
-        }
-      }
-    },
-    {
-      "id": "todo-section",
-      "component": {
-        "Column": {
-          "children": {
-            "explicitList": [
-              "todo-title",
-              "todo-1",
-              "todo-2",
-              "todo-3"
-            ]
-          }
-        }
-      }
-    },
-    {
-      "id": "todo-title",
-      "component": {
-        "Text": {
-          "text": {
-            "literalString": "\u2610 To Do (3)"
-          },
-          "usageHint": "h3"
-        }
-      }
-    },
-    {
-      "id": "todo-1",
-      "component": {
-        "Card": {
-          "child": "todo-1-col"
-        }
-      }
-    },
-    {
-      "id": "todo-1-col",
-      "component": {
-        "Column": {
-          "children": {
-            "explicitList": [
-              "todo-1-title",
-              "todo-1-meta"
-            ]
-          }
-        }
-      }
-    },
-    {
-      "id": "todo-1-title",
-      "component": {
-        "Text": {
-          "text": {
-            "path": "/todo1/title"
-          },
-          "usageHint": "h4"
-        }
-      }
-    },
-    {
-      "id": "todo-1-meta",
-      "component": {
-        "Text": {
-          "text": {
-            "path": "/todo1/meta"
-          },
-          "usageHint": "caption"
-        }
-      }
-    },
-    {
-      "id": "todo-2",
-      "component": {
-        "Card": {
-          "child": "todo-2-col"
-        }
-      }
-    },
-    {
-      "id": "todo-2-col",
-      "component": {
-        "Column": {
-          "children": {
-            "explicitList": [
-              "todo-2-title",
-              "todo-2-meta"
-            ]
-          }
-        }
-      }
-    },
-    {
-      "id": "todo-2-title",
-      "component": {
-        "Text": {
-          "text": {
-            "path": "/todo2/title"
-          },
-          "usageHint": "h4"
-        }
-      }
-    },
-    {
-      "id": "todo-2-meta",
-      "component": {
-        "Text": {
-          "text": {
-            "path": "/todo2/meta"
-          },
-          "usageHint": "caption"
-        }
-      }
-    },
-    {
-      "id": "todo-3",
-      "component": {
-        "Card": {
-          "child": "todo-3-col"
-        }
-      }
-    },
-    {
-      "id": "todo-3-col",
-      "component": {
-        "Column": {
-          "children": {
-            "explicitList": [
-              "todo-3-title",
-              "todo-3-meta"
-            ]
-          }
-        }
-      }
-    },
-    {
-      "id": "todo-3-title",
-      "component": {
-        "Text": {
-          "text": {
-            "path": "/todo3/title"
-          },
-          "usageHint": "h4"
-        }
-      }
-    },
-    {
-      "id": "todo-3-meta",
-      "component": {
-        "Text": {
-          "text": {
-            "path": "/todo3/meta"
-          },
-          "usageHint": "caption"
-        }
-      }
-    },
-    {
-      "id": "review-section",
-      "component": {
-        "Column": {
-          "children": {
-            "explicitList": [
-              "review-title",
-              "review-1"
-            ]
-          }
-        }
-      }
-    },
-    {
-      "id": "review-title",
-      "component": {
-        "Text": {
-          "text": {
-            "literalString": "\ud83d\udc40 Review (1)"
-          },
-          "usageHint": "h3"
-        }
-      }
-    },
-    {
-      "id": "review-1",
-      "component": {
-        "Card": {
-          "child": "review-1-col"
-        }
-      }
-    },
-    {
-      "id": "review-1-col",
-      "component": {
-        "Column": {
-          "children": {
-            "explicitList": [
-              "review-1-title",
-              "review-1-meta"
-            ]
-          }
-        }
-      }
-    },
-    {
-      "id": "review-1-title",
-      "component": {
-        "Text": {
-          "text": {
-            "path": "/review1/title"
-          },
-          "usageHint": "h4"
-        }
-      }
-    },
-    {
-      "id": "review-1-meta",
-      "component": {
-        "Text": {
-          "text": {
-            "path": "/review1/meta"
-          },
-          "usageHint": "caption"
-        }
-      }
-    },
-    {
-      "id": "done-section",
-      "component": {
-        "Column": {
-          "children": {
-            "explicitList": [
-              "done-title",
-              "done-1",
-              "done-2"
-            ]
-          }
-        }
-      }
-    },
-    {
-      "id": "done-title",
-      "component": {
-        "Text": {
-          "text": {
-            "literalString": "\u2705 Done (2)"
-          },
-          "usageHint": "h3"
-        }
-      }
-    },
-    {
-      "id": "done-1",
-      "component": {
-        "Card": {
-          "child": "done-1-col"
-        }
-      }
-    },
-    {
-      "id": "done-1-col",
-      "component": {
-        "Column": {
-          "children": {
-            "explicitList": [
-              "done-1-title",
-              "done-1-meta"
-            ]
-          }
-        }
-      }
-    },
-    {
-      "id": "done-1-title",
-      "component": {
-        "Text": {
-          "text": {
-            "path": "/done1/title"
-          },
-          "usageHint": "h4"
-        }
-      }
-    },
-    {
-      "id": "done-1-meta",
-      "component": {
-        "Text": {
-          "text": {
-            "path": "/done1/meta"
-          },
-          "usageHint": "caption"
-        }
-      }
-    },
-    {
-      "id": "done-2",
-      "component": {
-        "Card": {
-          "child": "done-2-col"
-        }
-      }
-    },
-    {
-      "id": "done-2-col",
-      "component": {
-        "Column": {
-          "children": {
-            "explicitList": [
-              "done-2-title",
-              "done-2-meta"
-            ]
-          }
-        }
-      }
-    },
-    {
-      "id": "done-2-title",
-      "component": {
-        "Text": {
-          "text": {
-            "path": "/done2/title"
-          },
-          "usageHint": "h4"
-        }
-      }
-    },
-    {
-      "id": "done-2-meta",
-      "component": {
-        "Text": {
-          "text": {
-            "path": "/done2/meta"
-          },
-          "usageHint": "caption"
-        }
-      }
+      ]
     }
-  ]
-}
+  }
+]

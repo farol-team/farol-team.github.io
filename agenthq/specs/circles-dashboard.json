@@ -1,516 +1,520 @@
-{
-  "surfaceId": "circles-dashboard",
-  "components": [
-    {
-      "id": "root",
-      "component": {
-        "Column": {
-          "children": {
-            "explicitList": [
-              "product-card",
-              "marketing-card",
-              "revenue-card",
-              "clients-card",
-              "finance-card"
-            ]
+[
+  {
+    "surfaceUpdate": {
+      "surfaceId": "circles-dashboard",
+      "components": [
+        {
+          "id": "root",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "product-card",
+                  "marketing-card",
+                  "revenue-card",
+                  "clients-card",
+                  "finance-card"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "product-card",
+          "component": {
+            "Card": {
+              "child": "product-col"
+            }
+          }
+        },
+        {
+          "id": "product-col",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "product-header",
+                  "product-metric",
+                  "product-status"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "product-header",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "product-icon",
+                  "product-name",
+                  "product-badge"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "product-icon",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "settings"
+              }
+            }
+          }
+        },
+        {
+          "id": "product-name",
+          "component": {
+            "Text": {
+              "text": {
+                "literalString": "Product"
+              },
+              "usageHint": "h4"
+            }
+          }
+        },
+        {
+          "id": "product-badge",
+          "component": {
+            "Card": {
+              "child": "product-badge-text"
+            }
+          }
+        },
+        {
+          "id": "product-badge-text",
+          "component": {
+            "Text": {
+              "text": {
+                "path": "/product/status"
+              },
+              "usageHint": "caption"
+            }
+          }
+        },
+        {
+          "id": "product-metric",
+          "component": {
+            "Text": {
+              "text": {
+                "path": "/product/metric"
+              },
+              "usageHint": "h1"
+            }
+          }
+        },
+        {
+          "id": "product-status",
+          "component": {
+            "Text": {
+              "text": {
+                "path": "/product/detail"
+              },
+              "usageHint": "caption"
+            }
+          }
+        },
+        {
+          "id": "marketing-card",
+          "component": {
+            "Card": {
+              "child": "marketing-col"
+            }
+          }
+        },
+        {
+          "id": "marketing-col",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "marketing-header",
+                  "marketing-metric",
+                  "marketing-status"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "marketing-header",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "marketing-icon",
+                  "marketing-name",
+                  "marketing-badge"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "marketing-icon",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "notifications"
+              }
+            }
+          }
+        },
+        {
+          "id": "marketing-name",
+          "component": {
+            "Text": {
+              "text": {
+                "literalString": "Marketing"
+              },
+              "usageHint": "h4"
+            }
+          }
+        },
+        {
+          "id": "marketing-badge",
+          "component": {
+            "Card": {
+              "child": "marketing-badge-text"
+            }
+          }
+        },
+        {
+          "id": "marketing-badge-text",
+          "component": {
+            "Text": {
+              "text": {
+                "path": "/marketing/status"
+              },
+              "usageHint": "caption"
+            }
+          }
+        },
+        {
+          "id": "marketing-metric",
+          "component": {
+            "Text": {
+              "text": {
+                "path": "/marketing/metric"
+              },
+              "usageHint": "h1"
+            }
+          }
+        },
+        {
+          "id": "marketing-status",
+          "component": {
+            "Text": {
+              "text": {
+                "path": "/marketing/detail"
+              },
+              "usageHint": "caption"
+            }
+          }
+        },
+        {
+          "id": "revenue-card",
+          "component": {
+            "Card": {
+              "child": "revenue-col"
+            }
+          }
+        },
+        {
+          "id": "revenue-col",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "revenue-header",
+                  "revenue-metric",
+                  "revenue-status"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "revenue-header",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "revenue-icon",
+                  "revenue-name",
+                  "revenue-badge"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "revenue-icon",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "payment"
+              }
+            }
+          }
+        },
+        {
+          "id": "revenue-name",
+          "component": {
+            "Text": {
+              "text": {
+                "literalString": "Revenue"
+              },
+              "usageHint": "h4"
+            }
+          }
+        },
+        {
+          "id": "revenue-badge",
+          "component": {
+            "Card": {
+              "child": "revenue-badge-text"
+            }
+          }
+        },
+        {
+          "id": "revenue-badge-text",
+          "component": {
+            "Text": {
+              "text": {
+                "path": "/revenue/status"
+              },
+              "usageHint": "caption"
+            }
+          }
+        },
+        {
+          "id": "revenue-metric",
+          "component": {
+            "Text": {
+              "text": {
+                "path": "/revenue/metric"
+              },
+              "usageHint": "h1"
+            }
+          }
+        },
+        {
+          "id": "revenue-status",
+          "component": {
+            "Text": {
+              "text": {
+                "path": "/revenue/detail"
+              },
+              "usageHint": "caption"
+            }
+          }
+        },
+        {
+          "id": "clients-card",
+          "component": {
+            "Card": {
+              "child": "clients-col"
+            }
+          }
+        },
+        {
+          "id": "clients-col",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "clients-header",
+                  "clients-metric",
+                  "clients-status"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "clients-header",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "clients-icon",
+                  "clients-name",
+                  "clients-badge"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "clients-icon",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "person"
+              }
+            }
+          }
+        },
+        {
+          "id": "clients-name",
+          "component": {
+            "Text": {
+              "text": {
+                "literalString": "Clients"
+              },
+              "usageHint": "h4"
+            }
+          }
+        },
+        {
+          "id": "clients-badge",
+          "component": {
+            "Card": {
+              "child": "clients-badge-text"
+            }
+          }
+        },
+        {
+          "id": "clients-badge-text",
+          "component": {
+            "Text": {
+              "text": {
+                "path": "/clients/status"
+              },
+              "usageHint": "caption"
+            }
+          }
+        },
+        {
+          "id": "clients-metric",
+          "component": {
+            "Text": {
+              "text": {
+                "path": "/clients/metric"
+              },
+              "usageHint": "h1"
+            }
+          }
+        },
+        {
+          "id": "clients-status",
+          "component": {
+            "Text": {
+              "text": {
+                "path": "/clients/detail"
+              },
+              "usageHint": "caption"
+            }
+          }
+        },
+        {
+          "id": "finance-card",
+          "component": {
+            "Card": {
+              "child": "finance-col"
+            }
+          }
+        },
+        {
+          "id": "finance-col",
+          "component": {
+            "Column": {
+              "children": {
+                "explicitList": [
+                  "finance-header",
+                  "finance-metric",
+                  "finance-status"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "id": "finance-header",
+          "component": {
+            "Row": {
+              "children": {
+                "explicitList": [
+                  "finance-icon",
+                  "finance-name",
+                  "finance-badge"
+                ]
+              },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "finance-icon",
+          "component": {
+            "Icon": {
+              "name": {
+                "literalString": "info"
+              }
+            }
+          }
+        },
+        {
+          "id": "finance-name",
+          "component": {
+            "Text": {
+              "text": {
+                "literalString": "Finance"
+              },
+              "usageHint": "h4"
+            }
+          }
+        },
+        {
+          "id": "finance-badge",
+          "component": {
+            "Card": {
+              "child": "finance-badge-text"
+            }
+          }
+        },
+        {
+          "id": "finance-badge-text",
+          "component": {
+            "Text": {
+              "text": {
+                "path": "/finance/status"
+              },
+              "usageHint": "caption"
+            }
+          }
+        },
+        {
+          "id": "finance-metric",
+          "component": {
+            "Text": {
+              "text": {
+                "path": "/finance/metric"
+              },
+              "usageHint": "h1"
+            }
+          }
+        },
+        {
+          "id": "finance-status",
+          "component": {
+            "Text": {
+              "text": {
+                "path": "/finance/detail"
+              },
+              "usageHint": "caption"
+            }
           }
         }
-      }
-    },
-    {
-      "id": "product-card",
-      "component": {
-        "Card": {
-          "child": "product-col"
-        }
-      }
-    },
-    {
-      "id": "product-col",
-      "component": {
-        "Column": {
-          "children": {
-            "explicitList": [
-              "product-header",
-              "product-metric",
-              "product-status"
-            ]
-          }
-        }
-      }
-    },
-    {
-      "id": "product-header",
-      "component": {
-        "Row": {
-          "children": {
-            "explicitList": [
-              "product-icon",
-              "product-name",
-              "product-badge"
-            ]
-          },
-          "alignment": "center"
-        }
-      }
-    },
-    {
-      "id": "product-icon",
-      "component": {
-        "Icon": {
-          "name": {
-            "literalString": "settings"
-          }
-        }
-      }
-    },
-    {
-      "id": "product-name",
-      "component": {
-        "Text": {
-          "text": {
-            "literalString": "Product"
-          },
-          "usageHint": "h4"
-        }
-      }
-    },
-    {
-      "id": "product-badge",
-      "component": {
-        "Card": {
-          "child": "product-badge-text"
-        }
-      }
-    },
-    {
-      "id": "product-badge-text",
-      "component": {
-        "Text": {
-          "text": {
-            "path": "/product/status"
-          },
-          "usageHint": "caption"
-        }
-      }
-    },
-    {
-      "id": "product-metric",
-      "component": {
-        "Text": {
-          "text": {
-            "path": "/product/metric"
-          },
-          "usageHint": "h1"
-        }
-      }
-    },
-    {
-      "id": "product-status",
-      "component": {
-        "Text": {
-          "text": {
-            "path": "/product/detail"
-          },
-          "usageHint": "caption"
-        }
-      }
-    },
-    {
-      "id": "marketing-card",
-      "component": {
-        "Card": {
-          "child": "marketing-col"
-        }
-      }
-    },
-    {
-      "id": "marketing-col",
-      "component": {
-        "Column": {
-          "children": {
-            "explicitList": [
-              "marketing-header",
-              "marketing-metric",
-              "marketing-status"
-            ]
-          }
-        }
-      }
-    },
-    {
-      "id": "marketing-header",
-      "component": {
-        "Row": {
-          "children": {
-            "explicitList": [
-              "marketing-icon",
-              "marketing-name",
-              "marketing-badge"
-            ]
-          },
-          "alignment": "center"
-        }
-      }
-    },
-    {
-      "id": "marketing-icon",
-      "component": {
-        "Icon": {
-          "name": {
-            "literalString": "notifications"
-          }
-        }
-      }
-    },
-    {
-      "id": "marketing-name",
-      "component": {
-        "Text": {
-          "text": {
-            "literalString": "Marketing"
-          },
-          "usageHint": "h4"
-        }
-      }
-    },
-    {
-      "id": "marketing-badge",
-      "component": {
-        "Card": {
-          "child": "marketing-badge-text"
-        }
-      }
-    },
-    {
-      "id": "marketing-badge-text",
-      "component": {
-        "Text": {
-          "text": {
-            "path": "/marketing/status"
-          },
-          "usageHint": "caption"
-        }
-      }
-    },
-    {
-      "id": "marketing-metric",
-      "component": {
-        "Text": {
-          "text": {
-            "path": "/marketing/metric"
-          },
-          "usageHint": "h1"
-        }
-      }
-    },
-    {
-      "id": "marketing-status",
-      "component": {
-        "Text": {
-          "text": {
-            "path": "/marketing/detail"
-          },
-          "usageHint": "caption"
-        }
-      }
-    },
-    {
-      "id": "revenue-card",
-      "component": {
-        "Card": {
-          "child": "revenue-col"
-        }
-      }
-    },
-    {
-      "id": "revenue-col",
-      "component": {
-        "Column": {
-          "children": {
-            "explicitList": [
-              "revenue-header",
-              "revenue-metric",
-              "revenue-status"
-            ]
-          }
-        }
-      }
-    },
-    {
-      "id": "revenue-header",
-      "component": {
-        "Row": {
-          "children": {
-            "explicitList": [
-              "revenue-icon",
-              "revenue-name",
-              "revenue-badge"
-            ]
-          },
-          "alignment": "center"
-        }
-      }
-    },
-    {
-      "id": "revenue-icon",
-      "component": {
-        "Icon": {
-          "name": {
-            "literalString": "payment"
-          }
-        }
-      }
-    },
-    {
-      "id": "revenue-name",
-      "component": {
-        "Text": {
-          "text": {
-            "literalString": "Revenue"
-          },
-          "usageHint": "h4"
-        }
-      }
-    },
-    {
-      "id": "revenue-badge",
-      "component": {
-        "Card": {
-          "child": "revenue-badge-text"
-        }
-      }
-    },
-    {
-      "id": "revenue-badge-text",
-      "component": {
-        "Text": {
-          "text": {
-            "path": "/revenue/status"
-          },
-          "usageHint": "caption"
-        }
-      }
-    },
-    {
-      "id": "revenue-metric",
-      "component": {
-        "Text": {
-          "text": {
-            "path": "/revenue/metric"
-          },
-          "usageHint": "h1"
-        }
-      }
-    },
-    {
-      "id": "revenue-status",
-      "component": {
-        "Text": {
-          "text": {
-            "path": "/revenue/detail"
-          },
-          "usageHint": "caption"
-        }
-      }
-    },
-    {
-      "id": "clients-card",
-      "component": {
-        "Card": {
-          "child": "clients-col"
-        }
-      }
-    },
-    {
-      "id": "clients-col",
-      "component": {
-        "Column": {
-          "children": {
-            "explicitList": [
-              "clients-header",
-              "clients-metric",
-              "clients-status"
-            ]
-          }
-        }
-      }
-    },
-    {
-      "id": "clients-header",
-      "component": {
-        "Row": {
-          "children": {
-            "explicitList": [
-              "clients-icon",
-              "clients-name",
-              "clients-badge"
-            ]
-          },
-          "alignment": "center"
-        }
-      }
-    },
-    {
-      "id": "clients-icon",
-      "component": {
-        "Icon": {
-          "name": {
-            "literalString": "person"
-          }
-        }
-      }
-    },
-    {
-      "id": "clients-name",
-      "component": {
-        "Text": {
-          "text": {
-            "literalString": "Clients"
-          },
-          "usageHint": "h4"
-        }
-      }
-    },
-    {
-      "id": "clients-badge",
-      "component": {
-        "Card": {
-          "child": "clients-badge-text"
-        }
-      }
-    },
-    {
-      "id": "clients-badge-text",
-      "component": {
-        "Text": {
-          "text": {
-            "path": "/clients/status"
-          },
-          "usageHint": "caption"
-        }
-      }
-    },
-    {
-      "id": "clients-metric",
-      "component": {
-        "Text": {
-          "text": {
-            "path": "/clients/metric"
-          },
-          "usageHint": "h1"
-        }
-      }
-    },
-    {
-      "id": "clients-status",
-      "component": {
-        "Text": {
-          "text": {
-            "path": "/clients/detail"
-          },
-          "usageHint": "caption"
-        }
-      }
-    },
-    {
-      "id": "finance-card",
-      "component": {
-        "Card": {
-          "child": "finance-col"
-        }
-      }
-    },
-    {
-      "id": "finance-col",
-      "component": {
-        "Column": {
-          "children": {
-            "explicitList": [
-              "finance-header",
-              "finance-metric",
-              "finance-status"
-            ]
-          }
-        }
-      }
-    },
-    {
-      "id": "finance-header",
-      "component": {
-        "Row": {
-          "children": {
-            "explicitList": [
-              "finance-icon",
-              "finance-name",
-              "finance-badge"
-            ]
-          },
-          "alignment": "center"
-        }
-      }
-    },
-    {
-      "id": "finance-icon",
-      "component": {
-        "Icon": {
-          "name": {
-            "literalString": "info"
-          }
-        }
-      }
-    },
-    {
-      "id": "finance-name",
-      "component": {
-        "Text": {
-          "text": {
-            "literalString": "Finance"
-          },
-          "usageHint": "h4"
-        }
-      }
-    },
-    {
-      "id": "finance-badge",
-      "component": {
-        "Card": {
-          "child": "finance-badge-text"
-        }
-      }
-    },
-    {
-      "id": "finance-badge-text",
-      "component": {
-        "Text": {
-          "text": {
-            "path": "/finance/status"
-          },
-          "usageHint": "caption"
-        }
-      }
-    },
-    {
-      "id": "finance-metric",
-      "component": {
-        "Text": {
-          "text": {
-            "path": "/finance/metric"
-          },
-          "usageHint": "h1"
-        }
-      }
-    },
-    {
-      "id": "finance-status",
-      "component": {
-        "Text": {
-          "text": {
-            "path": "/finance/detail"
-          },
-          "usageHint": "caption"
-        }
-      }
+      ]
     }
-  ]
-}
+  }
+]
