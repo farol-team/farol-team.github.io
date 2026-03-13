@@ -516,5 +516,11 @@
         }
       ]
     }
+  },
+  {
+    "beginRendering": {
+      "surfaceId": "circles-dashboard",
+      "root": "root"
+    }
   }
 ]

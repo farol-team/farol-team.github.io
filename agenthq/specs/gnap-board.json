@@ -501,5 +501,11 @@
         }
       ]
     }
+  },
+  {
+    "beginRendering": {
+      "surfaceId": "gnap-board",
+      "root": "root"
+    }
   }
 ]

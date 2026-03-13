@@ -300,5 +300,11 @@
         }
       ]
     }
+  },
+  {
+    "beginRendering": {
+      "surfaceId": "agents",
+      "root": "root"
+    }
   }
 ]

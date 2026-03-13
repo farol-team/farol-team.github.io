@@ -309,5 +309,11 @@
         }
       ]
     }
+  },
+  {
+    "beginRendering": {
+      "surfaceId": "tensions",
+      "root": "root"
+    }
   }
 ]
