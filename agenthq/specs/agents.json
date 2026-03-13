@@ -1,0 +1,177 @@
+[
+  {
+    "surfaceUpdate": {
+      "surfaceId": "agents",
+      "components": [
+        {
+          "id": "root",
+          "component": {
+            "Column": {
+              "children": { "explicitList": ["agents-title", "ori-card", "carl-card", "mkt-card", "client-card"] }
+            }
+          }
+        },
+        {
+          "id": "agents-title",
+          "component": { "Text": { "text": { "literalString": "🤖 Agents" }, "usageHint": "h2" } }
+        },
+        {
+          "id": "ori-card",
+          "component": { "Card": { "child": "ori-row" } }
+        },
+        {
+          "id": "ori-row",
+          "component": {
+            "Row": {
+              "children": { "explicitList": ["ori-icon", "ori-info"] },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "ori-icon",
+          "component": { "Icon": { "name": { "literalString": "star" } } }
+        },
+        {
+          "id": "ori-info",
+          "component": {
+            "Column": {
+              "children": { "explicitList": ["ori-name", "ori-task"] }
+            }
+          }
+        },
+        {
+          "id": "ori-name",
+          "component": { "Text": { "text": { "path": "/ori/name" }, "usageHint": "h4" } }
+        },
+        {
+          "id": "ori-task",
+          "component": { "Text": { "text": { "path": "/ori/task" }, "usageHint": "caption" } }
+        },
+
+        {
+          "id": "carl-card",
+          "component": { "Card": { "child": "carl-row" } }
+        },
+        {
+          "id": "carl-row",
+          "component": {
+            "Row": {
+              "children": { "explicitList": ["carl-icon", "carl-info"] },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "carl-icon",
+          "component": { "Icon": { "name": { "literalString": "payment" } } }
+        },
+        {
+          "id": "carl-info",
+          "component": {
+            "Column": {
+              "children": { "explicitList": ["carl-name", "carl-task"] }
+            }
+          }
+        },
+        {
+          "id": "carl-name",
+          "component": { "Text": { "text": { "path": "/carl/name" }, "usageHint": "h4" } }
+        },
+        {
+          "id": "carl-task",
+          "component": { "Text": { "text": { "path": "/carl/task" }, "usageHint": "caption" } }
+        },
+
+        {
+          "id": "mkt-card",
+          "component": { "Card": { "child": "mkt-row" } }
+        },
+        {
+          "id": "mkt-row",
+          "component": {
+            "Row": {
+              "children": { "explicitList": ["mkt-icon", "mkt-info"] },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "mkt-icon",
+          "component": { "Icon": { "name": { "literalString": "notifications" } } }
+        },
+        {
+          "id": "mkt-info",
+          "component": {
+            "Column": {
+              "children": { "explicitList": ["mkt-name", "mkt-task"] }
+            }
+          }
+        },
+        {
+          "id": "mkt-name",
+          "component": { "Text": { "text": { "path": "/mkt/name" }, "usageHint": "h4" } }
+        },
+        {
+          "id": "mkt-task",
+          "component": { "Text": { "text": { "path": "/mkt/task" }, "usageHint": "caption" } }
+        },
+
+        {
+          "id": "client-card",
+          "component": { "Card": { "child": "client-row" } }
+        },
+        {
+          "id": "client-row",
+          "component": {
+            "Row": {
+              "children": { "explicitList": ["client-icon", "client-info"] },
+              "alignment": "center"
+            }
+          }
+        },
+        {
+          "id": "client-icon",
+          "component": { "Icon": { "name": { "literalString": "person" } } }
+        },
+        {
+          "id": "client-info",
+          "component": {
+            "Column": {
+              "children": { "explicitList": ["client-name", "client-task"] }
+            }
+          }
+        },
+        {
+          "id": "client-name",
+          "component": { "Text": { "text": { "path": "/client/name" }, "usageHint": "h4" } }
+        },
+        {
+          "id": "client-task",
+          "component": { "Text": { "text": { "path": "/client/task" }, "usageHint": "caption" } }
+        }
+      ]
+    }
+  },
+  {
+    "dataModelUpdate": {
+      "surfaceId": "agents",
+      "contents": [
+        { "key": "ori/name", "valueString": "✨ Ori — Coordinator" },
+        { "key": "ori/task", "valueString": "🟢 Online · Building AgentHQ on A2UI" },
+        { "key": "carl/name", "valueString": "💰 Carl — CRO" },
+        { "key": "carl/task", "valueString": "🟡 Busy · Revenue analysis" },
+        { "key": "mkt/name", "valueString": "📣 Marketing Agent" },
+        { "key": "mkt/task", "valueString": "⚫ Offline" },
+        { "key": "client/name", "valueString": "🤝 Client Agent" },
+        { "key": "client/task", "valueString": "⚫ Offline" }
+      ]
+    }
+  },
+  {
+    "beginRendering": {
+      "surfaceId": "agents",
+      "root": "root"
+    }
+  }
+]
