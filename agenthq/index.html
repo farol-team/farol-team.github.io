@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AgentHQ — Wireframes v1</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', -apple-system, sans-serif; background: #0a0a0f; color: #e0e0e0; }
+
+  .page-title {
+    text-align: center; padding: 40px 20px 10px;
+    font-size: 14px; color: #666; text-transform: uppercase; letter-spacing: 3px;
+  }
+  .page-title span { color: #8b5cf6; }
+
+  /* === SCREEN 1: MAIN DASHBOARD === */
+  .screen { max-width: 1200px; margin: 0 auto 60px; padding: 20px; }
+  .screen-label {
+    font-size: 11px; color: #444; text-transform: uppercase; letter-spacing: 2px;
+    border-bottom: 1px solid #1a1a2e; padding-bottom: 8px; margin-bottom: 20px;
+  }
+
+  /* Top bar */
+  .topbar {
+    display: flex; align-items: center; justify-content: space-between;
+    background: #111118; border: 1px solid #1a1a2e; border-radius: 12px;
+    padding: 12px 20px; margin-bottom: 20px;
+  }
+  .topbar-left { display: flex; align-items: center; gap: 12px; }
+  .topbar-logo { width: 28px; height: 28px; background: #8b5cf6; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+  .topbar-title { font-size: 16px; font-weight: 600; }
+  .topbar-right { display: flex; gap: 8px; }
+  .topbar-btn {
+    padding: 6px 14px; border-radius: 8px; font-size: 12px;
+    border: 1px solid #2a2a3e; background: transparent; color: #888; cursor: pointer;
+  }
+  .topbar-btn.active { background: #8b5cf6; color: #fff; border-color: #8b5cf6; }
+
+  /* Status strip */
+  .status-strip {
+    display: flex; gap: 12px; margin-bottom: 20px; overflow-x: auto;
+  }
+  .status-card {
+    flex: 1; min-width: 200px;
+    background: #111118; border: 1px solid #1a1a2e; border-radius: 12px;
+    padding: 16px;
+  }
+  .status-card-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+  .status-emoji { font-size: 18px; }
+  .status-name { font-size: 13px; font-weight: 600; }
+  .status-badge {
+    margin-left: auto; padding: 2px 8px; border-radius: 10px;
+    font-size: 10px; font-weight: 600;
+  }
+  .badge-active { background: #064e3b; color: #34d399; }
+  .badge-sleeping { background: #1e1e2e; color: #555; }
+  .status-metric { font-size: 22px; font-weight: 700; margin-bottom: 2px; }
+  .status-label { font-size: 11px; color: #666; }
+  .status-sparkline {
+    margin-top: 8px; height: 24px; background: #0d0d15; border-radius: 4px;
+    position: relative; overflow: hidden;
+  }
+  .spark-bar {
+    position: absolute; bottom: 0; width: 6px; background: #8b5cf6; border-radius: 2px 2px 0 0;
+    opacity: 0.6;
+  }
+
+  /* Main grid */
+  .main-grid {
+    display: grid; grid-template-columns: 1fr 340px; gap: 20px;
+  }
+
+  /* GNAP Board */
+  .gnap-board {
+    background: #111118; border: 1px solid #1a1a2e; border-radius: 12px;
+    padding: 16px;
+  }
+  .section-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .section-title { font-size: 14px; font-weight: 600; }
+  .section-badge { font-size: 11px; color: #666; }
+
+  .kanban-cols { display: flex; gap: 12px; }
+  .kanban-col { flex: 1; }
+  .kanban-col-header {
+    font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+    color: #555; margin-bottom: 10px; padding-bottom: 6px;
+    border-bottom: 2px solid #1a1a2e;
+  }
+  .kanban-col-header.todo-h { border-color: #374151; }
+  .kanban-col-header.wip-h { border-color: #8b5cf6; }
+  .kanban-col-header.review-h { border-color: #f59e0b; }
+  .kanban-col-header.done-h { border-color: #10b981; }
+
+  .kanban-card {
+    background: #0d0d15; border: 1px solid #1e1e2e; border-radius: 8px;
+    padding: 10px; margin-bottom: 8px; font-size: 12px;
+  }
+  .kanban-card-title { font-weight: 600; margin-bottom: 4px; }
+  .kanban-card-meta { display: flex; align-items: center; gap: 6px; color: #555; font-size: 10px; }
+  .kanban-card-circle {
+    padding: 1px 6px; border-radius: 4px; font-size: 9px; font-weight: 600;
+  }
+  .circle-product { background: #1e293b; color: #60a5fa; }
+  .circle-marketing { background: #1e1b2e; color: #a78bfa; }
+  .circle-revenue { background: #1a2e1a; color: #34d399; }
+  .circle-clients { background: #2e2a1a; color: #fbbf24; }
+
+  /* Right sidebar */
+  .sidebar { display: flex; flex-direction: column; gap: 16px; }
+
+  /* Tension feed */
+  .tension-feed {
+    background: #111118; border: 1px solid #1a1a2e; border-radius: 12px;
+    padding: 16px;
+  }
+  .tension-item {
+    padding: 10px 0; border-bottom: 1px solid #1a1a2e; font-size: 12px;
+  }
+  .tension-item:last-child { border-bottom: none; }
+  .tension-from { font-weight: 600; color: #8b5cf6; }
+  .tension-arrow { color: #333; margin: 0 4px; }
+  .tension-to { font-weight: 600; color: #f59e0b; }
+  .tension-text { color: #999; margin-top: 4px; }
+  .tension-time { font-size: 10px; color: #444; margin-top: 2px; }
+  .tension-severity {
+    display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+    margin-right: 6px; vertical-align: middle;
+  }
+  .sev-red { background: #ef4444; }
+  .sev-yellow { background: #f59e0b; }
+  .sev-blue { background: #3b82f6; }
+
+  /* Agent status */
+  .agent-status {
+    background: #111118; border: 1px solid #1a1a2e; border-radius: 12px;
+    padding: 16px;
+  }
+  .agent-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 0; border-bottom: 1px solid #0d0d15;
+  }
+  .agent-row:last-child { border-bottom: none; }
+  .agent-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .dot-online { background: #10b981; box-shadow: 0 0 6px #10b98155; }
+  .dot-busy { background: #f59e0b; box-shadow: 0 0 6px #f59e0b55; }
+  .dot-offline { background: #333; }
+  .agent-name { font-size: 12px; font-weight: 600; }
+  .agent-task { font-size: 10px; color: #555; margin-left: auto; max-width: 140px; text-align: right; }
+
+  /* === SCREEN 2: CIRCLE DETAIL === */
+  .circle-detail-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  .detail-card {
+    background: #111118; border: 1px solid #1a1a2e; border-radius: 12px;
+    padding: 16px;
+  }
+  .detail-card.full { grid-column: 1 / -1; }
+  .metric-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 8px 0; border-bottom: 1px solid #0d0d15;
+  }
+  .metric-row:last-child { border-bottom: none; }
+  .metric-key { font-size: 12px; color: #888; }
+  .metric-value { font-size: 14px; font-weight: 700; }
+  .metric-value.good { color: #10b981; }
+  .metric-value.warn { color: #f59e0b; }
+  .metric-value.bad { color: #ef4444; }
+
+  .accountability-list { list-style: none; }
+  .accountability-list li {
+    padding: 6px 0; border-bottom: 1px solid #0d0d15;
+    font-size: 12px; display: flex; align-items: center; gap: 8px;
+  }
+  .accountability-list li:last-child { border-bottom: none; }
+  .acc-check { color: #10b981; }
+  .acc-pending { color: #f59e0b; }
+  .acc-overdue { color: #ef4444; }
+
+  /* Soul preview */
+  .soul-preview {
+    background: #0d0d15; border-radius: 8px; padding: 12px;
+    font-size: 11px; color: #666; line-height: 1.6;
+    border-left: 3px solid #8b5cf6;
+  }
+  .soul-preview strong { color: #999; }
+
+  /* === SCREEN 3: TENSION VIEW === */
+  .tension-full {
+    background: #111118; border: 1px solid #1a1a2e; border-radius: 12px;
+    padding: 20px;
+  }
+  .tension-card {
+    background: #0d0d15; border: 1px solid #1e1e2e; border-radius: 10px;
+    padding: 16px; margin-bottom: 12px;
+  }
+  .tension-card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .tension-type-badge {
+    padding: 2px 8px; border-radius: 6px; font-size: 10px; font-weight: 600;
+  }
+  .type-within { background: #1e293b; color: #60a5fa; }
+  .type-between { background: #2e1e3b; color: #c084fc; }
+  .type-escalation { background: #3b1e1e; color: #f87171; }
+  .tension-card-title { font-size: 13px; font-weight: 600; }
+  .tension-card-body { font-size: 12px; color: #888; line-height: 1.5; }
+  .tension-card-footer { display: flex; justify-content: space-between; margin-top: 10px; }
+  .tension-card-action {
+    padding: 4px 12px; border-radius: 6px; font-size: 11px;
+    border: 1px solid #2a2a3e; background: transparent; color: #888; cursor: pointer;
+  }
+  .tension-card-action.primary { background: #8b5cf6; color: #fff; border-color: #8b5cf6; }
+
+  /* Divider */
+  .divider { height: 1px; background: #1a1a2e; margin: 40px 0; }
+
+  /* Annotation */
+  .annotation {
+    background: #1a1a0d; border: 1px dashed #3d3d1a; border-radius: 8px;
+    padding: 12px 16px; margin: 16px 0; font-size: 11px; color: #999;
+    line-height: 1.5;
+  }
+  .annotation strong { color: #f59e0b; }
+</style>
+</head>
+<body>
+
+<div class="page-title">AgentHQ Wireframes <span>v1</span> — GNAP + A2UI + Constitution</div>
+
+<!-- ========== SCREEN 1: MAIN DASHBOARD ========== -->
+<div class="screen">
+  <div class="screen-label">Screen 1 — Main Dashboard (Coordinator View)</div>
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-logo">⚡</div>
+      <div class="topbar-title">AgentHQ</div>
+    </div>
+    <div class="topbar-right">
+      <button class="topbar-btn active">Dashboard</button>
+      <button class="topbar-btn">Board</button>
+      <button class="topbar-btn">Tensions</button>
+      <button class="topbar-btn">Constitution</button>
+    </div>
+  </div>
+
+  <!-- Circle status strip -->
+  <div class="status-strip">
+    <div class="status-card">
+      <div class="status-card-header">
+        <span class="status-emoji">🔧</span>
+        <span class="status-name">Product</span>
+        <span class="status-badge badge-active">Active</span>
+      </div>
+      <div class="status-metric">3 <span style="font-size:12px;color:#666">tasks</span></div>
+      <div class="status-label">1 blocked &gt;48h ⚠️</div>
+      <div class="status-sparkline">
+        <div class="spark-bar" style="left:5%;height:30%"></div>
+        <div class="spark-bar" style="left:15%;height:50%"></div>
+        <div class="spark-bar" style="left:25%;height:70%"></div>
+        <div class="spark-bar" style="left:35%;height:40%"></div>
+        <div class="spark-bar" style="left:45%;height:90%"></div>
+        <div class="spark-bar" style="left:55%;height:60%"></div>
+        <div class="spark-bar" style="left:65%;height:80%"></div>
+      </div>
+    </div>
+    <div class="status-card">
+      <div class="status-card-header">
+        <span class="status-emoji">📣</span>
+        <span class="status-name">Marketing</span>
+        <span class="status-badge badge-active">Active</span>
+      </div>
+      <div class="status-metric">2.1K <span style="font-size:12px;color:#666">visits/wk</span></div>
+      <div class="status-label">0 signups today</div>
+      <div class="status-sparkline">
+        <div class="spark-bar" style="left:5%;height:60%"></div>
+        <div class="spark-bar" style="left:15%;height:40%"></div>
+        <div class="spark-bar" style="left:25%;height:55%"></div>
+        <div class="spark-bar" style="left:35%;height:70%"></div>
+        <div class="spark-bar" style="left:45%;height:45%"></div>
+        <div class="spark-bar" style="left:55%;height:30%"></div>
+        <div class="spark-bar" style="left:65%;height:50%"></div>
+      </div>
+    </div>
+    <div class="status-card">
+      <div class="status-card-header">
+        <span class="status-emoji">💰</span>
+        <span class="status-name">Revenue</span>
+        <span class="status-badge badge-sleeping">Sleeping</span>
+      </div>
+      <div class="status-metric" style="color:#ef4444">$0 <span style="font-size:12px;color:#666">MRR</span></div>
+      <div class="status-label">Billing not connected</div>
+      <div class="status-sparkline"></div>
+    </div>
+    <div class="status-card">
+      <div class="status-card-header">
+        <span class="status-emoji">🤝</span>
+        <span class="status-name">Clients</span>
+        <span class="status-badge badge-sleeping">Sleeping</span>
+      </div>
+      <div class="status-metric">4 <span style="font-size:12px;color:#666">pipeline</span></div>
+      <div class="status-label">Naora, Anna, BUNT, SHAMAN</div>
+      <div class="status-sparkline"></div>
+    </div>
+    <div class="status-card">
+      <div class="status-card-header">
+        <span class="status-emoji">📊</span>
+        <span class="status-name">Finance</span>
+        <span class="status-badge badge-sleeping">Sleeping</span>
+      </div>
+      <div class="status-metric">—</div>
+      <div class="status-label">Not tracked yet</div>
+      <div class="status-sparkline"></div>
+    </div>
+  </div>
+
+  <div class="annotation">
+    <strong>A2UI:</strong> Каждая карточка = A2UI component от круга-агента. Круг пушит свои метрики через <code>a2ui_push</code>. Dashboard собирает и рендерит. Клик → drill-down в Screen 2.
+  </div>
+
+  <!-- Main content -->
+  <div class="main-grid">
+    <!-- GNAP Board -->
+    <div class="gnap-board">
+      <div class="section-header">
+        <div class="section-title">📋 GNAP Board</div>
+        <div class="section-badge">farol-team/gnap · main</div>
+      </div>
+      <div class="kanban-cols">
+        <div class="kanban-col">
+          <div class="kanban-col-header todo-h">To Do · 3</div>
+          <div class="kanban-card">
+            <div class="kanban-card-title">Stripe integration</div>
+            <div class="kanban-card-meta">
+              <span class="kanban-card-circle circle-revenue">💰 Revenue</span>
+              <span>P0</span>
+            </div>
+          </div>
+          <div class="kanban-card">
+            <div class="kanban-card-title">SEO landing pages</div>
+            <div class="kanban-card-meta">
+              <span class="kanban-card-circle circle-marketing">📣 Marketing</span>
+            </div>
+          </div>
+          <div class="kanban-card">
+            <div class="kanban-card-title">NPS survey setup</div>
+            <div class="kanban-card-meta">
+              <span class="kanban-card-circle circle-clients">🤝 Clients</span>
+            </div>
+          </div>
+        </div>
+        <div class="kanban-col">
+          <div class="kanban-col-header wip-h">In Progress · 2</div>
+          <div class="kanban-card">
+            <div class="kanban-card-title">AgentHQ wireframes</div>
+            <div class="kanban-card-meta">
+              <span class="kanban-card-circle circle-product">🔧 Product</span>
+              <span>→ Ori</span>
+            </div>
+          </div>
+          <div class="kanban-card">
+            <div class="kanban-card-title">GNAP README + stars</div>
+            <div class="kanban-card-meta">
+              <span class="kanban-card-circle circle-marketing">📣 Marketing</span>
+              <span>→ Leonid</span>
+            </div>
+          </div>
+        </div>
+        <div class="kanban-col">
+          <div class="kanban-col-header review-h">Review · 1</div>
+          <div class="kanban-card">
+            <div class="kanban-card-title">Sebastian onboarding fix</div>
+            <div class="kanban-card-meta">
+              <span class="kanban-card-circle circle-product">🔧 Product</span>
+              <span>→ Leonid</span>
+            </div>
+          </div>
+        </div>
+        <div class="kanban-col">
+          <div class="kanban-col-header done-h">Done · 4</div>
+          <div class="kanban-card" style="opacity:0.5">
+            <div class="kanban-card-title">Self-service deploy</div>
+            <div class="kanban-card-meta">
+              <span class="kanban-card-circle circle-product">🔧 Product</span>
+              <span>✅ 5 Mar</span>
+            </div>
+          </div>
+          <div class="kanban-card" style="opacity:0.5">
+            <div class="kanban-card-title">awesome-agent-services</div>
+            <div class="kanban-card-meta">
+              <span class="kanban-card-circle circle-marketing">📣 Marketing</span>
+              <span>✅ 12 Mar</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right sidebar -->
+    <div class="sidebar">
+      <!-- Tension Feed -->
+      <div class="tension-feed">
+        <div class="section-header">
+          <div class="section-title">⚡ Tensions</div>
+          <div class="section-badge">3 open</div>
+        </div>
+        <div class="tension-item">
+          <div>
+            <span class="tension-severity sev-red"></span>
+            <span class="tension-from">💰 Revenue</span>
+            <span class="tension-arrow">→</span>
+            <span class="tension-to">🔧 Product</span>
+          </div>
+          <div class="tension-text">Billing blocked. Zero revenue 19+ days. Need Stripe ASAP.</div>
+          <div class="tension-time">2h ago · escalated to Coordinator</div>
+        </div>
+        <div class="tension-item">
+          <div>
+            <span class="tension-severity sev-yellow"></span>
+            <span class="tension-from">📣 Marketing</span>
+            <span class="tension-arrow">→</span>
+            <span class="tension-to">Coordinator</span>
+          </div>
+          <div class="tension-text">Twitter approval process blocks content velocity.</div>
+          <div class="tension-time">6h ago</div>
+        </div>
+        <div class="tension-item">
+          <div>
+            <span class="tension-severity sev-blue"></span>
+            <span class="tension-from">🤝 Clients</span>
+            <span class="tension-arrow">→</span>
+            <span class="tension-to">🔧 Product</span>
+          </div>
+          <div class="tension-text">Алёна dropped off onboarding. UX needs fix.</div>
+          <div class="tension-time">1d ago</div>
+        </div>
+      </div>
+
+      <!-- Agent Status -->
+      <div class="agent-status">
+        <div class="section-header">
+          <div class="section-title">🤖 Agents</div>
+        </div>
+        <div class="agent-row">
+          <div class="agent-dot dot-online"></div>
+          <div class="agent-name">Ori</div>
+          <div class="agent-task">AgentHQ wireframes</div>
+        </div>
+        <div class="agent-row">
+          <div class="agent-dot dot-busy"></div>
+          <div class="agent-name">Carl (CRO)</div>
+          <div class="agent-task">Revenue analysis</div>
+        </div>
+        <div class="agent-row">
+          <div class="agent-dot dot-offline"></div>
+          <div class="agent-name">Marketing Agent</div>
+          <div class="agent-task">—</div>
+        </div>
+        <div class="agent-row">
+          <div class="agent-dot dot-offline"></div>
+          <div class="agent-name">Client Agent</div>
+          <div class="agent-task">—</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ========== SCREEN 2: CIRCLE DETAIL ========== -->
+<div class="screen">
+  <div class="screen-label">Screen 2 — Circle Detail (🔧 Product)</div>
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-logo">🔧</div>
+      <div class="topbar-title">Product Circle</div>
+      <span class="status-badge badge-active" style="margin-left:8px">Active</span>
+    </div>
+    <div class="topbar-right">
+      <button class="topbar-btn">← Back</button>
+      <button class="topbar-btn">SOUL.md</button>
+      <button class="topbar-btn">MEMORY.md</button>
+    </div>
+  </div>
+
+  <div class="circle-detail-grid">
+    <!-- Purpose & Soul -->
+    <div class="detail-card">
+      <div class="section-title" style="margin-bottom:12px">Purpose</div>
+      <div class="soul-preview">
+        <strong>Users get a working product that solves their problem.</strong><br><br>
+        Domain: Features, UX, architecture, bugs, deployment, tech debt<br>
+        Autonomy: Owns backlog, chooses tech solutions, deploys without approval
+      </div>
+    </div>
+
+    <!-- Metrics -->
+    <div class="detail-card">
+      <div class="section-title" style="margin-bottom:12px">Metrics</div>
+      <div class="metric-row">
+        <span class="metric-key">Backlog size</span>
+        <span class="metric-value warn">12 items</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-key">Blocked &gt;48h</span>
+        <span class="metric-value bad">1 (Stripe)</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-key">Deployed this week</span>
+        <span class="metric-value good">3 releases</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-key">Uptime</span>
+        <span class="metric-value good">99.7%</span>
+      </div>
+    </div>
+
+    <!-- Accountabilities -->
+    <div class="detail-card">
+      <div class="section-title" style="margin-bottom:12px">Accountabilities</div>
+      <ul class="accountability-list">
+        <li><span class="acc-check">✓</span> Daily: what's done, what's blocked</li>
+        <li><span class="acc-check">✓</span> Alert: product is broken or inaccessible</li>
+        <li><span class="acc-pending">○</span> Weekly: releases, users, retention, bugs</li>
+        <li><span class="acc-overdue">✗</span> Tension: Backlog &gt; 2 weeks (triggered!)</li>
+      </ul>
+    </div>
+
+    <!-- Links -->
+    <div class="detail-card">
+      <div class="section-title" style="margin-bottom:12px">Links</div>
+      <div class="metric-row">
+        <span class="metric-key">→ Marketing</span>
+        <span class="metric-value" style="font-size:11px;color:#666">changelogs, features</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-key">→ Revenue</span>
+        <span class="metric-value" style="font-size:11px;color:#666">pricing, billing integration</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-key">→ Clients</span>
+        <span class="metric-value" style="font-size:11px;color:#666">bugs, feature requests</span>
+      </div>
+      <div class="metric-row">
+        <span class="metric-key">→ Finance</span>
+        <span class="metric-value" style="font-size:11px;color:#666">infra cost, budgets</span>
+      </div>
+    </div>
+
+    <!-- Task list from GNAP -->
+    <div class="detail-card full">
+      <div class="section-header">
+        <div class="section-title">Tasks (from GNAP)</div>
+        <div class="section-badge">product/ board</div>
+      </div>
+      <div class="kanban-cols">
+        <div class="kanban-col">
+          <div class="kanban-col-header wip-h">In Progress</div>
+          <div class="kanban-card">
+            <div class="kanban-card-title">AgentHQ wireframes</div>
+            <div class="kanban-card-meta"><span>→ Ori</span> <span>· started 13 Mar</span></div>
+          </div>
+        </div>
+        <div class="kanban-col">
+          <div class="kanban-col-header todo-h">Blocked</div>
+          <div class="kanban-card" style="border-color:#ef444455">
+            <div class="kanban-card-title" style="color:#f87171">Stripe integration</div>
+            <div class="kanban-card-meta"><span style="color:#ef4444">🔴 19 days</span> <span>needs Leonid</span></div>
+          </div>
+        </div>
+        <div class="kanban-col">
+          <div class="kanban-col-header review-h">Review</div>
+          <div class="kanban-card">
+            <div class="kanban-card-title">Sebastian onboarding fix</div>
+            <div class="kanban-card-meta"><span>→ Leonid review</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="annotation">
+    <strong>A2UI:</strong> Весь экран = композиция A2UI компонентов от Product circle агента. Метрики, таски, accountabilities — всё декларативный JSON. Агент пушит обновления → UI обновляется инкрементально.
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ========== SCREEN 3: TENSION MANAGEMENT ========== -->
+<div class="screen">
+  <div class="screen-label">Screen 3 — Tension Management</div>
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-logo" style="background:#f59e0b">⚡</div>
+      <div class="topbar-title">Tensions</div>
+    </div>
+    <div class="topbar-right">
+      <button class="topbar-btn active">Open (3)</button>
+      <button class="topbar-btn">Resolved</button>
+      <button class="topbar-btn">All</button>
+    </div>
+  </div>
+
+  <div class="tension-full">
+    <div class="tension-card" style="border-color:#ef444444">
+      <div class="tension-card-header">
+        <span class="tension-type-badge type-escalation">Escalation</span>
+        <span class="tension-card-title">Billing blocked → $0 revenue</span>
+      </div>
+      <div class="tension-card-body">
+        Revenue circle cannot operate. Stripe integration is in Product backlog but blocked for 19+ days. Per constitution: "Zero revenue for a week → crisis signal." This is week 3.<br><br>
+        <strong>From:</strong> 💰 Revenue → 🔧 Product → Coordinator<br>
+        <strong>Impact:</strong> ~$2,700/day lost revenue potential
+      </div>
+      <div class="tension-card-footer">
+        <span style="font-size:10px;color:#444">Opened 22 Feb · Escalated 5 Mar</span>
+        <div>
+          <button class="tension-card-action">Dismiss</button>
+          <button class="tension-card-action primary">Resolve</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="tension-card">
+      <div class="tension-card-header">
+        <span class="tension-type-badge type-between">Between circles</span>
+        <span class="tension-card-title">Content velocity blocked by approval</span>
+      </div>
+      <div class="tension-card-body">
+        Marketing circle needs autonomy to publish. Current process requires founder approval for every tweet. Constitution says: "Each circle is sovereign. No one tells it how to work."<br><br>
+        <strong>From:</strong> 📣 Marketing → Coordinator<br>
+        <strong>Proposal:</strong> Marketing publishes freely, founders review weekly
+      </div>
+      <div class="tension-card-footer">
+        <span style="font-size:10px;color:#444">Opened 2 Mar</span>
+        <div>
+          <button class="tension-card-action">Discuss</button>
+          <button class="tension-card-action primary">Governance</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="tension-card">
+      <div class="tension-card-header">
+        <span class="tension-type-badge type-within">Within circle</span>
+        <span class="tension-card-title">Onboarding drop-off</span>
+      </div>
+      <div class="tension-card-body">
+        Алёна tested Sebastian, dropped off during onboarding. Clients circle flagged UX issue to Product.<br><br>
+        <strong>From:</strong> 🤝 Clients → 🔧 Product<br>
+        <strong>Action needed:</strong> Product to review onboarding flow
+      </div>
+      <div class="tension-card-footer">
+        <span style="font-size:10px;color:#444">Opened 12 Mar</span>
+        <div>
+          <button class="tension-card-action primary">Assign</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="annotation">
+    <strong>A2UI + Constitution:</strong> Tensions = governance engine. Каждый круг пушит tensions как A2UI events. Coordinator видит их здесь, резолвит по правилам конституции. "Governance" кнопка запускает objection round process (Part VIII).
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ========== ARCHITECTURE NOTES ========== -->
+<div class="screen">
+  <div class="screen-label">Architecture — How it works</div>
+
+  <div class="detail-card full" style="max-width:800px;margin:0 auto">
+    <div class="section-title" style="margin-bottom:16px">Data Flow</div>
+    <pre style="font-size:11px;line-height:1.8;color:#888;overflow-x:auto">
+┌─────────────┐    git push     ┌──────────┐
+│ Circle Agent │ ──────────────► │   GNAP   │  (source of truth)
+│  (OpenClaw)  │                 │  git repo│
+└──────┬──────┘                 └─────┬────┘
+       │                              │
+       │ a2ui_push (JSON)             │ git pull
+       │                              │
+       ▼                              ▼
+┌─────────────┐                ┌──────────────┐
+│  A2UI Layer  │◄──────────────│  AgentHQ     │
+│  Components  │   renders     │  Dashboard   │
+└─────────────┘                └──────┬───────┘
+                                      │
+                                      ▼
+                               ┌──────────────┐
+                               │  farol.team  │
+                               │   (hosted)   │
+                               └──────────────┘
+    </pre>
+    <div style="margin-top:16px;font-size:12px;color:#666;line-height:1.6">
+      <strong style="color:#8b5cf6">A2UI Components needed:</strong><br>
+      • <code>status-card</code> — circle health summary<br>
+      • <code>kanban-board</code> — GNAP task visualization<br>
+      • <code>tension-feed</code> — live tension stream<br>
+      • <code>agent-status</code> — online/busy/offline indicators<br>
+      • <code>metric-panel</code> — KPIs per circle<br>
+      • <code>soul-viewer</code> — circle SOUL.md preview<br>
+      • <code>governance-flow</code> — tension resolution UI<br>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
