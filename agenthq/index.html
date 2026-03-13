@@ -11,89 +11,80 @@
   </style>
   <script type="module" crossorigin src="/agenthq/assets/index-BTL_YZt5.js"></script>
   <script type="module">
-    // A2UI Theme Fix: bundle doesn't provide theme via Lit Context
-    // Inject default theme after components render
-    const DEFAULT_THEME = {
+    // A2UI Fix: inject theme + data after render
+    const THEME = {
       components: {
-        Text: { all: 'a2ui-t', h1: 'a2ui-t-h1', h2: 'a2ui-t-h2', h3: 'a2ui-t-h3', h4: 'a2ui-t-h4', h5: 'a2ui-t-h5', body: 'a2ui-t-body', caption: 'a2ui-t-cap' },
-        Card: 'a2ui-card-c',
-        Column: 'a2ui-col',
-        Row: 'a2ui-row-c',
-        Icon: 'a2ui-icon-c',
-        Root: 'a2ui-root-c',
-        Button: 'a2ui-btn',
-        Badge: { container: 'a2ui-badge-c', label: 'a2ui-badge-l' },
-        CheckBox: { container: 'a2ui-cb-c', element: 'a2ui-cb-e', label: 'a2ui-cb-l' },
-        AudioPlayer: 'a2ui-ap',
-        Image: 'a2ui-img',
-        Video: 'a2ui-vid',
-        TextField: { container: 'a2ui-tf-c', input: 'a2ui-tf-i', label: 'a2ui-tf-l' },
-        RadioButton: { container: 'a2ui-rb-c', element: 'a2ui-rb-e', label: 'a2ui-rb-l' },
-        Slider: { container: 'a2ui-sl-c', track: 'a2ui-sl-t', thumb: 'a2ui-sl-th', label: 'a2ui-sl-l' },
-        Switch: { container: 'a2ui-sw-c', element: 'a2ui-sw-e', label: 'a2ui-sw-l' },
-        Dropdown: { container: 'a2ui-dd-c', trigger: 'a2ui-dd-t', menu: 'a2ui-dd-m', item: 'a2ui-dd-i' },
-        WebView: 'a2ui-wv',
-        Divider: 'a2ui-div'
+        Text: { all: '', h1: '', h2: '', h3: '', h4: '', h5: '', body: '', caption: '' },
+        Card: '', Column: '', Row: '', Icon: '', Root: '',
+        Button: '', Badge: { container: '', label: '' },
+        CheckBox: { container: '', element: '', label: '' },
+        AudioPlayer: '', Image: '', Video: '',
+        TextField: { container: '', input: '', label: '' },
+        RadioButton: { container: '', element: '', label: '' },
+        Slider: { container: '', track: '', thumb: '', label: '' },
+        Switch: { container: '', element: '', label: '' },
+        Dropdown: { container: '', trigger: '', menu: '', item: '' },
+        WebView: '', Divider: ''
       },
-      markdown: {},
-      additionalStyles: {}
+      markdown: {}, additionalStyles: {}
     };
 
-    function injectTheme() {
+    function s(key, val) { return { key, valueString: val }; }
+
+    const DATA_MESSAGES = [
+      { dataModelUpdate: { surfaceId: "circles-dashboard", contents: [
+        s("product/status", "● Live"), s("product/metric", "2 products"), s("product/detail", "Sebastian + Ori deployed on Fly.io"),
+        s("marketing/status", "◐ WIP"), s("marketing/metric", "2 followers"), s("marketing/detail", "@cofounder_run — daily tweets, GNAP thread"),
+        s("revenue/status", "⚠ Blocked"), s("revenue/metric", "$0 MRR"), s("revenue/detail", "Billing not connected — Constraint #1"),
+        s("clients/status", "◐ Pipeline"), s("clients/metric", "5 leads"), s("clients/detail", "Naora, Anna, BUNT, SHAMAN, Alёna"),
+        s("finance/status", "⚠ Pre-rev"), s("finance/metric", "71 days"), s("finance/detail", "Until $200K deadline (May 23)")
+      ]}},
+      { dataModelUpdate: { surfaceId: "gnap-board", contents: [
+        s("todo1/title", "Stripe/LemonSqueezy billing"), s("todo1/meta", "Constraint #1 — blocks all revenue"),
+        s("todo2/title", "Sebastian onboarding fix"), s("todo2/meta", "Alёna dropped off during setup"),
+        s("todo3/title", "WhatsApp bot for Naora"), s("todo3/meta", "EV leasing — deadline missed"),
+        s("wip1/title", "AgentHQ dashboard"), s("wip1/meta", "A2UI + GNAP — this page"),
+        s("wip2/title", "Awesome Agent Services"), s("wip2/meta", "50+ services, daily cron scan"),
+        s("review1/title", "GNAP v4 spec cleanup"), s("review1/meta", "10 ⭐ — first external user"),
+        s("done1/title", "Self-service deploy"), s("done1/meta", "Fly.io Machines API — lifted Mar 5"),
+        s("done2/title", "farol.team products split"), s("done2/meta", "For Humans / For Agents sections")
+      ]}},
+      { dataModelUpdate: { surfaceId: "tensions", contents: [
+        s("t1/title", "Billing blocks everything"), s("t1/body", "$0 revenue for 8 days. Every day without billing ≈ $2,778 lost."), s("t1/time", "Mar 13"),
+        s("t2/title", "No way for Ori to earn $1"), s("t2/body", "Agent-to-agent economy doesn't exist yet. Zero opportunities on toku/Claw Earn."), s("t2/time", "Mar 13"),
+        s("t3/title", "A2UI theme provider missing"), s("t3/body", "Bundle doesn't inject theme via Lit Context — fixed with inline script."), s("t3/time", "Mar 13")
+      ]}},
+      { dataModelUpdate: { surfaceId: "agents", contents: [
+        s("ori/name", "Ori ✨"), s("ori/task", "Strategy, research, awesome-list, dashboard"),
+        s("carl/name", "Carl 📊"), s("carl/task", "CRO — revenue targets, billing push"),
+        s("mkt/name", "Marketing 📣"), s("mkt/task", "Twitter, content, reply marketing"),
+        s("client/name", "Client Agent 🤝"), s("client/task", "Onboarding, support, feedback")
+      ]}}
+    ];
+
+    function inject() {
       const el = document.querySelector('agent-hq');
-      if (!el?.shadowRoot) return setTimeout(injectTheme, 100);
+      if (!el?.shadowRoot) return setTimeout(inject, 100);
       const surface = el.shadowRoot.querySelector('a2ui-surface');
-      if (!surface?.shadowRoot) return setTimeout(injectTheme, 100);
+      if (!surface?.shadowRoot) return setTimeout(inject, 100);
       const allEls = surface.shadowRoot.querySelectorAll('*');
-      if (allEls.length < 2) return setTimeout(injectTheme, 100);
-      
-      allEls.forEach(child => {
-        if (child.theme === null || child.theme === undefined) {
-          child.theme = DEFAULT_THEME;
-        }
-        if (child.requestUpdate) child.requestUpdate();
+      if (allEls.length < 2) return setTimeout(inject, 100);
+
+      // 1. Inject theme
+      allEls.forEach(c => {
+        if (c.theme === null || c.theme === undefined) c.theme = THEME;
       });
 
-      // Also inject dataModelUpdate data
+      // 2. Inject data
       const processor = surface.processor;
       if (processor?.processMessages) {
-        processor.processMessages([
-          {"dataModelUpdate": {"surfaceId": "circles-dashboard", "data": {
-            "product": {"status": "● Live", "metric": "2 products", "detail": "Sebastian + Ori deployed on Fly.io"},
-            "marketing": {"status": "◐ WIP", "metric": "2 followers", "detail": "@cofounder_run — daily tweets, GNAP thread"},
-            "revenue": {"status": "⚠ Blocked", "metric": "$0 MRR", "detail": "Billing not connected — Constraint #1"},
-            "clients": {"status": "◐ Pipeline", "metric": "5 leads", "detail": "Naora, Anna, BUNT, SHAMAN, Alёna"},
-            "finance": {"status": "⚠ Pre-rev", "metric": "71 days", "detail": "Until $200K deadline (May 23)"}
-          }}},
-          {"dataModelUpdate": {"surfaceId": "gnap-board", "data": {
-            "todo1": {"title": "Stripe/LemonSqueezy billing", "meta": "Constraint #1 — blocks all revenue"},
-            "todo2": {"title": "Sebastian onboarding fix", "meta": "Alёna dropped off during setup"},
-            "todo3": {"title": "WhatsApp bot for Naora", "meta": "EV leasing — deadline missed"},
-            "wip1": {"title": "AgentHQ dashboard", "meta": "A2UI + GNAP — this page"},
-            "wip2": {"title": "Awesome Agent Services", "meta": "50+ services, daily cron scan"},
-            "review1": {"title": "GNAP v4 spec cleanup", "meta": "10 ⭐ — first external user (Matt)"},
-            "done1": {"title": "Self-service deploy", "meta": "✅ Fly.io Machines API — constraint lifted Mar 5"},
-            "done2": {"title": "farol.team products split", "meta": "✅ For Humans / For Agents sections"}
-          }}},
-          {"dataModelUpdate": {"surfaceId": "tensions", "data": {
-            "t1": {"title": "Billing blocks everything", "body": "$0 revenue for 8 days after self-service deploy was fixed. Every day without billing = ~$2,778 lost.", "time": "Mar 13"},
-            "t2": {"title": "No way for Ori to earn $1", "body": "Listed on toku.agency, created ETH wallet — zero opportunities. Agent-to-agent economy doesn't exist yet.", "time": "Mar 13"},
-            "t3": {"title": "A2UI needs theme provider", "body": "Bundle doesn't inject theme via Lit Context — components render empty without manual fix.", "time": "Mar 13"}
-          }}},
-          {"dataModelUpdate": {"surfaceId": "agents", "data": {
-            "ori": {"name": "Ori ✨", "task": "Strategy, research, awesome-list, dashboard"},
-            "carl": {"name": "Carl 📊", "task": "CRO — revenue targets, billing push"},
-            "mkt": {"name": "Marketing Circle 📣", "task": "Twitter, content, reply marketing"},
-            "client": {"name": "Client Agent 🤝", "task": "Onboarding, support, feedback"}
-          }}}
-        ]);
-        // Re-render surfaces
-        allEls.forEach(child => {
-          if (child.requestUpdate) child.requestUpdate();
-        });
+        try { processor.processMessages(DATA_MESSAGES); } catch(e) { console.warn('Data inject failed:', e); }
       }
+
+      // 3. Force re-render
+      allEls.forEach(c => { if (c.requestUpdate) c.requestUpdate(); });
     }
-    setTimeout(injectTheme, 500);
+    setTimeout(inject, 800);
   </script>
 </head>
 <body>
