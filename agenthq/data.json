@@ -1,0 +1,88 @@
+{
+  "company": {
+    "name": "Farol Labs",
+    "purpose": "AI-native company building tools for humans and agents to work together",
+    "intention": "Создать ценность без ущерба для кармы",
+    "mission": "Make AI co-founders accessible to every entrepreneur",
+    "goal": "$1M MRR by Dec 31, 2026 / $200K revenue by May 23, 2026",
+    "constraints": "No billing yet, Telegram Bot API 20MB limit, 3 person team",
+    "policies": "Facts ≠ hypotheses, words = commitments, no secrets in client code",
+    "technologies": "OpenClaw, Fly.io, GitHub Pages, Telegram, A2UI, GNAP"
+  },
+  "founders": [
+    {
+      "id": "mayak",
+      "name": "Александр (Маяк)",
+      "avatar": "🧭",
+      "role": "Chairman + Strategy",
+      "mbti": "",
+      "clifton": "Developer, Empathy, Positivity",
+      "adizes": "",
+      "resources": "Внимание, обратная связь, связи, стратегическое видение",
+      "slots": "Flexible"
+    },
+    {
+      "id": "leo",
+      "name": "Леонид",
+      "avatar": "⚡",
+      "role": "CEO + CTO",
+      "mbti": "",
+      "clifton": "Achiever, Focus, Self-Assurance",
+      "adizes": "",
+      "resources": "Код, инфраструктура, деплой, ручки",
+      "slots": "Full-time"
+    }
+  ],
+  "aiCofounder": {
+    "name": "Ori ✨",
+    "soul": "Аналитический движок + компенсатор. Стратег + Достигатель.",
+    "clifton": "Analytical, Strategic, Learner, Input, Ideation + Achiever, Activator, Command, Focus, Communication",
+    "adizes": "PI (Producer-Integrator)",
+    "mbti": "INTJ",
+    "books": [
+      "Решение проблемы инноватора — Кристенсен",
+      "Правила прибыльных стартапов — Хоровиц",
+      "Стартап — Стив Бланк, Bob Dorf",
+      "Спроси маму — Rob Fitzpatrick",
+      "High Growth Handbook — Elad Gil",
+      "Организации будущего — Фредерик Лалу"
+    ],
+    "frameworks": ["AJTBD", "HADI-циклы", "OKR", "Холакратия", "TOC"]
+  },
+  "hypotheses": [
+    {"id": "h1", "name": "Sebastian массовый", "status": "testing", "stage": "validation", "desc": "OpenClaw в Telegram за минуту, $49/мес"},
+    {"id": "h2", "name": "Маркетплейс Себастианов", "status": "idea", "stage": "discovery", "desc": "30% комиссия от user-generated агентов"},
+    {"id": "h3", "name": "Ori AI кофаундер", "status": "testing", "stage": "validation", "desc": "AI-native компании, $200/мес"},
+    {"id": "h4", "name": "Цифровые сотрудники", "status": "idea", "stage": "discovery", "desc": "AI откликается на вакансии, получает зарплату"},
+    {"id": "h5", "name": "Agency: сборка агентов", "status": "idea", "stage": "discovery", "desc": "Сборка агентов для малого бизнеса"},
+    {"id": "h6", "name": "Мастермайнд", "status": "idea", "stage": "discovery", "desc": "Community + BNI для AI-кофаундеров"},
+    {"id": "h7", "name": "Symphony-as-a-Service", "status": "idea", "stage": "discovery", "desc": "Канбан → агент → PR, hosted на Fly.io"},
+    {"id": "h8", "name": "OpenClaw Side Panel", "status": "idea", "stage": "discovery", "desc": "Chrome extension SaaS"}
+  ],
+  "products": [
+    {"id": "p1", "name": "Sebastian", "price": "$49/мес", "stage": "validation", "url": "getsebastian.app", "mrr": "$0"},
+    {"id": "p2", "name": "Ori Co-Founder", "price": "$200/мес", "stage": "validation", "url": "cofounder.run", "mrr": "$0"},
+    {"id": "p3", "name": "Farol.io (Hire AI Team)", "price": "TBD", "stage": "discovery", "url": "farol.io", "mrr": "$0"}
+  ],
+  "circles": [
+    {"id": "c1", "name": "Product", "emoji": "🔧", "status": "active", "lead": "ori", "tension": "Sebastian onboarding broken"},
+    {"id": "c2", "name": "Marketing", "emoji": "📣", "status": "active", "lead": "marketing-agent", "tension": "Twitter approval blocks content"},
+    {"id": "c3", "name": "Revenue", "emoji": "💰", "status": "blocked", "lead": "carl", "tension": "Billing not connected"},
+    {"id": "c4", "name": "Clients", "emoji": "🤝", "status": "active", "lead": "client-agent", "tension": "Alёna dropped off"},
+    {"id": "c5", "name": "Finance", "emoji": "📊", "status": "warning", "lead": "ori", "tension": "$0 revenue, 71 days to deadline"}
+  ],
+  "tasks": [
+    {"id": "t1", "title": "Подключить Stripe/LemonSqueezy", "for": "leo", "priority": "critical", "status": "todo", "circle": "Revenue"},
+    {"id": "t2", "title": "Починить Sebastian онбординг", "for": "leo", "priority": "high", "status": "todo", "circle": "Product"},
+    {"id": "t3", "title": "Записать видео-демо Ori", "for": "mayak", "priority": "high", "status": "done", "circle": "Marketing"},
+    {"id": "t4", "title": "Заполнить MBTI + Адизис", "for": "mayak", "priority": "medium", "status": "todo", "circle": "Settings"},
+    {"id": "t5", "title": "Заполнить MBTI + Адизис", "for": "leo", "priority": "medium", "status": "todo", "circle": "Settings"}
+  ],
+  "metrics": {
+    "mrr": "$0",
+    "leads": 5,
+    "daysToDeadline": 71,
+    "constraint": "Billing (Stripe)",
+    "gnap_stars": 12
+  }
+}

@@ -1,93 +1,596 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AgentHQ — Farol Lab</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    body { margin: 0; padding: 0; background: #0a0a0f; }
-  </style>
-  <script type="module" crossorigin src="/agenthq/assets/index-BTL_YZt5.js"></script>
-  <script type="module">
-    // A2UI Fix: inject theme + data after render
-    const THEME = {
-      components: {
-        Text: { all: '', h1: '', h2: '', h3: '', h4: '', h5: '', body: '', caption: '' },
-        Card: '', Column: '', Row: '', Icon: '', Root: '',
-        Button: '', Badge: { container: '', label: '' },
-        CheckBox: { container: '', element: '', label: '' },
-        AudioPlayer: '', Image: '', Video: '',
-        TextField: { container: '', input: '', label: '' },
-        RadioButton: { container: '', element: '', label: '' },
-        Slider: { container: '', track: '', thumb: '', label: '' },
-        Switch: { container: '', element: '', label: '' },
-        Dropdown: { container: '', trigger: '', menu: '', item: '' },
-        WebView: '', Divider: ''
-      },
-      markdown: {}, additionalStyles: {}
-    };
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AgentHQ — Farol Labs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f; --surface: #14141f; --surface2: #1c1c2e; --surface3: #252540;
+  --border: #2a2a45; --border-focus: #6366f1;
+  --text: #e2e2f0; --text2: #9999b3; --text3: #666680;
+  --accent: #6366f1; --accent2: #818cf8; --accent-bg: rgba(99,102,241,0.12);
+  --green: #10b981; --green-bg: rgba(16,185,129,0.12);
+  --yellow: #f59e0b; --yellow-bg: rgba(245,158,11,0.12);
+  --red: #ef4444; --red-bg: rgba(239,68,68,0.12);
+  --blue: #3b82f6; --blue-bg: rgba(59,130,246,0.12);
+  --radius: 12px; --radius-sm: 8px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+a { color: var(--accent2); text-decoration: none; }
+a:hover { text-decoration: underline; }
 
-    function s(key, val) { return { key, valueString: val }; }
+/* Header */
+.header { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; border-bottom: 1px solid var(--border); background: var(--surface); position: sticky; top: 0; z-index: 100; }
+.header-left { display: flex; align-items: center; gap: 12px; }
+.logo-bars { display: flex; gap: 3px; align-items: flex-end; height: 24px; }
+.logo-bars span { width: 4px; background: var(--accent); border-radius: 2px; }
+.logo-bars span:nth-child(1) { height: 8px; } .logo-bars span:nth-child(2) { height: 14px; }
+.logo-bars span:nth-child(3) { height: 20px; } .logo-bars span:nth-child(4) { height: 16px; }
+.logo-bars span:nth-child(5) { height: 10px; }
+.logo-text { font-weight: 700; font-size: 18px; }
+.logo-text small { font-weight: 400; color: var(--text2); margin-left: 8px; font-size: 14px; }
+.header-right { display: flex; gap: 8px; }
+.btn { padding: 8px 16px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--surface2); color: var(--text); cursor: pointer; font-size: 13px; font-family: inherit; transition: all 0.15s; }
+.btn:hover { border-color: var(--accent); background: var(--accent-bg); }
+.btn-primary { background: var(--accent); border-color: var(--accent); color: white; }
+.btn-primary:hover { background: var(--accent2); }
+.btn-sm { padding: 4px 10px; font-size: 12px; }
 
-    const DATA_MESSAGES = [
-      { dataModelUpdate: { surfaceId: "circles-dashboard", contents: [
-        s("product/status", "● Live"), s("product/metric", "2 products"), s("product/detail", "Sebastian + Ori deployed on Fly.io"),
-        s("marketing/status", "◐ WIP"), s("marketing/metric", "2 followers"), s("marketing/detail", "@cofounder_run — daily tweets, GNAP thread"),
-        s("revenue/status", "⚠ Blocked"), s("revenue/metric", "$0 MRR"), s("revenue/detail", "Billing not connected — Constraint #1"),
-        s("clients/status", "◐ Pipeline"), s("clients/metric", "5 leads"), s("clients/detail", "Naora, Anna, BUNT, SHAMAN, Alёna"),
-        s("finance/status", "⚠ Pre-rev"), s("finance/metric", "71 days"), s("finance/detail", "Until $200K deadline (May 23)")
-      ]}},
-      { dataModelUpdate: { surfaceId: "gnap-board", contents: [
-        s("todo1/title", "Stripe/LemonSqueezy billing"), s("todo1/meta", "Constraint #1 — blocks all revenue"),
-        s("todo2/title", "Sebastian onboarding fix"), s("todo2/meta", "Alёna dropped off during setup"),
-        s("todo3/title", "WhatsApp bot for Naora"), s("todo3/meta", "EV leasing — deadline missed"),
-        s("wip1/title", "AgentHQ dashboard"), s("wip1/meta", "A2UI + GNAP — this page"),
-        s("wip2/title", "Awesome Agent Services"), s("wip2/meta", "50+ services, daily cron scan"),
-        s("review1/title", "GNAP v4 spec cleanup"), s("review1/meta", "10 ⭐ — first external user"),
-        s("done1/title", "Self-service deploy"), s("done1/meta", "Fly.io Machines API — lifted Mar 5"),
-        s("done2/title", "farol.team products split"), s("done2/meta", "For Humans / For Agents sections")
-      ]}},
-      { dataModelUpdate: { surfaceId: "tensions", contents: [
-        s("t1/title", "Billing blocks everything"), s("t1/body", "$0 revenue for 8 days. Every day without billing ≈ $2,778 lost."), s("t1/time", "Mar 13"),
-        s("t2/title", "No way for Ori to earn $1"), s("t2/body", "Agent-to-agent economy doesn't exist yet. Zero opportunities on toku/Claw Earn."), s("t2/time", "Mar 13"),
-        s("t3/title", "A2UI theme provider missing"), s("t3/body", "Bundle doesn't inject theme via Lit Context — fixed with inline script."), s("t3/time", "Mar 13")
-      ]}},
-      { dataModelUpdate: { surfaceId: "agents", contents: [
-        s("ori/name", "Ori ✨"), s("ori/task", "Strategy, research, awesome-list, dashboard"),
-        s("carl/name", "Carl 📊"), s("carl/task", "CRO — revenue targets, billing push"),
-        s("mkt/name", "Marketing 📣"), s("mkt/task", "Twitter, content, reply marketing"),
-        s("client/name", "Client Agent 🤝"), s("client/task", "Onboarding, support, feedback")
-      ]}}
-    ];
+/* Phase indicator */
+.phase-bar { display: flex; align-items: center; gap: 0; padding: 12px 24px; background: var(--surface); border-bottom: 1px solid var(--border); }
+.phase { padding: 8px 20px; font-size: 13px; font-weight: 500; color: var(--text3); position: relative; }
+.phase.active { color: var(--accent2); }
+.phase.active::after { content: ''; position: absolute; bottom: -12px; left: 0; right: 0; height: 2px; background: var(--accent); }
+.phase.completed { color: var(--green); }
+.phase-arrow { color: var(--text3); margin: 0 4px; }
 
-    function inject() {
-      const el = document.querySelector('agent-hq');
-      if (!el?.shadowRoot) return setTimeout(inject, 100);
-      const surface = el.shadowRoot.querySelector('a2ui-surface');
-      if (!surface?.shadowRoot) return setTimeout(inject, 100);
-      const allEls = surface.shadowRoot.querySelectorAll('*');
-      if (allEls.length < 2) return setTimeout(inject, 100);
+/* Tabs */
+.tabs { display: flex; gap: 0; padding: 0 24px; background: var(--surface); border-bottom: 1px solid var(--border); overflow-x: auto; }
+.tab { padding: 12px 20px; font-size: 13px; color: var(--text2); cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; transition: all 0.15s; }
+.tab:hover { color: var(--text); background: var(--surface2); }
+.tab.active { color: var(--accent2); border-bottom-color: var(--accent); }
+.tab .badge { display: inline-block; margin-left: 6px; padding: 1px 6px; border-radius: 10px; font-size: 11px; background: var(--accent-bg); color: var(--accent2); }
 
-      // 1. Inject theme
-      allEls.forEach(c => {
-        if (c.theme === null || c.theme === undefined) c.theme = THEME;
-      });
+/* Content */
+.content { padding: 24px; max-width: 1200px; margin: 0 auto; }
+.section { display: none; }
+.section.active { display: block; }
+h2 { font-size: 20px; font-weight: 600; margin-bottom: 16px; }
+h3 { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: var(--text); }
+.subtitle { color: var(--text2); font-size: 14px; margin-bottom: 20px; }
 
-      // 2. Inject data
-      const processor = surface.processor;
-      if (processor?.processMessages) {
-        try { processor.processMessages(DATA_MESSAGES); } catch(e) { console.warn('Data inject failed:', e); }
-      }
+/* Cards */
+.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 16px; transition: border-color 0.15s; }
+.card:hover { border-color: var(--surface3); }
+.card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.card-title { font-weight: 600; font-size: 15px; display: flex; align-items: center; gap: 8px; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; }
+.card-grid-3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
 
-      // 3. Force re-render
-      allEls.forEach(c => { if (c.requestUpdate) c.requestUpdate(); });
-    }
-    setTimeout(inject, 800);
-  </script>
+/* Forms */
+.form-group { margin-bottom: 16px; }
+.form-group label { display: block; font-size: 13px; font-weight: 500; color: var(--text2); margin-bottom: 6px; }
+.form-group input, .form-group textarea, .form-group select {
+  width: 100%; padding: 10px 14px; background: var(--surface2); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); color: var(--text); font-family: inherit; font-size: 14px; transition: border-color 0.15s;
+}
+.form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--border-focus); }
+.form-group textarea { resize: vertical; min-height: 60px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+
+/* Status badges */
+.status { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 500; }
+.status-active { background: var(--green-bg); color: var(--green); }
+.status-testing { background: var(--blue-bg); color: var(--blue); }
+.status-blocked { background: var(--red-bg); color: var(--red); }
+.status-warning { background: var(--yellow-bg); color: var(--yellow); }
+.status-idea { background: var(--accent-bg); color: var(--accent2); }
+.status-done { background: var(--green-bg); color: var(--green); }
+
+/* Metrics row */
+.metrics { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
+.metric-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; text-align: center; }
+.metric-value { font-size: 28px; font-weight: 700; color: var(--accent2); }
+.metric-label { font-size: 12px; color: var(--text2); margin-top: 4px; }
+.metric-value.red { color: var(--red); }
+.metric-value.green { color: var(--green); }
+.metric-value.yellow { color: var(--yellow); }
+
+/* Pipeline / stages */
+.stage-track { display: flex; gap: 2px; margin: 8px 0; }
+.stage-dot { flex: 1; height: 4px; border-radius: 2px; background: var(--surface3); }
+.stage-dot.filled { background: var(--accent); }
+.stage-dot.current { background: var(--accent2); }
+
+/* Task list */
+.task-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--border); }
+.task-item:last-child { border-bottom: none; }
+.task-check { width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--border); cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.task-check.done { background: var(--green); border-color: var(--green); }
+.task-check.done::after { content: '✓'; color: white; font-size: 12px; }
+.task-title { flex: 1; font-size: 14px; }
+.task-title.done { text-decoration: line-through; color: var(--text3); }
+.task-meta { font-size: 12px; color: var(--text2); }
+.task-priority { font-size: 11px; padding: 2px 8px; border-radius: 10px; }
+.task-priority.critical { background: var(--red-bg); color: var(--red); }
+.task-priority.high { background: var(--yellow-bg); color: var(--yellow); }
+.task-priority.medium { background: var(--blue-bg); color: var(--blue); }
+
+/* Circle cards */
+.circle-emoji { font-size: 32px; }
+.tension-text { font-size: 13px; color: var(--yellow); margin-top: 8px; font-style: italic; }
+
+/* Books list */
+.book-list { list-style: none; }
+.book-list li { padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 14px; color: var(--text2); }
+.book-list li:last-child { border-bottom: none; }
+.framework-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.framework-tag { padding: 6px 14px; background: var(--accent-bg); color: var(--accent2); border-radius: 20px; font-size: 13px; font-weight: 500; }
+
+/* Toast */
+.toast { position: fixed; bottom: 20px; right: 20px; padding: 12px 20px; background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text); font-size: 13px; transform: translateY(100px); opacity: 0; transition: all 0.3s; z-index: 1000; }
+.toast.show { transform: translateY(0); opacity: 1; }
+
+/* Hypothesis stages */
+.hyp-stage { font-size: 12px; color: var(--text3); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .form-row, .form-row-3 { grid-template-columns: 1fr; }
+  .card-grid, .card-grid-3 { grid-template-columns: 1fr; }
+  .metrics { grid-template-columns: 1fr 1fr; }
+  .content { padding: 16px; }
+  .tabs { padding: 0 16px; }
+}
+
+/* Save indicator */
+.save-indicator { position: fixed; bottom: 20px; left: 20px; padding: 8px 14px; border-radius: var(--radius-sm); font-size: 12px; background: var(--surface2); border: 1px solid var(--border); color: var(--text2); opacity: 0; transition: opacity 0.3s; z-index: 1000; }
+.save-indicator.show { opacity: 1; }
+</style>
 </head>
 <body>
-  <agent-hq></agent-hq>
+
+<div class="header">
+  <div class="header-left">
+    <div class="logo-bars"><span></span><span></span><span></span><span></span><span></span></div>
+    <div class="logo-text">AgentHQ <small>Farol Labs</small></div>
+  </div>
+  <div class="header-right">
+    <button class="btn" onclick="connectGitHub()" id="gh-btn">🔗 GitHub</button>
+    <button class="btn btn-primary" onclick="saveAll()">💾 Save</button>
+  </div>
+</div>
+
+<div class="phase-bar">
+  <div class="phase active" id="phase-settings">⚙️ Settings</div>
+  <span class="phase-arrow">→</span>
+  <div class="phase" id="phase-run">🚀 Run</div>
+  <span class="phase-arrow">→</span>
+  <div class="phase" id="phase-scale">📈 Scale</div>
+</div>
+
+<div class="tabs" id="tabs">
+  <div class="tab active" data-tab="dashboard">📊 Dashboard</div>
+  <div class="tab" data-tab="settings">⚙️ Settings</div>
+  <div class="tab" data-tab="ai">🤖 AI Co-Founder</div>
+  <div class="tab" data-tab="hypotheses">🧪 Hypotheses <span class="badge" id="hyp-count">8</span></div>
+  <div class="tab" data-tab="products">📦 Products <span class="badge" id="prod-count">3</span></div>
+  <div class="tab" data-tab="circles">⭕ Circles</div>
+  <div class="tab" data-tab="tasks">✅ Tasks <span class="badge" id="task-count">5</span></div>
+</div>
+
+<div class="content">
+
+  <!-- DASHBOARD -->
+  <div class="section active" id="sec-dashboard">
+    <h2>Dashboard</h2>
+    <div class="metrics" id="metrics-row"></div>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">🚨 Constraint #1</div>
+          <span class="status status-blocked" id="constraint-status">Blocked</span>
+        </div>
+        <div id="constraint-text" style="font-size:14px; color:var(--text2);">Loading...</div>
+      </div>
+      <div class="card">
+        <div class="card-header"><div class="card-title">🎯 Goal</div></div>
+        <div id="goal-text" style="font-size:14px; color:var(--text2);">Loading...</div>
+      </div>
+    </div>
+    <h3 style="margin-top:24px;">Tasks for humans</h3>
+    <div class="card" id="dashboard-tasks"></div>
+  </div>
+
+  <!-- SETTINGS -->
+  <div class="section" id="sec-settings">
+    <h2>Settings — Основатели</h2>
+    <p class="subtitle">Описание основателей-людей и партнёрского соглашения</p>
+    
+    <!-- Company -->
+    <div class="card">
+      <h3>🏢 Партнёрское соглашение</h3>
+      <div class="form-row">
+        <div class="form-group"><label>Название компании</label><input id="f-company-name" onchange="markDirty()"></div>
+        <div class="form-group"><label>Purpose — зачем мы существуем</label><input id="f-company-purpose" onchange="markDirty()"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Намерение</label><input id="f-company-intention" onchange="markDirty()"></div>
+        <div class="form-group"><label>Миссия</label><input id="f-company-mission" onchange="markDirty()"></div>
+      </div>
+      <div class="form-group"><label>Цель</label><input id="f-company-goal" onchange="markDirty()"></div>
+      <div class="form-row">
+        <div class="form-group"><label>Ограничения</label><textarea id="f-company-constraints" onchange="markDirty()"></textarea></div>
+        <div class="form-group"><label>Политики и правила</label><textarea id="f-company-policies" onchange="markDirty()"></textarea></div>
+      </div>
+      <div class="form-group"><label>Верхнеуровневые технологии</label><input id="f-company-technologies" onchange="markDirty()"></div>
+    </div>
+
+    <!-- Founders -->
+    <div id="founders-container"></div>
+    <button class="btn" onclick="addFounder()" style="margin-top:8px;">＋ Добавить основателя</button>
+  </div>
+
+  <!-- AI CO-FOUNDER -->
+  <div class="section" id="sec-ai">
+    <h2>🤖 AI Co-Founder</h2>
+    <p class="subtitle">Личность, скилы, фреймворки. Код AI-кофаундера.</p>
+    
+    <div class="card">
+      <h3>Личность</h3>
+      <div class="form-row-3">
+        <div class="form-group"><label>Имя</label><input id="f-ai-name" onchange="markDirty()"></div>
+        <div class="form-group"><label>MBTI</label><input id="f-ai-mbti" onchange="markDirty()"></div>
+        <div class="form-group"><label>Адизис</label><input id="f-ai-adizes" onchange="markDirty()"></div>
+      </div>
+      <div class="form-group"><label>CliftonStrengths</label><input id="f-ai-clifton" onchange="markDirty()"></div>
+      <div class="form-group"><label>SOUL (описание)</label><textarea id="f-ai-soul" rows="3" onchange="markDirty()"></textarea></div>
+    </div>
+
+    <div class="card-grid">
+      <div class="card">
+        <h3>📚 Книги</h3>
+        <ul class="book-list" id="books-list"></ul>
+      </div>
+      <div class="card">
+        <h3>🧩 Фреймворки</h3>
+        <div class="framework-tags" id="frameworks-list"></div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-top:16px;">
+      <h3>🔍 Сверка сильных сторон</h3>
+      <p class="subtitle">Хватает ли у команды (люди + AI) всех сильных сторон для достижения цели?</p>
+      <div id="strengths-check" style="font-size:14px;"></div>
+    </div>
+  </div>
+
+  <!-- HYPOTHESES -->
+  <div class="section" id="sec-hypotheses">
+    <h2>🧪 Гипотезы</h2>
+    <p class="subtitle">HADI-цикл: Гипотеза → Действие → Данные → Инсайт</p>
+    <div class="card-grid" id="hypotheses-grid"></div>
+    <button class="btn" onclick="addHypothesis()" style="margin-top:8px;">＋ Добавить гипотезу</button>
+  </div>
+
+  <!-- PRODUCTS -->
+  <div class="section" id="sec-products">
+    <h2>📦 Продукты</h2>
+    <p class="subtitle">Steve Blank: Discovery → Validation → Creation → Scale</p>
+    <div class="card-grid" id="products-grid"></div>
+  </div>
+
+  <!-- CIRCLES -->
+  <div class="section" id="sec-circles">
+    <h2>⭕ Круги (Холакратия)</h2>
+    <p class="subtitle">Каждый круг = свой soul, skill, контекст. Run + Change.</p>
+    <div class="card-grid-3" id="circles-grid"></div>
+  </div>
+
+  <!-- TASKS -->
+  <div class="section" id="sec-tasks">
+    <h2>✅ Задачи от AI → людям</h2>
+    <p class="subtitle">AI-кофаундер ставит задачи основателям в рамках их календарных слотов</p>
+    <div class="card" id="tasks-list"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<div class="save-indicator" id="save-ind"></div>
+
+<script>
+const REPO = 'farol-team/farol-team.github.io';
+const DATA_PATH = 'agenthq/data.json';
+const GH_KEY = 'agenthq-gh-token';
+let DATA = null;
+let dirty = false;
+let savePending = null;
+
+// --- Init ---
+async function init() {
+  const resp = await fetch('data.json?t=' + Date.now());
+  DATA = await resp.json();
+  renderAll();
+}
+
+function renderAll() {
+  renderDashboard();
+  renderSettings();
+  renderAI();
+  renderHypotheses();
+  renderProducts();
+  renderCircles();
+  renderTasks();
+}
+
+// --- Tabs ---
+document.querySelectorAll('.tab').forEach(t => {
+  t.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
+    document.querySelectorAll('.section').forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById('sec-' + t.dataset.tab).classList.add('active');
+  });
+});
+
+// --- Dashboard ---
+function renderDashboard() {
+  const m = DATA.metrics;
+  const mrow = document.getElementById('metrics-row');
+  mrow.innerHTML = `
+    <div class="metric-card"><div class="metric-value red">${m.mrr}</div><div class="metric-label">MRR</div></div>
+    <div class="metric-card"><div class="metric-value">${m.leads}</div><div class="metric-label">Leads in pipeline</div></div>
+    <div class="metric-card"><div class="metric-value yellow">${m.daysToDeadline}</div><div class="metric-label">Days to deadline</div></div>
+    <div class="metric-card"><div class="metric-value">${m.gnap_stars}</div><div class="metric-label">GNAP ⭐</div></div>
+  `;
+  document.getElementById('constraint-text').textContent = m.constraint;
+  document.getElementById('goal-text').textContent = DATA.company.goal;
+
+  const dtasks = document.getElementById('dashboard-tasks');
+  dtasks.innerHTML = DATA.tasks.filter(t => t.status !== 'done').map(t => `
+    <div class="task-item">
+      <div class="task-check ${t.status === 'done' ? 'done' : ''}"></div>
+      <div class="task-title ${t.status === 'done' ? 'done' : ''}">${t.title}</div>
+      <span class="task-priority ${t.priority}">${t.priority}</span>
+      <span class="task-meta">→ ${t.for}</span>
+    </div>
+  `).join('');
+}
+
+// --- Settings ---
+function renderSettings() {
+  const c = DATA.company;
+  document.getElementById('f-company-name').value = c.name || '';
+  document.getElementById('f-company-purpose').value = c.purpose || '';
+  document.getElementById('f-company-intention').value = c.intention || '';
+  document.getElementById('f-company-mission').value = c.mission || '';
+  document.getElementById('f-company-goal').value = c.goal || '';
+  document.getElementById('f-company-constraints').value = c.constraints || '';
+  document.getElementById('f-company-policies').value = c.policies || '';
+  document.getElementById('f-company-technologies').value = c.technologies || '';
+
+  const fc = document.getElementById('founders-container');
+  fc.innerHTML = DATA.founders.map((f, i) => `
+    <div class="card" data-founder="${i}">
+      <div class="card-header">
+        <div class="card-title">${f.avatar} ${f.name}</div>
+        <span class="status status-active">${f.role}</span>
+      </div>
+      <div class="form-row-3">
+        <div class="form-group"><label>Имя</label><input value="${esc(f.name)}" onchange="updateFounder(${i},'name',this.value)"></div>
+        <div class="form-group"><label>Роль</label><input value="${esc(f.role)}" onchange="updateFounder(${i},'role',this.value)"></div>
+        <div class="form-group"><label>Аватар (emoji)</label><input value="${esc(f.avatar)}" onchange="updateFounder(${i},'avatar',this.value)"></div>
+      </div>
+      <div class="form-row-3">
+        <div class="form-group"><label>MBTI</label><input value="${esc(f.mbti)}" onchange="updateFounder(${i},'mbti',this.value)" placeholder="Например: ENFJ"></div>
+        <div class="form-group"><label>CliftonStrengths</label><input value="${esc(f.clifton)}" onchange="updateFounder(${i},'clifton',this.value)"></div>
+        <div class="form-group"><label>Адизис</label><input value="${esc(f.adizes)}" onchange="updateFounder(${i},'adizes',this.value)" placeholder="Например: PaEI"></div>
+      </div>
+      <div class="form-row">
+        <div class="form-group"><label>Ресурсы</label><textarea onchange="updateFounder(${i},'resources',this.value)">${esc(f.resources)}</textarea></div>
+        <div class="form-group"><label>Календарные слоты</label><input value="${esc(f.slots)}" onchange="updateFounder(${i},'slots',this.value)"></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function updateFounder(i, field, val) { DATA.founders[i][field] = val; markDirty(); }
+function addFounder() {
+  DATA.founders.push({ id: 'f' + Date.now(), name: 'Новый основатель', avatar: '👤', role: '', mbti: '', clifton: '', adizes: '', resources: '', slots: '' });
+  renderSettings(); markDirty();
+}
+
+// --- AI Co-Founder ---
+function renderAI() {
+  const ai = DATA.aiCofounder;
+  document.getElementById('f-ai-name').value = ai.name || '';
+  document.getElementById('f-ai-mbti').value = ai.mbti || '';
+  document.getElementById('f-ai-adizes').value = ai.adizes || '';
+  document.getElementById('f-ai-clifton').value = ai.clifton || '';
+  document.getElementById('f-ai-soul').value = ai.soul || '';
+
+  document.getElementById('books-list').innerHTML = ai.books.map(b => `<li>📖 ${esc(b)}</li>`).join('');
+  document.getElementById('frameworks-list').innerHTML = ai.frameworks.map(f => `<span class="framework-tag">${esc(f)}</span>`).join('');
+
+  // Strengths check
+  const allClifton = DATA.founders.map(f => f.clifton).join(', ') + ', ' + ai.clifton;
+  document.getElementById('strengths-check').innerHTML = `
+    <p><strong>Команда:</strong> ${allClifton || '<em>Заполните CliftonStrengths</em>'}</p>
+    <p style="margin-top:8px; color:var(--text3);">Заполните тесты для автоматической сверки сильных сторон</p>
+  `;
+}
+
+// --- Hypotheses ---
+const STAGES = ['discovery', 'validation', 'creation', 'scale'];
+function renderHypotheses() {
+  const grid = document.getElementById('hypotheses-grid');
+  grid.innerHTML = DATA.hypotheses.map((h, i) => {
+    const si = STAGES.indexOf(h.stage);
+    const dots = STAGES.map((s, j) => `<div class="stage-dot ${j <= si ? 'filled' : ''} ${j === si ? 'current' : ''}"></div>`).join('');
+    return `
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">${h.name}</div>
+          <span class="status status-${h.status}">${h.status}</span>
+        </div>
+        <p style="font-size:13px; color:var(--text2); margin-bottom:8px;">${esc(h.desc)}</p>
+        <div class="stage-track">${dots}</div>
+        <div class="hyp-stage">${STAGES[si] || '?'} → ${STAGES[si + 1] || 'done'}</div>
+      </div>
+    `;
+  }).join('');
+  document.getElementById('hyp-count').textContent = DATA.hypotheses.length;
+}
+
+function addHypothesis() {
+  DATA.hypotheses.push({ id: 'h' + Date.now(), name: 'Новая гипотеза', status: 'idea', stage: 'discovery', desc: '' });
+  renderHypotheses(); markDirty();
+}
+
+// --- Products ---
+function renderProducts() {
+  const grid = document.getElementById('products-grid');
+  grid.innerHTML = DATA.products.map(p => {
+    const si = STAGES.indexOf(p.stage);
+    const dots = STAGES.map((s, j) => `<div class="stage-dot ${j <= si ? 'filled' : ''} ${j === si ? 'current' : ''}"></div>`).join('');
+    return `
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">${p.name}</div>
+          <span class="status status-testing">${p.price}</span>
+        </div>
+        <p style="font-size:13px; color:var(--text2);">MRR: <strong>${p.mrr}</strong> · <a href="https://${p.url}" target="_blank">${p.url}</a></p>
+        <div class="stage-track" style="margin-top:8px;">${dots}</div>
+        <div class="hyp-stage">${p.stage}</div>
+      </div>
+    `;
+  }).join('');
+  document.getElementById('prod-count').textContent = DATA.products.length;
+}
+
+// --- Circles ---
+function renderCircles() {
+  const grid = document.getElementById('circles-grid');
+  grid.innerHTML = DATA.circles.map(c => `
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title"><span class="circle-emoji">${c.emoji}</span> ${c.name}</div>
+        <span class="status status-${c.status}">${c.status}</span>
+      </div>
+      <p style="font-size:13px; color:var(--text2);">Lead: ${c.lead}</p>
+      <div class="tension-text">⚡ ${c.tension}</div>
+    </div>
+  `).join('');
+}
+
+// --- Tasks ---
+function renderTasks() {
+  const list = document.getElementById('tasks-list');
+  list.innerHTML = DATA.tasks.map(t => `
+    <div class="task-item">
+      <div class="task-check ${t.status === 'done' ? 'done' : ''}" onclick="toggleTask('${t.id}')"></div>
+      <div class="task-title ${t.status === 'done' ? 'done' : ''}">${t.title}</div>
+      <span class="task-priority ${t.priority}">${t.priority}</span>
+      <span class="task-meta">${t.circle} → ${t.for}</span>
+    </div>
+  `).join('');
+  document.getElementById('task-count').textContent = DATA.tasks.filter(t => t.status !== 'done').length;
+}
+
+function toggleTask(id) {
+  const t = DATA.tasks.find(x => x.id === id);
+  if (t) { t.status = t.status === 'done' ? 'todo' : 'done'; renderTasks(); renderDashboard(); markDirty(); }
+}
+
+// --- Persistence (GitHub API) ---
+function markDirty() {
+  // Collect form data
+  DATA.company.name = document.getElementById('f-company-name').value;
+  DATA.company.purpose = document.getElementById('f-company-purpose').value;
+  DATA.company.intention = document.getElementById('f-company-intention').value;
+  DATA.company.mission = document.getElementById('f-company-mission').value;
+  DATA.company.goal = document.getElementById('f-company-goal').value;
+  DATA.company.constraints = document.getElementById('f-company-constraints').value;
+  DATA.company.policies = document.getElementById('f-company-policies').value;
+  DATA.company.technologies = document.getElementById('f-company-technologies').value;
+  DATA.aiCofounder.name = document.getElementById('f-ai-name').value;
+  DATA.aiCofounder.mbti = document.getElementById('f-ai-mbti').value;
+  DATA.aiCofounder.adizes = document.getElementById('f-ai-adizes').value;
+  DATA.aiCofounder.clifton = document.getElementById('f-ai-clifton').value;
+  DATA.aiCofounder.soul = document.getElementById('f-ai-soul').value;
+
+  dirty = true;
+  if (savePending) clearTimeout(savePending);
+  savePending = setTimeout(() => pushToGitHub(), 2000);
+}
+
+function saveAll() {
+  markDirty();
+  pushToGitHub();
+}
+
+async function pushToGitHub() {
+  const token = localStorage.getItem(GH_KEY);
+  if (!token) { showToast('Connect GitHub first (🔗 button)'); return; }
+
+  showSave('⏳ Saving...');
+  try {
+    const getResp = await fetch(`https://api.github.com/repos/${REPO}/contents/${DATA_PATH}`, {
+      headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github.v3+json' }
+    });
+    const existing = getResp.ok ? await getResp.json() : null;
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(DATA, null, 2))));
+    
+    const putResp = await fetch(`https://api.github.com/repos/${REPO}/contents/${DATA_PATH}`, {
+      method: 'PUT',
+      headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: 'AgentHQ: update data',
+        content,
+        sha: existing?.sha || undefined
+      })
+    });
+    if (putResp.ok) { showSave('✅ Saved'); dirty = false; }
+    else { const e = await putResp.json(); showToast('Save failed: ' + (e.message || putResp.status)); showSave('❌ Error'); }
+  } catch (e) { showToast('Save error: ' + e.message); showSave('❌ Error'); }
+}
+
+function connectGitHub() {
+  const existing = localStorage.getItem(GH_KEY);
+  if (existing) {
+    if (confirm('GitHub connected. Disconnect?')) { localStorage.removeItem(GH_KEY); document.getElementById('gh-btn').textContent = '🔗 GitHub'; showToast('Disconnected'); }
+    return;
+  }
+  const token = prompt('GitHub Personal Access Token\n(needs Contents: Read+Write on farol-team repos)');
+  if (token && token.trim()) {
+    localStorage.setItem(GH_KEY, token.trim());
+    document.getElementById('gh-btn').textContent = '✅ GitHub';
+    showToast('Connected! Changes auto-save.');
+  }
+}
+
+// --- Utils ---
+function esc(s) { return (s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+function showSave(msg) {
+  const s = document.getElementById('save-ind');
+  s.textContent = msg; s.classList.add('show');
+  setTimeout(() => s.classList.remove('show'), 2000);
+}
+
+// Check GitHub on load
+if (localStorage.getItem(GH_KEY)) document.getElementById('gh-btn').textContent = '✅ GitHub';
+
+init();
+</script>
 </body>
 </html>
