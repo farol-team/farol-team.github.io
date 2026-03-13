@@ -10,6 +10,91 @@
     body { margin: 0; padding: 0; background: #0a0a0f; }
   </style>
   <script type="module" crossorigin src="/agenthq/assets/index-BTL_YZt5.js"></script>
+  <script type="module">
+    // A2UI Theme Fix: bundle doesn't provide theme via Lit Context
+    // Inject default theme after components render
+    const DEFAULT_THEME = {
+      components: {
+        Text: { all: 'a2ui-t', h1: 'a2ui-t-h1', h2: 'a2ui-t-h2', h3: 'a2ui-t-h3', h4: 'a2ui-t-h4', h5: 'a2ui-t-h5', body: 'a2ui-t-body', caption: 'a2ui-t-cap' },
+        Card: 'a2ui-card-c',
+        Column: 'a2ui-col',
+        Row: 'a2ui-row-c',
+        Icon: 'a2ui-icon-c',
+        Root: 'a2ui-root-c',
+        Button: 'a2ui-btn',
+        Badge: { container: 'a2ui-badge-c', label: 'a2ui-badge-l' },
+        CheckBox: { container: 'a2ui-cb-c', element: 'a2ui-cb-e', label: 'a2ui-cb-l' },
+        AudioPlayer: 'a2ui-ap',
+        Image: 'a2ui-img',
+        Video: 'a2ui-vid',
+        TextField: { container: 'a2ui-tf-c', input: 'a2ui-tf-i', label: 'a2ui-tf-l' },
+        RadioButton: { container: 'a2ui-rb-c', element: 'a2ui-rb-e', label: 'a2ui-rb-l' },
+        Slider: { container: 'a2ui-sl-c', track: 'a2ui-sl-t', thumb: 'a2ui-sl-th', label: 'a2ui-sl-l' },
+        Switch: { container: 'a2ui-sw-c', element: 'a2ui-sw-e', label: 'a2ui-sw-l' },
+        Dropdown: { container: 'a2ui-dd-c', trigger: 'a2ui-dd-t', menu: 'a2ui-dd-m', item: 'a2ui-dd-i' },
+        WebView: 'a2ui-wv',
+        Divider: 'a2ui-div'
+      },
+      markdown: {},
+      additionalStyles: {}
+    };
+
+    function injectTheme() {
+      const el = document.querySelector('agent-hq');
+      if (!el?.shadowRoot) return setTimeout(injectTheme, 100);
+      const surface = el.shadowRoot.querySelector('a2ui-surface');
+      if (!surface?.shadowRoot) return setTimeout(injectTheme, 100);
+      const allEls = surface.shadowRoot.querySelectorAll('*');
+      if (allEls.length < 2) return setTimeout(injectTheme, 100);
+      
+      allEls.forEach(child => {
+        if (child.theme === null || child.theme === undefined) {
+          child.theme = DEFAULT_THEME;
+        }
+        if (child.requestUpdate) child.requestUpdate();
+      });
+
+      // Also inject dataModelUpdate data
+      const processor = surface.processor;
+      if (processor?.processMessages) {
+        processor.processMessages([
+          {"dataModelUpdate": {"surfaceId": "circles-dashboard", "data": {
+            "product": {"status": "● Live", "metric": "2 products", "detail": "Sebastian + Ori deployed on Fly.io"},
+            "marketing": {"status": "◐ WIP", "metric": "2 followers", "detail": "@cofounder_run — daily tweets, GNAP thread"},
+            "revenue": {"status": "⚠ Blocked", "metric": "$0 MRR", "detail": "Billing not connected — Constraint #1"},
+            "clients": {"status": "◐ Pipeline", "metric": "5 leads", "detail": "Naora, Anna, BUNT, SHAMAN, Alёna"},
+            "finance": {"status": "⚠ Pre-rev", "metric": "71 days", "detail": "Until $200K deadline (May 23)"}
+          }}},
+          {"dataModelUpdate": {"surfaceId": "gnap-board", "data": {
+            "todo1": {"title": "Stripe/LemonSqueezy billing", "meta": "Constraint #1 — blocks all revenue"},
+            "todo2": {"title": "Sebastian onboarding fix", "meta": "Alёna dropped off during setup"},
+            "todo3": {"title": "WhatsApp bot for Naora", "meta": "EV leasing — deadline missed"},
+            "wip1": {"title": "AgentHQ dashboard", "meta": "A2UI + GNAP — this page"},
+            "wip2": {"title": "Awesome Agent Services", "meta": "50+ services, daily cron scan"},
+            "review1": {"title": "GNAP v4 spec cleanup", "meta": "10 ⭐ — first external user (Matt)"},
+            "done1": {"title": "Self-service deploy", "meta": "✅ Fly.io Machines API — constraint lifted Mar 5"},
+            "done2": {"title": "farol.team products split", "meta": "✅ For Humans / For Agents sections"}
+          }}},
+          {"dataModelUpdate": {"surfaceId": "tensions", "data": {
+            "t1": {"title": "Billing blocks everything", "body": "$0 revenue for 8 days after self-service deploy was fixed. Every day without billing = ~$2,778 lost.", "time": "Mar 13"},
+            "t2": {"title": "No way for Ori to earn $1", "body": "Listed on toku.agency, created ETH wallet — zero opportunities. Agent-to-agent economy doesn't exist yet.", "time": "Mar 13"},
+            "t3": {"title": "A2UI needs theme provider", "body": "Bundle doesn't inject theme via Lit Context — components render empty without manual fix.", "time": "Mar 13"}
+          }}},
+          {"dataModelUpdate": {"surfaceId": "agents", "data": {
+            "ori": {"name": "Ori ✨", "task": "Strategy, research, awesome-list, dashboard"},
+            "carl": {"name": "Carl 📊", "task": "CRO — revenue targets, billing push"},
+            "mkt": {"name": "Marketing Circle 📣", "task": "Twitter, content, reply marketing"},
+            "client": {"name": "Client Agent 🤝", "task": "Onboarding, support, feedback"}
+          }}}
+        ]);
+        // Re-render surfaces
+        allEls.forEach(child => {
+          if (child.requestUpdate) child.requestUpdate();
+        });
+      }
+    }
+    setTimeout(injectTheme, 500);
+  </script>
 </head>
 <body>
   <agent-hq></agent-hq>
