@@ -1,174 +1,309 @@
-[
-  {
-    "surfaceUpdate": {
-      "surfaceId": "tensions",
-      "components": [
-        {
-          "id": "root",
-          "component": {
-            "Column": {
-              "children": {
-                "explicitList": ["tensions-title", "tension-1", "divider-1", "tension-2", "divider-2", "tension-3"]
-              }
-            }
+{
+  "surfaceId": "tensions",
+  "components": [
+    {
+      "id": "root",
+      "component": {
+        "Column": {
+          "children": {
+            "explicitList": [
+              "tensions-title",
+              "tension-1",
+              "divider-1",
+              "tension-2",
+              "divider-2",
+              "tension-3"
+            ]
           }
-        },
-        {
-          "id": "tensions-title",
-          "component": { "Text": { "text": { "literalString": "⚡ Open Tensions" }, "usageHint": "h2" } }
-        },
-        {
-          "id": "tension-1",
-          "component": { "Card": { "child": "t1-col" } }
-        },
-        {
-          "id": "t1-col",
-          "component": {
-            "Column": {
-              "children": { "explicitList": ["t1-header", "t1-body", "t1-time"] }
-            }
-          }
-        },
-        {
-          "id": "t1-header",
-          "component": {
-            "Row": {
-              "children": { "explicitList": ["t1-badge", "t1-title"] },
-              "alignment": "center"
-            }
-          }
-        },
-        {
-          "id": "t1-badge",
-          "component": { "Card": { "child": "t1-badge-text" } }
-        },
-        {
-          "id": "t1-badge-text",
-          "component": { "Text": { "text": { "literalString": "Escalation" }, "usageHint": "caption" } }
-        },
-        {
-          "id": "t1-title",
-          "component": { "Text": { "text": { "path": "/t1/title" }, "usageHint": "h4" } }
-        },
-        {
-          "id": "t1-body",
-          "component": { "Text": { "text": { "path": "/t1/body" }, "usageHint": "body" } }
-        },
-        {
-          "id": "t1-time",
-          "component": { "Text": { "text": { "path": "/t1/time" }, "usageHint": "caption" } }
-        },
-
-        { "id": "divider-1", "component": { "Divider": {} } },
-
-        {
-          "id": "tension-2",
-          "component": { "Card": { "child": "t2-col" } }
-        },
-        {
-          "id": "t2-col",
-          "component": {
-            "Column": {
-              "children": { "explicitList": ["t2-header", "t2-body", "t2-time"] }
-            }
-          }
-        },
-        {
-          "id": "t2-header",
-          "component": {
-            "Row": {
-              "children": { "explicitList": ["t2-badge", "t2-title"] },
-              "alignment": "center"
-            }
-          }
-        },
-        {
-          "id": "t2-badge",
-          "component": { "Card": { "child": "t2-badge-text" } }
-        },
-        {
-          "id": "t2-badge-text",
-          "component": { "Text": { "text": { "literalString": "Between circles" }, "usageHint": "caption" } }
-        },
-        {
-          "id": "t2-title",
-          "component": { "Text": { "text": { "path": "/t2/title" }, "usageHint": "h4" } }
-        },
-        {
-          "id": "t2-body",
-          "component": { "Text": { "text": { "path": "/t2/body" }, "usageHint": "body" } }
-        },
-        {
-          "id": "t2-time",
-          "component": { "Text": { "text": { "path": "/t2/time" }, "usageHint": "caption" } }
-        },
-
-        { "id": "divider-2", "component": { "Divider": {} } },
-
-        {
-          "id": "tension-3",
-          "component": { "Card": { "child": "t3-col" } }
-        },
-        {
-          "id": "t3-col",
-          "component": {
-            "Column": {
-              "children": { "explicitList": ["t3-header", "t3-body", "t3-time"] }
-            }
-          }
-        },
-        {
-          "id": "t3-header",
-          "component": {
-            "Row": {
-              "children": { "explicitList": ["t3-badge", "t3-title"] },
-              "alignment": "center"
-            }
-          }
-        },
-        {
-          "id": "t3-badge",
-          "component": { "Card": { "child": "t3-badge-text" } }
-        },
-        {
-          "id": "t3-badge-text",
-          "component": { "Text": { "text": { "literalString": "Within circle" }, "usageHint": "caption" } }
-        },
-        {
-          "id": "t3-title",
-          "component": { "Text": { "text": { "path": "/t3/title" }, "usageHint": "h4" } }
-        },
-        {
-          "id": "t3-body",
-          "component": { "Text": { "text": { "path": "/t3/body" }, "usageHint": "body" } }
-        },
-        {
-          "id": "t3-time",
-          "component": { "Text": { "text": { "path": "/t3/time" }, "usageHint": "caption" } }
         }
-      ]
+      }
+    },
+    {
+      "id": "tensions-title",
+      "component": {
+        "Text": {
+          "text": {
+            "literalString": "\u26a1 Open Tensions"
+          },
+          "usageHint": "h2"
+        }
+      }
+    },
+    {
+      "id": "tension-1",
+      "component": {
+        "Card": {
+          "child": "t1-col"
+        }
+      }
+    },
+    {
+      "id": "t1-col",
+      "component": {
+        "Column": {
+          "children": {
+            "explicitList": [
+              "t1-header",
+              "t1-body",
+              "t1-time"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "t1-header",
+      "component": {
+        "Row": {
+          "children": {
+            "explicitList": [
+              "t1-badge",
+              "t1-title"
+            ]
+          },
+          "alignment": "center"
+        }
+      }
+    },
+    {
+      "id": "t1-badge",
+      "component": {
+        "Card": {
+          "child": "t1-badge-text"
+        }
+      }
+    },
+    {
+      "id": "t1-badge-text",
+      "component": {
+        "Text": {
+          "text": {
+            "literalString": "Escalation"
+          },
+          "usageHint": "caption"
+        }
+      }
+    },
+    {
+      "id": "t1-title",
+      "component": {
+        "Text": {
+          "text": {
+            "path": "/t1/title"
+          },
+          "usageHint": "h4"
+        }
+      }
+    },
+    {
+      "id": "t1-body",
+      "component": {
+        "Text": {
+          "text": {
+            "path": "/t1/body"
+          },
+          "usageHint": "body"
+        }
+      }
+    },
+    {
+      "id": "t1-time",
+      "component": {
+        "Text": {
+          "text": {
+            "path": "/t1/time"
+          },
+          "usageHint": "caption"
+        }
+      }
+    },
+    {
+      "id": "divider-1",
+      "component": {
+        "Divider": {}
+      }
+    },
+    {
+      "id": "tension-2",
+      "component": {
+        "Card": {
+          "child": "t2-col"
+        }
+      }
+    },
+    {
+      "id": "t2-col",
+      "component": {
+        "Column": {
+          "children": {
+            "explicitList": [
+              "t2-header",
+              "t2-body",
+              "t2-time"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "t2-header",
+      "component": {
+        "Row": {
+          "children": {
+            "explicitList": [
+              "t2-badge",
+              "t2-title"
+            ]
+          },
+          "alignment": "center"
+        }
+      }
+    },
+    {
+      "id": "t2-badge",
+      "component": {
+        "Card": {
+          "child": "t2-badge-text"
+        }
+      }
+    },
+    {
+      "id": "t2-badge-text",
+      "component": {
+        "Text": {
+          "text": {
+            "literalString": "Between circles"
+          },
+          "usageHint": "caption"
+        }
+      }
+    },
+    {
+      "id": "t2-title",
+      "component": {
+        "Text": {
+          "text": {
+            "path": "/t2/title"
+          },
+          "usageHint": "h4"
+        }
+      }
+    },
+    {
+      "id": "t2-body",
+      "component": {
+        "Text": {
+          "text": {
+            "path": "/t2/body"
+          },
+          "usageHint": "body"
+        }
+      }
+    },
+    {
+      "id": "t2-time",
+      "component": {
+        "Text": {
+          "text": {
+            "path": "/t2/time"
+          },
+          "usageHint": "caption"
+        }
+      }
+    },
+    {
+      "id": "divider-2",
+      "component": {
+        "Divider": {}
+      }
+    },
+    {
+      "id": "tension-3",
+      "component": {
+        "Card": {
+          "child": "t3-col"
+        }
+      }
+    },
+    {
+      "id": "t3-col",
+      "component": {
+        "Column": {
+          "children": {
+            "explicitList": [
+              "t3-header",
+              "t3-body",
+              "t3-time"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "t3-header",
+      "component": {
+        "Row": {
+          "children": {
+            "explicitList": [
+              "t3-badge",
+              "t3-title"
+            ]
+          },
+          "alignment": "center"
+        }
+      }
+    },
+    {
+      "id": "t3-badge",
+      "component": {
+        "Card": {
+          "child": "t3-badge-text"
+        }
+      }
+    },
+    {
+      "id": "t3-badge-text",
+      "component": {
+        "Text": {
+          "text": {
+            "literalString": "Within circle"
+          },
+          "usageHint": "caption"
+        }
+      }
+    },
+    {
+      "id": "t3-title",
+      "component": {
+        "Text": {
+          "text": {
+            "path": "/t3/title"
+          },
+          "usageHint": "h4"
+        }
+      }
+    },
+    {
+      "id": "t3-body",
+      "component": {
+        "Text": {
+          "text": {
+            "path": "/t3/body"
+          },
+          "usageHint": "body"
+        }
+      }
+    },
+    {
+      "id": "t3-time",
+      "component": {
+        "Text": {
+          "text": {
+            "path": "/t3/time"
+          },
+          "usageHint": "caption"
+        }
+      }
     }
-  },
-  {
-    "dataModelUpdate": {
-      "surfaceId": "tensions",
-      "contents": [
-        { "key": "t1/title", "valueString": "Billing blocked → $0 revenue" },
-        { "key": "t1/body", "valueString": "💰 Revenue → 🔧 Product → Coordinator. Stripe integration blocked 19+ days. Per constitution: 'Zero revenue for a week → crisis signal.' This is week 3. Impact: ~$2,700/day lost." },
-        { "key": "t1/time", "valueString": "Opened 22 Feb · Escalated 5 Mar" },
-        { "key": "t2/title", "valueString": "Content velocity blocked by approval" },
-        { "key": "t2/body", "valueString": "📣 Marketing → Coordinator. Current process requires founder approval for every tweet. Constitution says: 'Each circle is sovereign.' Proposal: Marketing publishes freely, founders review weekly." },
-        { "key": "t2/time", "valueString": "Opened 2 Mar" },
-        { "key": "t3/title", "valueString": "Onboarding drop-off" },
-        { "key": "t3/body", "valueString": "🤝 Clients → 🔧 Product. Алёна tested Sebastian, dropped off during onboarding. UX review needed." },
-        { "key": "t3/time", "valueString": "Opened 12 Mar" }
-      ]
-    }
-  },
-  {
-    "beginRendering": {
-      "surfaceId": "tensions",
-      "root": "root"
-    }
-  }
-]
+  ]
+}
