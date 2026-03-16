@@ -321,8 +321,8 @@ h3 { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: var(--text);
   <!-- CIRCLES -->
   <div class="section" id="sec-circles">
     <h2>⭕ Круги (Холакратия)</h2>
-    <p class="subtitle">Каждый круг = свой soul, skill, контекст. Run + Change.</p>
-    <div class="card-grid-3" id="circles-grid"></div>
+    <p class="subtitle">Каждый круг = свой soul, skill, контекст. Нажми чтобы раскрыть.</p>
+    <div id="circles-grid"></div>
   </div>
 
   <!-- TASKS -->
@@ -524,16 +524,63 @@ function renderProducts() {
 // --- Circles ---
 function renderCircles() {
   const grid = document.getElementById('circles-grid');
-  grid.innerHTML = DATA.circles.map(c => `
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title"><span class="circle-emoji">${c.emoji}</span> ${c.name}</div>
-        <span class="status status-${c.status}">${c.status}</span>
+  grid.innerHTML = DATA.circles.map(c => {
+    const circleTasks = DATA.tasks.filter(t => t.circle === c.name && t.status !== 'done');
+    const tasksHtml = circleTasks.length
+      ? circleTasks.map(t => `
+          <div class="task-item" style="padding:8px 0;">
+            <div class="task-check ${t.status === 'done' ? 'done' : ''}" onclick="toggleTask('${t.id}')"></div>
+            <div class="task-title" style="font-size:13px;">${t.title}</div>
+            <span class="task-priority ${t.priority}" style="font-size:10px;">${t.priority}</span>
+            <span class="task-meta">→ ${t.for}</span>
+          </div>`).join('')
+      : '<p style="font-size:12px;color:var(--text3);padding:8px 0;">No active tasks</p>';
+
+    return `
+    <div class="card" style="margin-bottom:10px;cursor:pointer;" onclick="toggleCircle('${c.id}')">
+      <div class="card-header" style="margin-bottom:0;">
+        <div class="card-title" style="font-size:16px;gap:10px;">
+          <span style="font-size:24px;">${c.emoji}</span>
+          <span>${c.name}</span>
+          <span style="font-size:12px;color:var(--text3);font-weight:400;">Lead: ${c.lead}</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <span class="status status-${c.status}">${c.status}</span>
+          <span id="chevron-${c.id}" style="color:var(--text3);font-size:12px;transition:transform 0.2s;">▼</span>
+        </div>
       </div>
-      <p style="font-size:13px; color:var(--text2);">Lead: ${c.lead}</p>
-      <div class="tension-text">⚡ ${c.tension}</div>
-    </div>
-  `).join('');
+      <div style="font-size:12px;color:var(--yellow);margin-top:8px;">⚡ ${esc(c.tension)}</div>
+
+      <div id="circle-detail-${c.id}" style="display:none;margin-top:16px;border-top:1px solid var(--border);padding-top:16px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+          <div>
+            <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text3);margin-bottom:6px;">🧠 Soul</div>
+            <div style="font-size:13px;color:var(--text2);line-height:1.5;">${esc(c.soul || '—')}</div>
+          </div>
+          <div>
+            <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text3);margin-bottom:6px;">🛠 Skill</div>
+            <div style="font-size:13px;color:var(--text2);line-height:1.5;">${esc(c.skill || '—')}</div>
+          </div>
+        </div>
+        <div style="margin-bottom:16px;">
+          <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text3);margin-bottom:6px;">📍 Context</div>
+          <div style="font-size:13px;color:var(--text2);line-height:1.5;">${esc(c.context || '—')}</div>
+        </div>
+        <div>
+          <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text3);margin-bottom:6px;">✅ Active Tasks (${circleTasks.length})</div>
+          ${tasksHtml}
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleCircle(id) {
+  const detail = document.getElementById('circle-detail-' + id);
+  const chevron = document.getElementById('chevron-' + id);
+  const open = detail.style.display === 'block';
+  detail.style.display = open ? 'none' : 'block';
+  chevron.style.transform = open ? '' : 'rotate(180deg)';
 }
 
 // --- Tasks ---

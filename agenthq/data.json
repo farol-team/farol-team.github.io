@@ -47,36 +47,196 @@
       "High Growth Handbook — Elad Gil",
       "Организации будущего — Фредерик Лалу"
     ],
-    "frameworks": ["AJTBD", "HADI-циклы", "OKR", "Холакратия", "TOC"]
+    "frameworks": [
+      "AJTBD",
+      "HADI-циклы",
+      "OKR",
+      "Холакратия",
+      "TOC"
+    ]
   },
   "hypotheses": [
-    {"id": "h1", "name": "Sebastian массовый", "status": "testing", "stage": "validation", "desc": "OpenClaw в Telegram за минуту, $49/мес"},
-    {"id": "h2", "name": "Маркетплейс Себастианов", "status": "idea", "stage": "discovery", "desc": "30% комиссия от user-generated агентов"},
-    {"id": "h3", "name": "Ori AI кофаундер", "status": "testing", "stage": "validation", "desc": "AI-native компании, $200/мес"},
-    {"id": "h4", "name": "Цифровые сотрудники", "status": "idea", "stage": "discovery", "desc": "AI откликается на вакансии, получает зарплату"},
-    {"id": "h5", "name": "Agency: сборка агентов", "status": "idea", "stage": "discovery", "desc": "Сборка агентов для малого бизнеса"},
-    {"id": "h6", "name": "Мастермайнд", "status": "idea", "stage": "discovery", "desc": "Community + BNI для AI-кофаундеров"},
-    {"id": "h7", "name": "Symphony-as-a-Service", "status": "idea", "stage": "discovery", "desc": "Канбан → агент → PR, hosted на Fly.io"},
-    {"id": "h8", "name": "OpenClaw Side Panel", "status": "idea", "stage": "discovery", "desc": "Chrome extension SaaS"}
+    {
+      "id": "h1",
+      "name": "Sebastian массовый",
+      "status": "testing",
+      "stage": "validation",
+      "desc": "OpenClaw в Telegram за минуту, $49/мес"
+    },
+    {
+      "id": "h2",
+      "name": "Маркетплейс Себастианов",
+      "status": "idea",
+      "stage": "discovery",
+      "desc": "30% комиссия от user-generated агентов"
+    },
+    {
+      "id": "h3",
+      "name": "Ori AI кофаундер",
+      "status": "testing",
+      "stage": "validation",
+      "desc": "AI-native компании, $200/мес"
+    },
+    {
+      "id": "h4",
+      "name": "Цифровые сотрудники",
+      "status": "idea",
+      "stage": "discovery",
+      "desc": "AI откликается на вакансии, получает зарплату"
+    },
+    {
+      "id": "h5",
+      "name": "Agency: сборка агентов",
+      "status": "idea",
+      "stage": "discovery",
+      "desc": "Сборка агентов для малого бизнеса"
+    },
+    {
+      "id": "h6",
+      "name": "Мастермайнд",
+      "status": "idea",
+      "stage": "discovery",
+      "desc": "Community + BNI для AI-кофаундеров"
+    },
+    {
+      "id": "h7",
+      "name": "Symphony-as-a-Service",
+      "status": "idea",
+      "stage": "discovery",
+      "desc": "Канбан → агент → PR, hosted на Fly.io"
+    },
+    {
+      "id": "h8",
+      "name": "OpenClaw Side Panel",
+      "status": "idea",
+      "stage": "discovery",
+      "desc": "Chrome extension SaaS"
+    }
   ],
   "products": [
-    {"id": "p1", "name": "Sebastian", "price": "$49/мес", "stage": "validation", "url": "getsebastian.app", "mrr": "$0"},
-    {"id": "p2", "name": "Ori Co-Founder", "price": "$200/мес", "stage": "validation", "url": "cofounder.run", "mrr": "$0"},
-    {"id": "p3", "name": "Farol.io (Hire AI Team)", "price": "TBD", "stage": "discovery", "url": "farol.io", "mrr": "$0"}
+    {
+      "id": "p1",
+      "name": "Sebastian",
+      "price": "$49/мес",
+      "stage": "validation",
+      "url": "getsebastian.app",
+      "mrr": "$0"
+    },
+    {
+      "id": "p2",
+      "name": "Ori Co-Founder",
+      "price": "$200/мес",
+      "stage": "validation",
+      "url": "cofounder.run",
+      "mrr": "$0"
+    },
+    {
+      "id": "p3",
+      "name": "Farol.io (Hire AI Team)",
+      "price": "TBD",
+      "stage": "discovery",
+      "url": "farol.io",
+      "mrr": "$0"
+    }
   ],
   "circles": [
-    {"id": "c1", "name": "Product", "emoji": "🔧", "status": "active", "lead": "ori", "tension": "Sebastian onboarding broken"},
-    {"id": "c2", "name": "Marketing", "emoji": "📣", "status": "active", "lead": "marketing-agent", "tension": "Twitter approval blocks content"},
-    {"id": "c3", "name": "Revenue", "emoji": "💰", "status": "blocked", "lead": "carl", "tension": "Billing not connected"},
-    {"id": "c4", "name": "Clients", "emoji": "🤝", "status": "active", "lead": "client-agent", "tension": "Alёna dropped off"},
-    {"id": "c5", "name": "Finance", "emoji": "📊", "status": "warning", "lead": "ori", "tension": "$0 revenue, 71 days to deadline"}
+    {
+      "id": "c1",
+      "name": "Product",
+      "emoji": "🔧",
+      "status": "active",
+      "lead": "ori",
+      "tension": "Sebastian onboarding broken",
+      "soul": "Build products users love. Ship fast, iterate based on real feedback. Never polish what nobody uses.",
+      "skill": "Product design, UX, feature prioritization, onboarding flows, user interviews, roadmap.",
+      "context": "Sebastian live at getsebastian.app. Onboarding broken — Alena dropped off. Ori onboarding in progress. Next: fix startup text, approve workflow."
+    },
+    {
+      "id": "c2",
+      "name": "Marketing",
+      "emoji": "📣",
+      "status": "active",
+      "lead": "marketing-agent",
+      "tension": "Twitter approval blocks content velocity",
+      "soul": "Make the right people aware we exist. Distribution is product. Content is leverage.",
+      "skill": "Twitter/X, SEO, building in public, community, reply marketing, LinkedIn.",
+      "context": "Daily tweets running via cron. Reply marketing identified as top tactic. Waiting for Alena TG channels. Google Ads not started. No paid budget allocated yet."
+    },
+    {
+      "id": "c3",
+      "name": "Revenue",
+      "emoji": "💰",
+      "status": "blocked",
+      "lead": "carl",
+      "tension": "Billing not connected — /bin/bash MRR after 24+ days",
+      "soul": "Revenue is oxygen. No billing = no company. Move fast, remove every friction from money flow.",
+      "skill": "Stripe, pricing strategy, sales funnel, conversion optimization, unit economics.",
+      "context": "BLOCKED: no legal entity → no Stripe. LemonSqueezy as alternative being evaluated. Carl (CRO agent) created. Clients ready to pay but cannot."
+    },
+    {
+      "id": "c4",
+      "name": "Clients",
+      "emoji": "🤝",
+      "status": "active",
+      "lead": "mayak",
+      "tension": "Alena dropped off at onboarding",
+      "soul": "Clients win when we win. Listen first, sell second. Every conversation is a product insight.",
+      "skill": "Sales, onboarding, relationship management, demos, follow-up cadence.",
+      "context": "Pipeline: Naora (EV leasing PT), BUNT, SHAMAN, Leads4You, Alena (TG channels). Naora blocked by approval gate. Alena — technical onboarding text killed conversion."
+    },
+    {
+      "id": "c5",
+      "name": "Finance",
+      "emoji": "📊",
+      "status": "warning",
+      "lead": "ori",
+      "tension": "/bin/bash revenue, 68 days to 00K deadline",
+      "soul": "Know the numbers. Protect runway. Make every dollar count. No vanity metrics.",
+      "skill": "Unit economics, runway calculation, cost tracking, LLM cost optimization.",
+      "context": "Anthropic Sonnet: ~0-40/client/mo. MiniMax M2.5: ~-5. Target margin ≥80%. Current runway unknown. Revenue deadline: May 23, 2026."
+    }
   ],
   "tasks": [
-    {"id": "t1", "title": "Подключить Stripe/LemonSqueezy", "for": "leo", "priority": "critical", "status": "todo", "circle": "Revenue"},
-    {"id": "t2", "title": "Починить Sebastian онбординг", "for": "leo", "priority": "high", "status": "todo", "circle": "Product"},
-    {"id": "t3", "title": "Записать видео-демо Ori", "for": "mayak", "priority": "high", "status": "done", "circle": "Marketing"},
-    {"id": "t4", "title": "Заполнить MBTI + Адизис", "for": "mayak", "priority": "medium", "status": "todo", "circle": "Settings"},
-    {"id": "t5", "title": "Заполнить MBTI + Адизис", "for": "leo", "priority": "medium", "status": "todo", "circle": "Settings"}
+    {
+      "id": "t1",
+      "title": "Подключить Stripe/LemonSqueezy",
+      "for": "leo",
+      "priority": "critical",
+      "status": "todo",
+      "circle": "Revenue"
+    },
+    {
+      "id": "t2",
+      "title": "Починить Sebastian онбординг",
+      "for": "leo",
+      "priority": "high",
+      "status": "todo",
+      "circle": "Product"
+    },
+    {
+      "id": "t3",
+      "title": "Записать видео-демо Ori",
+      "for": "mayak",
+      "priority": "high",
+      "status": "done",
+      "circle": "Marketing"
+    },
+    {
+      "id": "t4",
+      "title": "Заполнить MBTI + Адизис",
+      "for": "mayak",
+      "priority": "medium",
+      "status": "todo",
+      "circle": "Settings"
+    },
+    {
+      "id": "t5",
+      "title": "Заполнить MBTI + Адизис",
+      "for": "leo",
+      "priority": "medium",
+      "status": "todo",
+      "circle": "Settings"
+    }
   ],
   "metrics": {
     "mrr": "$0",
