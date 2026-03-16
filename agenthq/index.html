@@ -328,9 +328,10 @@ h3 { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: var(--text);
 
   <!-- CIRCLES -->
   <div class="section" id="sec-circles">
-    <h2>⭕ Круги (Холакратия)</h2>
-    <p class="subtitle">Каждый круг = свой soul, skill, контекст. Нажми чтобы раскрыть.</p>
-    <div id="circles-grid"></div>
+    <h2>⭕ Circles — Farol Labs</h2>
+    <p class="subtitle">Holacracy structure. Click a circle to explore.</p>
+    <div id="circles-svg-container"></div>
+    <div id="circle-detail-panel" style="display:none;margin-top:20px;"></div>
   </div>
 
   <!-- TASKS -->
@@ -740,16 +741,20 @@ function toggleCircle(id) {
 
 // --- Tasks ---
 function renderTasks() {
+  // tasks-list is legacy; tasks now live in kanban board
   const list = document.getElementById('tasks-list');
-  list.innerHTML = DATA.tasks.map(t => `
-    <div class="task-item">
-      <div class="task-check ${t.status === 'done' ? 'done' : ''}" onclick="toggleTask('${t.id}')"></div>
-      <div class="task-title ${t.status === 'done' ? 'done' : ''}">${t.title}</div>
-      <span class="task-priority ${t.priority}">${t.priority}</span>
-      <span class="task-meta">${t.circle} → ${t.for}</span>
-    </div>
-  `).join('');
-  document.getElementById('task-count').textContent = DATA.tasks.filter(t => t.status !== 'done').length;
+  if (list) {
+    list.innerHTML = DATA.tasks.map(t => `
+      <div class="task-item">
+        <div class="task-check ${t.status === 'done' ? 'done' : ''}" onclick="toggleTask('${t.id}')"></div>
+        <div class="task-title ${t.status === 'done' ? 'done' : ''}">${t.title}</div>
+        <span class="task-priority ${t.priority}">${t.priority}</span>
+        <span class="task-meta">${t.circle} → ${t.for}</span>
+      </div>
+    `).join('');
+  }
+  const tc = document.getElementById('task-count');
+  if (tc) tc.textContent = DATA.tasks.filter(t => t.status !== 'done').length;
 }
 
 function toggleTask(id) {
