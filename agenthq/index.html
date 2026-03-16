@@ -443,19 +443,50 @@ function renderSettings() {
         <div class="form-group"><label>CliftonStrengths</label><input value="${esc(f.clifton)}" onchange="updateFounder(${i},'clifton',this.value)"></div>
         <div class="form-group"><label>Адизис</label><input value="${esc(f.adizes)}" onchange="updateFounder(${i},'adizes',this.value)" placeholder="Например: PaEI"></div>
       </div>
-      <div class="form-row">
-        <div class="form-group"><label>Ресурсы</label><textarea onchange="updateFounder(${i},'resources',this.value)">${esc(f.resources)}</textarea></div>
-        <div class="form-group"><label>Календарные слоты</label><input value="${esc(f.slots)}" onchange="updateFounder(${i},'slots',this.value)"></div>
+      <div class="form-row-3">
+        <div class="form-group"><label>⏱ Часов/неделю для AI</label><input type="number" min="0" max="80" value="${esc(f.hoursPerWeek||'')}" placeholder="напр. 10" onchange="updateFounder(${i},'hoursPerWeek',+this.value)"></div>
+        <div class="form-group"><label>📅 Слоты</label><input value="${esc(f.slots)}" onchange="updateFounder(${i},'slots',this.value)" placeholder="напр. Пн-Ср утро"></div>
+        <div class="form-group"><label>📍 Часовой пояс</label><input value="${esc(f.tz||'')}" onchange="updateFounder(${i},'tz',this.value)" placeholder="напр. UTC+3"></div>
       </div>
+      <div class="form-group"><label>💡 Скилы (что хорошо получается)</label><input value="${esc((f.skills||[]).join(', '))}" placeholder="напр. продажи, питчинг, Python, design" onchange="updateFounder(${i},'skills',this.value.split(',').map(s=>s.trim()).filter(Boolean))"></div>
     </div>
   `).join('');
+
+  // Resources summary for AI
+  const totalHours = DATA.founders.reduce((sum, f) => sum + (f.hoursPerWeek || 0), 0);
+  const resHtml = DATA.founders.map(f => {
+    const h = f.hoursPerWeek || 0;
+    const skills = (f.skills||[]).join(' · ') || '—';
+    return `<div style="display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid var(--border);">
+      <span style="font-size:18px;">${f.avatar}</span>
+      <span style="font-weight:600;min-width:80px;">${esc(f.name)}</span>
+      <span style="color:var(--accent2);font-weight:700;min-width:60px;">${h}ч/нед</span>
+      <span style="color:var(--text2);font-size:12px;">${esc(skills)}</span>
+    </div>`;
+  }).join('');
+
+  let resSummary = document.getElementById('founder-resources-summary');
+  if (!resSummary) {
+    const fc = document.getElementById('founders-container');
+    resSummary = document.createElement('div');
+    resSummary.id = 'founder-resources-summary';
+    resSummary.style.cssText = 'margin-top:12px;padding:14px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);';
+    fc.parentNode.insertBefore(resSummary, fc.nextSibling);
+  }
+  resSummary.innerHTML = `
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+      <span style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text3);">🔋 Ресурс для AI-кофаундера</span>
+      <span style="font-size:18px;font-weight:700;color:var(--accent2);">${totalHours}ч/нед</span>
+    </div>
+    ${resHtml}
+  `;
 
   renderAI();
 }
 
 function updateFounder(i, field, val) { DATA.founders[i][field] = val; markDirty(); }
 function addFounder() {
-  DATA.founders.push({ id: 'f' + Date.now(), name: 'Новый основатель', avatar: '👤', role: '', mbti: '', clifton: '', adizes: '', resources: '', slots: '' });
+  DATA.founders.push({ id: 'f' + Date.now(), name: 'Новый основатель', avatar: '👤', role: '', mbti: '', clifton: '', adizes: '', resources: '', slots: '', hoursPerWeek: 0, skills: [], tz: '' });
   renderSettings(); markDirty();
 }
 

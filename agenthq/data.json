@@ -19,7 +19,16 @@
       "clifton": "Developer, Empathy, Positivity",
       "adizes": "",
       "resources": "Внимание, обратная связь, связи, стратегическое видение",
-      "slots": "Flexible"
+      "slots": "утро / вечер",
+      "hoursPerWeek": 15,
+      "skills": [
+        "strategy",
+        "partnerships",
+        "empathy",
+        "storytelling",
+        "product vision"
+      ],
+      "tz": "UTC+3"
     },
     {
       "id": "leo",
@@ -30,7 +39,16 @@
       "clifton": "Achiever, Focus, Self-Assurance",
       "adizes": "",
       "resources": "Код, инфраструктура, деплой, ручки",
-      "slots": "Full-time"
+      "slots": "гибко",
+      "hoursPerWeek": 20,
+      "skills": [
+        "infrastructure",
+        "backend",
+        "DevOps",
+        "product engineering",
+        "B2B sales"
+      ],
+      "tz": "UTC+3"
     }
   ],
   "aiCofounder": {
