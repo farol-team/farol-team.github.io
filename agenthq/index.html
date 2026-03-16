@@ -677,66 +677,251 @@ function buildChecklist(blank, currentKey) {
   }).join('');
 }
 
-// --- Circles ---
+// --- Circles (Holacracy SVG) ---
 function renderCircles() {
-  const grid = document.getElementById('circles-grid');
-  grid.innerHTML = DATA.circles.map(c => {
-    const circleTasks = DATA.tasks.filter(t => t.circle === c.name && t.status !== 'done');
-    const tasksHtml = circleTasks.length
-      ? circleTasks.map(t => `
-          <div class="task-item" style="padding:8px 0;">
-            <div class="task-check ${t.status === 'done' ? 'done' : ''}" onclick="toggleTask('${t.id}')"></div>
-            <div class="task-title" style="font-size:13px;">${t.title}</div>
-            <span class="task-priority ${t.priority}" style="font-size:10px;">${t.priority}</span>
-            <span class="task-meta">→ ${t.for}</span>
-          </div>`).join('')
-      : '<p style="font-size:12px;color:var(--text3);padding:8px 0;">No active tasks</p>';
+  const container = document.getElementById('circles-svg-container');
+  if (!container || !DATA || !DATA.circles) return;
 
+  const statusColor = { active: '#10b981', blocked: '#ef4444', warning: '#f59e0b' };
+  const statusBg   = { active: 'rgba(16,185,129,0.09)', blocked: 'rgba(239,68,68,0.09)', warning: 'rgba(245,158,11,0.09)' };
+
+  // Sub-circle positions inside viewBox 0 0 600 420
+  const POS = {
+    c1: { cx: 215, cy: 145, r: 65 },  // Product
+    c2: { cx: 385, cy: 145, r: 65 },  // Marketing
+    c3: { cx: 300, cy: 287, r: 62 },  // Revenue (BLOCKED)
+    c4: { cx: 410, cy: 245, r: 58 },  // Clients
+    c5: { cx: 185, cy: 262, r: 58 },  // Finance
+  };
+
+  // Returns endpoint for an arrow: starts at source center (hidden under source circle),
+  // ends at edge of destination circle
+  function calcLine(fromId, toId) {
+    const f = POS[fromId], t = POS[toId];
+    const dx = t.cx - f.cx, dy = t.cy - f.cy;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+    if (dist < 1) return null;
+    return {
+      sx: f.cx, sy: f.cy,
+      ex: +(t.cx - dx/dist * (t.r + 4)).toFixed(1),
+      ey: +(t.cy - dy/dist * (t.r + 4)).toFixed(1),
+      mx: +((f.cx + t.cx)/2 + dy/dist*14).toFixed(1),  // label offset perpendicular
+      my: +((f.cy + t.cy)/2 - dx/dist*14).toFixed(1),
+    };
+  }
+
+  // Solid arrows: Marketing→Clients, Clients→Revenue, Product→Revenue
+  const solidArrows = [
+    { from:'c2', to:'c4', label:'traffic→leads' },
+    { from:'c4', to:'c3', label:'leads→$' },
+    { from:'c1', to:'c3', label:'value→$' },
+  ];
+
+  const arrowsSvg = solidArrows.map(a => {
+    const l = calcLine(a.from, a.to);
+    if (!l) return '';
+    return `<line x1="${l.sx}" y1="${l.sy}" x2="${l.ex}" y2="${l.ey}" stroke="rgba(99,102,241,0.55)" stroke-width="1.5" marker-end="url(#arr)"/>
+    <text x="${l.mx}" y="${l.my}" text-anchor="middle" fill="rgba(130,140,248,0.45)" font-size="8.5" font-family="Inter,sans-serif">${a.label}</text>`;
+  }).join('\n    ');
+
+  // Dashed Finance→all
+  const dashSvg = ['c1','c2','c3','c4'].map(toId => {
+    const l = calcLine('c5', toId);
+    if (!l) return '';
+    return `<line x1="${l.sx}" y1="${l.sy}" x2="${l.ex}" y2="${l.ey}" stroke="rgba(153,153,179,0.28)" stroke-width="1" stroke-dasharray="5 4" marker-end="url(#arr-dim)"/>`;
+  }).join('\n    ');
+
+  // Sub-circle nodes
+  const nodesSvg = DATA.circles.map(c => {
+    const p = POS[c.id];
+    if (!p) return '';
+    const col = statusColor[c.status] || '#6366f1';
+    const bg  = statusBg[c.status]  || 'rgba(99,102,241,0.07)';
+    const blocked = c.status === 'blocked';
+    const statusLabel = blocked ? '● BLOCKED' : ('● ' + c.status);
+    const pulse = blocked
+      ? `<circle cx="${p.cx}" cy="${p.cy}" r="${p.r+7}" fill="none" stroke="${col}" stroke-width="1" opacity="0.25"/>`
+      : '';
     return `
-    <div class="card" style="margin-bottom:10px;cursor:pointer;" onclick="toggleCircle('${c.id}')">
-      <div class="card-header" style="margin-bottom:0;">
-        <div class="card-title" style="font-size:16px;gap:10px;">
-          <span style="font-size:24px;">${c.emoji}</span>
-          <span>${c.name}</span>
-          <span style="font-size:12px;color:var(--text3);font-weight:400;">Lead: ${c.lead}</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:8px;">
-          <span class="status status-${c.status}">${c.status}</span>
-          <span id="chevron-${c.id}" style="color:var(--text3);font-size:12px;transition:transform 0.2s;">▼</span>
-        </div>
-      </div>
-      <div style="font-size:12px;color:var(--yellow);margin-top:8px;">⚡ ${esc(c.tension)}</div>
-
-      <div id="circle-detail-${c.id}" style="display:none;margin-top:16px;border-top:1px solid var(--border);padding-top:16px;">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
-          <div>
-            <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text3);margin-bottom:6px;">🧠 Soul</div>
-            <div style="font-size:13px;color:var(--text2);line-height:1.5;">${esc(c.soul || '—')}</div>
-          </div>
-          <div>
-            <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text3);margin-bottom:6px;">🛠 Skill</div>
-            <div style="font-size:13px;color:var(--text2);line-height:1.5;">${esc(c.skill || '—')}</div>
-          </div>
-        </div>
-        <div style="margin-bottom:16px;">
-          <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text3);margin-bottom:6px;">📍 Context</div>
-          <div style="font-size:13px;color:var(--text2);line-height:1.5;">${esc(c.context || '—')}</div>
-        </div>
-        <div>
-          <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text3);margin-bottom:6px;">✅ Active Tasks (${circleTasks.length})</div>
-          ${tasksHtml}
-        </div>
-      </div>
-    </div>`;
+    <g id="node-${c.id}" class="circle-node" style="cursor:pointer;">
+      ${pulse}
+      <circle cx="${p.cx}" cy="${p.cy}" r="${p.r}" fill="${bg}" stroke="${col}" stroke-width="2.2" class="node-ring"/>
+      <text x="${p.cx}" y="${p.cy - 10}" text-anchor="middle" font-size="20" font-family="Inter,sans-serif">${c.emoji}</text>
+      <text x="${p.cx}" y="${p.cy + 8}" text-anchor="middle" fill="#e2e2f0" font-size="11" font-weight="600" font-family="Inter,sans-serif">${c.name}</text>
+      <text x="${p.cx}" y="${p.cy + 23}" text-anchor="middle" fill="${col}" font-size="9" font-weight="${blocked?'700':'400'}" font-family="Inter,sans-serif">${statusLabel}</text>
+    </g>`;
   }).join('');
+
+  container.innerHTML = `
+<style>
+.circle-node .node-ring { transition: stroke-width 0.18s, opacity 0.18s; }
+.circle-node:hover .node-ring { stroke-width: 4.5 !important; filter: drop-shadow(0 0 7px currentColor); }
+#holacracy-svg { border-radius: 16px; }
+#circles-legend { display:flex; gap:16px; flex-wrap:wrap; justify-content:center; margin-top:12px; font-size:11px; color:var(--text2); }
+#circles-legend span { display:flex; align-items:center; gap:5px; }
+@media (max-width:500px) { #circles-mobile-list { display:block!important; } #holacracy-svg { display:none; } }
+</style>
+<div style="position:relative;">
+  <svg id="holacracy-svg" viewBox="0 0 600 420" xmlns="http://www.w3.org/2000/svg"
+       style="width:100%;max-width:640px;display:block;margin:0 auto;background:rgba(8,8,18,0.55);border-radius:16px;">
+    <defs>
+      <marker id="arr" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto">
+        <polygon points="0 0,8 3,0 6" fill="rgba(99,102,241,0.72)"/>
+      </marker>
+      <marker id="arr-dim" markerWidth="7" markerHeight="5" refX="5.5" refY="2.5" orient="auto">
+        <polygon points="0 0,7 2.5,0 5" fill="rgba(153,153,179,0.48)"/>
+      </marker>
+    </defs>
+
+    <!-- Anchor circle: Farol Labs -->
+    <circle cx="300" cy="210" r="185" fill="rgba(10,10,25,0.25)" stroke="rgba(99,102,241,0.28)" stroke-width="1.5" stroke-dasharray="8 5"/>
+    <text x="300" y="46" text-anchor="middle" fill="rgba(130,140,248,0.88)" font-size="14" font-weight="600" font-family="Inter,sans-serif">⭕ Farol Labs</text>
+    <text x="300" y="62" text-anchor="middle" fill="rgba(153,153,179,0.44)" font-size="9" letter-spacing="2" font-family="Inter,sans-serif">ANCHOR CIRCLE</text>
+
+    <!-- Finance dashed connections -->
+    ${dashSvg}
+
+    <!-- Solid directional arrows -->
+    ${arrowsSvg}
+
+    <!-- Sub-circles -->
+    ${nodesSvg}
+  </svg>
+
+  <!-- Legend -->
+  <div id="circles-legend">
+    <span><svg width="12" height="12"><circle cx="6" cy="6" r="5" fill="none" stroke="#10b981" stroke-width="1.5"/></svg>active</span>
+    <span><svg width="12" height="12"><circle cx="6" cy="6" r="5" fill="none" stroke="#ef4444" stroke-width="1.5"/></svg>blocked</span>
+    <span><svg width="12" height="12"><circle cx="6" cy="6" r="5" fill="none" stroke="#f59e0b" stroke-width="1.5"/></svg>warning</span>
+    <span><svg width="22" height="12"><line x1="0" y1="6" x2="22" y2="6" stroke="rgba(99,102,241,0.6)" stroke-width="1.5"/></svg>flow</span>
+    <span><svg width="22" height="12"><line x1="0" y1="6" x2="22" y2="6" stroke="rgba(153,153,179,0.4)" stroke-width="1" stroke-dasharray="4 3"/></svg>Finance serves all</span>
+  </div>
+
+  <!-- Tooltip -->
+  <div id="circle-tooltip" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--text);max-width:240px;z-index:9999;box-shadow:0 4px 24px rgba(0,0,0,0.55);line-height:1.5;pointer-events:none;">
+    <div id="tt-name" style="font-weight:600;font-size:13px;margin-bottom:5px;"></div>
+    <div id="tt-tension" style="color:var(--yellow);font-size:11px;"></div>
+    <div id="tt-lead" style="color:var(--text2);font-size:11px;margin-top:3px;"></div>
+  </div>
+</div>
+
+<!-- Mobile fallback list -->
+<div id="circles-mobile-list" style="display:none;margin-top:16px;"></div>`;
+
+  // Mobile fallback
+  const mobileList = document.getElementById('circles-mobile-list');
+  if (mobileList) {
+    mobileList.innerHTML = DATA.circles.map(c =>
+      `<div class="card" style="cursor:pointer;margin-bottom:10px;" onclick="toggleCircle('${c.id}')">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="font-size:22px;">${c.emoji}</span>
+          <span style="font-weight:600;">${c.name}</span>
+          <span class="status status-${c.status}" style="margin-left:auto;">${c.status}</span>
+        </div>
+        <div style="font-size:12px;color:var(--yellow);margin-top:6px;">⚡ ${esc(c.tension)}</div>
+      </div>`
+    ).join('');
+  }
+
+  // Attach events to SVG nodes
+  const tt = document.getElementById('circle-tooltip');
+  DATA.circles.forEach(c => {
+    const node = document.getElementById('node-' + c.id);
+    if (!node) return;
+    node.addEventListener('mouseenter', () => {
+      document.getElementById('tt-name').textContent = c.emoji + ' ' + c.name + '  [' + c.status.toUpperCase() + ']';
+      document.getElementById('tt-tension').textContent = '⚡ ' + c.tension;
+      document.getElementById('tt-lead').textContent = 'Lead: ' + c.lead;
+      tt.style.display = 'block';
+    });
+    node.addEventListener('mousemove', e => {
+      tt.style.left = (e.clientX + 16) + 'px';
+      tt.style.top  = (e.clientY - 10) + 'px';
+    });
+    node.addEventListener('mouseleave', () => { tt.style.display = 'none'; });
+    node.addEventListener('click', () => toggleCircle(c.id));
+  });
 }
 
 function toggleCircle(id) {
-  const detail = document.getElementById('circle-detail-' + id);
-  const chevron = document.getElementById('chevron-' + id);
-  const open = detail.style.display === 'block';
-  detail.style.display = open ? 'none' : 'block';
-  chevron.style.transform = open ? '' : 'rotate(180deg)';
+  const panel = document.getElementById('circle-detail-panel');
+  const c = DATA.circles.find(x => x.id === id);
+  if (!c) return;
+
+  // Toggle off if same circle clicked again
+  if (panel.dataset.activeId === id && panel.style.display !== 'none') {
+    panel.style.display = 'none';
+    panel.dataset.activeId = '';
+    document.querySelectorAll('.circle-node .node-ring').forEach(r => { r.style.strokeWidth = ''; r.style.opacity = ''; });
+    return;
+  }
+
+  panel.dataset.activeId = id;
+
+  // Highlight selected, dim others
+  document.querySelectorAll('.circle-node').forEach(n => {
+    const ring = n.querySelector('.node-ring');
+    if (!ring) return;
+    if (n.id === 'node-' + id) { ring.style.strokeWidth = '4.5'; ring.style.opacity = '1'; }
+    else { ring.style.opacity = '0.4'; ring.style.strokeWidth = ''; }
+  });
+
+  const circleTasks = (DATA.tasks || []).filter(t => t.circle === c.name && t.status !== 'done');
+  const statusColor = { active: '#10b981', blocked: '#ef4444', warning: '#f59e0b' };
+  const col = statusColor[c.status] || '#6366f1';
+
+  const tasksList = circleTasks.length
+    ? circleTasks.map(t =>
+        `<div style="padding:6px 0;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:8px;">
+          <span style="color:var(--accent2);font-size:12px;margin-top:1px;">›</span>
+          <span style="font-size:13px;color:var(--text);flex:1;">${esc(t.title)}</span>
+          <span style="font-size:11px;color:var(--text3);white-space:nowrap;">${t.priority||''}</span>
+        </div>`).join('')
+    : `<div style="color:var(--text3);font-size:13px;padding:8px 0;">No active tasks</div>`;
+
+  panel.style.display = 'block';
+  panel.innerHTML = `
+  <div style="background:var(--surface);border:1px solid var(--border);border-left:3px solid ${col};border-radius:12px;padding:20px;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
+      <div style="display:flex;align-items:center;gap:12px;">
+        <span style="font-size:32px;line-height:1;">${c.emoji}</span>
+        <div>
+          <div style="font-size:17px;font-weight:700;">${c.name}</div>
+          <div style="font-size:12px;color:var(--text2);margin-top:2px;">Lead: ${esc(c.lead)}</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span class="status status-${c.status}">${c.status}</span>
+        <button onclick="document.getElementById('circle-detail-panel').style.display='none';document.getElementById('circle-detail-panel').dataset.activeId='';document.querySelectorAll('.circle-node .node-ring').forEach(r=>{r.style.strokeWidth='';r.style.opacity='';})" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:20px;padding:0 4px;line-height:1;">✕</button>
+      </div>
+    </div>
+
+    <div style="color:var(--yellow);font-size:13px;margin-bottom:16px;padding:8px 12px;background:rgba(245,158,11,0.08);border-radius:6px;">⚡ ${esc(c.tension)}</div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+      <div>
+        <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text3);margin-bottom:6px;">🧠 Soul</div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.55;">${esc(c.soul||'—')}</div>
+      </div>
+      <div>
+        <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text3);margin-bottom:6px;">🛠 Skill</div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.55;">${esc(c.skill||'—')}</div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:16px;">
+      <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text3);margin-bottom:6px;">📍 Context</div>
+      <div style="font-size:13px;color:var(--text2);line-height:1.55;">${esc(c.context||'—')}</div>
+    </div>
+
+    <div>
+      <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text3);margin-bottom:8px;">✅ Active Tasks (${circleTasks.length})</div>
+      ${tasksList}
+    </div>
+  </div>`;
+
+  // Scroll panel into view
+  panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
 // --- Tasks ---
