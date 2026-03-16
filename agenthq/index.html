@@ -1139,32 +1139,59 @@ async function initKanban() {
   renderKanban();
 }
 
-function renderKanban() {
-  const board = document.getElementById('kanban-board');
-  if (!KANBAN || !board) return;
-
-  board.innerHTML = KANBAN.columns.map(colId => {
+function renderKanbanSection(filterFn, boardId) {
+  return KANBAN.columns.map(colId => {
     const colName = KANBAN.columnNames[colId] || colId;
     const cards = KANBAN.cards
-      .filter(c => c.column === colId)
+      .filter(c => c.column === colId && filterFn(c))
       .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
 
     return `
-      <div class="kb-column" data-col="${colId}"
+      <div class="kb-column" data-col="${colId}" data-board="${boardId}"
            ondragover="kanbanDragOver(event)"
            ondragleave="kanbanDragLeave(event)"
            ondrop="kanbanDrop(event,'${colId}')">
         <div class="kb-col-header">
           <span class="kb-col-name">${esc(colName)}</span>
           <span class="kb-col-count">${cards.length}</span>
-          <button class="kb-add-btn" onclick="kanbanAddCard('${colId}')" title="Add card">＋</button>
+          <button class="kb-add-btn" onclick="kanbanAddCard('${colId}','${boardId}')" title="Add card">＋</button>
         </div>
-        <div class="kb-cards" id="col-${colId}">
+        <div class="kb-cards" id="${boardId}-col-${colId}">
           ${cards.map(card => renderKanbanCard(card)).join('')}
         </div>
-      </div>
-    `;
+      </div>`;
   }).join('');
+}
+
+function renderKanban() {
+  const board = document.getElementById('kanban-board');
+  if (!KANBAN || !board) return;
+
+  const oriCards  = KANBAN.cards.filter(c => c.source === 'ori');
+  const teamCards = KANBAN.cards.filter(c => c.source !== 'ori');
+
+  board.innerHTML = `
+    <div style="margin-bottom:20px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+        <span style="font-size:13px;font-weight:700;color:var(--accent2);">✨ От AI-кофаундера</span>
+        <span class="badge" style="background:rgba(99,102,241,0.15);color:var(--accent2);">${oriCards.length}</span>
+        <button class="btn" style="margin-left:auto;font-size:11px;padding:3px 10px;" onclick="kanbanAddCard('next','ori')">＋ Задача от Ori</button>
+      </div>
+      <div class="kb-board" id="kb-ori">
+        ${oriCards.length ? renderKanbanSection(c => c.source === 'ori', 'ori') : '<div style="padding:16px;color:var(--text3);font-size:13px;font-style:italic;">Ori пока не ставил задач людям</div>'}
+      </div>
+    </div>
+    <div style="border-top:1px solid var(--border);padding-top:20px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+        <span style="font-size:13px;font-weight:700;color:var(--text);">✋ Команда (свои задачи)</span>
+        <span class="badge">${teamCards.length}</span>
+        <button class="btn" style="margin-left:auto;font-size:11px;padding:3px 10px;" onclick="kanbanAddCard('next','team')">＋ Задача</button>
+      </div>
+      <div class="kb-board" id="kb-team">
+        ${renderKanbanSection(c => c.source !== 'ori', 'team')}
+      </div>
+    </div>
+  `;
 }
 
 function renderKanbanCard(card) {
@@ -1237,7 +1264,7 @@ function kanbanDrop(e, colId) {
   dragCardId = null;
 }
 
-function kanbanAddCard(colId) {
+function kanbanAddCard(colId, source) {
   const colCards = KANBAN.cards.filter(c => c.column === colId);
   const newCard = {
     id: 'card-' + Date.now(),
@@ -1247,7 +1274,8 @@ function kanbanAddCard(colId) {
     desc: '',
     owners: [],
     blocked: false,
-    order: colCards.length
+    order: colCards.length,
+    source: source || 'team'
   };
   KANBAN.cards.push(newCard);
   renderKanban();
