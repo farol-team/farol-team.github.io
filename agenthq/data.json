@@ -577,5 +577,53 @@
     "daysToDeadline": 71,
     "constraint": "Billing (Stripe)",
     "gnap_stars": 12
+  },
+  "board": {
+    "meetingSchedule": "Ежедневно в 07:00 МСК",
+    "meetingFocus": "TOC-анализ, приоритеты, рекомендации по текущему constraint",
+    "members": [
+      {
+        "id": "musk",
+        "name": "Elon Musk",
+        "emoji": "🚀",
+        "role": "First Principles & Speed",
+        "focus": "Скорость исполнения, first principles thinking, отрезание лишнего"
+      },
+      {
+        "id": "jobs",
+        "name": "Steve Jobs",
+        "emoji": "🍎",
+        "role": "Product & Design",
+        "focus": "Продуктовое видение, простота, пользовательский опыт"
+      },
+      {
+        "id": "thiel",
+        "name": "Peter Thiel",
+        "emoji": "♟",
+        "role": "Strategy & Monopoly",
+        "focus": "Уникальное конкурентное преимущество, тайные знания, монополия"
+      },
+      {
+        "id": "hoffman",
+        "name": "Reid Hoffman",
+        "emoji": "🤝",
+        "role": "Scale & Networks",
+        "focus": "Масштабирование, сетевые эффекты, founder crisis resolution"
+      },
+      {
+        "id": "graham",
+        "name": "Paul Graham",
+        "emoji": "✏️",
+        "role": "Startup & PMF",
+        "focus": "Product-market fit, простота, talk to users"
+      },
+      {
+        "id": "christensen",
+        "name": "Clayton Christensen",
+        "emoji": "📐",
+        "role": "Disruption",
+        "focus": "Disruptive innovation, jobs to be done, underserved markets"
+      }
+    ]
   }
 }

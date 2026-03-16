@@ -313,6 +313,20 @@ h3 { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: var(--text);
         <div id="strengths-check" style="font-size:13px; color:var(--text2);"></div>
       </div>
     </div>
+
+    <!-- Board of Directors -->
+    <h3 style="margin-top:32px;margin-bottom:6px;font-size:14px;color:var(--text2);">🏛 Совет директоров</h3>
+    <p class="subtitle" style="margin-bottom:12px;">Виртуальные советники — собираются автоматически по расписанию и анализируют деятельность компании</p>
+
+    <div class="card" style="margin-bottom:12px;">
+      <div class="form-row">
+        <div class="form-group"><label>📅 Расписание встреч</label><input id="f-board-schedule" onchange="markBoardDirty()" placeholder="напр. Ежедневно в 07:00 МСК"></div>
+        <div class="form-group"><label>🎯 Фокус заседаний</label><input id="f-board-focus" onchange="markBoardDirty()" placeholder="напр. TOC-анализ, приоритеты, constraint"></div>
+      </div>
+    </div>
+
+    <div id="board-members-container"></div>
+    <button class="btn" onclick="addBoardMember()" style="margin-top:8px;font-size:12px;">＋ Добавить советника</button>
   </div>
 
   <!-- PRODUCTS (includes hypotheses as discovery stage) -->
@@ -482,9 +496,62 @@ function renderSettings() {
   `;
 
   renderAI();
+  renderBoard();
 }
 
 function updateFounder(i, field, val) { DATA.founders[i][field] = val; markDirty(); }
+
+// --- Board of Directors ---
+function renderBoard() {
+  const b = DATA.board || {};
+  const schedEl = document.getElementById('f-board-schedule');
+  const focusEl = document.getElementById('f-board-focus');
+  if (schedEl) schedEl.value = b.meetingSchedule || '';
+  if (focusEl) focusEl.value = b.meetingFocus || '';
+
+  const container = document.getElementById('board-members-container');
+  if (!container) return;
+  container.innerHTML = (b.members || []).map((m, i) => `
+    <div class="card" style="margin-bottom:10px;">
+      <div class="card-header">
+        <div class="card-title" style="font-size:15px;">${m.emoji || '👤'} ${esc(m.name)}</div>
+        <button onclick="removeBoardMember(${i})" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:16px;padding:0;">✕</button>
+      </div>
+      <div class="form-row-3" style="margin-top:10px;">
+        <div class="form-group"><label>Имя</label><input value="${esc(m.name)}" onchange="updateBoardMember(${i},'name',this.value)"></div>
+        <div class="form-group"><label>Emoji</label><input value="${esc(m.emoji||'')}" onchange="updateBoardMember(${i},'emoji',this.value)" style="width:60px;"></div>
+        <div class="form-group"><label>Роль / Экспертиза</label><input value="${esc(m.role||'')}" onchange="updateBoardMember(${i},'role',this.value)"></div>
+      </div>
+      <div class="form-group" style="margin-top:4px;"><label>Фокус и перспектива</label><textarea rows="2" onchange="updateBoardMember(${i},'focus',this.value)">${esc(m.focus||'')}</textarea></div>
+    </div>
+  `).join('');
+}
+
+function updateBoardMember(i, field, val) {
+  if (!DATA.board) DATA.board = { members: [] };
+  DATA.board.members[i][field] = val;
+  markDirty();
+}
+
+function removeBoardMember(i) {
+  DATA.board.members.splice(i, 1);
+  renderBoard();
+  markDirty();
+}
+
+function addBoardMember() {
+  if (!DATA.board) DATA.board = { members: [], meetingSchedule: '', meetingFocus: '' };
+  DATA.board.members.push({ id: 'b' + Date.now(), name: 'Новый советник', emoji: '👤', role: '', focus: '' });
+  renderBoard();
+  markDirty();
+}
+
+function markBoardDirty() {
+  if (!DATA.board) DATA.board = {};
+  DATA.board.meetingSchedule = document.getElementById('f-board-schedule').value;
+  DATA.board.meetingFocus = document.getElementById('f-board-focus').value;
+  markDirty();
+}
 function addFounder() {
   DATA.founders.push({ id: 'f' + Date.now(), name: 'Новый основатель', avatar: '👤', role: '', mbti: '', clifton: '', adizes: '', resources: '', slots: '', hoursPerWeek: 0, skills: [], tz: '' });
   renderSettings(); markDirty();
