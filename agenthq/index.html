@@ -395,11 +395,10 @@ async function init() {
 }
 
 function renderAll() {
-  renderDashboard();
-  renderSettings();
-  renderProducts();
-  renderCircles();
-  renderTasks();
+  const fns = [renderDashboard, renderSettings, renderProducts, renderCircles, renderTasks];
+  for (const fn of fns) {
+    try { fn(); } catch(e) { console.error('[AgentHQ] Error in ' + fn.name + ':', e); }
+  }
 }
 
 // --- Tabs ---
@@ -489,11 +488,12 @@ function renderSettings() {
 
   let resSummary = document.getElementById('founder-resources-summary');
   if (!resSummary) {
-    const fc = document.getElementById('founders-container');
     resSummary = document.createElement('div');
     resSummary.id = 'founder-resources-summary';
     resSummary.style.cssText = 'margin-top:12px;padding:14px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);';
-    fc.parentNode.insertBefore(resSummary, fc.nextSibling);
+    const fc = document.getElementById('founders-container');
+    if (fc && fc.parentNode) fc.parentNode.insertBefore(resSummary, fc.nextSibling);
+    else document.getElementById('sec-settings').appendChild(resSummary);
   }
   resSummary.innerHTML = `
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
