@@ -151,6 +151,41 @@ h3 { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: var(--text);
 /* Save indicator */
 .save-indicator { position: fixed; bottom: 20px; left: 20px; padding: 8px 14px; border-radius: var(--radius-sm); font-size: 12px; background: var(--surface2); border: 1px solid var(--border); color: var(--text2); opacity: 0; transition: opacity 0.3s; z-index: 1000; }
 .save-indicator.show { opacity: 1; }
+
+/* ── Kanban Board ────────────────────────── */
+.kanban-wrap { overflow-x: auto; padding-bottom: 12px; margin-top: 4px; }
+.kb-board { display: flex; gap: 14px; align-items: flex-start; min-width: min-content; }
+.kb-column { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); width: 230px; flex-shrink: 0; display: flex; flex-direction: column; max-height: calc(100vh - 280px); transition: border-color 0.15s, background 0.15s; }
+.kb-column.kb-drag-over { border-color: var(--accent); background: var(--accent-bg); }
+.kb-col-header { display: flex; align-items: center; gap: 6px; padding: 10px 12px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+.kb-col-name { font-size: 13px; font-weight: 600; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.kb-col-count { font-size: 11px; color: var(--text3); background: var(--surface2); padding: 1px 6px; border-radius: 10px; flex-shrink: 0; }
+.kb-add-btn { background: none; border: 1px solid var(--border); border-radius: 6px; color: var(--text2); cursor: pointer; font-size: 15px; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; transition: all 0.15s; padding: 0; flex-shrink: 0; line-height: 1; }
+.kb-add-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-bg); }
+.kb-cards { padding: 8px; display: flex; flex-direction: column; gap: 7px; overflow-y: auto; flex: 1; min-height: 50px; }
+.kb-card { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 11px; cursor: pointer; transition: all 0.15s; user-select: none; }
+.kb-card:hover { border-color: var(--border-focus); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,0,0,0.35); }
+.kb-card.kb-dragging { opacity: 0.45; transform: scale(0.97); }
+.kb-blocked { font-size: 10px; display: block; margin-bottom: 4px; }
+.kb-card-title { font-size: 13px; font-weight: 500; line-height: 1.4; margin-bottom: 8px; color: var(--text); }
+.kb-card-footer { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
+.kb-tag { font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 130px; flex-shrink: 1; }
+.kb-owners { font-size: 12px; letter-spacing: 0; flex-shrink: 0; }
+
+/* Kanban Modal */
+.kb-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.65); z-index: 500; align-items: center; justify-content: center; backdrop-filter: blur(2px); }
+.kb-modal-overlay.show { display: flex; }
+.kb-modal-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; width: 500px; max-width: 96vw; max-height: 90vh; overflow-y: auto; }
+.kb-modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+.kb-modal-header h3 { font-size: 16px; font-weight: 600; }
+.kb-modal-close { background: none; border: 1px solid var(--border); border-radius: 6px; color: var(--text2); cursor: pointer; font-size: 16px; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
+.kb-modal-close:hover { color: var(--text); border-color: var(--text2); }
+.btn-danger { background: var(--red-bg); border-color: var(--red); color: var(--red); }
+.btn-danger:hover { background: var(--red); color: white; border-color: var(--red); }
+.kb-owner-checks { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 6px; }
+.kb-owner-label { display: flex; align-items: center; gap: 5px; cursor: pointer; font-size: 14px; color: var(--text2); transition: color 0.1s; }
+.kb-owner-label:hover { color: var(--text); }
+.kb-owner-label input[type=checkbox] { accent-color: var(--accent); width: 15px; height: 15px; }
 </style>
 </head>
 <body>
@@ -203,8 +238,12 @@ h3 { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: var(--text);
         <div id="goal-text" style="font-size:14px; color:var(--text2);">Loading...</div>
       </div>
     </div>
-    <h3 style="margin-top:24px;">Tasks for humans</h3>
-    <div class="card" id="dashboard-tasks"></div>
+    <h3 style="margin-top:24px;">📋 Kanban Board</h3>
+    <div class="kanban-wrap">
+      <div class="kb-board" id="kanban-board">
+        <div style="color:var(--text3); padding:20px; font-size:13px;">Loading kanban...</div>
+      </div>
+    </div>
   </div>
 
   <!-- SETTINGS -->
@@ -303,6 +342,11 @@ h3 { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: var(--text);
 <div class="toast" id="toast"></div>
 <div class="save-indicator" id="save-ind"></div>
 
+<!-- Kanban Card Modal -->
+<div class="kb-modal-overlay" id="kanban-modal" onclick="if(event.target===this)kanbanCloseModal()">
+  <div class="kb-modal-box" id="kanban-modal-content"></div>
+</div>
+
 <script>
 const REPO = 'farol-team/farol-team.github.io';
 const DATA_PATH = 'agenthq/data.json';
@@ -316,6 +360,7 @@ async function init() {
   const resp = await fetch('data.json?t=' + Date.now());
   DATA = await resp.json();
   renderAll();
+  initKanban();
 }
 
 function renderAll() {
@@ -351,15 +396,7 @@ function renderDashboard() {
   document.getElementById('constraint-text').textContent = m.constraint;
   document.getElementById('goal-text').textContent = DATA.company.goal;
 
-  const dtasks = document.getElementById('dashboard-tasks');
-  dtasks.innerHTML = DATA.tasks.filter(t => t.status !== 'done').map(t => `
-    <div class="task-item">
-      <div class="task-check ${t.status === 'done' ? 'done' : ''}"></div>
-      <div class="task-title ${t.status === 'done' ? 'done' : ''}">${t.title}</div>
-      <span class="task-priority ${t.priority}">${t.priority}</span>
-      <span class="task-meta">→ ${t.for}</span>
-    </div>
-  `).join('');
+  // dashboard-tasks replaced by kanban board
 }
 
 // --- Settings ---
@@ -589,6 +626,296 @@ function showSave(msg) {
 
 // Check GitHub on load
 if (localStorage.getItem(GH_KEY)) document.getElementById('gh-btn').textContent = '✅ GitHub';
+
+// ── Kanban Board ──────────────────────────────────────────────────
+
+const KANBAN_PATH = 'kanban-data.json';
+let KANBAN = null;
+let kanbanDirty = false;
+let kanbanSavePending = null;
+let dragCardId = null;
+
+const OWNER_ICONS = { leo: '🦁', mayak: '⚓', ori: '✨', all: '👥' };
+
+const TAG_COLORS = {
+  'Security':   { bg: 'rgba(239,68,68,0.15)',    fg: '#ef4444' },
+  'Marketing':  { bg: 'rgba(245,158,11,0.15)',   fg: '#f59e0b' },
+  'Legal':      { bg: 'rgba(139,92,246,0.15)',   fg: '#8b5cf6' },
+  'Sales':      { bg: 'rgba(16,185,129,0.15)',   fg: '#10b981' },
+  'Content':    { bg: 'rgba(59,130,246,0.15)',   fg: '#3b82f6' },
+  'Product':    { bg: 'rgba(99,102,241,0.15)',   fg: '#6366f1' },
+  'Infra':      { bg: 'rgba(6,182,212,0.15)',    fg: '#06b6d4' },
+  'Strategy':   { bg: 'rgba(249,115,22,0.15)',   fg: '#f97316' },
+  'Research':   { bg: 'rgba(132,204,22,0.15)',   fg: '#84cc16' },
+  'Foundation': { bg: 'rgba(236,72,153,0.15)',   fg: '#ec4899' },
+};
+
+function getTagStyle(tag) {
+  return TAG_COLORS[tag] || { bg: 'rgba(153,153,179,0.15)', fg: '#9999b3' };
+}
+
+async function initKanban() {
+  try {
+    const resp = await fetch('../kanban-data.json?t=' + Date.now());
+    if (!resp.ok) throw new Error('not found');
+    KANBAN = await resp.json();
+  } catch(e) {
+    KANBAN = {
+      columns: ["notnow","maybe","next","progress","review","done"],
+      columnNames: {"notnow":"Not Now","maybe":"Maybe","next":"Up Next","progress":"In Progress","review":"Human Review","done":"Done"},
+      cards: []
+    };
+  }
+  renderKanban();
+}
+
+function renderKanban() {
+  const board = document.getElementById('kanban-board');
+  if (!KANBAN || !board) return;
+
+  board.innerHTML = KANBAN.columns.map(colId => {
+    const colName = KANBAN.columnNames[colId] || colId;
+    const cards = KANBAN.cards
+      .filter(c => c.column === colId)
+      .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+
+    return `
+      <div class="kb-column" data-col="${colId}"
+           ondragover="kanbanDragOver(event)"
+           ondragleave="kanbanDragLeave(event)"
+           ondrop="kanbanDrop(event,'${colId}')">
+        <div class="kb-col-header">
+          <span class="kb-col-name">${esc(colName)}</span>
+          <span class="kb-col-count">${cards.length}</span>
+          <button class="kb-add-btn" onclick="kanbanAddCard('${colId}')" title="Add card">＋</button>
+        </div>
+        <div class="kb-cards" id="col-${colId}">
+          ${cards.map(card => renderKanbanCard(card)).join('')}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderKanbanCard(card) {
+  const ownerStr = (card.owners || []).map(o => OWNER_ICONS[o] || o).join('');
+  const ts = getTagStyle(card.tag);
+  const blockedHtml = card.blocked ? '<span class="kb-blocked">🔴 blocked</span>' : '';
+
+  return `
+    <div class="kb-card" draggable="true" data-id="${esc(card.id)}"
+         ondragstart="kanbanDragStart(event,'${esc(card.id)}')"
+         ondragend="kanbanDragEnd(event)"
+         onclick="kanbanOpenCard('${esc(card.id)}')">
+      ${blockedHtml}
+      <div class="kb-card-title">${esc(card.title)}</div>
+      <div class="kb-card-footer">
+        <span class="kb-tag" style="background:${ts.bg};color:${ts.fg};">${esc(card.tag || '')}</span>
+        <span class="kb-owners">${ownerStr}</span>
+      </div>
+    </div>
+  `;
+}
+
+function kanbanDragStart(e, cardId) {
+  dragCardId = cardId;
+  e.dataTransfer.effectAllowed = 'move';
+  e.dataTransfer.setData('text/plain', cardId);
+  setTimeout(() => {
+    const el = document.querySelector(`.kb-card[data-id="${cardId}"]`);
+    if (el) el.classList.add('kb-dragging');
+  }, 0);
+}
+
+function kanbanDragEnd(e) {
+  dragCardId = null;
+  document.querySelectorAll('.kb-dragging').forEach(el => el.classList.remove('kb-dragging'));
+  document.querySelectorAll('.kb-drag-over').forEach(el => el.classList.remove('kb-drag-over'));
+}
+
+function kanbanDragOver(e) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  const col = e.currentTarget;
+  if (col.classList.contains('kb-column')) col.classList.add('kb-drag-over');
+}
+
+function kanbanDragLeave(e) {
+  const col = e.currentTarget;
+  if (!col.contains(e.relatedTarget)) col.classList.remove('kb-drag-over');
+}
+
+function kanbanDrop(e, colId) {
+  e.preventDefault();
+  const col = e.currentTarget;
+  col.classList.remove('kb-drag-over');
+
+  const cid = dragCardId || e.dataTransfer.getData('text/plain');
+  if (!cid) return;
+  const card = KANBAN.cards.find(c => c.id === cid);
+  if (!card) return;
+
+  const oldCol = card.column;
+  card.column = colId;
+  if (oldCol !== colId) {
+    const colCards = KANBAN.cards.filter(c => c.column === colId && c.id !== cid);
+    card.order = colCards.length;
+  }
+
+  renderKanban();
+  markKanbanDirty();
+  dragCardId = null;
+}
+
+function kanbanAddCard(colId) {
+  const colCards = KANBAN.cards.filter(c => c.column === colId);
+  const newCard = {
+    id: 'card-' + Date.now(),
+    column: colId,
+    tag: 'Product',
+    title: 'New task',
+    desc: '',
+    owners: [],
+    blocked: false,
+    order: colCards.length
+  };
+  KANBAN.cards.push(newCard);
+  renderKanban();
+  markKanbanDirty();
+  kanbanOpenCard(newCard.id);
+}
+
+function kanbanOpenCard(cardId) {
+  const card = KANBAN.cards.find(c => c.id === cardId);
+  if (!card) return;
+
+  const ownerChecks = Object.entries(OWNER_ICONS).map(([key, icon]) => `
+    <label class="kb-owner-label">
+      <input type="checkbox" id="km-owner-${key}" ${(card.owners||[]).includes(key) ? 'checked' : ''}>
+      ${icon} ${key}
+    </label>
+  `).join('');
+
+  const colOptions = KANBAN.columns.map(c =>
+    `<option value="${c}" ${card.column === c ? 'selected' : ''}>${esc(KANBAN.columnNames[c] || c)}</option>`
+  ).join('');
+
+  document.getElementById('kanban-modal-content').innerHTML = `
+    <div class="kb-modal-header">
+      <h3>Edit Card</h3>
+      <button class="kb-modal-close" onclick="kanbanCloseModal()">✕</button>
+    </div>
+    <div class="form-group">
+      <label>Title</label>
+      <input id="km-title" value="${esc(card.title)}">
+    </div>
+    <div class="form-group">
+      <label>Description</label>
+      <textarea id="km-desc" rows="3">${esc(card.desc || '')}</textarea>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Column</label>
+        <select id="km-column">${colOptions}</select>
+      </div>
+      <div class="form-group">
+        <label>Tag</label>
+        <input id="km-tag" value="${esc(card.tag || '')}" list="km-tag-list">
+        <datalist id="km-tag-list">
+          ${Object.keys(TAG_COLORS).map(t => `<option value="${t}">`).join('')}
+        </datalist>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Owners</label>
+      <div class="kb-owner-checks">${ownerChecks}</div>
+    </div>
+    <div class="form-group" style="margin-top:4px;">
+      <label class="kb-owner-label" style="color:var(--red);">
+        <input type="checkbox" id="km-blocked" ${card.blocked ? 'checked' : ''} style="accent-color:var(--red);">
+        🔴 Blocked
+      </label>
+    </div>
+    <div style="display:flex;justify-content:space-between;margin-top:24px;gap:10px;">
+      <button class="btn btn-danger" onclick="kanbanDeleteCard('${esc(card.id)}')">🗑️ Delete</button>
+      <button class="btn btn-primary" onclick="kanbanSaveCard('${esc(card.id)}')">💾 Save</button>
+    </div>
+  `;
+  document.getElementById('kanban-modal').classList.add('show');
+}
+
+function kanbanSaveCard(cardId) {
+  const card = KANBAN.cards.find(c => c.id === cardId);
+  if (!card) return;
+
+  card.title = document.getElementById('km-title').value.trim() || 'Untitled';
+  card.desc = document.getElementById('km-desc').value;
+  const newCol = document.getElementById('km-column').value;
+  if (newCol !== card.column) {
+    card.column = newCol;
+    const colCards = KANBAN.cards.filter(c => c.column === newCol && c.id !== cardId);
+    card.order = colCards.length;
+  }
+  card.tag = document.getElementById('km-tag').value.trim();
+  card.owners = Object.keys(OWNER_ICONS).filter(k => {
+    const el = document.getElementById('km-owner-' + k);
+    return el && el.checked;
+  });
+  card.blocked = !!document.getElementById('km-blocked').checked;
+
+  kanbanCloseModal();
+  renderKanban();
+  markKanbanDirty();
+}
+
+function kanbanDeleteCard(cardId) {
+  if (!confirm('Delete this card?')) return;
+  KANBAN.cards = KANBAN.cards.filter(c => c.id !== cardId);
+  kanbanCloseModal();
+  renderKanban();
+  markKanbanDirty();
+}
+
+function kanbanCloseModal() {
+  document.getElementById('kanban-modal').classList.remove('show');
+}
+
+// Close modal on Escape
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') kanbanCloseModal();
+});
+
+function markKanbanDirty() {
+  kanbanDirty = true;
+  if (kanbanSavePending) clearTimeout(kanbanSavePending);
+  kanbanSavePending = setTimeout(() => pushKanbanToGitHub(), 2000);
+}
+
+async function pushKanbanToGitHub() {
+  const token = localStorage.getItem(GH_KEY);
+  if (!token) return; // no token — skip silently
+
+  showSave('⏳ Saving kanban...');
+  try {
+    const getResp = await fetch(`https://api.github.com/repos/${REPO}/contents/${KANBAN_PATH}`, {
+      headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github.v3+json' }
+    });
+    const existing = getResp.ok ? await getResp.json() : null;
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(KANBAN, null, 2))));
+
+    const putResp = await fetch(`https://api.github.com/repos/${REPO}/contents/${KANBAN_PATH}`, {
+      method: 'PUT',
+      headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: 'AgentHQ: update kanban',
+        content,
+        sha: existing?.sha || undefined
+      })
+    });
+    if (putResp.ok) { showSave('✅ Kanban saved'); kanbanDirty = false; }
+    else { const er = await putResp.json(); showToast('Kanban save failed: ' + (er.message || putResp.status)); showSave('❌ Error'); }
+  } catch(e) { showToast('Kanban save error: ' + e.message); showSave('❌ Error'); }
+}
 
 init();
 </script>
