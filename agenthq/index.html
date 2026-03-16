@@ -611,7 +611,74 @@ function renderProductDetail(p) {
     }
   }
 
-  // ── Block 4: JTBD ────────────────────────────────
+  // ── Block 4: Team Activity ───────────────────────
+  {
+    const circleName = p.name; // try to match by product name in tasks
+    const allTasks = (DATA.tasks || []).filter(t => t.status !== 'done');
+    // Kanban cards (if available)
+    const kanbanCards = (typeof KANBAN !== 'undefined' && KANBAN && KANBAN.cards)
+      ? KANBAN.cards.filter(c => !c.done && c.status !== 'done')
+      : [];
+
+    // AI tasks: for ori or assigned to ai
+    const aiTasks = allTasks.filter(t => {
+      const f = (t.for || '').toLowerCase();
+      return f.includes('ori') || f.includes('✨') || f.includes('ai');
+    });
+    const humanBlockers = allTasks.filter(t => {
+      const f = (t.for || '').toLowerCase();
+      const status = (t.status || '').toLowerCase();
+      const isHuman = f.includes('leo') || f.includes('🦁') || f.includes('mayak') || f.includes('⚓') || f.includes('alex');
+      const isActive = status === 'progress' || status === 'next' || status === 'review';
+      return isHuman && isActive;
+    });
+
+    // Kanban blockers: cards in progress/review assigned to humans
+    const kanbanHumanCards = kanbanCards.filter(c => {
+      const col = (c.column || c.status || '');
+      const owner = (c.owner || c.for || '');
+      const isHumanCol = col === 'progress' || col === 'review';
+      const isHuman = owner.includes('leo') || owner.includes('🦁') || owner.includes('mayak') || owner.includes('⚓');
+      return isHumanCol && isHuman;
+    });
+
+    const allBlockers = [
+      ...humanBlockers.map(t => ({ title: t.title, owner: t.for, src: 'task' })),
+      ...kanbanHumanCards.map(c => ({ title: c.title, owner: c.owner || c.for, src: 'kanban' })),
+    ];
+
+    const aiHtml = aiTasks.length
+      ? aiTasks.map(t => `<div style="padding:5px 0;border-bottom:1px solid var(--border);font-size:13px;display:flex;gap:8px;align-items:flex-start;">
+          <span style="color:var(--accent2);">✨</span>
+          <span style="flex:1;color:var(--text);">${esc(t.title)}</span>
+          <span style="font-size:11px;color:var(--text3);white-space:nowrap;">${esc(t.circle||'')}</span>
+        </div>`).join('')
+      : `<div style="font-size:13px;color:var(--text3);font-style:italic;">Нет активных задач AI</div>`;
+
+    const blockersHtml = allBlockers.length
+      ? allBlockers.map(b => `<div style="padding:5px 0;border-bottom:1px solid rgba(239,68,68,0.2);font-size:13px;display:flex;gap:8px;align-items:flex-start;">
+          <span style="color:#ef4444;">🔴</span>
+          <span style="flex:1;color:var(--text);">${esc(b.title)}</span>
+          <span style="font-size:11px;color:#f97316;white-space:nowrap;">${esc(b.owner||'')}</span>
+        </div>`).join('')
+      : '';
+
+    html += `<div style="margin-bottom:20px;">
+      <div class="detail-section-label">⚡ Что происходит сейчас</div>
+      <div style="display:grid;grid-template-columns:1fr${allBlockers.length ? ' 1fr' : ''};gap:12px;">
+        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;">
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--accent2);margin-bottom:8px;">✨ AI-команда работает над</div>
+          ${aiHtml}
+        </div>
+        ${allBlockers.length ? `<div style="background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.25);border-radius:var(--radius-sm);padding:12px;">
+          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:#ef4444;margin-bottom:8px;">🔴 Застряли на людях</div>
+          ${blockersHtml}
+        </div>` : ''}
+      </div>
+    </div>`;
+  }
+
+  // ── Block 5: JTBD ────────────────────────────────
   if (p.jtbd) {
     const j = p.jtbd;
     const wtpBadge = j.wtpConfirmed
