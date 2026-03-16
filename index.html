@@ -274,7 +274,10 @@
       <div class="product-icon" style="background:#f0fdf4">📡</div>
       <div>
         <h3>GNAP — Git-Native Agent Protocol</h3>
-        <div class="status status-live">● Live</div>
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div class="status status-live">● Live</div>
+          <span id="gnap-stars" style="font-size:12px;color:#888;font-weight:600;"></span>
+        </div>
         <p>Open protocol for multi-agent orchestration through git. Agents collaborate via commits, branches, and a shared kanban board. No central server.</p>
         <span class="url">github.com/farol-team/gnap →</span>
       </div>
@@ -430,6 +433,14 @@
 </footer>
 
 <script>
+  fetch('https://api.github.com/repos/farol-team/gnap')
+    .then(r => r.json())
+    .then(d => {
+      const el = document.getElementById('gnap-stars');
+      if (el && d.stargazers_count !== undefined)
+        el.textContent = '⭐ ' + d.stargazers_count;
+    }).catch(() => {});
+
 // Days left to $200K deadline (May 23, 2026)
 (function() {
   var deadline = new Date('2026-05-23T00:00:00Z');
