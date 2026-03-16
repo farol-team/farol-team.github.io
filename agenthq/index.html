@@ -1293,6 +1293,20 @@ function renderKanbanCard(card) {
   const ownerStr = (card.owners || []).map(o => OWNER_ICONS[o] || o).join('');
   const ts = getTagStyle(card.tag);
   const blockedHtml = card.blocked ? '<span class="kb-blocked">🔴 blocked</span>' : '';
+  const auth = card.oriAuth;
+  let authBadge = '';
+  if (card.source !== 'ori') { // only team tasks need auth
+    if (auth && auth.authorized) {
+      const mrrColor = auth.mrrImpact === 'yes' ? '#10b981' : auth.mrrImpact === 'indirect' ? '#f59e0b' : 'var(--text3)';
+      authBadge = `<div style="margin-top:5px;display:flex;align-items:center;gap:5px;flex-wrap:wrap;">
+        <span style="font-size:9px;font-weight:700;background:rgba(16,185,129,0.12);color:#10b981;border:1px solid rgba(16,185,129,0.3);border-radius:4px;padding:1px 5px;">✨ Ori ✓</span>
+        ${auth.product ? `<span style="font-size:9px;color:var(--text3);background:var(--surface2);border-radius:4px;padding:1px 5px;">${esc(auth.product)}</span>` : ''}
+        <span style="font-size:9px;color:${mrrColor};">MRR: ${auth.mrrImpact || '?'}</span>
+      </div>`;
+    } else {
+      authBadge = `<div style="margin-top:5px;"><span style="font-size:9px;color:var(--text3);background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:1px 5px;">❓ не авторизована</span></div>`;
+    }
+  }
 
   return `
     <div class="kb-card" draggable="true" data-id="${esc(card.id)}"
@@ -1301,7 +1315,8 @@ function renderKanbanCard(card) {
          onclick="kanbanOpenCard('${esc(card.id)}')">
       ${blockedHtml}
       <div class="kb-card-title">${esc(card.title)}</div>
-      <div class="kb-card-footer">
+      ${authBadge}
+      <div class="kb-card-footer" style="margin-top:5px;">
         <span class="kb-tag" style="background:${ts.bg};color:${ts.fg};">${esc(card.tag || '')}</span>
         <span class="kb-owners">${ownerStr}</span>
       </div>
@@ -1429,6 +1444,33 @@ function kanbanOpenCard(cardId) {
         🔴 Blocked
       </label>
     </div>
+    ${card.source !== 'ori' ? `
+    <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--accent2);margin-bottom:10px;">✨ Авторизация Ori</div>
+      <div class="form-row-3" style="margin-bottom:8px;">
+        <div class="form-group"><label>Продукт</label>
+          <select id="km-auth-product">
+            <option value="">— выбрать —</option>
+            ${(DATA.products||[]).map(p => `<option value="${esc(p.name)}" ${(card.oriAuth||{}).product === p.name ? 'selected':''}>${esc(p.name)}</option>`).join('')}
+          </select>
+        </div>
+        <div class="form-group"><label>Влияет на MRR?</label>
+          <select id="km-auth-mrr">
+            <option value="">— ?</option>
+            <option value="yes" ${(card.oriAuth||{}).mrrImpact === 'yes' ? 'selected':''}>✅ Да, прямо</option>
+            <option value="indirect" ${(card.oriAuth||{}).mrrImpact === 'indirect' ? 'selected':''}>🟡 Косвенно</option>
+            <option value="no" ${(card.oriAuth||{}).mrrImpact === 'no' ? 'selected':''}>❌ Нет</option>
+          </select>
+        </div>
+        <div class="form-group"><label>Авторизовано</label>
+          <label style="display:flex;align-items:center;gap:6px;margin-top:6px;cursor:pointer;">
+            <input type="checkbox" id="km-auth-ok" ${(card.oriAuth||{}).authorized ? 'checked':''} style="accent-color:var(--accent);">
+            <span style="font-size:13px;">Ori одобряет</span>
+          </label>
+        </div>
+      </div>
+      <div class="form-group"><label>Заметка Ori</label><textarea id="km-auth-note" rows="2" placeholder="Почему важно / с чем связано...">${esc((card.oriAuth||{}).note||'')}</textarea></div>
+    </div>` : ''}
     <div style="display:flex;justify-content:space-between;margin-top:24px;gap:10px;">
       <button class="btn btn-danger" onclick="kanbanDeleteCard('${esc(card.id)}')">🗑️ Delete</button>
       <button class="btn btn-primary" onclick="kanbanSaveCard('${esc(card.id)}')">💾 Save</button>
@@ -1455,6 +1497,21 @@ function kanbanSaveCard(cardId) {
     return el && el.checked;
   });
   card.blocked = !!document.getElementById('km-blocked').checked;
+
+  // Save Ori authorization (only for team tasks)
+  const authProduct = document.getElementById('km-auth-product');
+  const authMrr = document.getElementById('km-auth-mrr');
+  const authOk = document.getElementById('km-auth-ok');
+  const authNote = document.getElementById('km-auth-note');
+  if (authProduct && card.source !== 'ori') {
+    card.oriAuth = {
+      authorized: !!authOk.checked,
+      product: authProduct.value,
+      mrrImpact: authMrr.value,
+      note: authNote.value,
+      authorizedAt: authOk.checked ? (card.oriAuth?.authorizedAt || new Date().toISOString()) : null
+    };
+  }
 
   kanbanCloseModal();
   renderKanban();
