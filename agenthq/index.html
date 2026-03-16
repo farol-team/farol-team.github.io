@@ -212,7 +212,6 @@ h3 { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: var(--text);
 <div class="tabs" id="tabs">
   <div class="tab active" data-tab="dashboard">📊 Dashboard</div>
   <div class="tab" data-tab="settings">⚙️ Settings</div>
-  <div class="tab" data-tab="ai">🤖 AI Co-Founder</div>
   <div class="tab" data-tab="products">📦 Products <span class="badge" id="prod-count">3</span></div>
   <div class="tab" data-tab="circles">⭕ Circles</div>
   <div class="tab" data-tab="tasks">📋 Tasks for Humans <span class="badge" id="task-count">5</span></div>
@@ -265,40 +264,35 @@ h3 { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: var(--text);
 
     <!-- Founders -->
     <div id="founders-container"></div>
-    <button class="btn" onclick="addFounder()" style="margin-top:8px;">＋ Добавить основателя</button>
-  </div>
+    <button class="btn" onclick="addFounder()" style="margin-top:8px;">＋ Add founder</button>
 
-  <!-- AI CO-FOUNDER -->
-  <div class="section" id="sec-ai">
-    <h2>🤖 AI Co-Founder</h2>
-    <p class="subtitle">Личность, скилы, фреймворки. Код AI-кофаундера.</p>
-    
-    <div class="card">
-      <h3>Личность</h3>
-      <div class="form-row-3">
-        <div class="form-group"><label>Имя</label><input id="f-ai-name" onchange="markDirty()"></div>
+    <!-- AI Co-Founder — same structure + extended -->
+    <h3 style="margin-top:32px; margin-bottom:12px; font-size:14px; color:var(--text2);">🤖 AI Co-Founder</h3>
+    <div class="card" style="border-color:var(--accent);">
+      <div class="card-header">
+        <div class="card-title">✨ <input id="f-ai-name" style="background:none;border:none;color:var(--text);font-size:15px;font-weight:600;font-family:inherit;width:120px;" onchange="markDirty()"></div>
+        <span class="status status-active">AI</span>
+      </div>
+      <div class="form-row-3" style="margin-top:12px;">
         <div class="form-group"><label>MBTI</label><input id="f-ai-mbti" onchange="markDirty()"></div>
+        <div class="form-group"><label>CliftonStrengths</label><input id="f-ai-clifton" onchange="markDirty()"></div>
         <div class="form-group"><label>Адизис</label><input id="f-ai-adizes" onchange="markDirty()"></div>
       </div>
-      <div class="form-group"><label>CliftonStrengths</label><input id="f-ai-clifton" onchange="markDirty()"></div>
-      <div class="form-group"><label>SOUL (описание)</label><textarea id="f-ai-soul" rows="3" onchange="markDirty()"></textarea></div>
-    </div>
-
-    <div class="card-grid">
-      <div class="card">
-        <h3>📚 Книги</h3>
-        <ul class="book-list" id="books-list"></ul>
+      <div class="form-group" style="margin-top:4px;"><label>SOUL</label><textarea id="f-ai-soul" rows="2" onchange="markDirty()"></textarea></div>
+      <div class="form-row" style="margin-top:4px;">
+        <div class="form-group">
+          <label>📚 Books</label>
+          <ul class="book-list" id="books-list" style="margin-top:4px;"></ul>
+        </div>
+        <div class="form-group">
+          <label>🧩 Frameworks</label>
+          <div class="framework-tags" id="frameworks-list" style="margin-top:4px;"></div>
+        </div>
       </div>
-      <div class="card">
-        <h3>🧩 Фреймворки</h3>
-        <div class="framework-tags" id="frameworks-list"></div>
+      <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);">
+        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;color:var(--text3);margin-bottom:8px;">Team Strengths Check</div>
+        <div id="strengths-check" style="font-size:13px; color:var(--text2);"></div>
       </div>
-    </div>
-
-    <div class="card" style="margin-top:16px;">
-      <h3>🔍 Сверка сильных сторон</h3>
-      <p class="subtitle">Хватает ли у команды (люди + AI) всех сильных сторон для достижения цели?</p>
-      <div id="strengths-check" style="font-size:14px;"></div>
     </div>
   </div>
 
@@ -369,7 +363,6 @@ async function init() {
 function renderAll() {
   renderDashboard();
   renderSettings();
-  renderAI();
   renderProducts();
   renderCircles();
   renderTasks();
@@ -438,13 +431,16 @@ function renderSettings() {
   `).join('');
 }
 
+  renderAI();
+}
+
 function updateFounder(i, field, val) { DATA.founders[i][field] = val; markDirty(); }
 function addFounder() {
   DATA.founders.push({ id: 'f' + Date.now(), name: 'Новый основатель', avatar: '👤', role: '', mbti: '', clifton: '', adizes: '', resources: '', slots: '' });
   renderSettings(); markDirty();
 }
 
-// --- AI Co-Founder ---
+// --- AI Co-Founder (now rendered as part of Settings) ---
 function renderAI() {
   const ai = DATA.aiCofounder;
   document.getElementById('f-ai-name').value = ai.name || '';
@@ -452,16 +448,13 @@ function renderAI() {
   document.getElementById('f-ai-adizes').value = ai.adizes || '';
   document.getElementById('f-ai-clifton').value = ai.clifton || '';
   document.getElementById('f-ai-soul').value = ai.soul || '';
+  document.getElementById('books-list').innerHTML = (ai.books||[]).map(b => `<li>📖 ${esc(b)}</li>`).join('');
+  document.getElementById('frameworks-list').innerHTML = (ai.frameworks||[]).map(f => `<span class="framework-tag">${esc(f)}</span>`).join('');
 
-  document.getElementById('books-list').innerHTML = ai.books.map(b => `<li>📖 ${esc(b)}</li>`).join('');
-  document.getElementById('frameworks-list').innerHTML = ai.frameworks.map(f => `<span class="framework-tag">${esc(f)}</span>`).join('');
-
-  // Strengths check
-  const allClifton = DATA.founders.map(f => f.clifton).join(', ') + ', ' + ai.clifton;
-  document.getElementById('strengths-check').innerHTML = `
-    <p><strong>Команда:</strong> ${allClifton || '<em>Заполните CliftonStrengths</em>'}</p>
-    <p style="margin-top:8px; color:var(--text3);">Заполните тесты для автоматической сверки сильных сторон</p>
-  `;
+  const allClifton = [...DATA.founders.map(f => f.clifton).filter(Boolean), ai.clifton].join(', ');
+  document.getElementById('strengths-check').innerHTML = allClifton
+    ? `<span style="color:var(--text2);">${allClifton}</span>`
+    : '<em style="color:var(--text3);">Fill in CliftonStrengths for each founder</em>';
 }
 
 // --- Hypotheses ---
