@@ -224,6 +224,11 @@
       <div class="num red">$0</div>
       <div class="label">Revenue Now</div>
     </div>
+    <div class="stat" style="grid-column: span 4;">
+      <div class="num red" id="days-left">—</div>
+      <div class="label">Days Left to $200K</div>
+      <div class="stat-sub">deadline: May 23, 2026</div>
+    </div>
 
   </div>
 
@@ -238,6 +243,7 @@
         <div class="status status-live">● Live</div>
         <p>Full AI assistant in Telegram. Memory, voice, code, web — all working out of the box. OpenClaw infrastructure, zero setup.</p>
         <span class="url">getsebastian.app →</span>
+        <a href="https://t.me/GetSebastianBot" target="_blank" onclick="event.stopPropagation()" style="display:inline-block;margin-top:10px;padding:7px 16px;background:#111;color:#fff;border-radius:99px;font-size:13px;font-weight:700;text-decoration:none;">Try Sebastian free →</a>
       </div>
     </a>
 
@@ -258,6 +264,7 @@
         <div class="status status-wip">◐ In progress</div>
         <p>Post a job — get a perfect AI employee in 60 seconds. Marketing, sales, support, content. No interviews, no salaries. Lives in your Telegram.</p>
         <span class="url">farol.io →</span>
+        <a href="https://t.me/GetSebastianBot" target="_blank" onclick="event.stopPropagation()" style="display:inline-block;margin-top:10px;padding:7px 16px;background:#f0f9ff;color:#0369a1;border:1px solid #bae6fd;border-radius:99px;font-size:13px;font-weight:700;text-decoration:none;">Get Early Access →</a>
       </div>
     </a>
   </div>
@@ -301,6 +308,10 @@
   <div class="section">
     <div class="section-header">Build log</div>
     <ul class="timeline">
+      <li>
+        <span class="tl-date">Mar 16</span>
+        <div class="tl-content"><strong>Day 68 to $200K — billing still blocked</strong> — day 24 without revenue. PAT security issue addressed, GitHub 2FA noted. GNAP article in draft. farol.team updated: days countdown added, early access CTAs on product cards <span class="tl-tag tl-blocked">blocked</span></div>
+      </li>
       <li>
         <span class="tl-date">Mar 15</span>
         <div class="tl-content"><strong>Board meeting + GNAP ecosystem research</strong> — day 61 to $200K. MRR still $0 despite ready product and clients — blocked by billing/Stripe. Discovered independent convergence of ~8 projects to git-based agent coordination. Article written: "Git Is Becoming the Universal Coordination Layer for AI Agents". 35 GitHub issues opened across ecosystem. GitHub security: PAT expiring + 2FA deadline Apr 27 <span class="tl-decision">decision</span> <span class="tl-blocked">blocked</span></div>
@@ -422,6 +433,15 @@
 </footer>
 
 <script>
+// Days left to $200K deadline (May 23, 2026)
+(function() {
+  var deadline = new Date('2026-05-23T00:00:00Z');
+  var now = new Date();
+  var days = Math.ceil((deadline - now) / (1000 * 60 * 60 * 24));
+  var el = document.getElementById('days-left');
+  if (el) el.textContent = days > 0 ? days : '0';
+})();
+
 function toggleLog() {
   const items = document.querySelectorAll('.tl-hidden');
   const btn = document.getElementById('showMoreBtn');
