@@ -437,7 +437,7 @@ function renderSettings() {
   document.getElementById('f-company-mission').value = c.mission || '';
   document.getElementById('f-company-goal').value = c.goal || '';
   document.getElementById('f-company-constraints').value = c.constraints || '';
-  document.getElementById('f-company-policies').value = c.policies || '';
+  // f-company-policies removed from UI (merged into constraints/Red Lines)
   document.getElementById('f-company-technologies').value = c.technologies || '';
 
   const fc = document.getElementById('founders-container');
@@ -1118,7 +1118,7 @@ function markDirty() {
   DATA.company.mission = document.getElementById('f-company-mission').value;
   DATA.company.goal = document.getElementById('f-company-goal').value;
   DATA.company.constraints = document.getElementById('f-company-constraints').value;
-  DATA.company.policies = document.getElementById('f-company-policies').value;
+  // policies merged into constraints field
   DATA.company.technologies = document.getElementById('f-company-technologies').value;
   DATA.aiCofounder.name = document.getElementById('f-ai-name').value;
   DATA.aiCofounder.mbti = document.getElementById('f-ai-mbti').value;
