@@ -297,6 +297,7 @@
       <div class="product-icon" style="background:#fffbeb">📚</div>
       <div>
         <h3>Awesome Agent Services</h3>
+        <span id="awesome-stars" style="font-size:12px;color:#888;font-weight:600;"></span>
         <div class="status status-live">● Live</div>
         <p>Curated list of APIs and services built for AI agents, not humans. The definitive resource for agent-native infrastructure.</p>
         <span class="url">github.com/farol-team/awesome-agent-services →</span>
@@ -433,6 +434,14 @@
 </footer>
 
 <script>
+  fetch('https://api.github.com/repos/farol-team/awesome-agent-services')
+    .then(r => r.json())
+    .then(d => {
+      const el = document.getElementById('awesome-stars');
+      if (el && d.stargazers_count !== undefined)
+        el.textContent = '⭐ ' + d.stargazers_count;
+    }).catch(() => {});
+
   fetch('https://api.github.com/repos/farol-team/gnap')
     .then(r => r.json())
     .then(d => {
