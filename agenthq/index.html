@@ -152,6 +152,35 @@ h3 { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: var(--text);
 .save-indicator { position: fixed; bottom: 20px; left: 20px; padding: 8px 14px; border-radius: var(--radius-sm); font-size: 12px; background: var(--surface2); border: 1px solid var(--border); color: var(--text2); opacity: 0; transition: opacity 0.3s; z-index: 1000; }
 .save-indicator.show { opacity: 1; }
 
+/* ── Product detail accordion ──────────── */
+.prod-expandable { cursor: pointer; }
+.prod-expandable:hover { border-color: var(--border-focus) !important; }
+
+.blank-stages { display: flex; margin-bottom: 16px; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border); }
+.blank-stage { flex: 1; padding: 8px 6px; text-align: center; background: var(--surface2); font-size: 10px; font-weight: 600; color: var(--text3); border-right: 1px solid var(--border); line-height: 1.4; transition: all 0.15s; }
+.blank-stage:last-child { border-right: none; }
+.blank-stage.bs-completed { background: var(--green-bg); color: var(--green); }
+.blank-stage.bs-current { background: var(--accent-bg); color: var(--accent2); position: relative; }
+.blank-stage.bs-current::after { content: '▼'; display: block; font-size: 8px; margin-top: 2px; opacity: 0.7; }
+
+.prod-checklist { list-style: none; margin: 10px 0 0; display: flex; flex-direction: column; gap: 5px; }
+.prod-checklist li { font-size: 13px; color: var(--text2); display: flex; align-items: flex-start; gap: 8px; line-height: 1.4; }
+
+.ch-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.ch-table th { text-align: left; padding: 6px 10px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text3); border-bottom: 1px solid var(--border); }
+.ch-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); color: var(--text2); vertical-align: top; }
+.ch-table tr:last-child td { border-bottom: none; }
+.ch-table tr:hover td { background: var(--surface2); }
+.ch-tested-yes { color: var(--green); font-weight: 500; }
+.ch-tested-no { color: var(--text3); }
+
+.jtbd-block { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px; }
+.jtbd-job { font-size: 14px; color: var(--text); font-style: italic; line-height: 1.6; border-left: 3px solid var(--accent); padding-left: 12px; margin-bottom: 12px; }
+.jtbd-needs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.jtbd-need { padding: 4px 10px; background: var(--surface3); border: 1px solid var(--border); border-radius: 20px; font-size: 12px; color: var(--text2); }
+
+.detail-section-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text3); margin-bottom: 8px; }
+
 /* ── Kanban Board ────────────────────────── */
 .kanban-wrap { overflow-x: auto; padding-bottom: 12px; margin-top: 4px; }
 .kb-board { display: flex; gap: 14px; align-items: flex-start; min-width: min-content; }
@@ -464,37 +493,187 @@ function addProduct() {
 const STAGE_LABELS = { discovery: '🔍 Discovery', validation: '🧪 Validation', creation: '🏗 Creation', scale: '📈 Scale' };
 const STAGE_ORDER = ['discovery', 'validation', 'creation', 'scale'];
 
+const BLANK_STAGE_NAMES = ['Customer Discovery', 'Customer Validation', 'Customer Creation', 'Company Building'];
+const BLANK_STAGE_KEYS = ['discovery', 'validation', 'creation', 'scale'];
+
 function renderProducts() {
   const grid = document.getElementById('products-grid');
   const all = DATA.products || [];
-
   let html = '';
   STAGE_ORDER.forEach(stage => {
     const items = all.filter(p => p.stage === stage);
     if (!items.length) return;
     html += `<div style="margin-bottom:24px;">
       <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text3);margin-bottom:10px;">${STAGE_LABELS[stage] || stage}</div>
-      <div class="card-grid">`;
-    items.forEach(p => {
-      const si = STAGE_ORDER.indexOf(p.stage);
-      const dots = STAGE_ORDER.map((s, j) => `<div class="stage-dot ${j <= si ? 'filled' : ''} ${j === si ? 'current' : ''}"></div>`).join('');
-      const urlHtml = p.url ? `<a href="https://${p.url}" target="_blank" style="font-size:12px;color:var(--accent2);">${p.url} →</a>` : '';
-      const priceHtml = p.price && p.price !== 'TBD' ? `<span class="status status-testing" style="font-size:11px;">${esc(p.price)}</span>` : `<span class="status status-idea" style="font-size:11px;">idea</span>`;
-      html += `<div class="card" style="position:relative;">
-        <div class="card-header">
-          <div class="card-title" style="font-size:14px;">${esc(p.name)}</div>
-          ${priceHtml}
-        </div>
-        ${p.desc ? `<p style="font-size:13px;color:var(--text2);margin-bottom:8px;">${esc(p.desc)}</p>` : ''}
-        ${p.mrr ? `<p style="font-size:12px;color:var(--text3);">MRR: <strong style="color:var(--text2);">${esc(p.mrr)}</strong>${urlHtml ? ' · ' + urlHtml : ''}</p>` : urlHtml}
-        <div class="stage-track" style="margin-top:10px;">${dots}</div>
-      </div>`;
-    });
+      <div>`;
+    items.forEach(p => { html += renderProductCard(p); });
     html += `</div></div>`;
   });
-
   grid.innerHTML = html;
   document.getElementById('prod-count').textContent = all.length;
+}
+
+function renderProductCard(p) {
+  const si = STAGE_ORDER.indexOf(p.stage);
+  const dots = STAGE_ORDER.map((s, j) => `<div class="stage-dot ${j <= si ? 'filled' : ''} ${j === si ? 'current' : ''}"></div>`).join('');
+  const urlHtml = p.url ? `<a href="https://${p.url}" target="_blank" style="font-size:12px;color:var(--accent2);" onclick="event.stopPropagation()">${esc(p.url)} →</a>` : '';
+  const priceHtml = p.price && p.price !== 'TBD'
+    ? `<span class="status status-testing" style="font-size:11px;">${esc(p.price)}</span>`
+    : `<span class="status status-idea" style="font-size:11px;">idea</span>`;
+  const hasDetail = !!(p.blank || p.jtbd);
+  const chevron = hasDetail ? `<span id="prod-chevron-${esc(p.id)}" style="color:var(--text3);font-size:12px;transition:transform 0.2s;margin-left:8px;flex-shrink:0;">▼</span>` : '';
+  return `
+  <div class="card ${hasDetail ? 'prod-expandable' : ''}" id="prod-card-${esc(p.id)}" style="margin-bottom:12px;" ${hasDetail ? `onclick="toggleProduct('${esc(p.id)}')"` : ''}>
+    <div class="card-header" style="margin-bottom:0;">
+      <div class="card-title" style="font-size:14px;flex:1;">${esc(p.name)}</div>
+      ${priceHtml}
+      ${chevron}
+    </div>
+    ${p.desc ? `<p style="font-size:13px;color:var(--text2);margin:8px 0 4px;">${esc(p.desc)}</p>` : ''}
+    ${p.mrr ? `<p style="font-size:12px;color:var(--text3);margin-top:4px;">MRR: <strong style="color:var(--text2);">${esc(p.mrr)}</strong>${urlHtml ? ' · ' + urlHtml : ''}</p>` : (urlHtml ? `<p style="margin-top:4px;">${urlHtml}</p>` : '')}
+    <div class="stage-track" style="margin-top:10px;">${dots}</div>
+    ${hasDetail ? `<div id="prod-detail-${esc(p.id)}" style="display:none;margin-top:16px;border-top:1px solid var(--border);padding-top:16px;">${renderProductDetail(p)}</div>` : ''}
+  </div>`;
+}
+
+function toggleProduct(id) {
+  const detail = document.getElementById('prod-detail-' + id);
+  const chevron = document.getElementById('prod-chevron-' + id);
+  if (!detail) return;
+  const open = detail.style.display === 'block';
+  detail.style.display = open ? 'none' : 'block';
+  if (chevron) chevron.style.transform = open ? '' : 'rotate(180deg)';
+}
+
+function renderProductDetail(p) {
+  let html = '';
+
+  // ── Block 1: Steve Blank Stages ─────────────────
+  if (p.blank) {
+    const currentKey = p.blank.currentStage || 'discovery';
+    const currentIdx = BLANK_STAGE_KEYS.indexOf(currentKey);
+    const stagesBar = BLANK_STAGE_NAMES.map((name, i) => {
+      let cls = '';
+      if (i < currentIdx) cls = 'bs-completed';
+      else if (i === currentIdx) cls = 'bs-current';
+      return `<div class="blank-stage ${cls}">${i < currentIdx ? '✓ ' : ''}${name}</div>`;
+    }).join('');
+
+    const checklist = buildChecklist(p.blank, currentKey);
+
+    html += `<div style="margin-bottom:20px;">
+      <div class="detail-section-label">📐 Steve Blank — Customer Development</div>
+      <div class="blank-stages">${stagesBar}</div>
+      <div style="font-size:11px;font-weight:600;color:var(--text2);margin-bottom:4px;">Текущий этап: <span style="color:var(--accent2);">${BLANK_STAGE_NAMES[currentIdx]}</span></div>
+      <ul class="prod-checklist">${checklist}</ul>
+    </div>`;
+
+    // ── Block 2: Channel Testing ──────────────────
+    const channels = p.blank.channels || [];
+    if (channels.length) {
+      const rows = channels.map(ch => {
+        const testedHtml = ch.tested
+          ? `<span class="ch-tested-yes">✓ Да</span>`
+          : `<span class="ch-tested-no">— Нет</span>`;
+        return `<tr>
+          <td style="font-weight:500;color:var(--text);">${esc(ch.name)}</td>
+          <td>${testedHtml}</td>
+          <td>${esc(ch.result || '—')}</td>
+          <td>${ch.cac != null ? '$' + ch.cac : '—'}</td>
+          <td>${esc(ch.conversion || '—')}</td>
+        </tr>`;
+      }).join('');
+      html += `<div style="margin-bottom:20px;">
+        <div class="detail-section-label">📡 Channel Testing</div>
+        <div style="overflow-x:auto;">
+          <table class="ch-table">
+            <thead><tr><th>Channel</th><th>Tested</th><th>Result</th><th>CAC</th><th>Conv.</th></tr></thead>
+            <tbody>${rows}</tbody>
+          </table>
+        </div>
+      </div>`;
+    } else if (p.blank.currentStage) {
+      html += `<div style="margin-bottom:20px;">
+        <div class="detail-section-label">📡 Channel Testing</div>
+        <p style="font-size:13px;color:var(--text3);font-style:italic;">Каналы не тестировались — на этапе discovery</p>
+      </div>`;
+    }
+
+    // ── Block 3: Notes ────────────────────────────
+    const stageData = p.blank[currentKey] || {};
+    const notes = stageData.notes;
+    if (notes) {
+      html += `<div style="margin-bottom:20px;">
+        <div class="detail-section-label">📝 Notes (${BLANK_STAGE_NAMES[currentIdx]})</div>
+        <div style="font-size:13px;color:var(--text2);line-height:1.6;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;">${esc(notes)}</div>
+      </div>`;
+    }
+  }
+
+  // ── Block 4: JTBD ────────────────────────────────
+  if (p.jtbd) {
+    const j = p.jtbd;
+    const wtpBadge = j.wtpConfirmed
+      ? `<span class="status status-active" style="font-size:11px;">✓ WTP Confirmed</span>`
+      : `<span class="status status-warning" style="font-size:11px;">⚠ WTP Not Confirmed</span>`;
+    const needsHtml = (j.userNeeds || []).map(n => `<span class="jtbd-need">${esc(n)}</span>`).join('');
+    html += `<div>
+      <div class="detail-section-label">🎯 Jobs to be Done</div>
+      <div class="jtbd-block">
+        ${j.intent ? `<p style="font-size:12px;color:var(--text3);margin-bottom:10px;">${esc(j.intent)}</p>` : ''}
+        <div class="jtbd-job">${esc(j.job || '')}</div>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:10px;">
+          <div style="flex:1;min-width:160px;">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text3);margin-bottom:4px;">За что платит</div>
+            <div style="font-size:13px;color:var(--text);">${esc(j.payingFor || '—')}</div>
+          </div>
+          <div style="flex:1;min-width:160px;">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text3);margin-bottom:4px;">WTP Evidence</div>
+            <div style="font-size:13px;color:var(--text2);">${esc(j.wtpEvidence || '—')}</div>
+          </div>
+        </div>
+        ${needsHtml ? `<div style="margin-bottom:10px;"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text3);margin-bottom:6px;">Боли клиента</div><div class="jtbd-needs">${needsHtml}</div></div>` : ''}
+        ${wtpBadge}
+      </div>
+    </div>`;
+  }
+
+  return html;
+}
+
+function buildChecklist(blank, currentKey) {
+  const items = [];
+  const d = blank.discovery || {};
+  const v = blank.validation || {};
+
+  if (currentKey === 'discovery') {
+    items.push([!!d.problemHypothesis, 'Problem hypothesis defined']);
+    items.push([d.interviewsDone > 0, `Customer interviews done (${d.interviewsDone || 0})`]);
+    items.push([!!d.problemConfirmed, 'Problem confirmed']);
+    items.push([false, 'Solution hypothesis tested']);
+    items.push([false, 'MVP prototype built']);
+  } else if (currentKey === 'validation') {
+    items.push([!!d.problemConfirmed, 'Problem confirmed ✓']);
+    items.push([!!v.mvpBuilt, 'MVP built and shipped']);
+    items.push([v.payingCustomers > 0, `Paying customers (${v.payingCustomers || 0})`]);
+    items.push([!!v.repeatableSales, 'Repeatable sales process']);
+    items.push([false, 'Unit economics positive']);
+    items.push([false, 'Scalable channel found']);
+  } else if (currentKey === 'creation') {
+    items.push([false, 'Scalable acquisition channel']);
+    items.push([false, 'CAC/LTV ratio positive']);
+    items.push([false, 'Marketing playbook documented']);
+    items.push([false, 'Demand creation at scale']);
+  } else {
+    items.push([false, 'Management team hired']);
+    items.push([false, 'Processes documented']);
+    items.push([false, '$1M+ ARR reached']);
+  }
+
+  return items.map(([done, label]) => {
+    const icon = done ? '🟢' : '⬜';
+    return `<li><span>${icon}</span><span style="${done ? '' : 'color:var(--text3);'}">${esc(label)}</span></li>`;
+  }).join('');
 }
 
 // --- Circles ---

@@ -65,7 +65,41 @@
       "url": "getsebastian.app",
       "mrr": "$0",
       "desc": "OpenClaw in Telegram in one minute. Memory, voice, code, web.",
-      "status": "testing"
+      "status": "testing",
+      "blank": {
+        "currentStage": "validation",
+        "discovery": {
+          "problemHypothesis": "Разработчики и нетехнические пользователи хотят OpenClaw в Telegram без настройки серверов — просто нажал кнопку и работаешь",
+          "interviewsDone": 5,
+          "problemConfirmed": true,
+          "notes": "Alena dropped off при онбординге — технический текст убил конверсию. Миша (3000 пользователей) подтвердил интерес. Naora, BUNT, SHAMAN, Leads4You — все хотят."
+        },
+        "validation": {
+          "mvpBuilt": true,
+          "payingCustomers": 0,
+          "repeatableSales": false,
+          "notes": "MVP живой на getsebastian.app. Billing заблокирован — нет юрлица → нет Stripe. Клиенты готовы платить но не могут. LemonSqueezy изучается как альтернатива."
+        },
+        "channels": [
+          {"name": "Telegram organic", "tested": true, "result": "Low reach, конверсия слабая", "cac": null, "conversion": "2%"},
+          {"name": "TG ads (Alena channels)", "tested": false, "result": "", "cac": null, "conversion": null},
+          {"name": "Referral / word of mouth", "tested": false, "result": "", "cac": null, "conversion": null},
+          {"name": "Product Hunt", "tested": false, "result": "", "cac": null, "conversion": null}
+        ]
+      },
+      "jtbd": {
+        "intent": "Сделать OpenClaw доступным для любого пользователя Telegram — без технических знаний и серверов",
+        "job": "Когда я хочу AI-ассистента без настройки серверов, я хочу Sebastian, чтобы запустить за минуту",
+        "payingFor": "Работающий OpenClaw в своём Telegram без технических знаний",
+        "userNeeds": [
+          "AI-ассистент в привычном мессенджере",
+          "Нет необходимости поднимать сервер",
+          "Память и голос из коробки",
+          "Быстрый старт за 60 секунд"
+        ],
+        "wtpEvidence": "Alena: 'прикольно, 40 баксов'. Миша (3000 юзеров): аналогично. WTP есть, 0 платящих — billing blocked",
+        "wtpConfirmed": false
+      }
     },
     {
       "id": "p2",
@@ -75,7 +109,41 @@
       "url": "cofounder.run",
       "mrr": "$0",
       "desc": "AI co-founder that works. Strategy, research, execution, memory. No equity.",
-      "status": "testing"
+      "status": "testing",
+      "blank": {
+        "currentStage": "validation",
+        "discovery": {
+          "problemHypothesis": "Фаундерам нужен AI-кофаундер который реально исполняет, помнит контекст и двигает вперёд — без доли в капитале",
+          "interviewsDone": 3,
+          "problemConfirmed": true,
+          "notes": "Позиционирование резонирует. Угол 'no equity' — сильный дифференциатор. Фаундеры хотят execution, а не ещё один чатбот."
+        },
+        "validation": {
+          "mvpBuilt": true,
+          "payingCustomers": 0,
+          "repeatableSales": false,
+          "notes": "Ori живой на cofounder.run. Демо-видео записано. Billing заблокирован. Ori сам себя продаёт через Twitter и лендинг."
+        },
+        "channels": [
+          {"name": "Twitter/X organic", "tested": true, "result": "Low reach, нужна аудитория", "cac": null, "conversion": "<1%"},
+          {"name": "Direct outreach founders", "tested": true, "result": "1 лид (Naora), заблокирован approval gate", "cac": null, "conversion": null},
+          {"name": "TG founder-каналы", "tested": false, "result": "", "cac": null, "conversion": null},
+          {"name": "Reply marketing (X)", "tested": false, "result": "Определён как топ-тактика, не запущен", "cac": null, "conversion": null}
+        ]
+      },
+      "jtbd": {
+        "intent": "Дать каждому фаундеру AI-кофаундера с реальным execution без equity",
+        "job": "Когда я строю AI-native компанию, я хочу Ori, чтобы он работал как настоящий кофаундер — исполнял, помнил, двигал вперёд — без доли в капитале",
+        "payingFor": "Execution без equity",
+        "userNeeds": [
+          "Стратегический партнёр 24/7",
+          "Память между сессиями",
+          "Реальные действия: код, посты, анализ",
+          "Нет совещаний и человеческих факторов"
+        ],
+        "wtpEvidence": "0 платящих, но позиционирование резонирует. Лендинг и демо подтверждают интерес",
+        "wtpConfirmed": false
+      }
     },
     {
       "id": "p3",
@@ -85,7 +153,35 @@
       "url": "farol.io",
       "mrr": "$0",
       "desc": "Post a job — get a perfect AI employee in 60 seconds.",
-      "status": "idea"
+      "status": "idea",
+      "blank": {
+        "currentStage": "discovery",
+        "discovery": {
+          "problemHypothesis": "Компании хотят нанимать AI-сотрудников так же как людей — разместить вакансию и получить агента за 60 секунд",
+          "interviewsDone": 0,
+          "problemConfirmed": false,
+          "notes": ""
+        },
+        "validation": {
+          "mvpBuilt": false,
+          "payingCustomers": 0,
+          "repeatableSales": false,
+          "notes": ""
+        },
+        "channels": []
+      },
+      "jtbd": {
+        "intent": "Сделать найм AI-команды таким же простым как найм людей на HeadHunter",
+        "job": "Когда мне нужен AI-сотрудник, я хочу разместить вакансию, чтобы получить готового агента без промпт-инжиниринга",
+        "payingFor": "Готовый AI-сотрудник под задачу без технической настройки",
+        "userNeeds": [
+          "Быстрое развёртывание AI без кода",
+          "Агент понимает контекст компании",
+          "Прозрачная стоимость"
+        ],
+        "wtpEvidence": "Гипотеза — интервью не проводились",
+        "wtpConfirmed": false
+      }
     },
     {
       "id": "h2",
@@ -95,7 +191,31 @@
       "url": "",
       "mrr": "$0",
       "desc": "30% commission from user-generated agents",
-      "status": "idea"
+      "status": "idea",
+      "blank": {
+        "currentStage": "discovery",
+        "discovery": {
+          "problemHypothesis": "Разработчики агентов хотят монетизировать своих агентов, а компании — найти готовых агентов под задачи",
+          "interviewsDone": 0,
+          "problemConfirmed": false,
+          "notes": ""
+        },
+        "validation": {
+          "mvpBuilt": false,
+          "payingCustomers": 0,
+          "repeatableSales": false,
+          "notes": ""
+        },
+        "channels": []
+      },
+      "jtbd": {
+        "intent": "Маркетплейс агентов как App Store для AI",
+        "job": "Когда мне нужен специализированный агент, я хочу найти и купить его, не строя с нуля",
+        "payingFor": "Готовый специализированный агент",
+        "userNeeds": ["Быстрый старт без разработки", "Проверенные агенты"],
+        "wtpEvidence": "Гипотеза",
+        "wtpConfirmed": false
+      }
     },
     {
       "id": "h4",
@@ -105,7 +225,31 @@
       "url": "",
       "mrr": "$0",
       "desc": "AI applies for jobs, receives salary",
-      "status": "idea"
+      "status": "idea",
+      "blank": {
+        "currentStage": "discovery",
+        "discovery": {
+          "problemHypothesis": "Компании готовы платить зарплату AI-агенту который автономно выполняет роль сотрудника",
+          "interviewsDone": 0,
+          "problemConfirmed": false,
+          "notes": ""
+        },
+        "validation": {
+          "mvpBuilt": false,
+          "payingCustomers": 0,
+          "repeatableSales": false,
+          "notes": ""
+        },
+        "channels": []
+      },
+      "jtbd": {
+        "intent": "AI-сотрудник который сам устраивается на работу и получает зарплату",
+        "job": "Когда мне нужна работа выполненная, я хочу нанять AI-сотрудника, чтобы платить за результат а не за время",
+        "payingFor": "Результат работы, не процесс",
+        "userNeeds": ["Автономное выполнение задач", "Предсказуемая стоимость"],
+        "wtpEvidence": "Гипотеза",
+        "wtpConfirmed": false
+      }
     },
     {
       "id": "h5",
@@ -115,7 +259,31 @@
       "url": "",
       "mrr": "$0",
       "desc": "Assembling agents for small business",
-      "status": "idea"
+      "status": "idea",
+      "blank": {
+        "currentStage": "discovery",
+        "discovery": {
+          "problemHypothesis": "Малый бизнес хочет AI-агентов под свои задачи но не может их сам собрать",
+          "interviewsDone": 0,
+          "problemConfirmed": false,
+          "notes": ""
+        },
+        "validation": {
+          "mvpBuilt": false,
+          "payingCustomers": 0,
+          "repeatableSales": false,
+          "notes": ""
+        },
+        "channels": []
+      },
+      "jtbd": {
+        "intent": "Агентство по сборке AI-команд под ключ для малого бизнеса",
+        "job": "Когда я хочу AI в своём бизнесе, я хочу нанять агентство, чтобы получить готовое решение без погружения в технологии",
+        "payingFor": "Работающие AI-процессы в бизнесе",
+        "userNeeds": ["Нет необходимости разбираться в AI", "Готовое решение под задачу"],
+        "wtpEvidence": "Гипотеза",
+        "wtpConfirmed": false
+      }
     },
     {
       "id": "h6",
@@ -125,7 +293,31 @@
       "url": "",
       "mrr": "$0",
       "desc": "Community + BNI for AI co-founders",
-      "status": "idea"
+      "status": "idea",
+      "blank": {
+        "currentStage": "discovery",
+        "discovery": {
+          "problemHypothesis": "AI-фаундеры хотят комьюнити и взаимную поддержку как в BNI но для AI-native компаний",
+          "interviewsDone": 0,
+          "problemConfirmed": false,
+          "notes": ""
+        },
+        "validation": {
+          "mvpBuilt": false,
+          "payingCustomers": 0,
+          "repeatableSales": false,
+          "notes": ""
+        },
+        "channels": []
+      },
+      "jtbd": {
+        "intent": "Комьюнити AI-фаундеров которые строят компании с AI-командами",
+        "job": "Когда я строю AI-native компанию в одиночку, я хочу мастермайнд, чтобы учиться у таких же и не повторять их ошибки",
+        "payingFor": "Доступ к опыту других AI-фаундеров",
+        "userNeeds": ["Peer support", "Конкретные знания и кейсы"],
+        "wtpEvidence": "Гипотеза",
+        "wtpConfirmed": false
+      }
     },
     {
       "id": "h7",
@@ -135,7 +327,31 @@
       "url": "",
       "mrr": "$0",
       "desc": "Kanban → agent → PR on Fly.io",
-      "status": "idea"
+      "status": "idea",
+      "blank": {
+        "currentStage": "discovery",
+        "discovery": {
+          "problemHypothesis": "Команды хотят превращать задачи в канбане напрямую в PR без ручного кодинга",
+          "interviewsDone": 0,
+          "problemConfirmed": false,
+          "notes": ""
+        },
+        "validation": {
+          "mvpBuilt": false,
+          "payingCustomers": 0,
+          "repeatableSales": false,
+          "notes": ""
+        },
+        "channels": []
+      },
+      "jtbd": {
+        "intent": "Автоматический pipeline: задача в канбане → агент → задеплоенный PR",
+        "job": "Когда у меня есть задача в канбане, я хочу чтобы агент сделал PR, чтобы я мог фокусироваться на продукте",
+        "payingFor": "Автоматизация разработки без найма",
+        "userNeeds": ["Faster shipping", "Меньше ручной работы"],
+        "wtpEvidence": "Гипотеза",
+        "wtpConfirmed": false
+      }
     },
     {
       "id": "h8",
@@ -145,7 +361,31 @@
       "url": "",
       "mrr": "$0",
       "desc": "Chrome extension SaaS",
-      "status": "idea"
+      "status": "idea",
+      "blank": {
+        "currentStage": "discovery",
+        "discovery": {
+          "problemHypothesis": "Пользователи хотят иметь OpenClaw прямо в браузере как боковую панель — без переключения вкладок",
+          "interviewsDone": 0,
+          "problemConfirmed": false,
+          "notes": ""
+        },
+        "validation": {
+          "mvpBuilt": false,
+          "payingCustomers": 0,
+          "repeatableSales": false,
+          "notes": ""
+        },
+        "channels": []
+      },
+      "jtbd": {
+        "intent": "OpenClaw встроенный в браузер — AI всегда под рукой при работе в вебе",
+        "job": "Когда я работаю в браузере, я хочу OpenClaw рядом, чтобы не переключаться между вкладками",
+        "payingFor": "AI-ассистент встроенный в рабочий процесс",
+        "userNeeds": ["AI без переключения контекста", "Работает на любом сайте"],
+        "wtpEvidence": "Гипотеза",
+        "wtpConfirmed": false
+      }
     }
   ],
   "circles": [
