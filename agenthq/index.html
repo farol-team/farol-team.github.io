@@ -355,6 +355,19 @@ let savePending = null;
 
 // --- Init ---
 async function init() {
+  // Check if onboarding needed
+  if (!localStorage.getItem('agenthq-onboarding-done')) {
+    // Check if data is empty
+    fetch('data.json?t=' + Date.now())
+      .then(r => r.json())
+      .then(d => {
+        if (!d.company || !d.company.name) {
+          window.location.href = 'onboarding.html';
+        }
+      }).catch(() => {
+        window.location.href = 'onboarding.html';
+      });
+  }
   const resp = await fetch('data.json?t=' + Date.now());
   DATA = await resp.json();
   renderAll();
