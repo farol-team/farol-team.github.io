@@ -5,8 +5,8 @@
     "intention": "Создать ценность без ущерба для кармы",
     "mission": "Make AI co-founders accessible to every entrepreneur",
     "goal": "$1M MRR by Dec 31, 2026 / $200K revenue by May 23, 2026",
-    "constraints": "No billing yet, Telegram Bot API 20MB limit, 3 person team",
-    "policies": "Facts ≠ hypotheses, words = commitments, no secrets in client code",
+    "constraints": "Мы не обманываем клиентов и не вводим их в заблуждение. Мы не продаём и не передаём данные пользователей третьим лицам. Мы не берём equity без явного согласия. Мы не запускаем маркетинг без работающего продукта. Мы не игнорируем красные флаги от клиентов.",
+    "policies": "",
     "technologies": "OpenClaw, Fly.io, GitHub Pages, Telegram, A2UI, GNAP"
   },
   "founders": [
@@ -81,10 +81,34 @@
           "notes": "MVP живой на getsebastian.app. Billing заблокирован — нет юрлица → нет Stripe. Клиенты готовы платить но не могут. LemonSqueezy изучается как альтернатива."
         },
         "channels": [
-          {"name": "Telegram organic", "tested": true, "result": "Low reach, конверсия слабая", "cac": null, "conversion": "2%"},
-          {"name": "TG ads (Alena channels)", "tested": false, "result": "", "cac": null, "conversion": null},
-          {"name": "Referral / word of mouth", "tested": false, "result": "", "cac": null, "conversion": null},
-          {"name": "Product Hunt", "tested": false, "result": "", "cac": null, "conversion": null}
+          {
+            "name": "Telegram organic",
+            "tested": true,
+            "result": "Low reach, конверсия слабая",
+            "cac": null,
+            "conversion": "2%"
+          },
+          {
+            "name": "TG ads (Alena channels)",
+            "tested": false,
+            "result": "",
+            "cac": null,
+            "conversion": null
+          },
+          {
+            "name": "Referral / word of mouth",
+            "tested": false,
+            "result": "",
+            "cac": null,
+            "conversion": null
+          },
+          {
+            "name": "Product Hunt",
+            "tested": false,
+            "result": "",
+            "cac": null,
+            "conversion": null
+          }
         ]
       },
       "jtbd": {
@@ -125,10 +149,34 @@
           "notes": "Ori живой на cofounder.run. Демо-видео записано. Billing заблокирован. Ori сам себя продаёт через Twitter и лендинг."
         },
         "channels": [
-          {"name": "Twitter/X organic", "tested": true, "result": "Low reach, нужна аудитория", "cac": null, "conversion": "<1%"},
-          {"name": "Direct outreach founders", "tested": true, "result": "1 лид (Naora), заблокирован approval gate", "cac": null, "conversion": null},
-          {"name": "TG founder-каналы", "tested": false, "result": "", "cac": null, "conversion": null},
-          {"name": "Reply marketing (X)", "tested": false, "result": "Определён как топ-тактика, не запущен", "cac": null, "conversion": null}
+          {
+            "name": "Twitter/X organic",
+            "tested": true,
+            "result": "Low reach, нужна аудитория",
+            "cac": null,
+            "conversion": "<1%"
+          },
+          {
+            "name": "Direct outreach founders",
+            "tested": true,
+            "result": "1 лид (Naora), заблокирован approval gate",
+            "cac": null,
+            "conversion": null
+          },
+          {
+            "name": "TG founder-каналы",
+            "tested": false,
+            "result": "",
+            "cac": null,
+            "conversion": null
+          },
+          {
+            "name": "Reply marketing (X)",
+            "tested": false,
+            "result": "Определён как топ-тактика, не запущен",
+            "cac": null,
+            "conversion": null
+          }
         ]
       },
       "jtbd": {
@@ -212,7 +260,10 @@
         "intent": "Маркетплейс агентов как App Store для AI",
         "job": "Когда мне нужен специализированный агент, я хочу найти и купить его, не строя с нуля",
         "payingFor": "Готовый специализированный агент",
-        "userNeeds": ["Быстрый старт без разработки", "Проверенные агенты"],
+        "userNeeds": [
+          "Быстрый старт без разработки",
+          "Проверенные агенты"
+        ],
         "wtpEvidence": "Гипотеза",
         "wtpConfirmed": false
       }
@@ -246,7 +297,10 @@
         "intent": "AI-сотрудник который сам устраивается на работу и получает зарплату",
         "job": "Когда мне нужна работа выполненная, я хочу нанять AI-сотрудника, чтобы платить за результат а не за время",
         "payingFor": "Результат работы, не процесс",
-        "userNeeds": ["Автономное выполнение задач", "Предсказуемая стоимость"],
+        "userNeeds": [
+          "Автономное выполнение задач",
+          "Предсказуемая стоимость"
+        ],
         "wtpEvidence": "Гипотеза",
         "wtpConfirmed": false
       }
@@ -280,7 +334,10 @@
         "intent": "Агентство по сборке AI-команд под ключ для малого бизнеса",
         "job": "Когда я хочу AI в своём бизнесе, я хочу нанять агентство, чтобы получить готовое решение без погружения в технологии",
         "payingFor": "Работающие AI-процессы в бизнесе",
-        "userNeeds": ["Нет необходимости разбираться в AI", "Готовое решение под задачу"],
+        "userNeeds": [
+          "Нет необходимости разбираться в AI",
+          "Готовое решение под задачу"
+        ],
         "wtpEvidence": "Гипотеза",
         "wtpConfirmed": false
       }
@@ -314,7 +371,10 @@
         "intent": "Комьюнити AI-фаундеров которые строят компании с AI-командами",
         "job": "Когда я строю AI-native компанию в одиночку, я хочу мастермайнд, чтобы учиться у таких же и не повторять их ошибки",
         "payingFor": "Доступ к опыту других AI-фаундеров",
-        "userNeeds": ["Peer support", "Конкретные знания и кейсы"],
+        "userNeeds": [
+          "Peer support",
+          "Конкретные знания и кейсы"
+        ],
         "wtpEvidence": "Гипотеза",
         "wtpConfirmed": false
       }
@@ -348,7 +408,10 @@
         "intent": "Автоматический pipeline: задача в канбане → агент → задеплоенный PR",
         "job": "Когда у меня есть задача в канбане, я хочу чтобы агент сделал PR, чтобы я мог фокусироваться на продукте",
         "payingFor": "Автоматизация разработки без найма",
-        "userNeeds": ["Faster shipping", "Меньше ручной работы"],
+        "userNeeds": [
+          "Faster shipping",
+          "Меньше ручной работы"
+        ],
         "wtpEvidence": "Гипотеза",
         "wtpConfirmed": false
       }
@@ -382,7 +445,10 @@
         "intent": "OpenClaw встроенный в браузер — AI всегда под рукой при работе в вебе",
         "job": "Когда я работаю в браузере, я хочу OpenClaw рядом, чтобы не переключаться между вкладками",
         "payingFor": "AI-ассистент встроенный в рабочий процесс",
-        "userNeeds": ["AI без переключения контекста", "Работает на любом сайте"],
+        "userNeeds": [
+          "AI без переключения контекста",
+          "Работает на любом сайте"
+        ],
         "wtpEvidence": "Гипотеза",
         "wtpConfirmed": false
       }
