@@ -216,7 +216,7 @@ h3 { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: var(--text);
   <div class="tab" data-tab="hypotheses">🧪 Hypotheses <span class="badge" id="hyp-count">8</span></div>
   <div class="tab" data-tab="products">📦 Products <span class="badge" id="prod-count">3</span></div>
   <div class="tab" data-tab="circles">⭕ Circles</div>
-  <div class="tab" data-tab="tasks">✅ Tasks <span class="badge" id="task-count">5</span></div>
+  <div class="tab" data-tab="tasks">📋 Tasks for Humans <span class="badge" id="task-count">5</span></div>
 </div>
 
 <div class="content">
@@ -236,12 +236,6 @@ h3 { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: var(--text);
       <div class="card">
         <div class="card-header"><div class="card-title">🎯 Goal</div></div>
         <div id="goal-text" style="font-size:14px; color:var(--text2);">Loading...</div>
-      </div>
-    </div>
-    <h3 style="margin-top:24px;">📋 Kanban Board</h3>
-    <div class="kanban-wrap">
-      <div class="kb-board" id="kanban-board">
-        <div style="color:var(--text3); padding:20px; font-size:13px;">Loading kanban...</div>
       </div>
     </div>
   </div>
@@ -333,9 +327,13 @@ h3 { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: var(--text);
 
   <!-- TASKS -->
   <div class="section" id="sec-tasks">
-    <h2>✅ Задачи от AI → людям</h2>
-    <p class="subtitle">AI-кофаундер ставит задачи основателям в рамках их календарных слотов</p>
-    <div class="card" id="tasks-list"></div>
+    <h2>📋 Tasks for Humans</h2>
+    <p class="subtitle">Kanban board — все задачи команды в одном месте</p>
+    <div class="kanban-wrap">
+      <div class="kb-board" id="kanban-board">
+        <div style="color:var(--text3); padding:20px; font-size:13px;">Loading kanban...</div>
+      </div>
+    </div>
   </div>
 </div>
 
