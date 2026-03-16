@@ -213,7 +213,6 @@ h3 { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: var(--text);
   <div class="tab active" data-tab="dashboard">📊 Dashboard</div>
   <div class="tab" data-tab="settings">⚙️ Settings</div>
   <div class="tab" data-tab="ai">🤖 AI Co-Founder</div>
-  <div class="tab" data-tab="hypotheses">🧪 Hypotheses <span class="badge" id="hyp-count">8</span></div>
   <div class="tab" data-tab="products">📦 Products <span class="badge" id="prod-count">3</span></div>
   <div class="tab" data-tab="circles">⭕ Circles</div>
   <div class="tab" data-tab="tasks">📋 Tasks for Humans <span class="badge" id="task-count">5</span></div>
@@ -303,19 +302,12 @@ h3 { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: var(--text);
     </div>
   </div>
 
-  <!-- HYPOTHESES -->
-  <div class="section" id="sec-hypotheses">
-    <h2>🧪 Гипотезы</h2>
-    <p class="subtitle">HADI-цикл: Гипотеза → Действие → Данные → Инсайт</p>
-    <div class="card-grid" id="hypotheses-grid"></div>
-    <button class="btn" onclick="addHypothesis()" style="margin-top:8px;">＋ Добавить гипотезу</button>
-  </div>
-
-  <!-- PRODUCTS -->
+  <!-- PRODUCTS (includes hypotheses as discovery stage) -->
   <div class="section" id="sec-products">
-    <h2>📦 Продукты</h2>
-    <p class="subtitle">Steve Blank: Discovery → Validation → Creation → Scale</p>
-    <div class="card-grid" id="products-grid"></div>
+    <h2>📦 Products</h2>
+    <p class="subtitle">Hypothesis → Discovery → Validation → Creation → Scale</p>
+    <div id="products-grid"></div>
+    <button class="btn" onclick="addProduct()" style="margin-top:12px;">＋ Add hypothesis</button>
   </div>
 
   <!-- CIRCLES -->
@@ -378,7 +370,6 @@ function renderAll() {
   renderDashboard();
   renderSettings();
   renderAI();
-  renderHypotheses();
   renderProducts();
   renderCircles();
   renderTasks();
@@ -475,50 +466,50 @@ function renderAI() {
 
 // --- Hypotheses ---
 const STAGES = ['discovery', 'validation', 'creation', 'scale'];
-function renderHypotheses() {
-  const grid = document.getElementById('hypotheses-grid');
-  grid.innerHTML = DATA.hypotheses.map((h, i) => {
-    const si = STAGES.indexOf(h.stage);
-    const dots = STAGES.map((s, j) => `<div class="stage-dot ${j <= si ? 'filled' : ''} ${j === si ? 'current' : ''}"></div>`).join('');
-    return `
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title">${h.name}</div>
-          <span class="status status-${h.status}">${h.status}</span>
-        </div>
-        <p style="font-size:13px; color:var(--text2); margin-bottom:8px;">${esc(h.desc)}</p>
-        <div class="stage-track">${dots}</div>
-        <div class="hyp-stage">${STAGES[si] || '?'} → ${STAGES[si + 1] || 'done'}</div>
-      </div>
-    `;
-  }).join('');
-  document.getElementById('hyp-count').textContent = DATA.hypotheses.length;
+function renderHypotheses() {} // merged into renderProducts
+
+function addHypothesis() { addProduct(); }
+
+function addProduct() {
+  DATA.products.push({ id: 'p' + Date.now(), name: 'New hypothesis', price: 'TBD', stage: 'discovery', url: '', mrr: '$0', desc: '', status: 'idea' });
+  renderProducts(); markDirty();
 }
 
-function addHypothesis() {
-  DATA.hypotheses.push({ id: 'h' + Date.now(), name: 'Новая гипотеза', status: 'idea', stage: 'discovery', desc: '' });
-  renderHypotheses(); markDirty();
-}
+// --- Products (includes hypotheses as discovery stage) ---
+const STAGE_LABELS = { discovery: '🔍 Discovery', validation: '🧪 Validation', creation: '🏗 Creation', scale: '📈 Scale' };
+const STAGE_ORDER = ['discovery', 'validation', 'creation', 'scale'];
 
-// --- Products ---
 function renderProducts() {
   const grid = document.getElementById('products-grid');
-  grid.innerHTML = DATA.products.map(p => {
-    const si = STAGES.indexOf(p.stage);
-    const dots = STAGES.map((s, j) => `<div class="stage-dot ${j <= si ? 'filled' : ''} ${j === si ? 'current' : ''}"></div>`).join('');
-    return `
-      <div class="card">
+  const all = DATA.products || [];
+
+  let html = '';
+  STAGE_ORDER.forEach(stage => {
+    const items = all.filter(p => p.stage === stage);
+    if (!items.length) return;
+    html += `<div style="margin-bottom:24px;">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text3);margin-bottom:10px;">${STAGE_LABELS[stage] || stage}</div>
+      <div class="card-grid">`;
+    items.forEach(p => {
+      const si = STAGE_ORDER.indexOf(p.stage);
+      const dots = STAGE_ORDER.map((s, j) => `<div class="stage-dot ${j <= si ? 'filled' : ''} ${j === si ? 'current' : ''}"></div>`).join('');
+      const urlHtml = p.url ? `<a href="https://${p.url}" target="_blank" style="font-size:12px;color:var(--accent2);">${p.url} →</a>` : '';
+      const priceHtml = p.price && p.price !== 'TBD' ? `<span class="status status-testing" style="font-size:11px;">${esc(p.price)}</span>` : `<span class="status status-idea" style="font-size:11px;">idea</span>`;
+      html += `<div class="card" style="position:relative;">
         <div class="card-header">
-          <div class="card-title">${p.name}</div>
-          <span class="status status-testing">${p.price}</span>
+          <div class="card-title" style="font-size:14px;">${esc(p.name)}</div>
+          ${priceHtml}
         </div>
-        <p style="font-size:13px; color:var(--text2);">MRR: <strong>${p.mrr}</strong> · <a href="https://${p.url}" target="_blank">${p.url}</a></p>
-        <div class="stage-track" style="margin-top:8px;">${dots}</div>
-        <div class="hyp-stage">${p.stage}</div>
-      </div>
-    `;
-  }).join('');
-  document.getElementById('prod-count').textContent = DATA.products.length;
+        ${p.desc ? `<p style="font-size:13px;color:var(--text2);margin-bottom:8px;">${esc(p.desc)}</p>` : ''}
+        ${p.mrr ? `<p style="font-size:12px;color:var(--text3);">MRR: <strong style="color:var(--text2);">${esc(p.mrr)}</strong>${urlHtml ? ' · ' + urlHtml : ''}</p>` : urlHtml}
+        <div class="stage-track" style="margin-top:10px;">${dots}</div>
+      </div>`;
+    });
+    html += `</div></div>`;
+  });
+
+  grid.innerHTML = html;
+  document.getElementById('prod-count').textContent = all.length;
 }
 
 // --- Circles ---

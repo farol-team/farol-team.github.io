@@ -55,64 +55,7 @@
       "TOC"
     ]
   },
-  "hypotheses": [
-    {
-      "id": "h1",
-      "name": "Sebastian массовый",
-      "status": "testing",
-      "stage": "validation",
-      "desc": "OpenClaw в Telegram за минуту, $49/мес"
-    },
-    {
-      "id": "h2",
-      "name": "Маркетплейс Себастианов",
-      "status": "idea",
-      "stage": "discovery",
-      "desc": "30% комиссия от user-generated агентов"
-    },
-    {
-      "id": "h3",
-      "name": "Ori AI кофаундер",
-      "status": "testing",
-      "stage": "validation",
-      "desc": "AI-native компании, $200/мес"
-    },
-    {
-      "id": "h4",
-      "name": "Цифровые сотрудники",
-      "status": "idea",
-      "stage": "discovery",
-      "desc": "AI откликается на вакансии, получает зарплату"
-    },
-    {
-      "id": "h5",
-      "name": "Agency: сборка агентов",
-      "status": "idea",
-      "stage": "discovery",
-      "desc": "Сборка агентов для малого бизнеса"
-    },
-    {
-      "id": "h6",
-      "name": "Мастермайнд",
-      "status": "idea",
-      "stage": "discovery",
-      "desc": "Community + BNI для AI-кофаундеров"
-    },
-    {
-      "id": "h7",
-      "name": "Symphony-as-a-Service",
-      "status": "idea",
-      "stage": "discovery",
-      "desc": "Канбан → агент → PR, hosted на Fly.io"
-    },
-    {
-      "id": "h8",
-      "name": "OpenClaw Side Panel",
-      "status": "idea",
-      "stage": "discovery",
-      "desc": "Chrome extension SaaS"
-    }
-  ],
+  "hypotheses": [],
   "products": [
     {
       "id": "p1",
@@ -120,7 +63,9 @@
       "price": "$49/мес",
       "stage": "validation",
       "url": "getsebastian.app",
-      "mrr": "$0"
+      "mrr": "$0",
+      "desc": "OpenClaw in Telegram in one minute. Memory, voice, code, web.",
+      "status": "testing"
     },
     {
       "id": "p2",
@@ -128,7 +73,9 @@
       "price": "$200/мес",
       "stage": "validation",
       "url": "cofounder.run",
-      "mrr": "$0"
+      "mrr": "$0",
+      "desc": "AI co-founder that works. Strategy, research, execution, memory. No equity.",
+      "status": "testing"
     },
     {
       "id": "p3",
@@ -136,7 +83,69 @@
       "price": "TBD",
       "stage": "discovery",
       "url": "farol.io",
-      "mrr": "$0"
+      "mrr": "$0",
+      "desc": "Post a job — get a perfect AI employee in 60 seconds.",
+      "status": "idea"
+    },
+    {
+      "id": "h2",
+      "name": "Agent Marketplace",
+      "price": "30% rev share",
+      "stage": "discovery",
+      "url": "",
+      "mrr": "$0",
+      "desc": "30% commission from user-generated agents",
+      "status": "idea"
+    },
+    {
+      "id": "h4",
+      "name": "Digital Employees",
+      "price": "TBD",
+      "stage": "discovery",
+      "url": "",
+      "mrr": "$0",
+      "desc": "AI applies for jobs, receives salary",
+      "status": "idea"
+    },
+    {
+      "id": "h5",
+      "name": "Agency: Agent Assembly",
+      "price": "TBD",
+      "stage": "discovery",
+      "url": "",
+      "mrr": "$0",
+      "desc": "Assembling agents for small business",
+      "status": "idea"
+    },
+    {
+      "id": "h6",
+      "name": "Mastermind",
+      "price": "TBD",
+      "stage": "discovery",
+      "url": "",
+      "mrr": "$0",
+      "desc": "Community + BNI for AI co-founders",
+      "status": "idea"
+    },
+    {
+      "id": "h7",
+      "name": "Symphony-as-a-Service",
+      "price": "TBD",
+      "stage": "discovery",
+      "url": "",
+      "mrr": "$0",
+      "desc": "Kanban → agent → PR on Fly.io",
+      "status": "idea"
+    },
+    {
+      "id": "h8",
+      "name": "OpenClaw Side Panel",
+      "price": "TBD",
+      "stage": "discovery",
+      "url": "",
+      "mrr": "$0",
+      "desc": "Chrome extension SaaS",
+      "status": "idea"
     }
   ],
   "circles": [
