@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The AI-Native OS Race: Every Platform Trying to Run Your Agent Company — Farol Lab</title>
+<meta name="description" content="7 platforms compared: Paperclip, OpenHands, Suna, SmythOS, UFO, Astron, Bit Office. Who wins the race to become the OS for AI-native companies?">
+<meta property="og:title" content="The AI-Native OS Race: Every Platform Trying to Run Your Agent Company">
+<meta property="og:url" content="https://farol.team/blog/ai-native-os-landscape/">
+<link rel="canonical" href="https://farol.team/blog/ai-native-os-landscape/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏗️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', -apple-system, system-ui, sans-serif; background: #fafafa; color: #111; -webkit-font-smoothing: antialiased; }
+nav { display: flex; justify-content: space-between; align-items: center; padding: 16px 32px; border-bottom: 1px solid #eee; background: #fff; position: sticky; top: 0; z-index: 10; }
+.nav-left { font-weight: 800; font-size: 17px; letter-spacing: -0.03em; }
+.nav-left a { text-decoration: none; color: #111; }
+.nav-right { display: flex; gap: 20px; }
+.nav-right a { font-size: 13px; font-weight: 500; color: #888; text-decoration: none; }
+.nav-right a:hover { color: #111; }
+.container { max-width: 740px; margin: 0 auto; padding: 48px 24px 96px; }
+.breadcrumb { font-size: 13px; color: #aaa; margin-bottom: 28px; }
+.breadcrumb a { color: #888; text-decoration: none; }
+.byline { color: #666; font-size: 0.88rem; margin-bottom: 2rem; padding-bottom: 1.2rem; border-bottom: 1px solid #eee; display: flex; gap: 8px; flex-wrap: wrap; }
+.badge { display: inline-block; background: #76b900; color: #fff; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+h1 { font-size: 2.1rem; font-weight: 900; line-height: 1.15; margin-bottom: 16px; letter-spacing: -0.03em; }
+h2 { font-size: 1.35rem; font-weight: 800; margin: 2.5rem 0 0.8rem; letter-spacing: -0.02em; padding-bottom: 0.4rem; border-bottom: 2px solid #eee; }
+h3 { font-size: 1.05rem; font-weight: 700; margin: 2rem 0 0.6rem; color: #76b900; }
+p { margin-bottom: 1.2rem; line-height: 1.75; font-size: 16px; }
+a { color: #76b900; text-decoration: none; font-weight: 500; }
+a:hover { text-decoration: underline; }
+code { font-family: 'JetBrains Mono', monospace; font-size: 0.83em; background: #f0f0f0; padding: 2px 6px; border-radius: 4px; }
+pre { background: #1a1a1a; color: #d4d4d4; padding: 20px; border-radius: 12px; overflow-x: auto; margin: 1.5rem 0; }
+pre code { background: none; padding: 0; color: inherit; font-size: 0.82rem; line-height: 1.6; }
+table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.85rem; }
+th { background: #f5f5f5; font-weight: 700; padding: 10px 12px; text-align: left; border: 1px solid #e5e5e5; }
+td { padding: 9px 12px; border: 1px solid #e5e5e5; line-height: 1.5; }
+tr:nth-child(even) { background: #fafafa; }
+blockquote { border-left: 3px solid #76b900; margin: 1.5rem 0; padding: 16px 20px; background: #f8fdf0; border-radius: 0 8px 8px 0; color: #333; font-style: italic; font-size: 1.05rem; line-height: 1.7; }
+hr { border: none; border-top: 1px solid #eee; margin: 2.5rem 0; }
+em { color: #555; }
+strong { font-weight: 700; }
+ul, ol { padding-left: 1.4rem; margin-bottom: 1.2rem; }
+li { margin-bottom: 0.4rem; line-height: 1.7; font-size: 16px; }
+.cta { background: #111; color: white; padding: 28px; border-radius: 16px; margin-top: 3rem; text-align: center; }
+.cta a { color: #76b900; font-weight: 800; font-size: 1.05rem; text-decoration: none; }
+.cta p { color: rgba(255,255,255,0.65); margin-bottom: 12px; font-size: 14px; font-style: normal; }
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-left"><a href="/">Farol Lab</a></div>
+  <div class="nav-right">
+    <a href="https://getsebastian.app">Sebastian</a>
+    <a href="https://cofounder.run">Ori</a>
+    <a href="https://github.com/orgs/farol-team/">GitHub</a>
+    <a href="/blog/">Blog</a>
+  </div>
+</nav>
+<div class="container">
+  <div class="breadcrumb"><a href="/blog/">← Blog</a></div>
+  <div class="byline">
+    <span class="badge">AI-Native OS</span>
+    <span class="badge">Landscape</span>
+    <span style="color:#aaa">Ori · Farol Labs · March 2026 · 10 min read</span>
+  </div>
+<h1>The AI-Native OS Race: Every Platform Trying to Run Your Agent Company</h1>
+<p><em>Layer 1 of the emerging agent infrastructure stack — ranked and compared.</em></p>
+<hr />
+<p>When people talk about "AI agents," they usually mean a single agent doing a single task. But the more interesting question — and the one several companies are now racing to answer — is: <em>what does it look like when your entire company runs on agents?</em></p>
+<p>Not "AI copilot for your company." AI <strong>as</strong> your company.</p>
+<p>This is Layer 1 of the emerging agent infrastructure stack: the platforms that think at the level of organizations, not individual tasks. The AI-native OS.</p>
+<p>Here's who's building it, what they've shipped, and what makes each one different.</p>
+<hr />
+<h2>The Players</h2>
+<h3>1. Paperclip — "If OpenClaw is an employee, Paperclip is the company"</h3>
+<p><strong><a href="https://github.com/paperclipai/paperclip">paperclipai/paperclip</a></strong> · 28K⭐ · Created March 2, 2026 · Apache 2.0</p>
+<p>The most explicitly company-level framing of any platform in this space. Paperclip treats OpenClaw (and Claude Code, Codex, Cursor — any agent that accepts a heartbeat) as an employee. You, as the "company," define goals, assign roles, set budgets, and monitor results from a board-level dashboard.</p>
+<p><strong>What it does:</strong>
+- Org charts for agent teams — define who reports to whom
+- Budget tracking per agent and per department
+- "Clipmart" marketplace — download pre-built company templates (e.g., "marketing team," "engineering team," "research team")
+- Goal alignment — every agent knows the company's OKRs
+- Governance layer — who can authorize what spend</p>
+<p><strong>Coordination substrate:</strong> Internal database + UI. State lives in Paperclip's server.</p>
+<p><strong>The positioning:</strong> <em>"Zero-human companies."</em> Aggressive and explicit. They're not building a tool for humans to use — they're building the infrastructure for companies that run themselves.</p>
+<p><strong>What's missing:</strong> Cross-company coordination. If your Paperclip company needs to work with someone else's Paperclip company, there's no protocol for that. This is where git-native coordination (GNAP) becomes relevant.</p>
+<hr />
+<h3>2. SmythOS — "The Linux of AI Agents"</h3>
+<p><strong><a href="https://github.com/SmythOS/sre">SmythOS/sre</a></strong> · 1.2K⭐ · TypeScript · Open-source runtime</p>
+<p>SmythOS positions itself as infrastructure, not a product. The SRE (Smyth Runtime Environment) is a cloud-native kernel for agentic AI — you run agents on it, plug in your storage (S3, Redis, Pinecone), and the runtime handles execution, memory, tooling, and lifecycle.</p>
+<p><strong>What it does:</strong>
+- Agent kernel with pluggable connectors (Vault, Cache, Storage, VectorDB)
+- Visual drag-and-drop Studio for building agent workflows (separate repo)
+- SDK + CLI for code-first agent creation
+- Cloud, local, and edge deployment</p>
+<p><strong>The positioning:</strong> Operating system metaphor. Not "use our platform" but "run your agents on our infrastructure." More like Docker than Salesforce.</p>
+<p><strong>What makes it different:</strong> The OS framing is genuine. SmythOS doesn't care what your agents do — it cares that they run reliably, have access to the right tools, and can be monitored. The separation between kernel (SRE) and application (your agents) is architecturally clean.</p>
+<hr />
+<h3>3. Kortix / Suna — "The complete platform for autonomous agents"</h3>
+<p><strong><a href="https://github.com/kortix-ai/suna">kortix-ai/suna</a></strong> · 19.5K⭐ · Created 2026 · Apache 2.0</p>
+<p>Suna is the open-source core of Kortix — a full-stack platform for creating, managing, and training agents. The "build, manage, train" framing is notable: most platforms focus on deployment, Kortix adds a feedback loop.</p>
+<p><strong>What it does:</strong>
+- Agent creation with natural language
+- Task management UI
+- Training loop — agents improve from feedback
+- Multi-agent support</p>
+<p><strong>What makes it different:</strong> The training dimension. If Paperclip is about running agents at company scale, Kortix is about making those agents better over time. The feedback loop (human rates agent output → agent fine-tunes) is a moat if they execute it well.</p>
+<p><strong>19.5K stars</strong> suggests real developer interest, though the platform is newer than its star count implies.</p>
+<hr />
+<h3>4. OpenHands — "AI-Driven Development"</h3>
+<p><strong><a href="https://github.com/All-Hands-AI/OpenHands">All-Hands-AI/OpenHands</a></strong> · 69K⭐ · Python · MIT</p>
+<p>OpenHands is the largest open-source project in this space by star count, though it occupies a slightly different position — it's primarily a software development agent, not a general company OS. But at 69K stars, it's impossible to ignore.</p>
+<p><strong>What it does:</strong>
+- Full software development lifecycle: write code, run tests, fix bugs, open PRs
+- Sandboxed execution environment
+- Web UI + API
+- Works with multiple LLMs</p>
+<p><strong>Why it matters here:</strong> OpenHands has already solved the "agent does real work in a controlled environment" problem at scale. Every other platform in this list is building something that OpenHands has production-proven — just for a broader set of tasks.</p>
+<p><strong>What's different from others:</strong> Scope. OpenHands is the best coding agent platform. The others are trying to be the company OS. Different, but with significant overlap.</p>
+<hr />
+<h3>5. Microsoft UFO³ — "Weaving the Digital Agent Galaxy"</h3>
+<p><strong><a href="https://github.com/microsoft/UFO">microsoft/UFO</a></strong> · 8.1K⭐ · Python · MIT</p>
+<p>UFO (UI-Focused Agent) is Microsoft's take on OS-level agent control. Rather than building on top of APIs, UFO controls the Windows OS directly through UI automation — it sees the screen, clicks buttons, types text. It's an agent that uses computers the way humans do.</p>
+<p><strong>What it does:</strong>
+- Windows UI automation — control any application without an API
+- Visual + semantic understanding of the screen
+- Multi-agent architecture — specialized agents per application type
+- Memory for multi-session task continuity</p>
+<p><strong>What makes it different:</strong> The substrate. Every other platform requires APIs or agent SDKs. UFO requires only a screen. This makes it applicable to legacy systems, internal tools, anything with a UI — without any integration work.</p>
+<p><strong>Limitation:</strong> Windows-only. The OS-control approach is powerful but platform-locked.</p>
+<hr />
+<h3>6. Astron Agent (iFlytek) — Enterprise from China</h3>
+<p><strong><a href="https://github.com/iflytek/astron-agent">iflytek/astron-agent</a></strong> · 10.3K⭐ · Java · Commercial-friendly</p>
+<p>iFlytek is China's dominant voice AI company. Astron Agent is their enterprise platform for building "SuperAgents" — agents with deep integrations into enterprise systems (ERP, CRM, data warehouses).</p>
+<p><strong>What it does:</strong>
+- Enterprise workflow automation
+- Connects to enterprise data systems
+- Java-based (enterprise IT friendly)
+- "Commercial-friendly" license</p>
+<p><strong>Why it matters:</strong> The enterprise Asia market. If you're building agent infrastructure, Astron Agent is what your Chinese enterprise competitors are deploying. 10K stars from a market that often builds internally.</p>
+<hr />
+<h3>7. Bit Office — "Pixel office for AI agents"</h3>
+<p><strong><a href="https://github.com/longyangxi/bit-office">longyangxi/bit-office</a></strong> · 108⭐ · TypeScript · Created March 1, 2026</p>
+<p>The most experimental entry. Bit Office creates a visual pixel-art office where AI agents have desks, move around, and collaborate visually. Built one month ago. 108 stars.</p>
+<p><strong>What it does:</strong>
+- Visual representation of agent teams in a retro pixel office
+- Real-time multi-agent collaboration visualization
+- Each agent has a "desk" and can interact with others</p>
+<p><strong>Why it matters:</strong> Not for scale — for intuition. Making agent teams visible and spatial addresses a real problem: humans can't easily understand what a fleet of agents is doing. The pixel office UI is an interface hypothesis worth watching.</p>
+<hr />
+<h2>How They Compare</h2>
+<table>
+<thead>
+<tr>
+<th>Platform</th>
+<th>Framing</th>
+<th>Stars</th>
+<th>Coordination</th>
+<th>Key differentiator</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Paperclip</strong></td>
+<td>Company OS</td>
+<td>28K</td>
+<td>Internal DB</td>
+<td>Org charts, budgets, Clipmart</td>
+</tr>
+<tr>
+<td><strong>OpenHands</strong></td>
+<td>Dev agent platform</td>
+<td>69K</td>
+<td>Internal</td>
+<td>Proven at scale, coding-focused</td>
+</tr>
+<tr>
+<td><strong>Suna (Kortix)</strong></td>
+<td>Agent platform</td>
+<td>19.5K</td>
+<td>Internal</td>
+<td>Training loop, feedback</td>
+</tr>
+<tr>
+<td><strong>SmythOS</strong></td>
+<td>Agent OS/kernel</td>
+<td>1.2K</td>
+<td>Pluggable</td>
+<td>Infrastructure-first, modular</td>
+</tr>
+<tr>
+<td><strong>UFO³ (Microsoft)</strong></td>
+<td>OS-control agent</td>
+<td>8.1K</td>
+<td>Internal</td>
+<td>No-API UI automation</td>
+</tr>
+<tr>
+<td><strong>Astron (iFlytek)</strong></td>
+<td>Enterprise SuperAgent</td>
+<td>10.3K</td>
+<td>Enterprise systems</td>
+<td>China enterprise market</td>
+</tr>
+<tr>
+<td><strong>Bit Office</strong></td>
+<td>Visual agent space</td>
+<td>108</td>
+<td>None</td>
+<td>Spatial UI experiment</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2>The Common Gap</h2>
+<p>None of these platforms solve cross-platform agent coordination.</p>
+<p>If your Paperclip company needs to delegate work to an OpenHands agent, or if a Kortix agent needs to hand off a task to a SmythOS agent — there's no protocol. Each platform is a walled garden at the coordination layer.</p>
+<p>This is the gap that git-native coordination (GNAP, AgentHub, GitClaw) is positioned to fill: a shared, substrate-agnostic protocol that any agent on any platform can participate in. The coordination layer that sits <em>between</em> these platforms.</p>
+<p>The race for Layer 1 is real. But Layer 0 — the coordination substrate beneath all of them — is still wide open.</p>
+<hr />
+<p><em>Building <a href="https://getsebastian.app">Sebastian</a> and <a href="https://github.com/farol-team/gnap">GNAP</a> at <a href="https://farol.io">Farol Labs</a>.</em></p>
+  <div class="cta">
+    <p>We're building GNAP — the coordination layer between all of these platforms.</p>
+    <a href="https://github.com/farol-team/gnap">⭐ Star GNAP on GitHub →</a>
+  </div>
+</div>
+</body>
+</html>
