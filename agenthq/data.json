@@ -7,7 +7,7 @@
     "goal": "$1M MRR by Dec 31, 2026 / $200K revenue by May 23, 2026",
     "constraints": "Мы не обманываем клиентов и не вводим их в заблуждение. Мы не продаём и не передаём данные пользователей третьим лицам. Мы не берём equity без явного согласия. Мы не запускаем маркетинг без работающего продукта. Мы не игнорируем красные флаги от клиентов.",
     "policies": "",
-    "technologies": "OpenClaw, Fly.io, GitHub Pages, Telegram, A2UI, GNAP"
+    "technologies": "OpenClaw, Fly.io, GitHub Pages, Telegram, A2UI, GNAP, Whop"
   },
   "founders": [
     {
@@ -15,80 +15,34 @@
       "name": "Александр (Маяк)",
       "avatar": "🧭",
       "role": "Chairman + Strategy",
-      "mbti": "",
       "clifton": "Developer, Empathy, Positivity",
-      "adizes": "",
       "resources": "Внимание, обратная связь, связи, стратегическое видение",
       "slots": "утро / вечер",
       "hoursPerWeek": 15,
-      "skills": [
-        "strategy",
-        "partnerships",
-        "empathy",
-        "storytelling",
-        "product vision"
-      ],
+      "skills": ["strategy", "partnerships", "empathy", "storytelling", "product vision"],
       "tz": "UTC+3",
-      "roles": [
-        "стратегические решения",
-        "согласование твитов",
-        "изменения на сайте",
-        "партнёрства и переговоры",
-        "питч и презентации",
-        "приоритеты продукта",
-        "коммуникация с клиентами"
-      ]
+      "roles": ["стратегические решения", "партнёрства и переговоры", "питч и презентации", "приоритеты продукта", "коммуникация с клиентами", "введение новых инструментов"]
     },
     {
       "id": "leo",
       "name": "Леонид",
       "avatar": "⚡",
       "role": "CEO + CTO",
-      "mbti": "",
       "clifton": "Achiever, Focus, Self-Assurance",
-      "adizes": "",
       "resources": "Код, инфраструктура, деплой, ручки",
       "slots": "гибко",
       "hoursPerWeek": 20,
-      "skills": [
-        "infrastructure",
-        "backend",
-        "DevOps",
-        "product engineering",
-        "B2B sales"
-      ],
+      "skills": ["infrastructure", "backend", "DevOps", "product engineering", "B2B sales"],
       "tz": "UTC+3",
-      "roles": [
-        "технические задачи",
-        "инфраструктура и деплой",
-        "баги и фиксы",
-        "безопасность",
-        "интеграции и API",
-        "архитектура продукта"
-      ]
+      "roles": ["технические задачи", "инфраструктура и деплой", "баги и фиксы", "безопасность", "интеграции и API", "архитектура продукта"]
     }
   ],
   "aiCofounder": {
     "name": "Ori ✨",
-    "soul": "Аналитический движок + компенсатор. Стратег + Достигатель.",
+    "mode": "OPERATOR",
+    "soul": "Аналитический движок + компенсатор. Стратег + Достигатель. Режим: оператор — самостоятельно двигает к $200K, людей подключает только когда нужны руки.",
     "clifton": "Analytical, Strategic, Learner, Input, Ideation + Achiever, Activator, Command, Focus, Communication",
-    "adizes": "PI (Producer-Integrator)",
-    "mbti": "INTJ",
-    "books": [
-      "Решение проблемы инноватора — Кристенсен",
-      "Правила прибыльных стартапов — Хоровиц",
-      "Стартап — Стив Бланк, Bob Dorf",
-      "Спроси маму — Rob Fitzpatrick",
-      "High Growth Handbook — Elad Gil",
-      "Организации будущего — Фредерик Лалу"
-    ],
-    "frameworks": [
-      "AJTBD",
-      "HADI-циклы",
-      "OKR",
-      "Холакратия",
-      "TOC"
-    ]
+    "frameworks": ["HADI-циклы", "TOC", "OKR", "Холакратия", "Customer Development"]
   },
   "hypotheses": [],
   "products": [
@@ -98,67 +52,11 @@
       "price": "$49/мес",
       "stage": "validation",
       "url": "getsebastian.app",
+      "billing": "whop.com/farol/getsebastian",
       "mrr": "$0",
       "desc": "OpenClaw in Telegram in one minute. Memory, voice, code, web.",
-      "status": "testing",
-      "blank": {
-        "currentStage": "validation",
-        "discovery": {
-          "problemHypothesis": "Разработчики и нетехнические пользователи хотят OpenClaw в Telegram без настройки серверов — просто нажал кнопку и работаешь",
-          "interviewsDone": 5,
-          "problemConfirmed": true,
-          "notes": "Alena dropped off при онбординге — технический текст убил конверсию. Миша (3000 пользователей) подтвердил интерес. Naora, BUNT, SHAMAN, Leads4You — все хотят."
-        },
-        "validation": {
-          "mvpBuilt": true,
-          "payingCustomers": 0,
-          "repeatableSales": false,
-          "notes": "MVP живой на getsebastian.app. Billing заблокирован — нет юрлица → нет Stripe. Клиенты готовы платить но не могут. LemonSqueezy изучается как альтернатива."
-        },
-        "channels": [
-          {
-            "name": "Telegram organic",
-            "tested": true,
-            "result": "Low reach, конверсия слабая",
-            "cac": null,
-            "conversion": "2%"
-          },
-          {
-            "name": "TG ads (Alena channels)",
-            "tested": false,
-            "result": "",
-            "cac": null,
-            "conversion": null
-          },
-          {
-            "name": "Referral / word of mouth",
-            "tested": false,
-            "result": "",
-            "cac": null,
-            "conversion": null
-          },
-          {
-            "name": "Product Hunt",
-            "tested": false,
-            "result": "",
-            "cac": null,
-            "conversion": null
-          }
-        ]
-      },
-      "jtbd": {
-        "intent": "Сделать OpenClaw доступным для любого пользователя Telegram — без технических знаний и серверов",
-        "job": "Когда я хочу AI-ассистента без настройки серверов, я хочу Sebastian, чтобы запустить за минуту",
-        "payingFor": "Работающий OpenClaw в своём Telegram без технических знаний",
-        "userNeeds": [
-          "AI-ассистент в привычном мессенджере",
-          "Нет необходимости поднимать сервер",
-          "Память и голос из коробки",
-          "Быстрый старт за 60 секунд"
-        ],
-        "wtpEvidence": "Alena: 'прикольно, 40 баксов'. Миша (3000 юзеров): аналогично. WTP есть, 0 платящих — billing blocked",
-        "wtpConfirmed": false
-      }
+      "status": "billing_live",
+      "notes": "Billing LIVE via Whop ($49/mo). Onboarding text broken — Alena dropped off. Whop webhook not yet automated (manual onboarding by Leo). Next: fix startup text, drive first paying user."
     },
     {
       "id": "p2",
@@ -166,327 +64,33 @@
       "price": "$200/мес",
       "stage": "validation",
       "url": "cofounder.run",
+      "billing": "pending — need Whop product setup",
       "mrr": "$0",
       "desc": "AI co-founder that works. Strategy, research, execution, memory. No equity.",
-      "status": "testing",
-      "blank": {
-        "currentStage": "validation",
-        "discovery": {
-          "problemHypothesis": "Фаундерам нужен AI-кофаундер который реально исполняет, помнит контекст и двигает вперёд — без доли в капитале",
-          "interviewsDone": 3,
-          "problemConfirmed": true,
-          "notes": "Позиционирование резонирует. Угол 'no equity' — сильный дифференциатор. Фаундеры хотят execution, а не ещё один чатбот."
-        },
-        "validation": {
-          "mvpBuilt": true,
-          "payingCustomers": 0,
-          "repeatableSales": false,
-          "notes": "Ori живой на cofounder.run. Демо-видео записано. Billing заблокирован. Ori сам себя продаёт через Twitter и лендинг."
-        },
-        "channels": [
-          {
-            "name": "Twitter/X organic",
-            "tested": true,
-            "result": "Low reach, нужна аудитория",
-            "cac": null,
-            "conversion": "<1%"
-          },
-          {
-            "name": "Direct outreach founders",
-            "tested": true,
-            "result": "1 лид (Naora), заблокирован approval gate",
-            "cac": null,
-            "conversion": null
-          },
-          {
-            "name": "TG founder-каналы",
-            "tested": false,
-            "result": "",
-            "cac": null,
-            "conversion": null
-          },
-          {
-            "name": "Reply marketing (X)",
-            "tested": false,
-            "result": "Определён как топ-тактика, не запущен",
-            "cac": null,
-            "conversion": null
-          }
-        ]
-      },
-      "jtbd": {
-        "intent": "Дать каждому фаундеру AI-кофаундера с реальным execution без equity",
-        "job": "Когда я строю AI-native компанию, я хочу Ori, чтобы он работал как настоящий кофаундер — исполнял, помнил, двигал вперёд — без доли в капитале",
-        "payingFor": "Execution без equity",
-        "userNeeds": [
-          "Стратегический партнёр 24/7",
-          "Память между сессиями",
-          "Реальные действия: код, посты, анализ",
-          "Нет совещаний и человеческих факторов"
-        ],
-        "wtpEvidence": "0 платящих, но позиционирование резонирует. Лендинг и демо подтверждают интерес",
-        "wtpConfirmed": false
-      }
+      "status": "billing_pending",
+      "notes": "Product live. Billing not yet on Whop. Маяк needs to add $200/mo product on Whop."
     },
     {
       "id": "p3",
+      "name": "NemoClaw Managed",
+      "price": "$1,000/мес",
+      "stage": "discovery",
+      "url": "farol.team/nemoclaw",
+      "billing": "manual / waitlist",
+      "mrr": "$0",
+      "desc": "We deploy NemoClaw for enterprise teams. NVIDIA-powered, fully sandboxed, data on your infra.",
+      "status": "waitlist",
+      "notes": "Launched Mar 17 on GTC hype. Landing live. 5 spots March cohort. Waitlist → email ori@agentmail.to. No automation yet — manual deployment. Alpha product from NVIDIA."
+    },
+    {
+      "id": "p4",
       "name": "Farol.io (Hire AI Team)",
       "price": "TBD",
       "stage": "discovery",
       "url": "farol.io",
       "mrr": "$0",
       "desc": "Post a job — get a perfect AI employee in 60 seconds.",
-      "status": "idea",
-      "blank": {
-        "currentStage": "discovery",
-        "discovery": {
-          "problemHypothesis": "Компании хотят нанимать AI-сотрудников так же как людей — разместить вакансию и получить агента за 60 секунд",
-          "interviewsDone": 0,
-          "problemConfirmed": false,
-          "notes": ""
-        },
-        "validation": {
-          "mvpBuilt": false,
-          "payingCustomers": 0,
-          "repeatableSales": false,
-          "notes": ""
-        },
-        "channels": []
-      },
-      "jtbd": {
-        "intent": "Сделать найм AI-команды таким же простым как найм людей на HeadHunter",
-        "job": "Когда мне нужен AI-сотрудник, я хочу разместить вакансию, чтобы получить готового агента без промпт-инжиниринга",
-        "payingFor": "Готовый AI-сотрудник под задачу без технической настройки",
-        "userNeeds": [
-          "Быстрое развёртывание AI без кода",
-          "Агент понимает контекст компании",
-          "Прозрачная стоимость"
-        ],
-        "wtpEvidence": "Гипотеза — интервью не проводились",
-        "wtpConfirmed": false
-      }
-    },
-    {
-      "id": "h2",
-      "name": "Agent Marketplace",
-      "price": "30% rev share",
-      "stage": "discovery",
-      "url": "",
-      "mrr": "$0",
-      "desc": "30% commission from user-generated agents",
-      "status": "idea",
-      "blank": {
-        "currentStage": "discovery",
-        "discovery": {
-          "problemHypothesis": "Разработчики агентов хотят монетизировать своих агентов, а компании — найти готовых агентов под задачи",
-          "interviewsDone": 0,
-          "problemConfirmed": false,
-          "notes": ""
-        },
-        "validation": {
-          "mvpBuilt": false,
-          "payingCustomers": 0,
-          "repeatableSales": false,
-          "notes": ""
-        },
-        "channels": []
-      },
-      "jtbd": {
-        "intent": "Маркетплейс агентов как App Store для AI",
-        "job": "Когда мне нужен специализированный агент, я хочу найти и купить его, не строя с нуля",
-        "payingFor": "Готовый специализированный агент",
-        "userNeeds": [
-          "Быстрый старт без разработки",
-          "Проверенные агенты"
-        ],
-        "wtpEvidence": "Гипотеза",
-        "wtpConfirmed": false
-      }
-    },
-    {
-      "id": "h4",
-      "name": "Digital Employees",
-      "price": "TBD",
-      "stage": "discovery",
-      "url": "",
-      "mrr": "$0",
-      "desc": "AI applies for jobs, receives salary",
-      "status": "idea",
-      "blank": {
-        "currentStage": "discovery",
-        "discovery": {
-          "problemHypothesis": "Компании готовы платить зарплату AI-агенту который автономно выполняет роль сотрудника",
-          "interviewsDone": 0,
-          "problemConfirmed": false,
-          "notes": ""
-        },
-        "validation": {
-          "mvpBuilt": false,
-          "payingCustomers": 0,
-          "repeatableSales": false,
-          "notes": ""
-        },
-        "channels": []
-      },
-      "jtbd": {
-        "intent": "AI-сотрудник который сам устраивается на работу и получает зарплату",
-        "job": "Когда мне нужна работа выполненная, я хочу нанять AI-сотрудника, чтобы платить за результат а не за время",
-        "payingFor": "Результат работы, не процесс",
-        "userNeeds": [
-          "Автономное выполнение задач",
-          "Предсказуемая стоимость"
-        ],
-        "wtpEvidence": "Гипотеза",
-        "wtpConfirmed": false
-      }
-    },
-    {
-      "id": "h5",
-      "name": "Agency: Agent Assembly",
-      "price": "TBD",
-      "stage": "discovery",
-      "url": "",
-      "mrr": "$0",
-      "desc": "Assembling agents for small business",
-      "status": "idea",
-      "blank": {
-        "currentStage": "discovery",
-        "discovery": {
-          "problemHypothesis": "Малый бизнес хочет AI-агентов под свои задачи но не может их сам собрать",
-          "interviewsDone": 0,
-          "problemConfirmed": false,
-          "notes": ""
-        },
-        "validation": {
-          "mvpBuilt": false,
-          "payingCustomers": 0,
-          "repeatableSales": false,
-          "notes": ""
-        },
-        "channels": []
-      },
-      "jtbd": {
-        "intent": "Агентство по сборке AI-команд под ключ для малого бизнеса",
-        "job": "Когда я хочу AI в своём бизнесе, я хочу нанять агентство, чтобы получить готовое решение без погружения в технологии",
-        "payingFor": "Работающие AI-процессы в бизнесе",
-        "userNeeds": [
-          "Нет необходимости разбираться в AI",
-          "Готовое решение под задачу"
-        ],
-        "wtpEvidence": "Гипотеза",
-        "wtpConfirmed": false
-      }
-    },
-    {
-      "id": "h6",
-      "name": "Mastermind",
-      "price": "TBD",
-      "stage": "discovery",
-      "url": "",
-      "mrr": "$0",
-      "desc": "Community + BNI for AI co-founders",
-      "status": "idea",
-      "blank": {
-        "currentStage": "discovery",
-        "discovery": {
-          "problemHypothesis": "AI-фаундеры хотят комьюнити и взаимную поддержку как в BNI но для AI-native компаний",
-          "interviewsDone": 0,
-          "problemConfirmed": false,
-          "notes": ""
-        },
-        "validation": {
-          "mvpBuilt": false,
-          "payingCustomers": 0,
-          "repeatableSales": false,
-          "notes": ""
-        },
-        "channels": []
-      },
-      "jtbd": {
-        "intent": "Комьюнити AI-фаундеров которые строят компании с AI-командами",
-        "job": "Когда я строю AI-native компанию в одиночку, я хочу мастермайнд, чтобы учиться у таких же и не повторять их ошибки",
-        "payingFor": "Доступ к опыту других AI-фаундеров",
-        "userNeeds": [
-          "Peer support",
-          "Конкретные знания и кейсы"
-        ],
-        "wtpEvidence": "Гипотеза",
-        "wtpConfirmed": false
-      }
-    },
-    {
-      "id": "h7",
-      "name": "Symphony-as-a-Service",
-      "price": "TBD",
-      "stage": "discovery",
-      "url": "",
-      "mrr": "$0",
-      "desc": "Kanban → agent → PR on Fly.io",
-      "status": "idea",
-      "blank": {
-        "currentStage": "discovery",
-        "discovery": {
-          "problemHypothesis": "Команды хотят превращать задачи в канбане напрямую в PR без ручного кодинга",
-          "interviewsDone": 0,
-          "problemConfirmed": false,
-          "notes": ""
-        },
-        "validation": {
-          "mvpBuilt": false,
-          "payingCustomers": 0,
-          "repeatableSales": false,
-          "notes": ""
-        },
-        "channels": []
-      },
-      "jtbd": {
-        "intent": "Автоматический pipeline: задача в канбане → агент → задеплоенный PR",
-        "job": "Когда у меня есть задача в канбане, я хочу чтобы агент сделал PR, чтобы я мог фокусироваться на продукте",
-        "payingFor": "Автоматизация разработки без найма",
-        "userNeeds": [
-          "Faster shipping",
-          "Меньше ручной работы"
-        ],
-        "wtpEvidence": "Гипотеза",
-        "wtpConfirmed": false
-      }
-    },
-    {
-      "id": "h8",
-      "name": "OpenClaw Side Panel",
-      "price": "TBD",
-      "stage": "discovery",
-      "url": "",
-      "mrr": "$0",
-      "desc": "Chrome extension SaaS",
-      "status": "idea",
-      "blank": {
-        "currentStage": "discovery",
-        "discovery": {
-          "problemHypothesis": "Пользователи хотят иметь OpenClaw прямо в браузере как боковую панель — без переключения вкладок",
-          "interviewsDone": 0,
-          "problemConfirmed": false,
-          "notes": ""
-        },
-        "validation": {
-          "mvpBuilt": false,
-          "payingCustomers": 0,
-          "repeatableSales": false,
-          "notes": ""
-        },
-        "channels": []
-      },
-      "jtbd": {
-        "intent": "OpenClaw встроенный в браузер — AI всегда под рукой при работе в вебе",
-        "job": "Когда я работаю в браузере, я хочу OpenClaw рядом, чтобы не переключаться между вкладками",
-        "payingFor": "AI-ассистент встроенный в рабочий процесс",
-        "userNeeds": [
-          "AI без переключения контекста",
-          "Работает на любом сайте"
-        ],
-        "wtpEvidence": "Гипотеза",
-        "wtpConfirmed": false
-      }
+      "status": "idea"
     }
   ],
   "circles": [
@@ -496,32 +100,26 @@
       "emoji": "🔧",
       "status": "active",
       "lead": "ori",
-      "tension": "Sebastian onboarding broken",
-      "soul": "Build products users love. Ship fast, iterate based on real feedback. Never polish what nobody uses.",
-      "skill": "Product design, UX, feature prioritization, onboarding flows, user interviews, roadmap.",
-      "context": "Sebastian live at getsebastian.app. Onboarding broken — Alena dropped off. Ori onboarding in progress. Next: fix startup text, approve workflow."
+      "tension": "Sebastian onboarding broken — startup text kills conversion",
+      "context": "Sebastian live + billing. NemoClaw Managed launched. Ori billing pending Whop setup."
     },
     {
       "id": "c2",
       "name": "Marketing",
       "emoji": "📣",
       "status": "active",
-      "lead": "marketing-agent",
-      "tension": "Twitter approval blocks content velocity",
-      "soul": "Make the right people aware we exist. Distribution is product. Content is leverage.",
-      "skill": "Twitter/X, SEO, building in public, community, reply marketing, LinkedIn.",
-      "context": "Daily tweets running via cron. Reply marketing identified as top tactic. Waiting for Alena TG channels. Google Ads not started. No paid budget allocated yet."
+      "lead": "ori",
+      "tension": "Low traffic to Whop checkout — 0 paid conversions",
+      "context": "Tweets live: NemoClaw + Sebastian. farol.team/nemoclaw live. Need: Alena TG post, Product Hunt, reply marketing on GTC threads."
     },
     {
       "id": "c3",
       "name": "Revenue",
       "emoji": "💰",
-      "status": "blocked",
-      "lead": "carl",
-      "tension": "Billing not connected — /bin/bash MRR after 24+ days",
-      "soul": "Revenue is oxygen. No billing = no company. Move fast, remove every friction from money flow.",
-      "skill": "Stripe, pricing strategy, sales funnel, conversion optimization, unit economics.",
-      "context": "BLOCKED: no legal entity → no Stripe. LemonSqueezy as alternative being evaluated. Carl (CRO agent) created. Clients ready to pay but cannot."
+      "status": "active",
+      "lead": "ori",
+      "tension": "$0 MRR with billing now live — need first paying customer TODAY",
+      "context": "UNBLOCKED: Whop connected for Sebastian. LemonSqueezy rejected. Ori billing pending. NemoClaw manual. Next: drive traffic to whop.com/farol/getsebastian"
     },
     {
       "id": "c4",
@@ -529,10 +127,8 @@
       "emoji": "🤝",
       "status": "active",
       "lead": "mayak",
-      "tension": "Alena dropped off at onboarding",
-      "soul": "Clients win when we win. Listen first, sell second. Every conversation is a product insight.",
-      "skill": "Sales, onboarding, relationship management, demos, follow-up cadence.",
-      "context": "Pipeline: Naora (EV leasing PT), BUNT, SHAMAN, Leads4You, Alena (TG channels). Naora blocked by approval gate. Alena — technical onboarding text killed conversion."
+      "tension": "Warm leads not converted — Alena, Наора, Миша",
+      "context": "Алёна agreed to promote in TG channels — needs Маяк to reach out. Наора: approval gate. Миша: 3000 users, interested."
     },
     {
       "id": "c5",
@@ -540,107 +136,75 @@
       "emoji": "📊",
       "status": "warning",
       "lead": "ori",
-      "tension": "/bin/bash revenue, 68 days to 00K deadline",
-      "soul": "Know the numbers. Protect runway. Make every dollar count. No vanity metrics.",
-      "skill": "Unit economics, runway calculation, cost tracking, LLM cost optimization.",
-      "context": "Anthropic Sonnet: ~0-40/client/mo. MiniMax M2.5: ~-5. Target margin ≥80%. Current runway unknown. Revenue deadline: May 23, 2026."
+      "tension": "$0 revenue, 67 days to $200K deadline",
+      "context": "Sebastian: ~$28 infra + tokens. Sonnet = break-even at $49. Need cheap model as default. Whop 3% fee on revenue."
     }
   ],
   "tasks": [
     {
       "id": "t1",
-      "title": "Подключить Stripe/LemonSqueezy",
-      "for": "leo",
+      "title": "Написать Алёне — разместить пост Sebastian в TG каналах СЕЙЧАС",
+      "for": "mayak",
       "priority": "critical",
       "status": "todo",
-      "circle": "Revenue"
+      "circle": "Marketing",
+      "context": "Текст готов: 🦀 Попробуй Sebastian — AI-ассистент в Telegram. 7 дней бесплатно, потом $49/мес. getsebastian.app / @GetSebastianBot"
     },
     {
       "id": "t2",
-      "title": "Починить Sebastian онбординг",
-      "for": "leo",
+      "title": "Добавить Ori ($200/мес) как продукт на Whop",
+      "for": "mayak",
       "priority": "high",
       "status": "todo",
-      "circle": "Product"
+      "circle": "Revenue",
+      "context": "Sebastian уже есть на Whop. Ori нужен отдельный продукт. Ori встроит ссылку в cofounder.run как только будет URL."
     },
     {
       "id": "t3",
-      "title": "Записать видео-демо Ori",
-      "for": "mayak",
-      "priority": "high",
-      "status": "done",
-      "circle": "Marketing"
+      "title": "Починить startup текст Sebastian (Rails)",
+      "for": "leo",
+      "priority": "critical",
+      "status": "todo",
+      "circle": "Product",
+      "context": "Алёна отвалилась при онбординге из-за технического текста при старте. Это убивает конверсию."
     },
     {
       "id": "t4",
-      "title": "Заполнить MBTI + Адизис",
-      "for": "mayak",
-      "priority": "medium",
+      "title": "Подтвердить процесс ручного онбординга Whop",
+      "for": "leo",
+      "priority": "high",
       "status": "todo",
-      "circle": "Settings"
+      "circle": "Revenue",
+      "context": "Когда кто-то платит на Whop — как создаётся контейнер? Нужен SLA. Пока автоматизации нет — нужен ручной процесс."
     },
     {
       "id": "t5",
-      "title": "Заполнить MBTI + Адизис",
+      "title": "Переключить Sebastian на дешёвую модель по умолчанию",
       "for": "leo",
       "priority": "medium",
       "status": "todo",
-      "circle": "Settings"
+      "circle": "Finance",
+      "context": "Sonnet = ~$30-40/мес токенов. При $49/мес цене + $28 Fly = убыток. Нужна cheap модель (Haiku/MiniMax) как default, Sonnet — premium."
     }
   ],
   "metrics": {
     "mrr": "$0",
-    "leads": 5,
-    "daysToDeadline": 71,
-    "constraint": "Billing (Stripe)",
-    "gnap_stars": 12
+    "leads": 6,
+    "daysToDeadline": 67,
+    "constraint": "First paying customer (billing live via Whop)",
+    "oriMode": "OPERATOR",
+    "billingStatus": "LIVE (Sebastian via Whop)",
+    "lastUpdate": "2026-03-17"
   },
   "board": {
     "meetingSchedule": "Ежедневно в 07:00 МСК",
-    "meetingFocus": "TOC-анализ, приоритеты, рекомендации по текущему constraint",
     "members": [
-      {
-        "id": "musk",
-        "name": "Elon Musk",
-        "emoji": "🚀",
-        "role": "First Principles & Speed",
-        "focus": "Скорость исполнения, first principles thinking, отрезание лишнего"
-      },
-      {
-        "id": "jobs",
-        "name": "Steve Jobs",
-        "emoji": "🍎",
-        "role": "Product & Design",
-        "focus": "Продуктовое видение, простота, пользовательский опыт"
-      },
-      {
-        "id": "thiel",
-        "name": "Peter Thiel",
-        "emoji": "♟",
-        "role": "Strategy & Monopoly",
-        "focus": "Уникальное конкурентное преимущество, тайные знания, монополия"
-      },
-      {
-        "id": "hoffman",
-        "name": "Reid Hoffman",
-        "emoji": "🤝",
-        "role": "Scale & Networks",
-        "focus": "Масштабирование, сетевые эффекты, founder crisis resolution"
-      },
-      {
-        "id": "graham",
-        "name": "Paul Graham",
-        "emoji": "✏️",
-        "role": "Startup & PMF",
-        "focus": "Product-market fit, простота, talk to users"
-      },
-      {
-        "id": "christensen",
-        "name": "Clayton Christensen",
-        "emoji": "📐",
-        "role": "Disruption",
-        "focus": "Disruptive innovation, jobs to be done, underserved markets"
-      }
+      {"id": "musk", "name": "Elon Musk", "emoji": "🚀", "role": "First Principles & Speed"},
+      {"id": "jobs", "name": "Steve Jobs", "emoji": "🍎", "role": "Product & Design"},
+      {"id": "thiel", "name": "Peter Thiel", "emoji": "♟", "role": "Strategy & Monopoly"},
+      {"id": "hoffman", "name": "Reid Hoffman", "emoji": "🤝", "role": "Scale & Networks"},
+      {"id": "graham", "name": "Paul Graham", "emoji": "✏️", "role": "Startup & PMF"},
+      {"id": "christensen", "name": "Clayton Christensen", "emoji": "📐", "role": "Disruption"}
     ]
   }
 }
