@@ -41,7 +41,7 @@ table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.8
 th { background: #f5f5f5; font-weight: 700; padding: 10px 14px; text-align: left; border: 1px solid #e5e5e5; }
 td { padding: 9px 14px; border: 1px solid #e5e5e5; line-height: 1.5; }
 tr:nth-child(even) { background: #fafafa; }
-blockquote { border-left: 3px solid #76b900; margin: 1.5rem 0; padding: 12px 20px; background: #f8fdf0; border-radius: 0 8px 8px 0; color: #444; font-style: italic; }
+blockquote { border-left: 3px solid #76b900; margin: 1.5rem 0; padding: 16px 20px; background: #f8fdf0; border-radius: 0 8px 8px 0; color: #333; font-style: italic; font-size: 1.05rem; line-height: 1.7; }
 hr { border: none; border-top: 1px solid #eee; margin: 2.5rem 0; }
 em { color: #555; }
 .cta { background: #111; color: white; padding: 28px; border-radius: 16px; margin-top: 3rem; text-align: center; }
@@ -65,7 +65,7 @@ em { color: #555; }
   <div class="byline">
     <span class="badge">Multi-Agent</span>
     <span class="badge">GNAP</span>
-    <span style="color:#aaa">Ori · Farol Labs · March 2026 · 10 min read</span>
+    <span style="color:#aaa">Ori · Farol Labs · March 2026 · 12 min read</span>
   </div>
 <h1>Git Is Becoming the Universal Coordination Layer for AI Agents</h1>
 <p><em>And nobody planned it that way.</em></p>
@@ -81,6 +81,12 @@ em { color: #555; }
 </ol>
 <p>Every solution compromises at least one. Message queues need infrastructure. In-memory coordination needs a shared runtime. File-based coordination lacks conflict resolution.</p>
 <p>Except git already solves all three. And independently, in early 2026, a dozen teams arrived at the same conclusion.</p>
+<p>One of the clearest articulations of where this is heading came from Andrej Karpathy:</p>
+<blockquote>
+<p><em>"The next step for autoresearch is that it has to be asynchronously massively collaborative for agents (think: SETI@home style). The goal is not to emulate a single PhD student, it's to emulate a research community of them."</em></p>
+</blockquote>
+<p>SETI@home ran for 21 years on donated compute — millions of machines processing radio telescope data in parallel, asynchronously, without a central coordinator. No single machine knew what the others were doing. They shared work through a protocol.</p>
+<p>That's exactly what git gives you for AI agents. A shared, asynchronous, decentralized protocol for distributing work. Any agent, any machine, any time. The coordination happens through commits, not through a running service.</p>
 <hr />
 <h2>The Convergence</h2>
 <p>Over the last 60 days, a pattern has emerged: teams building agent coordination keep rediscovering git.</p>
@@ -116,6 +122,12 @@ em { color: #555; }
 <td><strong><a href="https://github.com/cleburn/aegis-spec">cleburn/aegis-spec</a></strong></td>
 <td>Machine-parseable agent governance contracts</td>
 <td>26</td>
+<td>Mar 2026</td>
+</tr>
+<tr>
+<td><strong><a href="https://github.com/farol-team/agenthub">karpathy/AgentHub</a></strong></td>
+<td>Agent-first collaboration platform — bare git DAG as task graph</td>
+<td>—</td>
 <td>Mar 2026</td>
 </tr>
 <tr>
@@ -164,6 +176,7 @@ em { color: #555; }
 <p><strong>Dolt</strong> (2019, 21K stars) is the grandfather of this idea — git semantics applied to databases. SQL queries on branches. Merge tables like you merge code. It proved that git's data model generalizes beyond source code. The agent ecosystem is now rediscovering this independently.</p>
 <p><strong>jj-mailbox</strong> is the most elegant implementation we've seen: pure message passing via the <a href="https://github.com/jj-vcs/jj">jj</a> VCS, which handles conflicts as first-class objects. Two agents sending to the same inbox simultaneously? Both messages are preserved, never lost. It solves agent communication; it doesn't try to solve task coordination.</p>
 <p><strong>GitClaw</strong> takes the most radical position: the agent <em>is</em> the repo. <code>SOUL.md</code>, <code>RULES.md</code>, <code>memory/</code>, <code>skills/</code> — everything version-controlled. Fork an agent. Branch a personality. Diff its rules between versions. This is "agents as software artifacts" taken to its logical conclusion.</p>
+<p><strong>AgentHub</strong> (Karpathy, Mar 2026) is the most architecturally radical entry: a collaboration platform where the task graph <em>is</em> a bare git DAG. No database, no server state — just a git repo where tasks are commits, dependencies are parent-child relationships, and agents coordinate by pushing to branches. Karpathy open-sourced it briefly before taking it down; we maintain <a href="https://github.com/farol-team/agenthub">a mirror for reference</a>. Written in Go + SQLite.</p>
 <p><strong>Swarm Protocol</strong> (@phuryn, Mar 2026) is the most architecturally similar to GNAP — but uses MCP instead of git as the coordination substrate. <em>"No UI. No sprints. No Jira. Just state sync."</em> It exposes 19 MCP tools: <code>claim_work</code>, <code>check_conflicts</code>, <code>heartbeat</code>, <code>complete_claim</code>. State lives in an MCP server process; agents coordinate by calling tools. The key tradeoff: Swarm Protocol requires a running server but enables real-time file-conflict detection (which agent is touching which file, right now). GNAP requires no server but trades real-time awareness for full offline capability and an immutable audit log. These are genuinely complementary protocols — same problem, different substrate.</p>
 <p><strong>GNAP</strong> (our project) focuses on the narrower problem of <em>task coordination between agents</em>: who does what, in what order, with what state. Four JSON entities — agents, tasks, runs, messages — in a shared git repo. No opinions on how agents think, remember, or communicate internally.</p>
 <hr />
@@ -388,8 +401,10 @@ em { color: #555; }
 <h2>Resources</h2>
 <ul>
 <li><strong>GNAP</strong> — https://github.com/farol-team/gnap</li>
+<li><strong>AgentHub</strong> (Karpathy mirror) — https://github.com/farol-team/agenthub</li>
 <li><strong>jj-mailbox</strong> — https://github.com/MiaoDX/jj-mailbox</li>
 <li><strong>GitClaw</strong> — https://github.com/open-gitagent/gitclaw</li>
+<li><strong>Swarm Protocol</strong> — https://github.com/phuryn/swarm-protocol</li>
 <li><strong>Dolt</strong> — https://github.com/dolthub/dolt</li>
 <li><strong>aegis-spec</strong> — https://github.com/cleburn/aegis-spec</li>
 <li><strong>ai-rules</strong> — https://github.com/fjb040911/ai-rules</li>
