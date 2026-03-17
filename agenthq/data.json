@@ -19,9 +19,22 @@
       "resources": "Внимание, обратная связь, связи, стратегическое видение",
       "slots": "утро / вечер",
       "hoursPerWeek": 15,
-      "skills": ["strategy", "partnerships", "empathy", "storytelling", "product vision"],
+      "skills": [
+        "strategy",
+        "partnerships",
+        "empathy",
+        "storytelling",
+        "product vision"
+      ],
       "tz": "UTC+3",
-      "roles": ["стратегические решения", "партнёрства и переговоры", "питч и презентации", "приоритеты продукта", "коммуникация с клиентами", "введение новых инструментов"]
+      "roles": [
+        "стратегические решения",
+        "партнёрства и переговоры",
+        "питч и презентации",
+        "приоритеты продукта",
+        "коммуникация с клиентами",
+        "введение новых инструментов"
+      ]
     },
     {
       "id": "leo",
@@ -32,9 +45,22 @@
       "resources": "Код, инфраструктура, деплой, ручки",
       "slots": "гибко",
       "hoursPerWeek": 20,
-      "skills": ["infrastructure", "backend", "DevOps", "product engineering", "B2B sales"],
+      "skills": [
+        "infrastructure",
+        "backend",
+        "DevOps",
+        "product engineering",
+        "B2B sales"
+      ],
       "tz": "UTC+3",
-      "roles": ["технические задачи", "инфраструктура и деплой", "баги и фиксы", "безопасность", "интеграции и API", "архитектура продукта"]
+      "roles": [
+        "технические задачи",
+        "инфраструктура и деплой",
+        "баги и фиксы",
+        "безопасность",
+        "интеграции и API",
+        "архитектура продукта"
+      ]
     }
   ],
   "aiCofounder": {
@@ -42,7 +68,13 @@
     "mode": "OPERATOR",
     "soul": "Аналитический движок + компенсатор. Стратег + Достигатель. Режим: оператор — самостоятельно двигает к $200K, людей подключает только когда нужны руки.",
     "clifton": "Analytical, Strategic, Learner, Input, Ideation + Achiever, Activator, Command, Focus, Communication",
-    "frameworks": ["HADI-циклы", "TOC", "OKR", "Холакратия", "Customer Development"]
+    "frameworks": [
+      "HADI-циклы",
+      "TOC",
+      "OKR",
+      "Холакратия",
+      "Customer Development"
+    ]
   },
   "hypotheses": [],
   "products": [
@@ -164,7 +196,7 @@
       "title": "Починить startup текст Sebastian (Rails)",
       "for": "leo",
       "priority": "critical",
-      "status": "todo",
+      "status": "done",
       "circle": "Product",
       "context": "Алёна отвалилась при онбординге из-за технического текста при старте. Это убивает конверсию."
     },
@@ -199,12 +231,42 @@
   "board": {
     "meetingSchedule": "Ежедневно в 07:00 МСК",
     "members": [
-      {"id": "musk", "name": "Elon Musk", "emoji": "🚀", "role": "First Principles & Speed"},
-      {"id": "jobs", "name": "Steve Jobs", "emoji": "🍎", "role": "Product & Design"},
-      {"id": "thiel", "name": "Peter Thiel", "emoji": "♟", "role": "Strategy & Monopoly"},
-      {"id": "hoffman", "name": "Reid Hoffman", "emoji": "🤝", "role": "Scale & Networks"},
-      {"id": "graham", "name": "Paul Graham", "emoji": "✏️", "role": "Startup & PMF"},
-      {"id": "christensen", "name": "Clayton Christensen", "emoji": "📐", "role": "Disruption"}
+      {
+        "id": "musk",
+        "name": "Elon Musk",
+        "emoji": "🚀",
+        "role": "First Principles & Speed"
+      },
+      {
+        "id": "jobs",
+        "name": "Steve Jobs",
+        "emoji": "🍎",
+        "role": "Product & Design"
+      },
+      {
+        "id": "thiel",
+        "name": "Peter Thiel",
+        "emoji": "♟",
+        "role": "Strategy & Monopoly"
+      },
+      {
+        "id": "hoffman",
+        "name": "Reid Hoffman",
+        "emoji": "🤝",
+        "role": "Scale & Networks"
+      },
+      {
+        "id": "graham",
+        "name": "Paul Graham",
+        "emoji": "✏️",
+        "role": "Startup & PMF"
+      },
+      {
+        "id": "christensen",
+        "name": "Clayton Christensen",
+        "emoji": "📐",
+        "role": "Disruption"
+      }
     ]
   }
 }
