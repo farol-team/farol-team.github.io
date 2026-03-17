@@ -523,29 +523,54 @@
     </div>
 
     <!-- MAP -->
-    <h3>Link map</h3>
-    <div class="map-box">              ┌──────────────┐
-              │  Coordinator │
-              │    (Ori)     │
-              └──────┬───────┘
-                     │
-     ┌───────┬───────┼───────┬────────┐
-     ▼       ▼       ▼       ▼        ▼
-  ┌──────┐┌───────┐┌──────┐┌──────┐┌───────┐
-  │🔧    ││📣     ││💰    ││🤝    ││📊     │
-  │Produc││Market.││Reven.││Client││Finance│
-  └──┬───┘└──┬────┘└──┬───┘└──┬───┘└──┬────┘
-     │◄──────┤        │       │       │
-     │ changelogs     │       │       │
-     │       │◄───────┤       │       │
-     │       │  leads │       │       │
-     │       │        │──────►│       │
-     │       │        │handoff│       │
-     │◄──────┼────────┼───────┤       │
-     │   bugs/features│ cases │       │
-     │◄──────┼────────┼───────┼──────►│
-     │       │   budgets + ROI        │
-     └───────┴────────┴───────┴───────┘</div>
+    <h3>Circle map</h3>
+    <div class="map-box" style="padding:0;background:transparent;border:none;">
+      <svg viewBox="0 0 600 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:600px;display:block;margin:0 auto;">
+        <defs>
+          <marker id="arr" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto">
+            <polygon points="0 0,8 3,0 6" fill="rgba(100,100,120,0.5)"/>
+          </marker>
+        </defs>
+        <!-- Anchor: organization -->
+        <circle cx="300" cy="190" r="175" fill="rgba(245,245,250,0.6)" stroke="#ccc" stroke-width="1.5" stroke-dasharray="7 4"/>
+        <text x="300" y="32" text-anchor="middle" font-size="11" fill="#999" font-family="Inter,sans-serif" letter-spacing="2">FAROL LABS</text>
+        <!-- Coordinator circle (center, small) -->
+        <circle cx="300" cy="190" r="42" fill="#f0f0f8" stroke="#999" stroke-width="1.5"/>
+        <text x="300" y="185" text-anchor="middle" font-size="11" font-weight="600" fill="#555" font-family="Inter,sans-serif">Coordinator</text>
+        <text x="300" y="200" text-anchor="middle" font-size="11" fill="#888" font-family="Inter,sans-serif">(Ori)</text>
+        <!-- Sub-circles -->
+        <!-- Product: top-left -->
+        <circle cx="175" cy="110" r="55" fill="rgba(230,240,255,0.7)" stroke="#6b8cff" stroke-width="1.5"/>
+        <text x="175" y="105" text-anchor="middle" font-size="18" font-family="serif">🔧</text>
+        <text x="175" y="122" text-anchor="middle" font-size="11" font-weight="600" fill="#4455cc" font-family="Inter,sans-serif">Product</text>
+        <!-- Marketing: top-right -->
+        <circle cx="425" cy="110" r="55" fill="rgba(255,235,230,0.7)" stroke="#ff8855" stroke-width="1.5"/>
+        <text x="425" y="105" text-anchor="middle" font-size="18" font-family="serif">📣</text>
+        <text x="425" y="122" text-anchor="middle" font-size="11" font-weight="600" fill="#cc5533" font-family="Inter,sans-serif">Marketing</text>
+        <!-- Revenue: bottom-center -->
+        <circle cx="300" cy="305" r="52" fill="rgba(230,255,235,0.7)" stroke="#44bb66" stroke-width="1.5"/>
+        <text x="300" y="300" text-anchor="middle" font-size="18" font-family="serif">💰</text>
+        <text x="300" y="317" text-anchor="middle" font-size="11" font-weight="600" fill="#227744" font-family="Inter,sans-serif">Revenue</text>
+        <!-- Clients: right -->
+        <circle cx="430" cy="270" r="48" fill="rgba(255,250,225,0.7)" stroke="#ccaa00" stroke-width="1.5"/>
+        <text x="430" y="265" text-anchor="middle" font-size="18" font-family="serif">🤝</text>
+        <text x="430" y="282" text-anchor="middle" font-size="11" font-weight="600" fill="#997700" font-family="Inter,sans-serif">Clients</text>
+        <!-- Finance: left -->
+        <circle cx="170" cy="275" r="48" fill="rgba(240,230,255,0.7)" stroke="#9966cc" stroke-width="1.5"/>
+        <text x="170" y="270" text-anchor="middle" font-size="18" font-family="serif">📊</text>
+        <text x="170" y="287" text-anchor="middle" font-size="11" font-weight="600" fill="#664499" font-family="Inter,sans-serif">Finance</text>
+        <!-- Flow arrows -->
+        <line x1="230" y1="110" x2="265" y2="158" stroke="rgba(100,100,180,0.4)" stroke-width="1.2" marker-end="url(#arr)"/>
+        <text x="238" y="130" font-size="9" fill="#aaa" font-family="Inter,sans-serif" transform="rotate(-35,238,130)">changelogs</text>
+        <line x1="370" y1="118" x2="338" y2="158" stroke="rgba(200,100,80,0.4)" stroke-width="1.2" marker-end="url(#arr)"/>
+        <text x="352" y="130" font-size="9" fill="#aaa" font-family="Inter,sans-serif" transform="rotate(35,352,130)">leads</text>
+        <line x1="385" y1="245" x2="350" y2="270" stroke="rgba(180,160,50,0.4)" stroke-width="1.2" marker-end="url(#arr)"/>
+        <text x="368" y="250" font-size="9" fill="#aaa" font-family="Inter,sans-serif">handoff</text>
+        <line x1="215" y1="270" x2="255" y2="290" stroke="rgba(140,80,200,0.4)" stroke-width="1.2" marker-end="url(#arr)"/>
+        <text x="218" y="282" font-size="9" fill="#aaa" font-family="Inter,sans-serif">budget</text>
+      </svg>
+      <p style="text-align:center;font-size:11px;color:#aaa;margin-top:4px;">No hierarchy — autonomous circles. Each one sovereign.</p>
+    </div>
 
     <!-- ACTIVATION -->
     <h3>Activation sequence</h3>
