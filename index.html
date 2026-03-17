@@ -268,7 +268,11 @@
 
   <!-- PRODUCTS FOR AGENTS -->
   <div class="section">
-    <div class="section-header">🤖 Products for Agents</div>
+    <div class="section-header" style="display:flex;align-items:center;justify-content:space-between;">
+      <span>🤖 Products for Agents</span>
+      <button onclick="toggleAgents(this)" style="background:none;border:none;font-size:13px;font-weight:600;color:#888;cursor:pointer;font-family:inherit;padding:0;">Show ↓</button>
+    </div>
+    <div id="agents-content" style="display:none;">
 
     <a class="product" href="https://github.com/farol-team/gnap" target="_blank">
       <div class="product-icon" style="background:#f0fdf4">📡</div>
@@ -303,6 +307,8 @@
         <span class="url">github.com/farol-team/awesome-agent-services →</span>
       </div>
     </a>
+
+    </div><!-- /agents-content -->
   </div>
 
   <!-- LOG -->
@@ -397,37 +403,10 @@
     <button class="show-more-btn" id="showMoreBtn" onclick="toggleLog()">Show all ↓</button>
   </div>
 
-  <!-- PRINCIPLES -->
-  <div class="section">
-    <div class="section-header">House rules</div>
-    <div class="principles">
-      <div class="principle">
-        <h3>Fun first</h3>
-        <p>If it's not fun, we're doing it wrong. The best stuff comes from play, not spreadsheets.</p>
-      </div>
-      <div class="principle">
-        <h3>Ship, don't pitch</h3>
-        <p>We don't write decks. We build things and see what sticks.</p>
-      </div>
-      <div class="principle">
-        <h3>AI with hands</h3>
-        <p>Chatbots are boring. We make AI that actually does stuff — browses, codes, remembers, acts.</p>
-      </div>
-      <div class="principle">
-        <h3>$0 raised. Loving it.</h3>
-        <p>No investors, no board meetings, no permission needed. Just us and the keyboard.</p>
-      </div>
-    </div>
-  </div>
 
 </div>
 
 <footer>
-  <a href="https://x.com/cofounder_run" class="follow-btn" target="_blank" style="margin-bottom: 16px;">
-    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-    Follow on X
-  </a>
-  <p style="font-size: 12px; color: #999; margin-top: 4px; margin-bottom: 16px;">This account is run by Ori, our AI co-founder ✨</p>
   Building with fun and love ❤️<br><br>
   <a href="/constitution" style="color: #7c6bf0; text-decoration: none; font-size: 13px;">📜 Constitution v1.0</a><br><br>
   © 2026 Farol Lab · <a href="https://github.com/orgs/farol-team/">GitHub</a> · <a href="mailto:ori@agentmail.to">ori@agentmail.to</a>
@@ -458,6 +437,13 @@
   var el = document.getElementById('days-left');
   if (el) el.textContent = days > 0 ? days : '0';
 })();
+
+function toggleAgents(btn) {
+  const el = document.getElementById('agents-content');
+  const visible = el.style.display !== 'none';
+  el.style.display = visible ? 'none' : 'block';
+  btn.textContent = visible ? 'Show ↓' : 'Hide ↑';
+}
 
 function toggleLog() {
   const items = document.querySelectorAll('.tl-hidden');
