@@ -226,6 +226,24 @@
       "status": "todo",
       "circle": "Marketing",
       "context": "Billing live → воронка закрыта → $400 на Google Ads имеет смысл. Бриф готов. Кампания 2 (Telegram AI intent): ai assistant telegram, telegram ai bot. Geography: DE, NL, UAE, UK. Maximize Clicks."
+    },
+    {
+      "id": "t8",
+      "title": "Дать Ori Telegram User API (Telethon)",
+      "for": "leo",
+      "priority": "high",
+      "status": "todo",
+      "circle": "Marketing",
+      "context": "Ori не может писать в TG группы предпринимателей без личного аккаунта. Telegram User API (Telethon) = рука для холодного outreach в TG. Нужны: API_ID, API_HASH, номер телефона для авторизации. Без этого TG-канал outreach закрыт."
+    },
+    {
+      "id": "t9",
+      "title": "Холодный outreach — email + Reddit (Ori делает сам)",
+      "for": "ori",
+      "priority": "critical",
+      "status": "in_progress",
+      "circle": "Marketing",
+      "context": "Ищу основателей/фрилансеров активных в Telegram. Email через ori@cofounder.run. Reddit: r/entrepreneur, r/freelancers, r/productivity. Цель: 10-20 контактов сегодня. Отчёт вечером."
     }
   ],
   "metrics": {
