@@ -45,11 +45,13 @@
       const AGENTS = [
         { id: 1, folderName: 'Ori — AI Co-founder' },
         { id: 2, folderName: 'Carl — CRO' },
-        { id: 3, folderName: 'Marketing Circle' },
+        { id: 3, folderName: 'Marketing' },
       ];
       
-      // Add agents
-      dispatch({ type: 'existingAgents', agents: AGENTS.map(a => a.id), folderNames: Object.fromEntries(AGENTS.map(a => [a.id, a.folderName])) });
+      // agentCreated adds immediately (no buffering like existingAgents)
+      for (const agent of AGENTS) {
+        dispatch({ type: 'agentCreated', id: agent.id, folderName: agent.folderName });
+      }
       
       // Simulate Ori working
       const ORI_ACTIONS = [
