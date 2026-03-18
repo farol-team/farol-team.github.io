@@ -110,20 +110,24 @@
         }, 8000);
       }, 5000);
       
-      // Start work loops
-      setTimeout(oriWork, 1500);
-      setTimeout(carlWork, 3000);
+      // Set agents active immediately
+      dispatch({ type: 'agentStatus', id: 1, status: 'active' });
+      dispatch({ type: 'agentStatus', id: 2, status: 'active' });
+      
+      // Start work loops — small delay so agents walk to seats first
+      setTimeout(oriWork, 3000);
+      setTimeout(carlWork, 5000);
     }
     
-    // Wait for pixel-agents to initialize
+    // Wait for pixel-agents to initialize fully
     let attempts = 0;
     const waitForInit = setInterval(() => {
       attempts++;
-      // Check if the office canvas is rendered
       const canvas = document.querySelector('canvas');
       if (canvas || attempts > 40) {
         clearInterval(waitForInit);
-        setTimeout(injectFarolAgents, 2000);
+        // Give extra time for layout + seats to settle
+        setTimeout(injectFarolAgents, 4000);
       }
     }, 500);
     </script>
