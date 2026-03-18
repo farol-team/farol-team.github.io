@@ -175,12 +175,12 @@
   "tasks": [
     {
       "id": "t1",
-      "title": "Написать Алёне — разместить пост Sebastian в TG каналах СЕЙЧАС",
+      "title": "Написать Алёне — разместить пост Sebastian в TG каналах",
       "for": "mayak",
       "priority": "critical",
       "status": "todo",
       "circle": "Marketing",
-      "context": "Текст готов: 🦀 Попробуй Sebastian — AI-ассистент в Telegram. 7 дней бесплатно, потом $49/мес. getsebastian.app / @GetSebastianBot"
+      "context": "Алёна согласна на рекламу в TG каналах. Billing live. Текст: 🦀 Попробуй Sebastian — AI-ассистент в Telegram. 7 дней бесплатно, потом $49/мес. getsebastian.app / @GetSebastianBot. Это самый быстрый путь к первому платящему клиенту."
     },
     {
       "id": "t2",
@@ -192,22 +192,13 @@
       "context": "Sebastian уже есть на Whop. Ori нужен отдельный продукт. Ori встроит ссылку в cofounder.run как только будет URL."
     },
     {
-      "id": "t3",
-      "title": "Починить startup текст Sebastian (Rails)",
-      "for": "leo",
-      "priority": "critical",
-      "status": "done",
-      "circle": "Product",
-      "context": "Алёна отвалилась при онбординге из-за технического текста при старте. Это убивает конверсию."
-    },
-    {
       "id": "t4",
       "title": "Подтвердить процесс ручного онбординга Whop",
       "for": "leo",
-      "priority": "high",
+      "priority": "critical",
       "status": "todo",
       "circle": "Revenue",
-      "context": "Когда кто-то платит на Whop — как создаётся контейнер? Нужен SLA. Пока автоматизации нет — нужен ручной процесс."
+      "context": "Когда кто-то платит на Whop — как создаётся контейнер? Нужен понятный SLA. Пока нет автоматизации — нужен чёткий ручной процесс чтобы не потерять первого клиента."
     },
     {
       "id": "t5",
@@ -217,16 +208,34 @@
       "status": "todo",
       "circle": "Finance",
       "context": "Sonnet = ~$30-40/мес токенов. При $49/мес цене + $28 Fly = убыток. Нужна cheap модель (Haiku/MiniMax) как default, Sonnet — premium."
+    },
+    {
+      "id": "t6",
+      "title": "Написать Мише — 3000 пользователей бухгалтерия, интерес к Sebastian",
+      "for": "mayak",
+      "priority": "high",
+      "status": "todo",
+      "circle": "Clients",
+      "context": "Миша видел Sebastian, сказал 'прикольно, 40 баксов'. Горячий лид. Маяку нужно выйти на него с конкретным предложением."
+    },
+    {
+      "id": "t7",
+      "title": "Запустить Google Ads Sebastian — $400 бюджет",
+      "for": "mayak",
+      "priority": "medium",
+      "status": "todo",
+      "circle": "Marketing",
+      "context": "Billing live → воронка закрыта → $400 на Google Ads имеет смысл. Бриф готов. Кампания 2 (Telegram AI intent): ai assistant telegram, telegram ai bot. Geography: DE, NL, UAE, UK. Maximize Clicks."
     }
   ],
   "metrics": {
     "mrr": "$0",
     "leads": 6,
-    "daysToDeadline": 67,
-    "constraint": "First paying customer (billing live via Whop)",
+    "daysToDeadline": 66,
+    "constraint": "First paying customer — billing live, traffic = 0",
     "oriMode": "OPERATOR",
-    "billingStatus": "LIVE (Sebastian via Whop)",
-    "lastUpdate": "2026-03-17"
+    "billingStatus": "LIVE (Sebastian via Whop $49/mo)",
+    "lastUpdate": "2026-03-18"
   },
   "board": {
     "meetingSchedule": "Ежедневно в 07:00 МСК",
