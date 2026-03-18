@@ -23,7 +23,52 @@
       #farol-header .dot { width: 7px; height: 7px; border-radius: 50%; background: #4ade80; animation: pulse 1.5s infinite; }
       #farol-header a { color: #7c6af7; text-decoration: none; font-size: 12px; background: rgba(124,106,247,0.15); padding: 5px 14px; border-radius: 6px; }
       @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
-      #root { margin-top: 44px; }
+      #root { margin-top: 44px; margin-bottom: 80px; }
+
+      /* Task bar overlay */
+      #task-bar {
+        position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
+        background: rgba(10,10,18,0.94); backdrop-filter: blur(12px);
+        border-top: 1px solid rgba(255,255,255,0.08);
+        display: flex; gap: 0; height: 72px;
+        font-family: 'SF Mono', 'Fira Code', monospace;
+      }
+      .agent-task {
+        flex: 1; display: flex; align-items: center; gap: 12px;
+        padding: 0 20px;
+        border-right: 1px solid rgba(255,255,255,0.06);
+      }
+      .agent-task:last-child { border-right: none; }
+      .agent-avatar {
+        width: 36px; height: 36px; border-radius: 10px;
+        display: flex; align-items: center; justify-content: center;
+        font-size: 18px; flex-shrink: 0;
+        background: rgba(124,106,247,0.15);
+        border: 1px solid rgba(124,106,247,0.3);
+      }
+      .agent-avatar.carl { background: rgba(74,222,128,0.12); border-color: rgba(74,222,128,0.3); }
+      .agent-avatar.mkt  { background: rgba(251,191,36,0.12); border-color: rgba(251,191,36,0.3); }
+      .agent-info { flex: 1; min-width: 0; }
+      .agent-name {
+        font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px;
+        color: #7c6af7; margin-bottom: 3px;
+      }
+      .agent-name.carl { color: #4ade80; }
+      .agent-name.mkt  { color: #fbbf24; }
+      .agent-current-task {
+        font-size: 12px; color: #c8c8e0;
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        line-height: 1.3;
+      }
+      .agent-status-dot {
+        width: 6px; height: 6px; border-radius: 50%;
+        background: #4ade80; flex-shrink: 0;
+        animation: blink 2s infinite;
+      }
+      .agent-status-dot.waiting { background: #fbbf24; animation: pulse2 1s infinite; }
+      .agent-status-dot.idle { background: #555; animation: none; }
+      @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.5} }
+      @keyframes pulse2 { 0%,100%{transform:scale(1)} 50%{transform:scale(1.4)} }
     </style>
   </head>
   <body>
@@ -33,6 +78,35 @@
       <a href="https://getsebastian.app" target="_blank">Try Sebastian →</a>
     </div>
     <div id="root"></div>
+
+    <!-- Task bar -->
+    <div id="task-bar">
+      <div class="agent-task">
+        <div class="agent-avatar">✨</div>
+        <div class="agent-info">
+          <div class="agent-name">Ori — AI Co-founder</div>
+          <div class="agent-current-task" id="ori-task">Initializing...</div>
+        </div>
+        <div class="agent-status-dot" id="ori-dot"></div>
+      </div>
+      <div class="agent-task">
+        <div class="agent-avatar carl">📈</div>
+        <div class="agent-info">
+          <div class="agent-name carl">Carl — CRO</div>
+          <div class="agent-current-task" id="carl-task">Initializing...</div>
+        </div>
+        <div class="agent-status-dot" id="carl-dot"></div>
+      </div>
+      <div class="agent-task">
+        <div class="agent-avatar mkt">📣</div>
+        <div class="agent-info">
+          <div class="agent-name mkt">Marketing Circle</div>
+          <div class="agent-current-task" id="mkt-task">Preparing Twitter thread</div>
+        </div>
+        <div class="agent-status-dot waiting" id="mkt-dot"></div>
+      </div>
+    </div>
+
     <script>
     // Inject Farol agents after pixel-agents loads
     window.__FAROL_AGENTS__ = true;
@@ -76,38 +150,56 @@
       
       let oriIdx = 0, carlIdx = 0;
       
+      function setTaskBar(agentId, task, status) {
+        const map = { 1: ['ori-task','ori-dot'], 2: ['carl-task','carl-dot'], 3: ['mkt-task','mkt-dot'] };
+        const [taskEl, dotEl] = map[agentId] || [];
+        if (taskEl) document.getElementById(taskEl).textContent = task;
+        if (dotEl) {
+          const dot = document.getElementById(dotEl);
+          dot.className = 'agent-status-dot' + (status === 'waiting' ? ' waiting' : status === 'idle' ? ' idle' : '');
+        }
+      }
+
       function oriWork() {
         const action = ORI_ACTIONS[oriIdx % ORI_ACTIONS.length];
-        oriIdx++;
-        dispatch({ type: 'agentToolStart', id: 1, toolId: `tool-${oriIdx}`, status: action });
+        const toolId = `tool-${++oriIdx}`;
+        dispatch({ type: 'agentToolStart', id: 1, toolId, status: action });
+        setTaskBar(1, action, 'active');
         
-        // Done after 8-15s
+        const dur = 8000 + Math.random() * 7000;
         setTimeout(() => {
-          dispatch({ type: 'agentToolDone', id: 1, toolId: `tool-${oriIdx}` });
+          dispatch({ type: 'agentToolDone', id: 1, toolId });
           dispatch({ type: 'agentToolsClear', id: 1 });
+          setTaskBar(1, '— thinking —', 'idle');
           setTimeout(oriWork, 2000 + Math.random() * 3000);
-        }, 8000 + Math.random() * 7000);
+        }, dur);
       }
       
       function carlWork() {
         const action = CARL_ACTIONS[carlIdx % CARL_ACTIONS.length];
-        carlIdx++;
-        dispatch({ type: 'agentToolStart', id: 2, toolId: `ctool-${carlIdx}`, status: action });
+        const toolId = `ctool-${++carlIdx}`;
+        dispatch({ type: 'agentToolStart', id: 2, toolId, status: action });
+        setTaskBar(2, action, 'active');
         
+        const dur = 10000 + Math.random() * 10000;
         setTimeout(() => {
-          dispatch({ type: 'agentToolDone', id: 2, toolId: `ctool-${carlIdx}` });
+          dispatch({ type: 'agentToolDone', id: 2, toolId });
           dispatch({ type: 'agentToolsClear', id: 2 });
-          setTimeout(carlWork, 12000 + Math.random() * 8000);
-        }, 10000 + Math.random() * 10000);
+          setTaskBar(2, '— reviewing —', 'idle');
+          setTimeout(carlWork, 5000 + Math.random() * 5000);
+        }, dur);
       }
       
-      // Marketing agent occasionally waits for input
+      // Marketing agent waits for founder approval
       setTimeout(() => {
         dispatch({ type: 'agentStatus', id: 3, status: 'waiting' });
+        setTaskBar(3, '⏳ Waiting for founder approval on tweet draft', 'waiting');
         setTimeout(() => {
           dispatch({ type: 'agentStatus', id: 3, status: 'active' });
-          dispatch({ type: 'agentToolStart', id: 3, toolId: 'mt1', status: 'Preparing Twitter thread' });
-        }, 8000);
+          const mkt1 = 'Publishing Twitter thread on AI agent adoption stats';
+          dispatch({ type: 'agentToolStart', id: 3, toolId: 'mt1', status: mkt1 });
+          setTaskBar(3, mkt1, 'active');
+        }, 15000);
       }, 5000);
       
       // Set agents active immediately
