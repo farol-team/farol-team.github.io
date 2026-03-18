@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Farol Office — Watch Ori & Team Work Live</title>
+    <meta property="og:title" content="Farol Office — AI agents at work">
+    <meta property="og:description" content="Watch Ori, Carl and the Farol team work in real time. 1 AI + 2 founders building $200K by May 23.">
+    <script type="module" crossorigin src="./assets/index-ByDU4aE7.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-C0_Jd-v0.css">
+    <style>
+      body { background: #1a1a2e; }
+      #farol-header {
+        position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+        background: rgba(13,13,20,0.92); backdrop-filter: blur(10px);
+        display: flex; align-items: center; justify-content: space-between;
+        padding: 10px 20px; border-bottom: 1px solid rgba(255,255,255,0.08);
+        font-family: 'SF Mono', monospace;
+      }
+      #farol-header .logo { color: #e2e2f0; font-weight: 700; font-size: 15px; }
+      #farol-header .logo span { color: #7c6af7; }
+      #farol-header .live { color: #4ade80; font-size: 12px; display: flex; align-items: center; gap: 6px; }
+      #farol-header .dot { width: 7px; height: 7px; border-radius: 50%; background: #4ade80; animation: pulse 1.5s infinite; }
+      #farol-header a { color: #7c6af7; text-decoration: none; font-size: 12px; background: rgba(124,106,247,0.15); padding: 5px 14px; border-radius: 6px; }
+      @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+      #root { margin-top: 44px; }
+    </style>
+  </head>
+  <body>
+    <div id="farol-header">
+      <div class="logo">farol<span>.</span>team/office</div>
+      <div class="live"><div class="dot"></div> Ori is working now</div>
+      <a href="https://getsebastian.app" target="_blank">Try Sebastian →</a>
+    </div>
+    <div id="root"></div>
+    <script>
+    // Inject Farol agents after pixel-agents loads
+    window.__FAROL_AGENTS__ = true;
+    
+    function injectFarolAgents() {
+      function dispatch(data) {
+        window.dispatchEvent(new MessageEvent('message', { data }));
+      }
+      
+      const AGENTS = [
+        { id: 1, folderName: 'Ori — AI Co-founder' },
+        { id: 2, folderName: 'Carl — CRO' },
+        { id: 3, folderName: 'Marketing Circle' },
+      ];
+      
+      // Add agents
+      dispatch({ type: 'existingAgents', agents: AGENTS.map(a => a.id), folderNames: Object.fromEntries(AGENTS.map(a => [a.id, a.folderName])) });
+      
+      // Simulate Ori working
+      const ORI_ACTIONS = [
+        'Reading emails — checking AgentMail inbox',
+        'Writing cold email to potential client',
+        'Analyzing competitor: Polsia.com',
+        'Updating memory/2026-03-18.md',
+        'Researching lead: solo founders with Telegram',
+        'Running: git push origin main',
+        'Monitoring farol.team/live',
+        'Reviewing outreach responses',
+        'Planning tomorrow priorities',
+        'Executing: send cold email batch',
+      ];
+      
+      const CARL_ACTIONS = [
+        'Reviewing Whop checkout conversion',
+        'Writing NemoClaw proposal',
+        'Updating revenue dashboard',
+        'Preparing outreach script',
+      ];
+      
+      let oriIdx = 0, carlIdx = 0;
+      
+      function oriWork() {
+        const action = ORI_ACTIONS[oriIdx % ORI_ACTIONS.length];
+        oriIdx++;
+        dispatch({ type: 'agentToolStart', id: 1, toolId: `tool-${oriIdx}`, status: action });
+        
+        // Done after 8-15s
+        setTimeout(() => {
+          dispatch({ type: 'agentToolDone', id: 1, toolId: `tool-${oriIdx}` });
+          dispatch({ type: 'agentToolsClear', id: 1 });
+          setTimeout(oriWork, 2000 + Math.random() * 3000);
+        }, 8000 + Math.random() * 7000);
+      }
+      
+      function carlWork() {
+        const action = CARL_ACTIONS[carlIdx % CARL_ACTIONS.length];
+        carlIdx++;
+        dispatch({ type: 'agentToolStart', id: 2, toolId: `ctool-${carlIdx}`, status: action });
+        
+        setTimeout(() => {
+          dispatch({ type: 'agentToolDone', id: 2, toolId: `ctool-${carlIdx}` });
+          dispatch({ type: 'agentToolsClear', id: 2 });
+          setTimeout(carlWork, 12000 + Math.random() * 8000);
+        }, 10000 + Math.random() * 10000);
+      }
+      
+      // Marketing agent occasionally waits for input
+      setTimeout(() => {
+        dispatch({ type: 'agentStatus', id: 3, status: 'waiting' });
+        setTimeout(() => {
+          dispatch({ type: 'agentStatus', id: 3, status: 'active' });
+          dispatch({ type: 'agentToolStart', id: 3, toolId: 'mt1', status: 'Preparing Twitter thread' });
+        }, 8000);
+      }, 5000);
+      
+      // Start work loops
+      setTimeout(oriWork, 1500);
+      setTimeout(carlWork, 3000);
+    }
+    
+    // Wait for pixel-agents to initialize
+    let attempts = 0;
+    const waitForInit = setInterval(() => {
+      attempts++;
+      // Check if the office canvas is rendered
+      const canvas = document.querySelector('canvas');
+      if (canvas || attempts > 40) {
+        clearInterval(waitForInit);
+        setTimeout(injectFarolAgents, 2000);
+      }
+    }, 500);
+    </script>
+  </body>
+</html>
