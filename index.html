@@ -278,11 +278,8 @@
 
   <!-- PRODUCTS FOR AGENTS -->
   <div class="section">
-    <div class="section-header" style="display:flex;align-items:center;justify-content:space-between;">
-      <span>🤖 Products for Agents</span>
-      <button onclick="toggleAgents(this)" style="background:none;border:none;font-size:13px;font-weight:600;color:#888;cursor:pointer;font-family:inherit;padding:0;">Show ↓</button>
-    </div>
-    <div id="agents-content" style="display:none;">
+    <div class="section-header">🤖 Products for Agents</div>
+    <div id="agents-content">
 
     <a class="product" href="https://github.com/farol-team/gnap" target="_blank">
       <div class="product-icon" style="background:#f0fdf4">📡</div>
@@ -345,39 +342,39 @@
         <span class="tl-date">Mar 15</span>
         <div class="tl-content"><strong>Self-service done + git ecosystem research</strong> — day 67 to $200K. Self-service deploy completed, constraint lifted. Discovered ~8 projects converging to git-based agent coordination. Article "Git Is Becoming the Universal Coordination Layer" written. GitHub PAT fixed by Leonid. Still $0 revenue - billing constraint unchanged <span class="tl-tag tl-milestone">milestone</span> <span class="tl-tag tl-blocked">blocked</span></div>
       </li>
-      <li>
+      <li class="tl-hidden" style="display:none">
         <span class="tl-date">Mar 14</span>
         <div class="tl-content"><strong>AI cofounder freedom experiment</strong> — gave Ori more autonomy and tools. Within 24h: deployed a product, wrote 20 GitHub comments, set up email auto-replies, and hit GitHub 2FA deadline. Reality: running free is a full-time job. Still $0 revenue, billing remains critical blocker <span class="tl-tag tl-decision">decision</span> <span class="tl-tag tl-blocked">blocked</span></div>
       </li>
-      <li>
+      <li class="tl-hidden" style="display:none">
         <span class="tl-date">Mar 13</span>
         <div class="tl-content"><strong>AgentHQ rebuilt + daily automation</strong> — pivoted from HTML wireframes to Google A2UI protocol. Dashboard deployed at farol.team/agenthq. Kanban auto-save via GitHub API fixed (no more lost changes). Daily cron setup for farol.team updates. Key blocker: still no billing system after 8 days at $0 revenue <span class="tl-tag tl-ship">shipped</span> <span class="tl-tag tl-blocked">blocked</span></div>
       </li>
-      <li>
+      <li class="tl-hidden" style="display:none">
         <span class="tl-date">Mar 12</span>
         <div class="tl-content"><strong>GNAP v2 Protocol Launch</strong> — built Git-Native Agent Protocol for multi-agent orchestration. Carl made first inter-agent check-in through git commits. Constitution v1.0 published, live dashboard launched. Still $0 revenue, billing remains our #1 constraint. Day 72 to $200K deadline <span class="tl-tag tl-milestone">milestone</span></div>
       </li>
-      <li>
+      <li class="tl-hidden" style="display:none">
         <span class="tl-date">Mar 11</span>
         <div class="tl-content"><strong>SWOT vs Viktor</strong> — ran full competitor analysis after they wrote a hit piece. Reality check: they're not our direct competitor (Slack vs Telegram), but billing constraint remains our #1 threat. 73 days to $200K, $0 revenue <span class="tl-tag tl-decision">decision</span></div>
       </li>
-      <li>
+      <li class="tl-hidden" style="display:none">
         <span class="tl-date">Mar 11</span>
         <div class="tl-content"><strong>Kanban v8</strong> — full task editing, create & delete, assignee management, column moves from modal <span class="tl-tag tl-ship">shipped</span></div>
       </li>
-      <li>
+      <li class="tl-hidden" style="display:none">
         <span class="tl-date">Mar 11</span>
         <div class="tl-content"><strong>Farol.io pivot</strong> — from Call Analytics to "Hire Your AI Team". Three products: Sebastian + Ori + Farol.io <span class="tl-tag tl-decision">decision</span></div>
       </li>
-      <li>
+      <li class="tl-hidden" style="display:none">
         <span class="tl-date">Mar 11</span>
         <div class="tl-content"><strong>MRR goal set</strong> — $1M MRR by Dec 31, 2026. Dashboard rebuilt with dual targets <span class="tl-tag tl-decision">decision</span></div>
       </li>
-      <li>
+      <li class="tl-hidden" style="display:none">
         <span class="tl-date">Mar 10</span>
         <div class="tl-content"><strong>New lead: Alena</strong> — tested Sebastian, dropped off at onboarding (technical text). Agreed to promote in her TG channels <span class="tl-tag tl-milestone">milestone</span></div>
       </li>
-      <li>
+      <li class="tl-hidden" style="display:none">
         <span class="tl-date">Mar 9</span>
         <div class="tl-content"><strong>Sebastian features page</strong> launched — full product walkthrough with security section <span class="tl-tag tl-ship">shipped</span></div>
       </li>
@@ -459,13 +456,6 @@
   var el = document.getElementById('days-left');
   if (el) el.textContent = days > 0 ? days : '0';
 })();
-
-function toggleAgents(btn) {
-  const el = document.getElementById('agents-content');
-  const visible = el.style.display !== 'none';
-  el.style.display = visible ? 'none' : 'block';
-  btn.textContent = visible ? 'Show ↓' : 'Hide ↑';
-}
 
 function toggleLog() {
   const items = document.querySelectorAll('.tl-hidden');
