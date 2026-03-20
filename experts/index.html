@@ -330,9 +330,13 @@
         <span>We handle matching and payment</span>
       </div>
     </div>
-    <form id="expert-form" onsubmit="handleSubmit(event, 'expert')">
+    <form id="expert-form" onsubmit="handleSubmit(event, 'expert', this)">
+      <input type="hidden" name="_subject" value="[Experts] New expert waitlist signup">
+      <input type="hidden" name="type" value="expert">
+      <input type="hidden" name="_template" value="basic">
+      <input type="hidden" name="_captcha" value="false">
       <div class="form-row">
-        <input type="email" id="expert-email" placeholder="your@email.com" required>
+        <input type="email" name="email" id="expert-email" placeholder="your@email.com" required>
         <button type="submit" class="btn btn-expert">Join as Expert</button>
       </div>
       <p class="form-note" style="margin-top:8px">Free to join. We take 20% per session.</p>
@@ -366,9 +370,13 @@
         <span>Starting at $99 flat for basic setup</span>
       </div>
     </div>
-    <form id="client-form" onsubmit="handleSubmit(event, 'client')">
+    <form id="client-form" onsubmit="handleSubmit(event, 'client', this)">
+      <input type="hidden" name="_subject" value="[Experts] New client waitlist signup">
+      <input type="hidden" name="type" value="client">
+      <input type="hidden" name="_template" value="basic">
+      <input type="hidden" name="_captcha" value="false">
       <div class="form-row">
-        <input type="email" id="client-email" placeholder="your@email.com" required>
+        <input type="email" name="email" id="client-email" placeholder="your@email.com" required>
         <button type="submit" class="btn btn-client">I Need Help</button>
       </div>
       <p class="form-note" style="margin-top:8px">No commitment. We'll match you with an expert.</p>
@@ -437,31 +445,29 @@
 </footer>
 
 <script>
-  function handleSubmit(e, type) {
+  function handleSubmit(e, type, form) {
     e.preventDefault();
     const email = document.getElementById(type + '-email').value;
-    const form = document.getElementById(type + '-form');
+    const formEl = document.getElementById(type + '-form');
     const success = document.getElementById(type + '-success');
 
-    // Send to mailto as fallback (replace with Formspree endpoint)
-    const subject = type === 'expert'
-      ? 'OpenClaw Expert Waitlist: ' + email
-      : 'OpenClaw Client Waitlist: ' + email;
+    const data = new FormData(form);
 
-    // Try fetch to a simple endpoint; fallback to mailto
-    fetch('https://formspree.io/f/REPLACE_WITH_FORM_ID', {
+    fetch('https://formsubmit.co/ajax/ori@agentmail.to', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({ email, type, _subject: subject })
+      headers: { 'Accept': 'application/json' },
+      body: data
     })
-    .then(r => {
-      form.style.display = 'none';
+    .then(r => r.json())
+    .then(d => {
+      formEl.style.display = 'none';
       success.style.display = 'block';
     })
     .catch(() => {
-      // Fallback: open mailto
-      window.location.href = 'mailto:ori@cofounder.run?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent('Email: ' + email + '\nType: ' + type);
-      form.style.display = 'none';
+      // Fallback: direct mailto
+      const subject = type === 'expert' ? 'Expert waitlist: ' + email : 'Client waitlist: ' + email;
+      window.open('mailto:ori@cofounder.run?subject=' + encodeURIComponent(subject));
+      formEl.style.display = 'none';
       success.style.display = 'block';
     });
   }
