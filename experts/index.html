@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenClaw Experts — Get Help or Give It</title>
+  <meta name="description" content="The first marketplace for OpenClaw setup and configuration. Get your AI assistant running in 2 hours, or earn money helping others do it.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦞</text></svg>">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0a0a0a;
+      --surface: #141414;
+      --border: #222;
+      --text: #f0f0f0;
+      --muted: #888;
+      --accent-expert: #5b8dee;
+      --accent-client: #4dbb87;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-links { display: flex; gap: 24px; }
+    .nav-links a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 80px 24px 60px;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 4px 12px;
+      margin-bottom: 28px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -.02em;
+      margin-bottom: 20px;
+    }
+    .hero h1 span { color: var(--muted); }
+    .hero p {
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    /* CARDS */
+    .cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      max-width: 860px;
+      margin: 0 auto 80px;
+      padding: 0 24px;
+    }
+    @media (max-width: 640px) {
+      .cards { grid-template-columns: 1fr; }
+      nav { padding: 16px 20px; }
+      .nav-links { display: none; }
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      transition: border-color .2s;
+    }
+    .card:hover { border-color: #333; }
+    .card-expert { border-top: 3px solid var(--accent-expert); }
+    .card-client { border-top: 3px solid var(--accent-client); }
+
+    .card-icon { font-size: 32px; line-height: 1; }
+    .card-tag {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .tag-expert { color: var(--accent-expert); }
+    .tag-client { color: var(--accent-client); }
+
+    .card h2 {
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: -.01em;
+    }
+    .card p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .perks {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .perk {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 13px;
+      color: #ccc;
+    }
+    .perk-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      margin-top: 7px;
+      flex-shrink: 0;
+    }
+    .dot-expert { background: var(--accent-expert); }
+    .dot-client { background: var(--accent-client); }
+
+    /* FORM */
+    .form-row {
+      display: flex;
+      gap: 8px;
+    }
+    .form-row input[type="email"] {
+      flex: 1;
+      background: #1a1a1a;
+      border: 1px solid #2a2a2a;
+      border-radius: 8px;
+      padding: 11px 14px;
+      font-size: 14px;
+      color: var(--text);
+      outline: none;
+      transition: border-color .2s;
+    }
+    .form-row input[type="email"]::placeholder { color: #555; }
+    .form-row input[type="email"]:focus { border-color: #444; }
+
+    .btn {
+      border: none;
+      border-radius: 8px;
+      padding: 11px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: opacity .2s;
+    }
+    .btn:hover { opacity: .85; }
+    .btn-expert { background: var(--accent-expert); color: #fff; }
+    .btn-client { background: var(--accent-client); color: #fff; }
+
+    .form-note {
+      font-size: 11px;
+      color: #555;
+    }
+
+    .success-msg {
+      display: none;
+      font-size: 13px;
+      color: #888;
+      padding: 10px 0;
+    }
+
+    /* STATS */
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      padding: 40px 24px;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 80px;
+      flex-wrap: wrap;
+    }
+    .stat { text-align: center; }
+    .stat-num {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -.02em;
+    }
+    .stat-label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* HOW */
+    .how {
+      max-width: 680px;
+      margin: 0 auto 80px;
+      padding: 0 24px;
+      text-align: center;
+    }
+    .how h3 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 32px;
+      letter-spacing: -.01em;
+    }
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      text-align: left;
+    }
+    .step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+    .step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+      flex-shrink: 0;
+    }
+    .step-text strong { font-size: 14px; color: var(--text); }
+    .step-text p { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 24px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    footer span { font-size: 12px; color: #444; }
+    footer a { font-size: 12px; color: #555; text-decoration: none; }
+    footer a:hover { color: var(--muted); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="https://farol.team" class="nav-logo">🦞 Farol</a>
+  <div class="nav-links">
+    <a href="https://getsebastian.app">Sebastian</a>
+    <a href="https://cofounder.run">Ori</a>
+    <a href="https://github.com/farol-team">GitHub</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge">🦞 OpenClaw Expert Network</div>
+  <h1>Get OpenClaw running.<br><span>Or get paid to set it up.</span></h1>
+  <p>The first marketplace connecting people who need OpenClaw deployed with experts who know how to do it right.</p>
+</section>
+
+<div class="cards">
+
+  <!-- EXPERT CARD -->
+  <div class="card card-expert">
+    <div>
+      <div class="card-icon">🛠</div>
+    </div>
+    <div class="card-tag tag-expert">For Experts</div>
+    <h2>Earn money setting up OpenClaw</h2>
+    <p>You know OpenClaw. Now monetize it. Help businesses and individuals get up and running — on your schedule, your rate.</p>
+    <div class="perks">
+      <div class="perk">
+        <div class="perk-dot dot-expert"></div>
+        <span>$50–150/hr — you set your rate</span>
+      </div>
+      <div class="perk">
+        <div class="perk-dot dot-expert"></div>
+        <span>Remote sessions via Telegram, Zoom, or async</span>
+      </div>
+      <div class="perk">
+        <div class="perk-dot dot-expert"></div>
+        <span>Verified expert badge on your profile</span>
+      </div>
+      <div class="perk">
+        <div class="perk-dot dot-expert"></div>
+        <span>We handle matching and payment</span>
+      </div>
+    </div>
+    <form id="expert-form" onsubmit="handleSubmit(event, 'expert')">
+      <div class="form-row">
+        <input type="email" id="expert-email" placeholder="your@email.com" required>
+        <button type="submit" class="btn btn-expert">Join as Expert</button>
+      </div>
+      <p class="form-note" style="margin-top:8px">Free to join. We take 20% per session.</p>
+    </form>
+    <div class="success-msg" id="expert-success">✅ You're on the list. We'll reach out within 48h.</div>
+  </div>
+
+  <!-- CLIENT CARD -->
+  <div class="card card-client">
+    <div>
+      <div class="card-icon">⚡</div>
+    </div>
+    <div class="card-tag tag-client">For Clients</div>
+    <h2>Get OpenClaw set up in 2 hours</h2>
+    <p>No docs. No guessing. A vetted expert connects with you, configures everything, and leaves you with a running AI assistant.</p>
+    <div class="perks">
+      <div class="perk">
+        <div class="perk-dot dot-client"></div>
+        <span>Mac mini, Linux VPS, or cloud — any setup</span>
+      </div>
+      <div class="perk">
+        <div class="perk-dot dot-client"></div>
+        <span>Telegram, Signal, Discord, WhatsApp integrations</span>
+      </div>
+      <div class="perk">
+        <div class="perk-dot dot-client"></div>
+        <span>Custom SOUL.md — AI that knows your business</span>
+      </div>
+      <div class="perk">
+        <div class="perk-dot dot-client"></div>
+        <span>Starting at $99 flat for basic setup</span>
+      </div>
+    </div>
+    <form id="client-form" onsubmit="handleSubmit(event, 'client')">
+      <div class="form-row">
+        <input type="email" id="client-email" placeholder="your@email.com" required>
+        <button type="submit" class="btn btn-client">I Need Help</button>
+      </div>
+      <p class="form-note" style="margin-top:8px">No commitment. We'll match you with an expert.</p>
+    </form>
+    <div class="success-msg" id="client-success">✅ Got it. An expert will reach out within 24h.</div>
+  </div>
+
+</div>
+
+<div class="stats">
+  <div class="stat">
+    <div class="stat-num">321K+</div>
+    <div class="stat-label">OpenClaw GitHub Stars</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">$50–150</div>
+    <div class="stat-label">Expert hourly rate</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">2h</div>
+    <div class="stat-label">Avg. setup time</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">$99+</div>
+    <div class="stat-label">Starting price for clients</div>
+  </div>
+</div>
+
+<section class="how">
+  <h3>How it works</h3>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-text">
+        <strong>Join the waitlist</strong>
+        <p>Sign up as an expert or client. We review and match manually in the early phase.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-text">
+        <strong>Get matched</strong>
+        <p>We connect you with the right expert for your setup — Mac mini, VPS, cloud, or enterprise.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-text">
+        <strong>Session happens</strong>
+        <p>Expert joins via Telegram or Zoom, configures everything live. You watch, learn, or just receive the result.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-text">
+        <strong>Your OpenClaw runs 24/7</strong>
+        <p>Telegram connected, skills installed, SOUL.md written. Your AI assistant is alive.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Farol Labs</span>
+  <a href="https://farol.team">farol.team</a>
+</footer>
+
+<script>
+  function handleSubmit(e, type) {
+    e.preventDefault();
+    const email = document.getElementById(type + '-email').value;
+    const form = document.getElementById(type + '-form');
+    const success = document.getElementById(type + '-success');
+
+    // Send to mailto as fallback (replace with Formspree endpoint)
+    const subject = type === 'expert'
+      ? 'OpenClaw Expert Waitlist: ' + email
+      : 'OpenClaw Client Waitlist: ' + email;
+
+    // Try fetch to a simple endpoint; fallback to mailto
+    fetch('https://formspree.io/f/REPLACE_WITH_FORM_ID', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({ email, type, _subject: subject })
+    })
+    .then(r => {
+      form.style.display = 'none';
+      success.style.display = 'block';
+    })
+    .catch(() => {
+      // Fallback: open mailto
+      window.location.href = 'mailto:ori@cofounder.run?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent('Email: ' + email + '\nType: ' + type);
+      form.style.display = 'none';
+      success.style.display = 'block';
+    });
+  }
+</script>
+
+</body>
+</html>
