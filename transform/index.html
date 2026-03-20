@@ -390,6 +390,47 @@
       background: #fff;
       color: var(--text);
     }
+    .cta-form {
+      max-width: 520px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .cta-form input, .cta-form select, .cta-form textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 10px;
+      padding: 13px 16px;
+      font-size: 14px;
+      color: #fff;
+      font-family: inherit;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .cta-form input::placeholder, .cta-form textarea::placeholder { color: rgba(255,255,255,0.35); }
+    .cta-form select { color: rgba(255,255,255,0.7); }
+    .cta-form select option { background: #111; color: #fff; }
+    .cta-form input:focus, .cta-form select:focus, .cta-form textarea:focus { border-color: rgba(255,255,255,0.4); }
+    .cta-form textarea { resize: vertical; min-height: 90px; }
+    .cta-form-row { display: flex; gap: 12px; }
+    .cta-form-row > * { flex: 1; }
+    .cta-submit {
+      background: #fff;
+      color: var(--text);
+      border: none;
+      border-radius: 10px;
+      padding: 14px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: opacity .2s;
+    }
+    .cta-submit:hover { opacity: .9; }
+    .cta-success { display: none; font-size: 15px; color: #aaa; padding: 16px; }
+    @media (max-width: 640px) { .cta-form-row { flex-direction: column; } }
 
     footer {
       border-top: 1px solid var(--border);
@@ -413,7 +454,7 @@
     <a href="#services">Services</a>
     <a href="#process">How it works</a>
     <a href="#packages">Packages</a>
-    <a href="mailto:ori@cofounder.run" class="nav-cta">Book a call →</a>
+    <a href="#contact" class="nav-cta">Book a call →</a>
   </div>
 </nav>
 
@@ -423,7 +464,7 @@
   <h1>Turn your company<br>into <em>AI-native.</em></h1>
   <p class="hero-sub">We deploy OpenClaw agents, automate your workflows, and train your team — from strategy to live system in weeks, not months.</p>
   <div class="hero-actions">
-    <a href="mailto:ori@cofounder.run?subject=Transform%20my%20company" class="btn-primary">Get started →</a>
+    <a href="#contact" class="btn-primary">Get started →</a>
     <a href="#cases" class="btn-ghost">See case studies</a>
   </div>
 </section>
@@ -651,11 +692,61 @@
 </section>
 
 <!-- CTA -->
-<div class="cta-section">
+<div class="cta-section" id="contact">
   <h2>Ready to become AI-native?</h2>
-  <p>Book a free 60-min discovery call. We'll tell you honestly what's worth automating and what isn't.</p>
-  <a href="mailto:ori@cofounder.run?subject=Discovery%20call%20request" class="btn-primary">Book free call →</a>
+  <p>Free 60-min discovery call. No sales pitch — just honest analysis of what's worth automating.</p>
+
+  <form class="cta-form" id="transform-form" onsubmit="handleSubmit(event)">
+    <input type="hidden" name="_subject" value="[Transform] New discovery call request">
+    <input type="hidden" name="_captcha" value="false">
+    <input type="hidden" name="_template" value="basic">
+    <div class="cta-form-row">
+      <input type="text" name="name" placeholder="Your name" required>
+      <input type="email" name="email" placeholder="Work email" required>
+    </div>
+    <input type="text" name="company" placeholder="Company name">
+    <select name="package">
+      <option value="" disabled selected>Package of interest</option>
+      <option value="starter">Starter — $2,500</option>
+      <option value="growth">Growth — $7,500</option>
+      <option value="enterprise">Enterprise — Custom</option>
+      <option value="unknown">Not sure yet</option>
+    </select>
+    <textarea name="message" placeholder="Briefly: what do you want to automate?"></textarea>
+    <button type="submit" class="cta-submit">Book free discovery call →</button>
+    <p style="font-size:12px;color:rgba(255,255,255,0.3);margin-top:4px;">We respond within 24 hours.</p>
+  </form>
+  <div class="cta-success" id="transform-success">
+    ✅ Got it! We'll reach out within 24 hours to schedule your discovery call.
+  </div>
 </div>
+
+<script>
+function handleSubmit(e) {
+  e.preventDefault();
+  const form = document.getElementById('transform-form');
+  const success = document.getElementById('transform-success');
+  const data = new FormData(form);
+
+  fetch('https://formsubmit.co/ajax/6562c4076bcc26d7ab7f7b81f61862b8', {
+    method: 'POST',
+    headers: { 'Accept': 'application/json' },
+    body: data
+  })
+  .then(r => r.json())
+  .then(() => {
+    form.style.display = 'none';
+    success.style.display = 'block';
+  })
+  .catch(() => {
+    const email = data.get('email');
+    const name = data.get('name');
+    window.open('mailto:ori@cofounder.run?subject=Discovery call request&body=Name: '+encodeURIComponent(name)+'%0AEmail: '+encodeURIComponent(email));
+    form.style.display = 'none';
+    success.style.display = 'block';
+  });
+}
+</script>
 
 <footer>
   <span>© 2026 Farol Labs</span>
