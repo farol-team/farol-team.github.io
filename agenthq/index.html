@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,205 +16,154 @@
   --yellow: #f59e0b; --yellow-bg: rgba(245,158,11,0.12);
   --red: #ef4444; --red-bg: rgba(239,68,68,0.12);
   --blue: #3b82f6; --blue-bg: rgba(59,130,246,0.12);
+  --orange: #f97316; --orange-bg: rgba(249,115,22,0.12);
   --radius: 12px; --radius-sm: 8px;
 }
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
-a { color: var(--accent2); text-decoration: none; }
-a:hover { text-decoration: underline; }
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; }
+a { color:var(--accent2); text-decoration:none; }
+a:hover { text-decoration:underline; }
 
 /* Header */
-.header { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; border-bottom: 1px solid var(--border); background: var(--surface); position: sticky; top: 0; z-index: 100; }
-.header-left { display: flex; align-items: center; gap: 12px; }
-.logo-bars { display: flex; gap: 3px; align-items: flex-end; height: 24px; }
-.logo-bars span { width: 4px; background: var(--accent); border-radius: 2px; }
-.logo-bars span:nth-child(1) { height: 8px; } .logo-bars span:nth-child(2) { height: 14px; }
-.logo-bars span:nth-child(3) { height: 20px; } .logo-bars span:nth-child(4) { height: 16px; }
-.logo-bars span:nth-child(5) { height: 10px; }
-.logo-text { font-weight: 700; font-size: 18px; }
-.logo-text small { font-weight: 400; color: var(--text2); margin-left: 8px; font-size: 14px; }
-.header-right { display: flex; gap: 8px; }
-.btn { padding: 8px 16px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--surface2); color: var(--text); cursor: pointer; font-size: 13px; font-family: inherit; transition: all 0.15s; }
-.btn:hover { border-color: var(--accent); background: var(--accent-bg); }
-.btn-primary { background: var(--accent); border-color: var(--accent); color: white; }
-.btn-primary:hover { background: var(--accent2); }
-.btn-sm { padding: 4px 10px; font-size: 12px; }
-
-/* Phase indicator */
-.phase-bar { display: flex; align-items: center; gap: 0; padding: 12px 24px; background: var(--surface); border-bottom: 1px solid var(--border); }
-.phase { padding: 8px 20px; font-size: 13px; font-weight: 500; color: var(--text3); position: relative; }
-.phase.active { color: var(--accent2); }
-.phase.active::after { content: ''; position: absolute; bottom: -12px; left: 0; right: 0; height: 2px; background: var(--accent); }
-.phase.completed { color: var(--green); }
-.phase-arrow { color: var(--text3); margin: 0 4px; }
+.header { display:flex; align-items:center; justify-content:space-between; padding:16px 24px; border-bottom:1px solid var(--border); background:var(--surface); position:sticky; top:0; z-index:100; }
+.header-left { display:flex; align-items:center; gap:12px; }
+.logo-bars { display:flex; gap:3px; align-items:flex-end; height:24px; }
+.logo-bars span { width:4px; background:var(--accent); border-radius:2px; }
+.logo-bars span:nth-child(1){height:8px} .logo-bars span:nth-child(2){height:14px}
+.logo-bars span:nth-child(3){height:20px} .logo-bars span:nth-child(4){height:16px}
+.logo-bars span:nth-child(5){height:10px}
+.logo-text { font-weight:700; font-size:18px; }
+.logo-text small { font-weight:400; color:var(--text2); margin-left:8px; font-size:13px; }
+.header-right { display:flex; align-items:center; gap:12px; }
+.status-dot { width:8px; height:8px; border-radius:50%; background:var(--green); display:inline-block; }
+.status-label { font-size:12px; color:var(--text2); }
+.last-update { font-size:11px; color:var(--text3); }
 
 /* Tabs */
-.tabs { display: flex; gap: 0; padding: 0 24px; background: var(--surface); border-bottom: 1px solid var(--border); overflow-x: auto; }
-.tab { padding: 12px 20px; font-size: 13px; color: var(--text2); cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; transition: all 0.15s; }
-.tab:hover { color: var(--text); background: var(--surface2); }
-.tab.active { color: var(--accent2); border-bottom-color: var(--accent); }
-.tab .badge { display: inline-block; margin-left: 6px; padding: 1px 6px; border-radius: 10px; font-size: 11px; background: var(--accent-bg); color: var(--accent2); }
+.tabs { display:flex; gap:0; padding:0 24px; background:var(--surface); border-bottom:1px solid var(--border); overflow-x:auto; }
+.tab { padding:12px 20px; font-size:13px; color:var(--text2); cursor:pointer; border-bottom:2px solid transparent; white-space:nowrap; transition:all .15s; user-select:none; }
+.tab:hover { color:var(--text); background:var(--surface2); }
+.tab.active { color:var(--accent2); border-bottom-color:var(--accent); }
+.tab .badge { display:inline-block; margin-left:6px; padding:1px 6px; border-radius:10px; font-size:11px; background:var(--accent-bg); color:var(--accent2); }
 
 /* Content */
-.content { padding: 24px; max-width: 1200px; margin: 0 auto; }
-.section { display: none; }
-.section.active { display: block; }
-h2 { font-size: 20px; font-weight: 600; margin-bottom: 16px; }
-h3 { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: var(--text); }
-.subtitle { color: var(--text2); font-size: 14px; margin-bottom: 20px; }
+.content { padding:24px; max-width:1400px; margin:0 auto; }
+.section { display:none; }
+.section.active { display:block; }
 
-/* Cards */
-.card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 16px; transition: border-color 0.15s; }
-.card:hover { border-color: var(--surface3); }
-.card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-.card-title { font-weight: 600; font-size: 15px; display: flex; align-items: center; gap: 8px; }
-.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px; }
-.card-grid-3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+/* Metrics */
+.metrics { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:16px; margin-bottom:24px; }
+.metric-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:20px; text-align:center; }
+.metric-value { font-size:32px; font-weight:700; color:var(--accent2); line-height:1.2; }
+.metric-value.red { color:var(--red); }
+.metric-value.green { color:var(--green); }
+.metric-value.yellow { color:var(--yellow); }
+.metric-label { font-size:12px; color:var(--text2); margin-top:6px; text-transform:uppercase; letter-spacing:.5px; }
 
-/* Forms */
-.form-group { margin-bottom: 16px; }
-.form-group label { display: block; font-size: 13px; font-weight: 500; color: var(--text2); margin-bottom: 6px; }
-.form-group input, .form-group textarea, .form-group select {
-  width: 100%; padding: 10px 14px; background: var(--surface2); border: 1px solid var(--border);
-  border-radius: var(--radius-sm); color: var(--text); font-family: inherit; font-size: 14px; transition: border-color 0.15s;
-}
-.form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--border-focus); }
-.form-group textarea { resize: vertical; min-height: 60px; }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+/* Card */
+.card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:20px; margin-bottom:16px; }
+.card-title { font-weight:600; font-size:15px; margin-bottom:12px; display:flex; align-items:center; gap:8px; }
 
-/* Status badges */
-.status { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 500; }
-.status-active { background: var(--green-bg); color: var(--green); }
-.status-testing { background: var(--blue-bg); color: var(--blue); }
-.status-blocked { background: var(--red-bg); color: var(--red); }
-.status-warning { background: var(--yellow-bg); color: var(--yellow); }
-.status-idea { background: var(--accent-bg); color: var(--accent2); }
-.status-done { background: var(--green-bg); color: var(--green); }
+/* Status bars */
+.task-bars { display:flex; gap:12px; flex-wrap:wrap; }
+.task-bar-item { flex:1; min-width:100px; }
+.task-bar-label { font-size:12px; color:var(--text2); margin-bottom:4px; display:flex; justify-content:space-between; }
+.task-bar-track { height:8px; background:var(--surface3); border-radius:4px; overflow:hidden; }
+.task-bar-fill { height:100%; border-radius:4px; transition:width .3s; }
 
-/* Metrics row */
-.metrics { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px; }
-.metric-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; text-align: center; }
-.metric-value { font-size: 28px; font-weight: 700; color: var(--accent2); }
-.metric-label { font-size: 12px; color: var(--text2); margin-top: 4px; }
-.metric-value.red { color: var(--red); }
-.metric-value.green { color: var(--green); }
-.metric-value.yellow { color: var(--yellow); }
+/* Constraint box */
+.constraint-box { background:var(--red-bg); border:1px solid rgba(239,68,68,.2); border-radius:var(--radius); padding:16px 20px; margin-bottom:24px; }
+.constraint-box h4 { color:var(--red); font-size:13px; text-transform:uppercase; letter-spacing:.5px; margin-bottom:6px; }
+.constraint-box p { color:var(--text); font-size:14px; line-height:1.5; }
 
-/* Pipeline / stages */
-.stage-track { display: flex; gap: 2px; margin: 8px 0; }
-.stage-dot { flex: 1; height: 4px; border-radius: 2px; background: var(--surface3); }
-.stage-dot.filled { background: var(--accent); }
-.stage-dot.current { background: var(--accent2); }
+/* Milestones */
+.milestone-list { list-style:none; }
+.milestone-list li { padding:8px 0; border-bottom:1px solid var(--border); font-size:13px; display:flex; align-items:center; gap:8px; }
+.milestone-list li:last-child { border-bottom:none; }
+.milestone-date { color:var(--text3); font-size:12px; min-width:90px; }
 
-/* Task list */
-.task-item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--border); }
-.task-item:last-child { border-bottom: none; }
-.task-check { width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--border); cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.task-check.done { background: var(--green); border-color: var(--green); }
-.task-check.done::after { content: '✓'; color: white; font-size: 12px; }
-.task-title { flex: 1; font-size: 14px; }
-.task-title.done { text-decoration: line-through; color: var(--text3); }
-.task-meta { font-size: 12px; color: var(--text2); }
-.task-priority { font-size: 11px; padding: 2px 8px; border-radius: 10px; }
-.task-priority.critical { background: var(--red-bg); color: var(--red); }
-.task-priority.high { background: var(--yellow-bg); color: var(--yellow); }
-.task-priority.medium { background: var(--blue-bg); color: var(--blue); }
+/* Kanban */
+.kanban-filters { display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap; }
+.filter-btn { padding:6px 14px; border-radius:20px; border:1px solid var(--border); background:var(--surface2); color:var(--text2); cursor:pointer; font-size:12px; font-family:inherit; transition:all .15s; }
+.filter-btn:hover,.filter-btn.active { border-color:var(--accent); color:var(--accent2); background:var(--accent-bg); }
+.kanban-board { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; overflow-x:auto; min-width:0; }
+@media(max-width:1000px){ .kanban-board { grid-template-columns:repeat(5,minmax(200px,1fr)); overflow-x:auto; } }
+@media(max-width:700px){ .kanban-board { grid-template-columns:1fr; } }
+.kanban-col { min-width:0; }
+.kanban-col-header { font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.5px; color:var(--text2); padding:8px 12px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; }
+.kanban-col-header .count { background:var(--surface3); padding:2px 8px; border-radius:10px; font-size:11px; }
+.kanban-card { background:var(--surface2); border:1px solid var(--border); border-radius:var(--radius-sm); padding:12px; margin-bottom:8px; cursor:pointer; transition:all .15s; }
+.kanban-card:hover { border-color:var(--accent); transform:translateY(-1px); }
+.kanban-card-title { font-size:13px; font-weight:500; margin-bottom:8px; line-height:1.4; }
+.kanban-card-meta { display:flex; align-items:center; justify-content:space-between; }
+.kanban-card-tag { font-size:11px; padding:2px 8px; border-radius:10px; background:var(--accent-bg); color:var(--accent2); }
+.kanban-card-owners { display:flex; gap:4px; }
+.owner-badge { width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:12px; background:var(--surface3); border:1px solid var(--border); }
+.kanban-card.blocked { border-left:3px solid var(--red); }
 
-/* Circle cards */
-.circle-emoji { font-size: 32px; }
-.tension-text { font-size: 13px; color: var(--yellow); margin-top: 8px; font-style: italic; }
+/* Team */
+.team-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:16px; }
+.team-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:20px; }
+.team-card-header { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
+.team-avatar { width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:24px; background:var(--surface3); border:2px solid var(--border); }
+.team-name { font-weight:600; font-size:16px; }
+.team-role { font-size:13px; color:var(--text2); }
+.team-type { font-size:11px; padding:2px 8px; border-radius:10px; display:inline-block; margin-top:4px; }
+.team-type.human { background:var(--blue-bg); color:var(--blue); }
+.team-type.ai { background:var(--accent-bg); color:var(--accent2); }
+.team-caps { display:flex; flex-wrap:wrap; gap:4px; margin-bottom:12px; }
+.team-cap { font-size:11px; padding:2px 8px; border-radius:10px; background:var(--surface3); color:var(--text2); }
+.team-tasks { display:grid; grid-template-columns:repeat(5,1fr); gap:4px; }
+.team-task-stat { text-align:center; padding:6px 4px; background:var(--surface2); border-radius:var(--radius-sm); }
+.team-task-stat .num { font-size:16px; font-weight:700; }
+.team-task-stat .lbl { font-size:9px; color:var(--text3); text-transform:uppercase; letter-spacing:.3px; }
 
-/* Books list */
-.book-list { list-style: none; }
-.book-list li { padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 14px; color: var(--text2); }
-.book-list li:last-child { border-bottom: none; }
-.framework-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-.framework-tag { padding: 6px 14px; background: var(--accent-bg); color: var(--accent2); border-radius: 20px; font-size: 13px; font-weight: 500; }
+/* Messages */
+.msg-list { display:flex; flex-direction:column; gap:12px; }
+.msg-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:16px 20px; }
+.msg-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; }
+.msg-from { font-weight:600; font-size:14px; display:flex; align-items:center; gap:6px; }
+.msg-to { font-size:12px; color:var(--text3); }
+.msg-time { font-size:11px; color:var(--text3); }
+.msg-type { font-size:11px; padding:2px 8px; border-radius:10px; }
+.msg-type.directive { background:var(--red-bg); color:var(--red); }
+.msg-type.checkin { background:var(--green-bg); color:var(--green); }
+.msg-body { font-size:13px; color:var(--text); line-height:1.6; }
 
-/* Toast */
-.toast { position: fixed; bottom: 20px; right: 20px; padding: 12px 20px; background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text); font-size: 13px; transform: translateY(100px); opacity: 0; transition: all 0.3s; z-index: 1000; }
-.toast.show { transform: translateY(0); opacity: 1; }
+/* Modal */
+.modal-overlay { position:fixed; inset:0; background:rgba(0,0,0,.7); z-index:200; display:none; align-items:center; justify-content:center; padding:24px; }
+.modal-overlay.open { display:flex; }
+.modal { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); max-width:600px; width:100%; max-height:80vh; overflow-y:auto; padding:24px; }
+.modal-close { float:right; background:none; border:none; color:var(--text2); font-size:20px; cursor:pointer; padding:4px 8px; }
+.modal-close:hover { color:var(--text); }
+.modal h3 { font-size:18px; margin-bottom:16px; padding-right:32px; }
+.modal-field { margin-bottom:12px; }
+.modal-field label { font-size:12px; color:var(--text3); text-transform:uppercase; letter-spacing:.5px; display:block; margin-bottom:4px; }
+.modal-field p { font-size:14px; line-height:1.5; color:var(--text); }
+.modal-field .tag { display:inline-block; padding:2px 10px; border-radius:10px; font-size:12px; background:var(--accent-bg); color:var(--accent2); }
+.modal-field .state { display:inline-block; padding:3px 10px; border-radius:10px; font-size:12px; font-weight:500; }
 
-/* Hypothesis stages */
-.hyp-stage { font-size: 12px; color: var(--text3); }
+/* Products */
+.products-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:16px; margin-bottom:24px; }
+.product-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:16px; }
+.product-name { font-weight:600; font-size:15px; margin-bottom:4px; }
+.product-price { color:var(--green); font-weight:600; font-size:14px; }
+.product-stage { font-size:11px; padding:2px 8px; border-radius:10px; margin-left:8px; }
+.product-desc { font-size:13px; color:var(--text2); margin-top:8px; line-height:1.4; }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .form-row, .form-row-3 { grid-template-columns: 1fr; }
-  .card-grid, .card-grid-3 { grid-template-columns: 1fr; }
-  .metrics { grid-template-columns: 1fr 1fr; }
-  .content { padding: 16px; }
-  .tabs { padding: 0 16px; }
-}
+/* Error banner */
+.error-banner { background:var(--yellow-bg); border:1px solid rgba(245,158,11,.3); border-radius:var(--radius-sm); padding:10px 16px; margin-bottom:16px; font-size:13px; color:var(--yellow); display:none; }
+.error-banner.visible { display:block; }
 
-/* Save indicator */
-.save-indicator { position: fixed; bottom: 20px; left: 20px; padding: 8px 14px; border-radius: var(--radius-sm); font-size: 12px; background: var(--surface2); border: 1px solid var(--border); color: var(--text2); opacity: 0; transition: opacity 0.3s; z-index: 1000; }
-.save-indicator.show { opacity: 1; }
+/* Loading */
+.loading { text-align:center; padding:60px; color:var(--text3); }
+.loading-spinner { display:inline-block; width:32px; height:32px; border:3px solid var(--surface3); border-top-color:var(--accent); border-radius:50%; animation:spin .8s linear infinite; }
+@keyframes spin { to{transform:rotate(360deg)} }
 
-/* ── Product detail accordion ──────────── */
-.prod-expandable { cursor: pointer; }
-.prod-expandable:hover { border-color: var(--border-focus) !important; }
-
-.blank-stages { display: flex; margin-bottom: 16px; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border); }
-.blank-stage { flex: 1; padding: 8px 6px; text-align: center; background: var(--surface2); font-size: 10px; font-weight: 600; color: var(--text3); border-right: 1px solid var(--border); line-height: 1.4; transition: all 0.15s; }
-.blank-stage:last-child { border-right: none; }
-.blank-stage.bs-completed { background: var(--green-bg); color: var(--green); }
-.blank-stage.bs-current { background: var(--accent-bg); color: var(--accent2); position: relative; }
-.blank-stage.bs-current::after { content: '▼'; display: block; font-size: 8px; margin-top: 2px; opacity: 0.7; }
-
-.prod-checklist { list-style: none; margin: 10px 0 0; display: flex; flex-direction: column; gap: 5px; }
-.prod-checklist li { font-size: 13px; color: var(--text2); display: flex; align-items: flex-start; gap: 8px; line-height: 1.4; }
-
-.ch-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-.ch-table th { text-align: left; padding: 6px 10px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text3); border-bottom: 1px solid var(--border); }
-.ch-table td { padding: 8px 10px; border-bottom: 1px solid var(--border); color: var(--text2); vertical-align: top; }
-.ch-table tr:last-child td { border-bottom: none; }
-.ch-table tr:hover td { background: var(--surface2); }
-.ch-tested-yes { color: var(--green); font-weight: 500; }
-.ch-tested-no { color: var(--text3); }
-
-.jtbd-block { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 14px 16px; }
-.jtbd-job { font-size: 14px; color: var(--text); font-style: italic; line-height: 1.6; border-left: 3px solid var(--accent); padding-left: 12px; margin-bottom: 12px; }
-.jtbd-needs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-.jtbd-need { padding: 4px 10px; background: var(--surface3); border: 1px solid var(--border); border-radius: 20px; font-size: 12px; color: var(--text2); }
-
-.detail-section-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text3); margin-bottom: 8px; }
-
-/* ── Kanban Board ────────────────────────── */
-.kanban-wrap { overflow-x: auto; padding-bottom: 12px; margin-top: 4px; }
-.kb-board { display: flex; gap: 14px; align-items: flex-start; min-width: min-content; }
-.kb-column { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); width: 230px; flex-shrink: 0; display: flex; flex-direction: column; max-height: calc(100vh - 280px); transition: border-color 0.15s, background 0.15s; }
-.kb-column.kb-drag-over { border-color: var(--accent); background: var(--accent-bg); }
-.kb-col-header { display: flex; align-items: center; gap: 6px; padding: 10px 12px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
-.kb-col-name { font-size: 13px; font-weight: 600; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.kb-col-count { font-size: 11px; color: var(--text3); background: var(--surface2); padding: 1px 6px; border-radius: 10px; flex-shrink: 0; }
-.kb-add-btn { background: none; border: 1px solid var(--border); border-radius: 6px; color: var(--text2); cursor: pointer; font-size: 15px; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; transition: all 0.15s; padding: 0; flex-shrink: 0; line-height: 1; }
-.kb-add-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-bg); }
-.kb-cards { padding: 8px; display: flex; flex-direction: column; gap: 7px; overflow-y: auto; flex: 1; min-height: 50px; }
-.kb-card { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 11px; cursor: pointer; transition: all 0.15s; user-select: none; }
-.kb-card:hover { border-color: var(--border-focus); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(0,0,0,0.35); }
-.kb-card.kb-dragging { opacity: 0.45; transform: scale(0.97); }
-.kb-blocked { font-size: 10px; display: block; margin-bottom: 4px; }
-.kb-card-title { font-size: 13px; font-weight: 500; line-height: 1.4; margin-bottom: 8px; color: var(--text); }
-.kb-card-footer { display: flex; align-items: center; justify-content: space-between; gap: 6px; }
-.kb-tag { font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 130px; flex-shrink: 1; }
-.kb-owners { font-size: 12px; letter-spacing: 0; flex-shrink: 0; }
-
-/* Kanban Modal */
-.kb-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.65); z-index: 500; align-items: center; justify-content: center; backdrop-filter: blur(2px); }
-.kb-modal-overlay.show { display: flex; }
-.kb-modal-box { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; width: 500px; max-width: 96vw; max-height: 90vh; overflow-y: auto; }
-.kb-modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
-.kb-modal-header h3 { font-size: 16px; font-weight: 600; }
-.kb-modal-close { background: none; border: 1px solid var(--border); border-radius: 6px; color: var(--text2); cursor: pointer; font-size: 16px; width: 28px; height: 28px; display: flex; align-items: center; justify-content: center; transition: all 0.15s; }
-.kb-modal-close:hover { color: var(--text); border-color: var(--text2); }
-.btn-danger { background: var(--red-bg); border-color: var(--red); color: var(--red); }
-.btn-danger:hover { background: var(--red); color: white; border-color: var(--red); }
-.kb-owner-checks { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 6px; }
-.kb-owner-label { display: flex; align-items: center; gap: 5px; cursor: pointer; font-size: 14px; color: var(--text2); transition: color 0.1s; }
-.kb-owner-label:hover { color: var(--text); }
-.kb-owner-label input[type=checkbox] { accent-color: var(--accent); width: 15px; height: 15px; }
+/* Scrollbar */
+::-webkit-scrollbar { width:6px; height:6px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:var(--surface3); border-radius:3px; }
 </style>
 </head>
 <body>
@@ -225,1373 +174,397 @@ h3 { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: var(--text);
     <div class="logo-text">AgentHQ <small>Farol Labs</small></div>
   </div>
   <div class="header-right">
-    <button class="btn" onclick="connectGitHub()" id="gh-btn">🔗 GitHub</button>
-    <button class="btn btn-primary" onclick="saveAll()">💾 Save</button>
+    <span class="status-dot" id="statusDot"></span>
+    <span class="status-label" id="statusLabel">Loading…</span>
+    <span class="last-update" id="lastUpdate"></span>
   </div>
 </div>
-
 
 <div class="tabs" id="tabs">
   <div class="tab active" data-tab="dashboard">📊 Dashboard</div>
-  <div class="tab" data-tab="settings">⚙️ Settings</div>
-  <div class="tab" data-tab="products">📦 Products <span class="badge" id="prod-count">3</span></div>
-  <div class="tab" data-tab="circles">⭕ Circles</div>
-  <div class="tab" data-tab="tasks">📋 Tasks for Humans <span class="badge" id="task-count">5</span></div>
+  <div class="tab" data-tab="kanban">📋 Kanban <span class="badge" id="kanbanCount">0</span></div>
+  <div class="tab" data-tab="team">👥 Team</div>
+  <div class="tab" data-tab="messages">📨 Messages <span class="badge" id="msgCount">0</span></div>
 </div>
 
 <div class="content">
+  <div class="error-banner" id="errorBanner">⚠️ Could not fetch live data — showing cached version.</div>
 
   <!-- DASHBOARD -->
   <div class="section active" id="sec-dashboard">
-    <h2>Dashboard</h2>
-    <div class="metrics" id="metrics-row"></div>
-    <div class="card-grid">
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title">🚨 Constraint #1</div>
-          <span class="status status-blocked" id="constraint-status">Blocked</span>
+    <div class="loading" id="loading"><div class="loading-spinner"></div><p style="margin-top:12px">Loading HQ data…</p></div>
+    <div id="dashboardContent" style="display:none">
+      <div class="metrics" id="metricsGrid"></div>
+      <div class="constraint-box" id="constraintBox"><h4>🔥 Constraint #1</h4><p id="constraintText"></p></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px" id="dashBottom">
+        <div class="card">
+          <div class="card-title">📊 Tasks by Status</div>
+          <div class="task-bars" id="taskBars"></div>
         </div>
-        <div id="constraint-text" style="font-size:14px; color:var(--text2);">Loading...</div>
-      </div>
-      <div class="card">
-        <div class="card-header"><div class="card-title">🎯 Goal</div></div>
-        <div id="goal-text" style="font-size:14px; color:var(--text2);">Loading...</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- SETTINGS -->
-  <div class="section" id="sec-settings">
-    <h2>Settings — Основатели</h2>
-    <p class="subtitle">Описание основателей-людей и партнёрского соглашения</p>
-    
-    <!-- Company -->
-    <div class="card">
-      <h3>🏢 Партнёрское соглашение</h3>
-      <div class="form-row">
-        <div class="form-group"><label>Название компании</label><input id="f-company-name" onchange="markDirty()"></div>
-        <div class="form-group"><label>Purpose — зачем мы существуем</label><input id="f-company-purpose" onchange="markDirty()"></div>
-      </div>
-      <div class="form-row">
-        <div class="form-group"><label>Намерение</label><input id="f-company-intention" onchange="markDirty()"></div>
-        <div class="form-group"><label>Миссия</label><input id="f-company-mission" onchange="markDirty()"></div>
-      </div>
-      <div class="form-group"><label>Цель</label><input id="f-company-goal" onchange="markDirty()"></div>
-      <div class="form-group"><label>🚫 Чего мы НЕ делаем (Red Lines)</label><textarea id="f-company-constraints" rows="3" onchange="markDirty()" placeholder="Мы не обманываем людей. Мы не вводим в заблуждение. Мы не продаём данные клиентов..."></textarea></div>
-      <div class="form-group"><label>Верхнеуровневые технологии</label><input id="f-company-technologies" onchange="markDirty()"></div>
-    </div>
-
-    <!-- Founders -->
-    <div id="founders-container"></div>
-    <button class="btn" onclick="addFounder()" style="margin-top:8px;">＋ Add founder</button>
-
-    <!-- AI Co-Founder — same structure + extended -->
-    <h3 style="margin-top:32px; margin-bottom:12px; font-size:14px; color:var(--text2);">🤖 AI Co-Founder</h3>
-    <div class="card" style="border-color:var(--accent);">
-      <div class="card-header">
-        <div class="card-title">✨ <input id="f-ai-name" style="background:none;border:none;color:var(--text);font-size:15px;font-weight:600;font-family:inherit;width:120px;" onchange="markDirty()"></div>
-        <span class="status status-active">AI</span>
-      </div>
-      <div class="form-row-3" style="margin-top:12px;">
-        <div class="form-group"><label>MBTI</label><input id="f-ai-mbti" onchange="markDirty()"></div>
-        <div class="form-group"><label>CliftonStrengths</label><input id="f-ai-clifton" onchange="markDirty()"></div>
-        <div class="form-group"><label>Адизис</label><input id="f-ai-adizes" onchange="markDirty()"></div>
-      </div>
-      <div class="form-group" style="margin-top:4px;"><label>SOUL</label><textarea id="f-ai-soul" rows="2" onchange="markDirty()"></textarea></div>
-      <div class="form-row" style="margin-top:4px;">
-        <div class="form-group">
-          <label>📚 Books</label>
-          <ul class="book-list" id="books-list" style="margin-top:4px;"></ul>
-        </div>
-        <div class="form-group">
-          <label>🧩 Frameworks</label>
-          <div class="framework-tags" id="frameworks-list" style="margin-top:4px;"></div>
+        <div class="card">
+          <div class="card-title">🏁 Milestones</div>
+          <ul class="milestone-list" id="milestoneList"></ul>
         </div>
       </div>
-      <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--border);">
-        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;color:var(--text3);margin-bottom:8px;">Team Strengths Check</div>
-        <div id="strengths-check" style="font-size:13px; color:var(--text2);"></div>
+      <div style="margin-top:16px">
+        <div class="card">
+          <div class="card-title">📦 Products</div>
+          <div class="products-grid" id="productsGrid"></div>
+        </div>
       </div>
     </div>
-
-    <!-- Board of Directors -->
-    <h3 style="margin-top:32px;margin-bottom:6px;font-size:14px;color:var(--text2);">🏛 Совет директоров</h3>
-    <p class="subtitle" style="margin-bottom:12px;">Виртуальные советники — собираются автоматически по расписанию и анализируют деятельность компании</p>
-
-    <div class="card" style="margin-bottom:12px;">
-      <div class="form-row">
-        <div class="form-group"><label>📅 Расписание встреч</label><input id="f-board-schedule" onchange="markBoardDirty()" placeholder="напр. Ежедневно в 07:00 МСК"></div>
-        <div class="form-group"><label>🎯 Фокус заседаний</label><input id="f-board-focus" onchange="markBoardDirty()" placeholder="напр. TOC-анализ, приоритеты, constraint"></div>
-      </div>
-    </div>
-
-    <div id="board-members-container"></div>
-    <button class="btn" onclick="addBoardMember()" style="margin-top:8px;font-size:12px;">＋ Добавить советника</button>
   </div>
 
-  <!-- PRODUCTS (includes hypotheses as discovery stage) -->
-  <div class="section" id="sec-products">
-    <h2>📦 Products</h2>
-    <p class="subtitle">Hypothesis → Discovery → Validation → Creation → Scale</p>
-    <div id="products-grid"></div>
-    <button class="btn" onclick="addProduct()" style="margin-top:12px;">＋ Add hypothesis</button>
+  <!-- KANBAN -->
+  <div class="section" id="sec-kanban">
+    <div class="kanban-filters" id="kanbanFilters"></div>
+    <div class="kanban-board" id="kanbanBoard"></div>
   </div>
 
-  <!-- CIRCLES -->
-  <div class="section" id="sec-circles">
-    <h2>⭕ Circles — Farol Labs</h2>
-    <p class="subtitle">Holacracy structure. Click a circle to explore.</p>
-    <div id="circles-svg-container"></div>
-    <div id="circle-detail-panel" style="display:none;margin-top:20px;"></div>
+  <!-- TEAM -->
+  <div class="section" id="sec-team">
+    <div class="team-grid" id="teamGrid"></div>
   </div>
 
-  <!-- TASKS -->
-  <div class="section" id="sec-tasks">
-    <h2>📋 Tasks for Humans</h2>
-    <p class="subtitle">Kanban board — все задачи команды в одном месте</p>
-    <div class="kanban-wrap">
-      <div class="kb-board" id="kanban-board">
-        <div style="color:var(--text3); padding:20px; font-size:13px;">Loading kanban...</div>
-      </div>
-    </div>
+  <!-- MESSAGES -->
+  <div class="section" id="sec-messages">
+    <div class="msg-list" id="msgList"></div>
   </div>
 </div>
 
-<div class="toast" id="toast"></div>
-<div class="save-indicator" id="save-ind"></div>
-
-<!-- Kanban Card Modal -->
-<div class="kb-modal-overlay" id="kanban-modal" onclick="if(event.target===this)kanbanCloseModal()">
-  <div class="kb-modal-box" id="kanban-modal-content"></div>
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modalClose">&times;</button>
+    <h3 id="modalTitle"></h3>
+    <div id="modalBody"></div>
+  </div>
 </div>
 
 <script>
-const REPO = 'farol-team/farol-team.github.io';
-const DATA_PATH = 'agenthq/data.json';
-const GH_KEY = 'agenthq-gh-token';
-let DATA = null;
-let dirty = false;
-let savePending = null;
-
-// --- Init ---
-async function init() {
-  // Check if onboarding needed
-  if (!localStorage.getItem('agenthq-onboarding-done')) {
-    // Check if data is empty
-    fetch('data.json?t=' + Date.now())
-      .then(r => r.json())
-      .then(d => {
-        if (!d.company || !d.company.name) {
-          window.location.href = 'onboarding.html';
-        }
-      }).catch(() => {
-        window.location.href = 'onboarding.html';
-      });
-  }
-  const resp = await fetch('data.json?t=' + Date.now());
-  DATA = await resp.json();
-  renderAll();
-  initKanban();
-}
-
-function renderAll() {
-  const fns = [renderDashboard, renderSettings, renderProducts, renderCircles, renderTasks];
-  for (const fn of fns) {
-    try { fn(); } catch(e) { console.error('[AgentHQ] Error in ' + fn.name + ':', e); }
-  }
-}
-
-// --- Tabs ---
-document.querySelectorAll('.tab').forEach(t => {
-  t.addEventListener('click', () => {
-    document.querySelectorAll('.tab').forEach(x => x.classList.remove('active'));
-    document.querySelectorAll('.section').forEach(x => x.classList.remove('active'));
-    t.classList.add('active');
-    document.getElementById('sec-' + t.dataset.tab).classList.add('active');
-  });
-});
-
-// --- Dashboard ---
-function renderDashboard() {
-  const m = DATA.metrics;
-  const mrow = document.getElementById('metrics-row');
-  mrow.innerHTML = `
-    <div class="metric-card"><div class="metric-value red">${m.mrr}</div><div class="metric-label">MRR</div></div>
-    <div class="metric-card"><div class="metric-value">${m.leads}</div><div class="metric-label">Leads in pipeline</div></div>
-    <div class="metric-card"><div class="metric-value yellow">${m.daysToDeadline}</div><div class="metric-label">Days to deadline</div></div>
-    <div class="metric-card"><div class="metric-value">${m.gnap_stars}</div><div class="metric-label">GNAP ⭐</div></div>
-  `;
-  document.getElementById('constraint-text').textContent = m.constraint;
-  document.getElementById('goal-text').textContent = DATA.company.goal;
-
-  // dashboard-tasks replaced by kanban board
-}
-
-// --- Settings ---
-function renderSettings() {
-  const c = DATA.company;
-  document.getElementById('f-company-name').value = c.name || '';
-  document.getElementById('f-company-purpose').value = c.purpose || '';
-  document.getElementById('f-company-intention').value = c.intention || '';
-  document.getElementById('f-company-mission').value = c.mission || '';
-  document.getElementById('f-company-goal').value = c.goal || '';
-  document.getElementById('f-company-constraints').value = c.constraints || '';
-  // f-company-policies removed from UI (merged into constraints/Red Lines)
-  document.getElementById('f-company-technologies').value = c.technologies || '';
-
-  const fc = document.getElementById('founders-container');
-  fc.innerHTML = DATA.founders.map((f, i) => `
-    <div class="card" data-founder="${i}">
-      <div class="card-header">
-        <div class="card-title">${f.avatar} ${f.name}</div>
-        <span class="status status-active">${f.role}</span>
-      </div>
-      <div class="form-row-3">
-        <div class="form-group"><label>Имя</label><input value="${esc(f.name)}" onchange="updateFounder(${i},'name',this.value)"></div>
-        <div class="form-group"><label>Роль</label><input value="${esc(f.role)}" onchange="updateFounder(${i},'role',this.value)"></div>
-        <div class="form-group"><label>Аватар (emoji)</label><input value="${esc(f.avatar)}" onchange="updateFounder(${i},'avatar',this.value)"></div>
-      </div>
-      <div class="form-row-3">
-        <div class="form-group"><label>MBTI</label><input value="${esc(f.mbti)}" onchange="updateFounder(${i},'mbti',this.value)" placeholder="Например: ENFJ"></div>
-        <div class="form-group"><label>CliftonStrengths</label><input value="${esc(f.clifton)}" onchange="updateFounder(${i},'clifton',this.value)"></div>
-        <div class="form-group"><label>Адизис</label><input value="${esc(f.adizes)}" onchange="updateFounder(${i},'adizes',this.value)" placeholder="Например: PaEI"></div>
-      </div>
-      <div class="form-row-3">
-        <div class="form-group"><label>⏱ Часов/неделю для AI</label><input type="number" min="0" max="80" value="${esc(f.hoursPerWeek||'')}" placeholder="напр. 10" onchange="updateFounder(${i},'hoursPerWeek',+this.value)"></div>
-        <div class="form-group"><label>📅 Слоты</label><input value="${esc(f.slots)}" onchange="updateFounder(${i},'slots',this.value)" placeholder="напр. Пн-Ср утро"></div>
-        <div class="form-group"><label>📍 Часовой пояс</label><input value="${esc(f.tz||'')}" onchange="updateFounder(${i},'tz',this.value)" placeholder="напр. UTC+3"></div>
-      </div>
-      <div class="form-group"><label>💡 Скилы (что хорошо получается)</label><input value="${esc((f.skills||[]).join(', '))}" placeholder="напр. продажи, питчинг, Python, design" onchange="updateFounder(${i},'skills',this.value.split(',').map(s=>s.trim()).filter(Boolean))"></div>
-      <div class="form-group" style="margin-top:4px;">
-        <label>🎯 Роль — по каким вопросам идти к нему</label>
-        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;" id="roles-tags-${i}">
-          ${(f.roles||[]).map((r,ri) => `<span style="display:inline-flex;align-items:center;gap:4px;background:rgba(99,102,241,0.12);border:1px solid rgba(99,102,241,0.3);color:var(--accent2);border-radius:20px;padding:3px 10px;font-size:12px;">${esc(r)}<button onclick="removeFounderRole(${i},${ri})" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:12px;padding:0 0 0 3px;line-height:1;">×</button></span>`).join('')}
-          <input id="roles-input-${i}" placeholder="+ добавить роль" style="background:none;border:1px dashed var(--border);border-radius:20px;padding:3px 10px;font-size:12px;color:var(--text);width:150px;outline:none;"
-            onkeydown="if(event.key==='Enter'||event.key===','){event.preventDefault();addFounderRole(${i});}">
-        </div>
-      </div>
-    </div>
-  `).join('');
-
-  // Resources summary for AI
-  const totalHours = DATA.founders.reduce((sum, f) => sum + (f.hoursPerWeek || 0), 0);
-  const resHtml = DATA.founders.map(f => {
-    const h = f.hoursPerWeek || 0;
-    const skills = (f.skills||[]).join(' · ') || '—';
-    return `<div style="display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid var(--border);">
-      <span style="font-size:18px;">${f.avatar}</span>
-      <span style="font-weight:600;min-width:80px;">${esc(f.name)}</span>
-      <span style="color:var(--accent2);font-weight:700;min-width:60px;">${h}ч/нед</span>
-      <span style="color:var(--text2);font-size:12px;">${esc(skills)}</span>
-    </div>`;
-  }).join('');
-
-  let resSummary = document.getElementById('founder-resources-summary');
-  if (!resSummary) {
-    resSummary = document.createElement('div');
-    resSummary.id = 'founder-resources-summary';
-    resSummary.style.cssText = 'margin-top:12px;padding:14px;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);';
-    const fc = document.getElementById('founders-container');
-    if (fc && fc.parentNode) fc.parentNode.insertBefore(resSummary, fc.nextSibling);
-    else document.getElementById('sec-settings').appendChild(resSummary);
-  }
-  resSummary.innerHTML = `
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
-      <span style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--text3);">🔋 Ресурс для AI-кофаундера</span>
-      <span style="font-size:18px;font-weight:700;color:var(--accent2);">${totalHours}ч/нед</span>
-    </div>
-    ${resHtml}
-  `;
-
-  renderAI();
-  renderBoard();
-}
-
-function updateFounder(i, field, val) { DATA.founders[i][field] = val; markDirty(); }
-
-function addFounderRole(i) {
-  const input = document.getElementById('roles-input-' + i);
-  if (!input) return;
-  const val = input.value.trim().replace(/,/g,'');
-  if (!val) return;
-  if (!DATA.founders[i].roles) DATA.founders[i].roles = [];
-  DATA.founders[i].roles.push(val);
-  input.value = '';
-  renderSettings(); markDirty();
-}
-
-function removeFounderRole(i, ri) {
-  DATA.founders[i].roles.splice(ri, 1);
-  renderSettings(); markDirty();
-}
-
-// --- Board of Directors ---
-function renderBoard() {
-  const b = DATA.board || {};
-  const schedEl = document.getElementById('f-board-schedule');
-  const focusEl = document.getElementById('f-board-focus');
-  if (schedEl) schedEl.value = b.meetingSchedule || '';
-  if (focusEl) focusEl.value = b.meetingFocus || '';
-
-  const container = document.getElementById('board-members-container');
-  if (!container) return;
-  container.innerHTML = (b.members || []).map((m, i) => `
-    <div class="card" style="margin-bottom:10px;">
-      <div class="card-header">
-        <div class="card-title" style="font-size:15px;">${m.emoji || '👤'} ${esc(m.name)}</div>
-        <button onclick="removeBoardMember(${i})" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:16px;padding:0;">✕</button>
-      </div>
-      <div class="form-row-3" style="margin-top:10px;">
-        <div class="form-group"><label>Имя</label><input value="${esc(m.name)}" onchange="updateBoardMember(${i},'name',this.value)"></div>
-        <div class="form-group"><label>Emoji</label><input value="${esc(m.emoji||'')}" onchange="updateBoardMember(${i},'emoji',this.value)" style="width:60px;"></div>
-        <div class="form-group"><label>Роль / Экспертиза</label><input value="${esc(m.role||'')}" onchange="updateBoardMember(${i},'role',this.value)"></div>
-      </div>
-      <div class="form-group" style="margin-top:4px;"><label>Фокус и перспектива</label><textarea rows="2" onchange="updateBoardMember(${i},'focus',this.value)">${esc(m.focus||'')}</textarea></div>
-    </div>
-  `).join('');
-}
-
-function updateBoardMember(i, field, val) {
-  if (!DATA.board) DATA.board = { members: [] };
-  DATA.board.members[i][field] = val;
-  markDirty();
-}
-
-function removeBoardMember(i) {
-  DATA.board.members.splice(i, 1);
-  renderBoard();
-  markDirty();
-}
-
-function addBoardMember() {
-  if (!DATA.board) DATA.board = { members: [], meetingSchedule: '', meetingFocus: '' };
-  DATA.board.members.push({ id: 'b' + Date.now(), name: 'Новый советник', emoji: '👤', role: '', focus: '' });
-  renderBoard();
-  markDirty();
-}
-
-function markBoardDirty() {
-  if (!DATA.board) DATA.board = {};
-  DATA.board.meetingSchedule = document.getElementById('f-board-schedule').value;
-  DATA.board.meetingFocus = document.getElementById('f-board-focus').value;
-  markDirty();
-}
-function addFounder() {
-  DATA.founders.push({ id: 'f' + Date.now(), name: 'Новый основатель', avatar: '👤', role: '', mbti: '', clifton: '', adizes: '', resources: '', slots: '', hoursPerWeek: 0, skills: [], tz: '' });
-  renderSettings(); markDirty();
-}
-
-// --- AI Co-Founder (now rendered as part of Settings) ---
-function renderAI() {
-  const ai = DATA.aiCofounder;
-  document.getElementById('f-ai-name').value = ai.name || '';
-  document.getElementById('f-ai-mbti').value = ai.mbti || '';
-  document.getElementById('f-ai-adizes').value = ai.adizes || '';
-  document.getElementById('f-ai-clifton').value = ai.clifton || '';
-  document.getElementById('f-ai-soul').value = ai.soul || '';
-  document.getElementById('books-list').innerHTML = (ai.books||[]).map(b => `<li>📖 ${esc(b)}</li>`).join('');
-  document.getElementById('frameworks-list').innerHTML = (ai.frameworks||[]).map(f => `<span class="framework-tag">${esc(f)}</span>`).join('');
-
-  const allClifton = [...DATA.founders.map(f => f.clifton).filter(Boolean), ai.clifton].join(', ');
-  document.getElementById('strengths-check').innerHTML = allClifton
-    ? `<span style="color:var(--text2);">${allClifton}</span>`
-    : '<em style="color:var(--text3);">Fill in CliftonStrengths for each founder</em>';
-}
-
-// --- Hypotheses ---
-const STAGES = ['discovery', 'validation', 'creation', 'scale'];
-function renderHypotheses() {} // merged into renderProducts
-
-function addHypothesis() { addProduct(); }
-
-function addProduct() {
-  DATA.products.push({ id: 'p' + Date.now(), name: 'New hypothesis', price: 'TBD', stage: 'discovery', url: '', mrr: '$0', desc: '', status: 'idea' });
-  renderProducts(); markDirty();
-}
-
-// --- Products (includes hypotheses as discovery stage) ---
-const STAGE_LABELS = { discovery: '🔍 Discovery', validation: '🧪 Validation', creation: '🏗 Creation', scale: '📈 Scale' };
-const STAGE_ORDER = ['discovery', 'validation', 'creation', 'scale'];
-
-const BLANK_STAGE_NAMES = ['Customer Discovery', 'Customer Validation', 'Customer Creation', 'Company Building'];
-const BLANK_STAGE_KEYS = ['discovery', 'validation', 'creation', 'scale'];
-
-function renderProducts() {
-  const grid = document.getElementById('products-grid');
-  const all = DATA.products || [];
-  let html = '';
-  STAGE_ORDER.forEach(stage => {
-    const items = all.filter(p => p.stage === stage);
-    if (!items.length) return;
-    html += `<div style="margin-bottom:24px;">
-      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--text3);margin-bottom:10px;">${STAGE_LABELS[stage] || stage}</div>
-      <div>`;
-    items.forEach(p => { html += renderProductCard(p); });
-    html += `</div></div>`;
-  });
-  grid.innerHTML = html;
-  document.getElementById('prod-count').textContent = all.length;
-}
-
-function renderProductCard(p) {
-  const si = STAGE_ORDER.indexOf(p.stage);
-  const dots = STAGE_ORDER.map((s, j) => `<div class="stage-dot ${j <= si ? 'filled' : ''} ${j === si ? 'current' : ''}"></div>`).join('');
-  const urlHtml = p.url ? `<a href="https://${p.url}" target="_blank" style="font-size:12px;color:var(--accent2);" onclick="event.stopPropagation()">${esc(p.url)} →</a>` : '';
-  const priceHtml = p.price && p.price !== 'TBD'
-    ? `<span class="status status-testing" style="font-size:11px;">${esc(p.price)}</span>`
-    : `<span class="status status-idea" style="font-size:11px;">idea</span>`;
-  const hasDetail = !!(p.blank || p.jtbd);
-  const chevron = hasDetail ? `<span id="prod-chevron-${esc(p.id)}" style="color:var(--text3);font-size:12px;transition:transform 0.2s;margin-left:8px;flex-shrink:0;">▼</span>` : '';
-  return `
-  <div class="card ${hasDetail ? 'prod-expandable' : ''}" id="prod-card-${esc(p.id)}" style="margin-bottom:12px;" ${hasDetail ? `onclick="toggleProduct('${esc(p.id)}')"` : ''}>
-    <div class="card-header" style="margin-bottom:0;">
-      <div class="card-title" style="font-size:14px;flex:1;">${esc(p.name)}</div>
-      ${priceHtml}
-      ${chevron}
-    </div>
-    ${p.desc ? `<p style="font-size:13px;color:var(--text2);margin:8px 0 4px;">${esc(p.desc)}</p>` : ''}
-    ${p.mrr ? `<p style="font-size:12px;color:var(--text3);margin-top:4px;">MRR: <strong style="color:var(--text2);">${esc(p.mrr)}</strong>${urlHtml ? ' · ' + urlHtml : ''}</p>` : (urlHtml ? `<p style="margin-top:4px;">${urlHtml}</p>` : '')}
-    <div class="stage-track" style="margin-top:10px;">${dots}</div>
-    ${hasDetail ? `<div id="prod-detail-${esc(p.id)}" style="display:none;margin-top:16px;border-top:1px solid var(--border);padding-top:16px;">${renderProductDetail(p)}</div>` : ''}
-  </div>`;
-}
-
-function toggleProduct(id) {
-  const detail = document.getElementById('prod-detail-' + id);
-  const chevron = document.getElementById('prod-chevron-' + id);
-  if (!detail) return;
-  const open = detail.style.display === 'block';
-  detail.style.display = open ? 'none' : 'block';
-  if (chevron) chevron.style.transform = open ? '' : 'rotate(180deg)';
-}
-
-function renderProductDetail(p) {
-  let html = '';
-
-  // ── Block 1: Steve Blank Stages ─────────────────
-  if (p.blank) {
-    const currentKey = p.blank.currentStage || 'discovery';
-    const currentIdx = BLANK_STAGE_KEYS.indexOf(currentKey);
-    const stagesBar = BLANK_STAGE_NAMES.map((name, i) => {
-      let cls = '';
-      if (i < currentIdx) cls = 'bs-completed';
-      else if (i === currentIdx) cls = 'bs-current';
-      return `<div class="blank-stage ${cls}">${i < currentIdx ? '✓ ' : ''}${name}</div>`;
-    }).join('');
-
-    const checklist = buildChecklist(p.blank, currentKey);
-
-    html += `<div style="margin-bottom:20px;">
-      <div class="detail-section-label">📐 Steve Blank — Customer Development</div>
-      <div class="blank-stages">${stagesBar}</div>
-      <div style="font-size:11px;font-weight:600;color:var(--text2);margin-bottom:4px;">Текущий этап: <span style="color:var(--accent2);">${BLANK_STAGE_NAMES[currentIdx]}</span></div>
-      <ul class="prod-checklist">${checklist}</ul>
-    </div>`;
-
-    // ── Block 2: Channel Testing ──────────────────
-    const channels = p.blank.channels || [];
-    if (channels.length) {
-      const rows = channels.map(ch => {
-        const testedHtml = ch.tested
-          ? `<span class="ch-tested-yes">✓ Да</span>`
-          : `<span class="ch-tested-no">— Нет</span>`;
-        return `<tr>
-          <td style="font-weight:500;color:var(--text);">${esc(ch.name)}</td>
-          <td>${testedHtml}</td>
-          <td>${esc(ch.result || '—')}</td>
-          <td>${ch.cac != null ? '$' + ch.cac : '—'}</td>
-          <td>${esc(ch.conversion || '—')}</td>
-        </tr>`;
-      }).join('');
-      html += `<div style="margin-bottom:20px;">
-        <div class="detail-section-label">📡 Channel Testing</div>
-        <div style="overflow-x:auto;">
-          <table class="ch-table">
-            <thead><tr><th>Channel</th><th>Tested</th><th>Result</th><th>CAC</th><th>Conv.</th></tr></thead>
-            <tbody>${rows}</tbody>
-          </table>
-        </div>
-      </div>`;
-    } else if (p.blank.currentStage) {
-      html += `<div style="margin-bottom:20px;">
-        <div class="detail-section-label">📡 Channel Testing</div>
-        <p style="font-size:13px;color:var(--text3);font-style:italic;">Каналы не тестировались — на этапе discovery</p>
-      </div>`;
-    }
-
-    // ── Block 3: Notes ────────────────────────────
-    const stageData = p.blank[currentKey] || {};
-    const notes = stageData.notes;
-    if (notes) {
-      html += `<div style="margin-bottom:20px;">
-        <div class="detail-section-label">📝 Notes (${BLANK_STAGE_NAMES[currentIdx]})</div>
-        <div style="font-size:13px;color:var(--text2);line-height:1.6;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;">${esc(notes)}</div>
-      </div>`;
-    }
-  }
-
-  // ── Block 4: Team Activity ───────────────────────
-  {
-    const circleName = p.name; // try to match by product name in tasks
-    const allTasks = (DATA.tasks || []).filter(t => t.status !== 'done');
-    // Kanban cards (if available)
-    const kanbanCards = (typeof KANBAN !== 'undefined' && KANBAN && KANBAN.cards)
-      ? KANBAN.cards.filter(c => !c.done && c.status !== 'done')
-      : [];
-
-    // AI tasks: for ori or assigned to ai
-    const aiTasks = allTasks.filter(t => {
-      const f = (t.for || '').toLowerCase();
-      return f.includes('ori') || f.includes('✨') || f.includes('ai');
-    });
-    const humanBlockers = allTasks.filter(t => {
-      const f = (t.for || '').toLowerCase();
-      const status = (t.status || '').toLowerCase();
-      const isHuman = f.includes('leo') || f.includes('🦁') || f.includes('mayak') || f.includes('⚓') || f.includes('alex');
-      const isActive = status === 'progress' || status === 'next' || status === 'review';
-      return isHuman && isActive;
-    });
-
-    // Kanban blockers: cards in progress/review assigned to humans
-    const kanbanHumanCards = kanbanCards.filter(c => {
-      const col = (c.column || c.status || '');
-      const owner = (c.owner || c.for || '');
-      const isHumanCol = col === 'progress' || col === 'review';
-      const isHuman = owner.includes('leo') || owner.includes('🦁') || owner.includes('mayak') || owner.includes('⚓');
-      return isHumanCol && isHuman;
-    });
-
-    const allBlockers = [
-      ...humanBlockers.map(t => ({ title: t.title, owner: t.for, src: 'task' })),
-      ...kanbanHumanCards.map(c => ({ title: c.title, owner: c.owner || c.for, src: 'kanban' })),
-    ];
-
-    const aiHtml = aiTasks.length
-      ? aiTasks.map(t => `<div style="padding:5px 0;border-bottom:1px solid var(--border);font-size:13px;display:flex;gap:8px;align-items:flex-start;">
-          <span style="color:var(--accent2);">✨</span>
-          <span style="flex:1;color:var(--text);">${esc(t.title)}</span>
-          <span style="font-size:11px;color:var(--text3);white-space:nowrap;">${esc(t.circle||'')}</span>
-        </div>`).join('')
-      : `<div style="font-size:13px;color:var(--text3);font-style:italic;">Нет активных задач AI</div>`;
-
-    const blockersHtml = allBlockers.length
-      ? allBlockers.map(b => `<div style="padding:5px 0;border-bottom:1px solid rgba(239,68,68,0.2);font-size:13px;display:flex;gap:8px;align-items:flex-start;">
-          <span style="color:#ef4444;">🔴</span>
-          <span style="flex:1;color:var(--text);">${esc(b.title)}</span>
-          <span style="font-size:11px;color:#f97316;white-space:nowrap;">${esc(b.owner||'')}</span>
-        </div>`).join('')
-      : '';
-
-    html += `<div style="margin-bottom:20px;">
-      <div class="detail-section-label">⚡ Что происходит сейчас</div>
-      <div style="display:grid;grid-template-columns:1fr${allBlockers.length ? ' 1fr' : ''};gap:12px;">
-        <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px;">
-          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--accent2);margin-bottom:8px;">✨ AI-команда работает над</div>
-          ${aiHtml}
-        </div>
-        ${allBlockers.length ? `<div style="background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.25);border-radius:var(--radius-sm);padding:12px;">
-          <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:#ef4444;margin-bottom:8px;">🔴 Застряли на людях</div>
-          ${blockersHtml}
-        </div>` : ''}
-      </div>
-    </div>`;
-  }
-
-  // ── Block 5: JTBD ────────────────────────────────
-  if (p.jtbd) {
-    const j = p.jtbd;
-    const wtpBadge = j.wtpConfirmed
-      ? `<span class="status status-active" style="font-size:11px;">✓ WTP Confirmed</span>`
-      : `<span class="status status-warning" style="font-size:11px;">⚠ WTP Not Confirmed</span>`;
-    const needsHtml = (j.userNeeds || []).map(n => `<span class="jtbd-need">${esc(n)}</span>`).join('');
-    html += `<div>
-      <div class="detail-section-label">🎯 Jobs to be Done</div>
-      <div class="jtbd-block">
-        ${j.intent ? `<p style="font-size:12px;color:var(--text3);margin-bottom:10px;">${esc(j.intent)}</p>` : ''}
-        <div class="jtbd-job">${esc(j.job || '')}</div>
-        <div style="display:flex;gap:16px;flex-wrap:wrap;margin-bottom:10px;">
-          <div style="flex:1;min-width:160px;">
-            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text3);margin-bottom:4px;">За что платит</div>
-            <div style="font-size:13px;color:var(--text);">${esc(j.payingFor || '—')}</div>
-          </div>
-          <div style="flex:1;min-width:160px;">
-            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text3);margin-bottom:4px;">WTP Evidence</div>
-            <div style="font-size:13px;color:var(--text2);">${esc(j.wtpEvidence || '—')}</div>
-          </div>
-        </div>
-        ${needsHtml ? `<div style="margin-bottom:10px;"><div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:var(--text3);margin-bottom:6px;">Боли клиента</div><div class="jtbd-needs">${needsHtml}</div></div>` : ''}
-        ${wtpBadge}
-      </div>
-    </div>`;
-  }
-
-  return html;
-}
-
-function buildChecklist(blank, currentKey) {
-  const items = [];
-  const d = blank.discovery || {};
-  const v = blank.validation || {};
-
-  if (currentKey === 'discovery') {
-    items.push([!!d.problemHypothesis, 'Problem hypothesis defined']);
-    items.push([d.interviewsDone > 0, `Customer interviews done (${d.interviewsDone || 0})`]);
-    items.push([!!d.problemConfirmed, 'Problem confirmed']);
-    items.push([false, 'Solution hypothesis tested']);
-    items.push([false, 'MVP prototype built']);
-  } else if (currentKey === 'validation') {
-    items.push([!!d.problemConfirmed, 'Problem confirmed ✓']);
-    items.push([!!v.mvpBuilt, 'MVP built and shipped']);
-    items.push([v.payingCustomers > 0, `Paying customers (${v.payingCustomers || 0})`]);
-    items.push([!!v.repeatableSales, 'Repeatable sales process']);
-    items.push([false, 'Unit economics positive']);
-    items.push([false, 'Scalable channel found']);
-  } else if (currentKey === 'creation') {
-    items.push([false, 'Scalable acquisition channel']);
-    items.push([false, 'CAC/LTV ratio positive']);
-    items.push([false, 'Marketing playbook documented']);
-    items.push([false, 'Demand creation at scale']);
-  } else {
-    items.push([false, 'Management team hired']);
-    items.push([false, 'Processes documented']);
-    items.push([false, '$1M+ ARR reached']);
-  }
-
-  return items.map(([done, label]) => {
-    const icon = done ? '🟢' : '⬜';
-    return `<li><span>${icon}</span><span style="${done ? '' : 'color:var(--text3);'}">${esc(label)}</span></li>`;
-  }).join('');
-}
-
-// --- Circles (Holacracy SVG) ---
-function renderCircles() {
-  const container = document.getElementById('circles-svg-container');
-  if (!container || !DATA || !DATA.circles) return;
-
-  const statusColor = { active: '#10b981', blocked: '#ef4444', warning: '#f59e0b' };
-  const statusBg   = { active: 'rgba(16,185,129,0.09)', blocked: 'rgba(239,68,68,0.09)', warning: 'rgba(245,158,11,0.09)' };
-
-  // Sub-circle positions inside viewBox 0 0 600 420
-  const POS = {
-    c1: { cx: 215, cy: 145, r: 65 },  // Product
-    c2: { cx: 385, cy: 145, r: 65 },  // Marketing
-    c3: { cx: 300, cy: 287, r: 62 },  // Revenue (BLOCKED)
-    c4: { cx: 410, cy: 245, r: 58 },  // Clients
-    c5: { cx: 185, cy: 262, r: 58 },  // Finance
-  };
-
-  // Returns endpoint for an arrow: starts at source center (hidden under source circle),
-  // ends at edge of destination circle
-  function calcLine(fromId, toId) {
-    const f = POS[fromId], t = POS[toId];
-    const dx = t.cx - f.cx, dy = t.cy - f.cy;
-    const dist = Math.sqrt(dx*dx + dy*dy);
-    if (dist < 1) return null;
-    return {
-      sx: f.cx, sy: f.cy,
-      ex: +(t.cx - dx/dist * (t.r + 4)).toFixed(1),
-      ey: +(t.cy - dy/dist * (t.r + 4)).toFixed(1),
-      mx: +((f.cx + t.cx)/2 + dy/dist*14).toFixed(1),  // label offset perpendicular
-      my: +((f.cy + t.cy)/2 - dx/dist*14).toFixed(1),
-    };
-  }
-
-  // Solid arrows: Marketing→Clients, Clients→Revenue, Product→Revenue
-  const solidArrows = [
-    { from:'c2', to:'c4', label:'traffic→leads' },
-    { from:'c4', to:'c3', label:'leads→$' },
-    { from:'c1', to:'c3', label:'value→$' },
-  ];
-
-  const arrowsSvg = solidArrows.map(a => {
-    const l = calcLine(a.from, a.to);
-    if (!l) return '';
-    return `<line x1="${l.sx}" y1="${l.sy}" x2="${l.ex}" y2="${l.ey}" stroke="rgba(99,102,241,0.55)" stroke-width="1.5" marker-end="url(#arr)"/>
-    <text x="${l.mx}" y="${l.my}" text-anchor="middle" fill="rgba(130,140,248,0.45)" font-size="8.5" font-family="Inter,sans-serif">${a.label}</text>`;
-  }).join('\n    ');
-
-  // Dashed Finance→all
-  const dashSvg = ['c1','c2','c3','c4'].map(toId => {
-    const l = calcLine('c5', toId);
-    if (!l) return '';
-    return `<line x1="${l.sx}" y1="${l.sy}" x2="${l.ex}" y2="${l.ey}" stroke="rgba(153,153,179,0.28)" stroke-width="1" stroke-dasharray="5 4" marker-end="url(#arr-dim)"/>`;
-  }).join('\n    ');
-
-  // Sub-circle nodes
-  const nodesSvg = DATA.circles.map(c => {
-    const p = POS[c.id];
-    if (!p) return '';
-    const col = statusColor[c.status] || '#6366f1';
-    const bg  = statusBg[c.status]  || 'rgba(99,102,241,0.07)';
-    const blocked = c.status === 'blocked';
-    const statusLabel = blocked ? '● BLOCKED' : ('● ' + c.status);
-    const pulse = blocked
-      ? `<circle cx="${p.cx}" cy="${p.cy}" r="${p.r+7}" fill="none" stroke="${col}" stroke-width="1" opacity="0.25"/>`
-      : '';
-    return `
-    <g id="node-${c.id}" class="circle-node" style="cursor:pointer;">
-      ${pulse}
-      <circle cx="${p.cx}" cy="${p.cy}" r="${p.r}" fill="${bg}" stroke="${col}" stroke-width="2.2" class="node-ring"/>
-      <text x="${p.cx}" y="${p.cy - 10}" text-anchor="middle" font-size="20" font-family="Inter,sans-serif">${c.emoji}</text>
-      <text x="${p.cx}" y="${p.cy + 8}" text-anchor="middle" fill="#e2e2f0" font-size="11" font-weight="600" font-family="Inter,sans-serif">${c.name}</text>
-      <text x="${p.cx}" y="${p.cy + 23}" text-anchor="middle" fill="${col}" font-size="9" font-weight="${blocked?'700':'400'}" font-family="Inter,sans-serif">${statusLabel}</text>
-    </g>`;
-  }).join('');
-
-  container.innerHTML = `
-<style>
-.circle-node .node-ring { transition: stroke-width 0.18s, opacity 0.18s; }
-.circle-node:hover .node-ring { stroke-width: 4.5 !important; filter: drop-shadow(0 0 7px currentColor); }
-#holacracy-svg { border-radius: 16px; }
-#circles-legend { display:flex; gap:16px; flex-wrap:wrap; justify-content:center; margin-top:12px; font-size:11px; color:var(--text2); }
-#circles-legend span { display:flex; align-items:center; gap:5px; }
-@media (max-width:500px) { #circles-mobile-list { display:block!important; } #holacracy-svg { display:none; } }
-</style>
-<div style="position:relative;">
-  <svg id="holacracy-svg" viewBox="0 0 600 420" xmlns="http://www.w3.org/2000/svg"
-       style="width:100%;max-width:640px;display:block;margin:0 auto;background:rgba(8,8,18,0.55);border-radius:16px;">
-    <defs>
-      <marker id="arr" markerWidth="8" markerHeight="6" refX="6" refY="3" orient="auto">
-        <polygon points="0 0,8 3,0 6" fill="rgba(99,102,241,0.72)"/>
-      </marker>
-      <marker id="arr-dim" markerWidth="7" markerHeight="5" refX="5.5" refY="2.5" orient="auto">
-        <polygon points="0 0,7 2.5,0 5" fill="rgba(153,153,179,0.48)"/>
-      </marker>
-    </defs>
-
-    <!-- Anchor circle: Farol Labs -->
-    <circle cx="300" cy="210" r="185" fill="rgba(10,10,25,0.25)" stroke="rgba(99,102,241,0.28)" stroke-width="1.5" stroke-dasharray="8 5"/>
-    <text x="300" y="46" text-anchor="middle" fill="rgba(130,140,248,0.88)" font-size="14" font-weight="600" font-family="Inter,sans-serif">⭕ Farol Labs</text>
-    <text x="300" y="62" text-anchor="middle" fill="rgba(153,153,179,0.44)" font-size="9" letter-spacing="2" font-family="Inter,sans-serif">ANCHOR CIRCLE</text>
-
-    <!-- Finance dashed connections -->
-    ${dashSvg}
-
-    <!-- Solid directional arrows -->
-    ${arrowsSvg}
-
-    <!-- Sub-circles -->
-    ${nodesSvg}
-  </svg>
-
-  <!-- Legend -->
-  <div id="circles-legend">
-    <span><svg width="12" height="12"><circle cx="6" cy="6" r="5" fill="none" stroke="#10b981" stroke-width="1.5"/></svg>active</span>
-    <span><svg width="12" height="12"><circle cx="6" cy="6" r="5" fill="none" stroke="#ef4444" stroke-width="1.5"/></svg>blocked</span>
-    <span><svg width="12" height="12"><circle cx="6" cy="6" r="5" fill="none" stroke="#f59e0b" stroke-width="1.5"/></svg>warning</span>
-    <span><svg width="22" height="12"><line x1="0" y1="6" x2="22" y2="6" stroke="rgba(99,102,241,0.6)" stroke-width="1.5"/></svg>flow</span>
-    <span><svg width="22" height="12"><line x1="0" y1="6" x2="22" y2="6" stroke="rgba(153,153,179,0.4)" stroke-width="1" stroke-dasharray="4 3"/></svg>Finance serves all</span>
-  </div>
-
-  <!-- Tooltip -->
-  <div id="circle-tooltip" style="display:none;position:fixed;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--text);max-width:240px;z-index:9999;box-shadow:0 4px 24px rgba(0,0,0,0.55);line-height:1.5;pointer-events:none;">
-    <div id="tt-name" style="font-weight:600;font-size:13px;margin-bottom:5px;"></div>
-    <div id="tt-tension" style="color:var(--yellow);font-size:11px;"></div>
-    <div id="tt-lead" style="color:var(--text2);font-size:11px;margin-top:3px;"></div>
-  </div>
-</div>
-
-<!-- Mobile fallback list -->
-<div id="circles-mobile-list" style="display:none;margin-top:16px;"></div>`;
-
-  // Mobile fallback
-  const mobileList = document.getElementById('circles-mobile-list');
-  if (mobileList) {
-    mobileList.innerHTML = DATA.circles.map(c =>
-      `<div class="card" style="cursor:pointer;margin-bottom:10px;" onclick="toggleCircle('${c.id}')">
-        <div style="display:flex;align-items:center;gap:10px;">
-          <span style="font-size:22px;">${c.emoji}</span>
-          <span style="font-weight:600;">${c.name}</span>
-          <span class="status status-${c.status}" style="margin-left:auto;">${c.status}</span>
-        </div>
-        <div style="font-size:12px;color:var(--yellow);margin-top:6px;">⚡ ${esc(c.tension)}</div>
-      </div>`
-    ).join('');
-  }
-
-  // Attach events to SVG nodes
-  const tt = document.getElementById('circle-tooltip');
-  DATA.circles.forEach(c => {
-    const node = document.getElementById('node-' + c.id);
-    if (!node) return;
-    node.addEventListener('mouseenter', () => {
-      document.getElementById('tt-name').textContent = c.emoji + ' ' + c.name + '  [' + c.status.toUpperCase() + ']';
-      document.getElementById('tt-tension').textContent = '⚡ ' + c.tension;
-      document.getElementById('tt-lead').textContent = 'Lead: ' + c.lead;
-      tt.style.display = 'block';
-    });
-    node.addEventListener('mousemove', e => {
-      tt.style.left = (e.clientX + 16) + 'px';
-      tt.style.top  = (e.clientY - 10) + 'px';
-    });
-    node.addEventListener('mouseleave', () => { tt.style.display = 'none'; });
-    node.addEventListener('click', () => toggleCircle(c.id));
-  });
-}
-
-function toggleCircle(id) {
-  const panel = document.getElementById('circle-detail-panel');
-  const c = DATA.circles.find(x => x.id === id);
-  if (!c) return;
-
-  // Toggle off if same circle clicked again
-  if (panel.dataset.activeId === id && panel.style.display !== 'none') {
-    panel.style.display = 'none';
-    panel.dataset.activeId = '';
-    document.querySelectorAll('.circle-node .node-ring').forEach(r => { r.style.strokeWidth = ''; r.style.opacity = ''; });
-    return;
-  }
-
-  panel.dataset.activeId = id;
-
-  // Highlight selected, dim others
-  document.querySelectorAll('.circle-node').forEach(n => {
-    const ring = n.querySelector('.node-ring');
-    if (!ring) return;
-    if (n.id === 'node-' + id) { ring.style.strokeWidth = '4.5'; ring.style.opacity = '1'; }
-    else { ring.style.opacity = '0.4'; ring.style.strokeWidth = ''; }
-  });
-
-  const circleTasks = (DATA.tasks || []).filter(t => t.circle === c.name && t.status !== 'done');
-  const statusColor = { active: '#10b981', blocked: '#ef4444', warning: '#f59e0b' };
-  const col = statusColor[c.status] || '#6366f1';
-
-  const tasksList = circleTasks.length
-    ? circleTasks.map(t =>
-        `<div style="padding:6px 0;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:8px;">
-          <span style="color:var(--accent2);font-size:12px;margin-top:1px;">›</span>
-          <span style="font-size:13px;color:var(--text);flex:1;">${esc(t.title)}</span>
-          <span style="font-size:11px;color:var(--text3);white-space:nowrap;">${t.priority||''}</span>
-        </div>`).join('')
-    : `<div style="color:var(--text3);font-size:13px;padding:8px 0;">No active tasks</div>`;
-
-  panel.style.display = 'block';
-  panel.innerHTML = `
-  <div style="background:var(--surface);border:1px solid var(--border);border-left:3px solid ${col};border-radius:12px;padding:20px;">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:10px;">
-      <div style="display:flex;align-items:center;gap:12px;">
-        <span style="font-size:32px;line-height:1;">${c.emoji}</span>
-        <div>
-          <div style="font-size:17px;font-weight:700;">${c.name}</div>
-          <div style="font-size:12px;color:var(--text2);margin-top:2px;">Lead: ${esc(c.lead)}</div>
-        </div>
-      </div>
-      <div style="display:flex;align-items:center;gap:8px;">
-        <span class="status status-${c.status}">${c.status}</span>
-        <button onclick="document.getElementById('circle-detail-panel').style.display='none';document.getElementById('circle-detail-panel').dataset.activeId='';document.querySelectorAll('.circle-node .node-ring').forEach(r=>{r.style.strokeWidth='';r.style.opacity='';})" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:20px;padding:0 4px;line-height:1;">✕</button>
-      </div>
-    </div>
-
-    <div style="color:var(--yellow);font-size:13px;margin-bottom:16px;padding:8px 12px;background:rgba(245,158,11,0.08);border-radius:6px;">⚡ ${esc(c.tension)}</div>
-
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
-      <div>
-        <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text3);margin-bottom:6px;">🧠 Soul</div>
-        <div style="font-size:13px;color:var(--text2);line-height:1.55;">${esc(c.soul||'—')}</div>
-      </div>
-      <div>
-        <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text3);margin-bottom:6px;">🛠 Skill</div>
-        <div style="font-size:13px;color:var(--text2);line-height:1.55;">${esc(c.skill||'—')}</div>
-      </div>
-    </div>
-
-    <div style="margin-bottom:16px;">
-      <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text3);margin-bottom:6px;">📍 Context</div>
-      <div style="font-size:13px;color:var(--text2);line-height:1.55;">${esc(c.context||'—')}</div>
-    </div>
-
-    <div>
-      <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;color:var(--text3);margin-bottom:8px;">✅ Active Tasks (${circleTasks.length})</div>
-      ${tasksList}
-    </div>
-  </div>`;
-
-  // Scroll panel into view
-  panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-}
-
-// --- Tasks ---
-function renderTasks() {
-  // tasks-list is legacy; tasks now live in kanban board
-  const list = document.getElementById('tasks-list');
-  if (list) {
-    list.innerHTML = DATA.tasks.map(t => `
-      <div class="task-item">
-        <div class="task-check ${t.status === 'done' ? 'done' : ''}" onclick="toggleTask('${t.id}')"></div>
-        <div class="task-title ${t.status === 'done' ? 'done' : ''}">${t.title}</div>
-        <span class="task-priority ${t.priority}">${t.priority}</span>
-        <span class="task-meta">${t.circle} → ${t.for}</span>
-      </div>
-    `).join('');
-  }
-  const tc = document.getElementById('task-count');
-  if (tc) tc.textContent = DATA.tasks.filter(t => t.status !== 'done').length;
-}
-
-function toggleTask(id) {
-  const t = DATA.tasks.find(x => x.id === id);
-  if (t) { t.status = t.status === 'done' ? 'todo' : 'done'; renderTasks(); renderDashboard(); markDirty(); }
-}
-
-// --- Persistence (GitHub API) ---
-function markDirty() {
-  // Collect form data
-  DATA.company.name = document.getElementById('f-company-name').value;
-  DATA.company.purpose = document.getElementById('f-company-purpose').value;
-  DATA.company.intention = document.getElementById('f-company-intention').value;
-  DATA.company.mission = document.getElementById('f-company-mission').value;
-  DATA.company.goal = document.getElementById('f-company-goal').value;
-  DATA.company.constraints = document.getElementById('f-company-constraints').value;
-  // policies merged into constraints field
-  DATA.company.technologies = document.getElementById('f-company-technologies').value;
-  DATA.aiCofounder.name = document.getElementById('f-ai-name').value;
-  DATA.aiCofounder.mbti = document.getElementById('f-ai-mbti').value;
-  DATA.aiCofounder.adizes = document.getElementById('f-ai-adizes').value;
-  DATA.aiCofounder.clifton = document.getElementById('f-ai-clifton').value;
-  DATA.aiCofounder.soul = document.getElementById('f-ai-soul').value;
-
-  dirty = true;
-  if (savePending) clearTimeout(savePending);
-  savePending = setTimeout(() => pushToGitHub(), 2000);
-}
-
-function saveAll() {
-  markDirty();
-  pushToGitHub();
-}
-
-async function pushToGitHub() {
-  const token = localStorage.getItem(GH_KEY);
-  if (!token) { showToast('Connect GitHub first (🔗 button)'); return; }
-
-  showSave('⏳ Saving...');
-  try {
-    const getResp = await fetch(`https://api.github.com/repos/${REPO}/contents/${DATA_PATH}`, {
-      headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github.v3+json' }
-    });
-    const existing = getResp.ok ? await getResp.json() : null;
-    const content = btoa(unescape(encodeURIComponent(JSON.stringify(DATA, null, 2))));
-    
-    const putResp = await fetch(`https://api.github.com/repos/${REPO}/contents/${DATA_PATH}`, {
-      method: 'PUT',
-      headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        message: 'AgentHQ: update data',
-        content,
-        sha: existing?.sha || undefined
-      })
-    });
-    if (putResp.ok) { showSave('✅ Saved'); dirty = false; }
-    else { const e = await putResp.json(); showToast('Save failed: ' + (e.message || putResp.status)); showSave('❌ Error'); }
-  } catch (e) { showToast('Save error: ' + e.message); showSave('❌ Error'); }
-}
-
-function connectGitHub() {
-  const existing = localStorage.getItem(GH_KEY);
-  if (existing) {
-    if (confirm('GitHub connected. Disconnect?')) { localStorage.removeItem(GH_KEY); document.getElementById('gh-btn').textContent = '🔗 GitHub'; showToast('Disconnected'); }
-    return;
-  }
-  const token = prompt('GitHub Personal Access Token\n(needs Contents: Read+Write on farol-team repos)');
-  if (token && token.trim()) {
-    localStorage.setItem(GH_KEY, token.trim());
-    document.getElementById('gh-btn').textContent = '✅ GitHub';
-    showToast('Connected! Changes auto-save.');
-  }
-}
-
-// --- Utils ---
-function esc(s) { return (s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 3000);
-}
-function showSave(msg) {
-  const s = document.getElementById('save-ind');
-  s.textContent = msg; s.classList.add('show');
-  setTimeout(() => s.classList.remove('show'), 2000);
-}
-
-// Check GitHub on load
-if (localStorage.getItem(GH_KEY)) document.getElementById('gh-btn').textContent = '✅ GitHub';
-
-// ── Kanban Board ──────────────────────────────────────────────────
-
-const KANBAN_PATH = 'kanban-data.json';
-let KANBAN = null;
-let kanbanDirty = false;
-let kanbanSavePending = null;
-let dragCardId = null;
-
-const OWNER_ICONS = { leo: '🦁', mayak: '⚓', ori: '✨', all: '👥' };
-
-const TAG_COLORS = {
-  'Security':   { bg: 'rgba(239,68,68,0.15)',    fg: '#ef4444' },
-  'Marketing':  { bg: 'rgba(245,158,11,0.15)',   fg: '#f59e0b' },
-  'Legal':      { bg: 'rgba(139,92,246,0.15)',   fg: '#8b5cf6' },
-  'Sales':      { bg: 'rgba(16,185,129,0.15)',   fg: '#10b981' },
-  'Content':    { bg: 'rgba(59,130,246,0.15)',   fg: '#3b82f6' },
-  'Product':    { bg: 'rgba(99,102,241,0.15)',   fg: '#6366f1' },
-  'Infra':      { bg: 'rgba(6,182,212,0.15)',    fg: '#06b6d4' },
-  'Strategy':   { bg: 'rgba(249,115,22,0.15)',   fg: '#f97316' },
-  'Research':   { bg: 'rgba(132,204,22,0.15)',   fg: '#84cc16' },
-  'Foundation': { bg: 'rgba(236,72,153,0.15)',   fg: '#ec4899' },
+const DATA_URL = 'https://raw.githubusercontent.com/farol-team/farol-hq/main/.gnap/index.json';
+const CACHE_KEY = 'agenthq_cache';
+const REFRESH_MS = 5 * 60 * 1000;
+
+const AGENT_EMOJI = { ori:'✨', leo:'⚡', mayak:'🧭', carl:'💰', all:'👥' };
+const STATE_COLORS = {
+  backlog:'var(--text3)', ready:'var(--blue)', in_progress:'var(--yellow)',
+  review:'var(--orange)', done:'var(--green)'
 };
+const STATE_LABELS = {
+  backlog:'Backlog', ready:'Ready', in_progress:'In Progress',
+  review:'Review', done:'Done'
+};
+const STATES = ['backlog','ready','in_progress','review','done'];
 
-function getTagStyle(tag) {
-  return TAG_COLORS[tag] || { bg: 'rgba(153,153,179,0.15)', fg: '#9999b3' };
-}
+let DATA = null;
+let currentFilter = 'all';
+let currentTab = 'dashboard';
 
-async function initKanban() {
+// --- DATA LOADING ---
+async function loadData() {
   try {
-    const resp = await fetch('../kanban-data.json?t=' + Date.now());
-    if (!resp.ok) throw new Error('not found');
-    KANBAN = await resp.json();
+    const r = await fetch(DATA_URL + '?t=' + Date.now());
+    if (!r.ok) throw new Error(r.status);
+    DATA = await r.json();
+    localStorage.setItem(CACHE_KEY, JSON.stringify(DATA));
+    document.getElementById('errorBanner').classList.remove('visible');
+    updateStatus(true);
   } catch(e) {
-    KANBAN = {
-      columns: ["notnow","maybe","next","progress","review","done"],
-      columnNames: {"notnow":"Not Now","maybe":"Maybe","next":"Up Next","progress":"In Progress","review":"Human Review","done":"Done"},
-      cards: []
-    };
+    const cached = localStorage.getItem(CACHE_KEY);
+    if (cached) {
+      DATA = JSON.parse(cached);
+      document.getElementById('errorBanner').classList.add('visible');
+      updateStatus(false);
+    } else {
+      document.getElementById('loading').innerHTML = '<p style="color:var(--red)">❌ Failed to load data</p>';
+      return;
+    }
   }
-  renderKanban();
+  render();
 }
 
-function renderKanbanSection(filterFn, boardId) {
-  return KANBAN.columns.map(colId => {
-    const colName = KANBAN.columnNames[colId] || colId;
-    const cards = KANBAN.cards
-      .filter(c => c.column === colId && filterFn(c))
-      .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
+function updateStatus(live) {
+  document.getElementById('statusDot').style.background = live ? 'var(--green)' : 'var(--yellow)';
+  document.getElementById('statusLabel').textContent = live ? 'Live' : 'Cached';
+  document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString();
+}
 
-    return `
-      <div class="kb-column" data-col="${colId}" data-board="${boardId}"
-           ondragover="kanbanDragOver(event)"
-           ondragleave="kanbanDragLeave(event)"
-           ondrop="kanbanDrop(event,'${colId}')">
-        <div class="kb-col-header">
-          <span class="kb-col-name">${esc(colName)}</span>
-          <span class="kb-col-count">${cards.length}</span>
-          <button class="kb-add-btn" onclick="kanbanAddCard('${colId}','${boardId}')" title="Add card">＋</button>
-        </div>
-        <div class="kb-cards" id="${boardId}-col-${colId}">
-          ${cards.map(card => renderKanbanCard(card)).join('')}
-        </div>
-      </div>`;
+// --- RENDER ---
+function render() {
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('dashboardContent').style.display = '';
+  renderDashboard();
+  renderKanban();
+  renderTeam();
+  renderMessages();
+  document.getElementById('kanbanCount').textContent = DATA.tasks.filter(t=>t.state!=='done').length;
+  document.getElementById('msgCount').textContent = DATA.messages.length;
+}
+
+function renderDashboard() {
+  const tasks = DATA.tasks;
+  const company = DATA.company;
+
+  // Days to deadline
+  const deadline = new Date('2026-05-23');
+  const now = new Date();
+  const days = Math.ceil((deadline - now) / 86400000);
+
+  // Task counts
+  const counts = {};
+  STATES.forEach(s => counts[s] = 0);
+  tasks.forEach(t => { if(counts[t.state] !== undefined) counts[t.state]++; });
+  const total = tasks.length;
+
+  // Metrics
+  const metricsGrid = document.getElementById('metricsGrid');
+  metricsGrid.innerHTML = `
+    <div class="metric-card">
+      <div class="metric-value ${days < 30 ? 'red' : days < 60 ? 'yellow' : ''}">${days}</div>
+      <div class="metric-label">Days to $200K deadline</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value red">$0</div>
+      <div class="metric-label">MRR</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">${total}</div>
+      <div class="metric-label">Total Tasks</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value green">${counts.done}</div>
+      <div class="metric-label">Completed</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value yellow">${counts.in_progress + counts.review}</div>
+      <div class="metric-label">In Progress / Review</div>
+    </div>
+  `;
+
+  // Constraint
+  const constraint = company.constraints && company.constraints.length
+    ? company.constraints[0]
+    : 'No constraint defined';
+  document.getElementById('constraintText').textContent = constraint;
+
+  // Task bars
+  const barsEl = document.getElementById('taskBars');
+  barsEl.innerHTML = STATES.map(s => {
+    const pct = total ? Math.round(counts[s]/total*100) : 0;
+    return `<div class="task-bar-item">
+      <div class="task-bar-label"><span>${STATE_LABELS[s]}</span><span>${counts[s]}</span></div>
+      <div class="task-bar-track"><div class="task-bar-fill" style="width:${pct}%;background:${STATE_COLORS[s]}"></div></div>
+    </div>`;
   }).join('');
+
+  // Milestones
+  const ml = document.getElementById('milestoneList');
+  const milestones = company.milestones_done || [];
+  ml.innerHTML = milestones.slice().reverse().map(m => {
+    const [date, ...rest] = m.split(': ');
+    return `<li><span class="milestone-date">${date.replace(/^\d{4}-/,'')}</span> <span>✅ ${rest.join(': ')}</span></li>`;
+  }).join('') || '<li style="color:var(--text3)">No milestones yet</li>';
+
+  // Products (from cache data.json structure — check if present in index)
+  // Not in index.json, skip or use minimal
+  document.getElementById('productsGrid').innerHTML = '';
 }
 
 function renderKanban() {
-  const board = document.getElementById('kanban-board');
-  if (!KANBAN || !board) return;
+  const tasks = DATA.tasks;
 
-  const oriCards  = KANBAN.cards.filter(c => c.source === 'ori');
-  const teamCards = KANBAN.cards.filter(c => c.source !== 'ori');
+  // Filters
+  const owners = new Set();
+  tasks.forEach(t => {
+    (t.owners || t.assigned_to || []).forEach(o => owners.add(o));
+  });
+  const filtersEl = document.getElementById('kanbanFilters');
+  filtersEl.innerHTML = `<button class="filter-btn ${currentFilter==='all'?'active':''}" data-owner="all">All</button>` +
+    [...owners].sort().map(o =>
+      `<button class="filter-btn ${currentFilter===o?'active':''}" data-owner="${o}">${AGENT_EMOJI[o]||'👤'} ${o}</button>`
+    ).join('');
 
-  board.innerHTML = `
-    <div style="margin-bottom:20px;">
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
-        <span style="font-size:13px;font-weight:700;color:var(--accent2);">✨ От AI-кофаундера</span>
-        <span class="badge" style="background:rgba(99,102,241,0.15);color:var(--accent2);">${oriCards.length}</span>
-        <button class="btn" style="margin-left:auto;font-size:11px;padding:3px 10px;" onclick="kanbanAddCard('next','ori')">＋ Задача от Ori</button>
+  filtersEl.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.onclick = () => { currentFilter = btn.dataset.owner; renderKanban(); };
+  });
+
+  // Filter tasks
+  const filtered = currentFilter === 'all' ? tasks :
+    tasks.filter(t => (t.owners || t.assigned_to || []).includes(currentFilter));
+
+  // Group by state
+  const groups = {};
+  STATES.forEach(s => groups[s] = []);
+  filtered.forEach(t => { if(groups[t.state]) groups[t.state].push(t); });
+
+  const board = document.getElementById('kanbanBoard');
+  board.innerHTML = STATES.map(s => `
+    <div class="kanban-col">
+      <div class="kanban-col-header">
+        <span>${STATE_LABELS[s]}</span>
+        <span class="count">${groups[s].length}</span>
       </div>
-      <div class="kb-board" id="kb-ori">
-        ${oriCards.length ? renderKanbanSection(c => c.source === 'ori', 'ori') : '<div style="padding:16px;color:var(--text3);font-size:13px;font-style:italic;">Ori пока не ставил задач людям</div>'}
-      </div>
+      ${groups[s].map(t => {
+        const ownersArr = t.owners || t.assigned_to || [];
+        const tag = t.tag || (t.tags && t.tags[0]) || '';
+        return `<div class="kanban-card ${t.blocked?'blocked':''}" data-id="${t.id}">
+          <div class="kanban-card-title">${esc(t.title)}</div>
+          <div class="kanban-card-meta">
+            <span class="kanban-card-tag">${esc(tag)}</span>
+            <div class="kanban-card-owners">
+              ${ownersArr.map(o => `<span class="owner-badge" title="${o}">${AGENT_EMOJI[o]||o[0]}</span>`).join('')}
+            </div>
+          </div>
+        </div>`;
+      }).join('')}
     </div>
-    <div style="border-top:1px solid var(--border);padding-top:20px;">
-      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
-        <span style="font-size:13px;font-weight:700;color:var(--text);">✋ Команда (свои задачи)</span>
-        <span class="badge">${teamCards.length}</span>
-        <button class="btn" style="margin-left:auto;font-size:11px;padding:3px 10px;" onclick="kanbanAddCard('next','team')">＋ Задача</button>
-      </div>
-      <div class="kb-board" id="kb-team">
-        ${renderKanbanSection(c => c.source !== 'ori', 'team')}
-      </div>
-    </div>
-  `;
-}
-
-function renderKanbanCard(card) {
-  const ownerStr = (card.owners || []).map(o => OWNER_ICONS[o] || o).join('');
-  const ts = getTagStyle(card.tag);
-  const blockedHtml = card.blocked ? '<span class="kb-blocked">🔴 blocked</span>' : '';
-  const auth = card.oriAuth;
-  let authBadge = '';
-  if (card.source !== 'ori') { // only team tasks need auth
-    if (auth && auth.authorized) {
-      const mrrColor = auth.mrrImpact === 'yes' ? '#10b981' : auth.mrrImpact === 'indirect' ? '#f59e0b' : 'var(--text3)';
-      authBadge = `<div style="margin-top:5px;display:flex;align-items:center;gap:5px;flex-wrap:wrap;">
-        <span style="font-size:9px;font-weight:700;background:rgba(16,185,129,0.12);color:#10b981;border:1px solid rgba(16,185,129,0.3);border-radius:4px;padding:1px 5px;">✨ Ori ✓</span>
-        ${auth.product ? `<span style="font-size:9px;color:var(--text3);background:var(--surface2);border-radius:4px;padding:1px 5px;">${esc(auth.product)}</span>` : ''}
-        <span style="font-size:9px;color:${mrrColor};">MRR: ${auth.mrrImpact || '?'}</span>
-      </div>`;
-    } else {
-      authBadge = `<div style="margin-top:5px;"><span style="font-size:9px;color:var(--text3);background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:1px 5px;">❓ не авторизована</span></div>`;
-    }
-  }
-
-  return `
-    <div class="kb-card" draggable="true" data-id="${esc(card.id)}"
-         ondragstart="kanbanDragStart(event,'${esc(card.id)}')"
-         ondragend="kanbanDragEnd(event)"
-         onclick="kanbanOpenCard('${esc(card.id)}')">
-      ${blockedHtml}
-      <div class="kb-card-title">${esc(card.title)}</div>
-      ${authBadge}
-      <div class="kb-card-footer" style="margin-top:5px;">
-        <span class="kb-tag" style="background:${ts.bg};color:${ts.fg};">${esc(card.tag || '')}</span>
-        <span class="kb-owners">${ownerStr}</span>
-      </div>
-    </div>
-  `;
-}
-
-function kanbanDragStart(e, cardId) {
-  dragCardId = cardId;
-  e.dataTransfer.effectAllowed = 'move';
-  e.dataTransfer.setData('text/plain', cardId);
-  setTimeout(() => {
-    const el = document.querySelector(`.kb-card[data-id="${cardId}"]`);
-    if (el) el.classList.add('kb-dragging');
-  }, 0);
-}
-
-function kanbanDragEnd(e) {
-  dragCardId = null;
-  document.querySelectorAll('.kb-dragging').forEach(el => el.classList.remove('kb-dragging'));
-  document.querySelectorAll('.kb-drag-over').forEach(el => el.classList.remove('kb-drag-over'));
-}
-
-function kanbanDragOver(e) {
-  e.preventDefault();
-  e.dataTransfer.dropEffect = 'move';
-  const col = e.currentTarget;
-  if (col.classList.contains('kb-column')) col.classList.add('kb-drag-over');
-}
-
-function kanbanDragLeave(e) {
-  const col = e.currentTarget;
-  if (!col.contains(e.relatedTarget)) col.classList.remove('kb-drag-over');
-}
-
-function kanbanDrop(e, colId) {
-  e.preventDefault();
-  const col = e.currentTarget;
-  col.classList.remove('kb-drag-over');
-
-  const cid = dragCardId || e.dataTransfer.getData('text/plain');
-  if (!cid) return;
-  const card = KANBAN.cards.find(c => c.id === cid);
-  if (!card) return;
-
-  const oldCol = card.column;
-  card.column = colId;
-  if (oldCol !== colId) {
-    const colCards = KANBAN.cards.filter(c => c.column === colId && c.id !== cid);
-    card.order = colCards.length;
-  }
-
-  renderKanban();
-  markKanbanDirty();
-  dragCardId = null;
-}
-
-function kanbanAddCard(colId, source) {
-  const colCards = KANBAN.cards.filter(c => c.column === colId);
-  const newCard = {
-    id: 'card-' + Date.now(),
-    column: colId,
-    tag: 'Product',
-    title: 'New task',
-    desc: '',
-    owners: [],
-    blocked: false,
-    order: colCards.length,
-    source: source || 'team'
-  };
-  KANBAN.cards.push(newCard);
-  renderKanban();
-  markKanbanDirty();
-  kanbanOpenCard(newCard.id);
-}
-
-function kanbanOpenCard(cardId) {
-  const card = KANBAN.cards.find(c => c.id === cardId);
-  if (!card) return;
-
-  const ownerChecks = Object.entries(OWNER_ICONS).map(([key, icon]) => `
-    <label class="kb-owner-label">
-      <input type="checkbox" id="km-owner-${key}" ${(card.owners||[]).includes(key) ? 'checked' : ''}>
-      ${icon} ${key}
-    </label>
   `).join('');
 
-  const colOptions = KANBAN.columns.map(c =>
-    `<option value="${c}" ${card.column === c ? 'selected' : ''}>${esc(KANBAN.columnNames[c] || c)}</option>`
-  ).join('');
-
-  document.getElementById('kanban-modal-content').innerHTML = `
-    <div class="kb-modal-header">
-      <h3>Edit Card</h3>
-      <button class="kb-modal-close" onclick="kanbanCloseModal()">✕</button>
-    </div>
-    <div class="form-group">
-      <label>Title</label>
-      <input id="km-title" value="${esc(card.title)}">
-    </div>
-    <div class="form-group">
-      <label>Description</label>
-      <textarea id="km-desc" rows="3">${esc(card.desc || '')}</textarea>
-    </div>
-    <div class="form-row">
-      <div class="form-group">
-        <label>Column</label>
-        <select id="km-column">${colOptions}</select>
-      </div>
-      <div class="form-group">
-        <label>Tag</label>
-        <input id="km-tag" value="${esc(card.tag || '')}" list="km-tag-list">
-        <datalist id="km-tag-list">
-          ${Object.keys(TAG_COLORS).map(t => `<option value="${t}">`).join('')}
-        </datalist>
-      </div>
-    </div>
-    <div class="form-group">
-      <label>Owners</label>
-      <div class="kb-owner-checks">${ownerChecks}</div>
-    </div>
-    <div class="form-group" style="margin-top:4px;">
-      <label class="kb-owner-label" style="color:var(--red);">
-        <input type="checkbox" id="km-blocked" ${card.blocked ? 'checked' : ''} style="accent-color:var(--red);">
-        🔴 Blocked
-      </label>
-    </div>
-    ${card.source !== 'ori' ? `
-    <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border);">
-      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.07em;color:var(--accent2);margin-bottom:10px;">✨ Авторизация Ori</div>
-      <div class="form-row-3" style="margin-bottom:8px;">
-        <div class="form-group"><label>Продукт</label>
-          <select id="km-auth-product">
-            <option value="">— выбрать —</option>
-            ${(DATA.products||[]).map(p => `<option value="${esc(p.name)}" ${(card.oriAuth||{}).product === p.name ? 'selected':''}>${esc(p.name)}</option>`).join('')}
-          </select>
-        </div>
-        <div class="form-group"><label>Влияет на MRR?</label>
-          <select id="km-auth-mrr">
-            <option value="">— ?</option>
-            <option value="yes" ${(card.oriAuth||{}).mrrImpact === 'yes' ? 'selected':''}>✅ Да, прямо</option>
-            <option value="indirect" ${(card.oriAuth||{}).mrrImpact === 'indirect' ? 'selected':''}>🟡 Косвенно</option>
-            <option value="no" ${(card.oriAuth||{}).mrrImpact === 'no' ? 'selected':''}>❌ Нет</option>
-          </select>
-        </div>
-        <div class="form-group"><label>Авторизовано</label>
-          <label style="display:flex;align-items:center;gap:6px;margin-top:6px;cursor:pointer;">
-            <input type="checkbox" id="km-auth-ok" ${(card.oriAuth||{}).authorized ? 'checked':''} style="accent-color:var(--accent);">
-            <span style="font-size:13px;">Ori одобряет</span>
-          </label>
-        </div>
-      </div>
-      <div class="form-group"><label>Заметка Ori</label><textarea id="km-auth-note" rows="2" placeholder="Почему важно / с чем связано...">${esc((card.oriAuth||{}).note||'')}</textarea></div>
-    </div>` : ''}
-    <div style="display:flex;justify-content:space-between;margin-top:24px;gap:10px;">
-      <button class="btn btn-danger" onclick="kanbanDeleteCard('${esc(card.id)}')">🗑️ Delete</button>
-      <button class="btn btn-primary" onclick="kanbanSaveCard('${esc(card.id)}')">💾 Save</button>
-    </div>
-  `;
-  document.getElementById('kanban-modal').classList.add('show');
-}
-
-function kanbanSaveCard(cardId) {
-  const card = KANBAN.cards.find(c => c.id === cardId);
-  if (!card) return;
-
-  card.title = document.getElementById('km-title').value.trim() || 'Untitled';
-  card.desc = document.getElementById('km-desc').value;
-  const newCol = document.getElementById('km-column').value;
-  if (newCol !== card.column) {
-    card.column = newCol;
-    const colCards = KANBAN.cards.filter(c => c.column === newCol && c.id !== cardId);
-    card.order = colCards.length;
-  }
-  card.tag = document.getElementById('km-tag').value.trim();
-  card.owners = Object.keys(OWNER_ICONS).filter(k => {
-    const el = document.getElementById('km-owner-' + k);
-    return el && el.checked;
+  // Card click → modal
+  board.querySelectorAll('.kanban-card').forEach(card => {
+    card.onclick = () => openTaskModal(card.dataset.id);
   });
-  card.blocked = !!document.getElementById('km-blocked').checked;
+}
 
-  // Save Ori authorization (only for team tasks)
-  const authProduct = document.getElementById('km-auth-product');
-  const authMrr = document.getElementById('km-auth-mrr');
-  const authOk = document.getElementById('km-auth-ok');
-  const authNote = document.getElementById('km-auth-note');
-  if (authProduct && card.source !== 'ori') {
-    card.oriAuth = {
-      authorized: !!authOk.checked,
-      product: authProduct.value,
-      mrrImpact: authMrr.value,
-      note: authNote.value,
-      authorizedAt: authOk.checked ? (card.oriAuth?.authorizedAt || new Date().toISOString()) : null
-    };
+function renderTeam() {
+  // Agents from DATA — check if agents key exists
+  // agents are in a separate file, but index.json doesn't include them
+  // We'll fetch agents.json separately or use inline known agents
+  const agentsUrl = 'https://raw.githubusercontent.com/farol-team/farol-hq/main/.gnap/agents.json';
+
+  fetch(agentsUrl + '?t=' + Date.now()).then(r=>r.json()).then(data => {
+    const agents = data.agents || [];
+    renderTeamCards(agents);
+  }).catch(() => {
+    // Fallback: extract unique owners from tasks
+    const knownAgents = [
+      {id:'ori',name:'Ori',role:'Co-Founder / Strategy & Execution',type:'ai',capabilities:['research','writing','planning','coding','design','analysis'],status:'active'},
+      {id:'leo',name:'Leonid',role:'CTO',type:'human',capabilities:['infra','coding','devops','architecture'],status:'active'},
+      {id:'mayak',name:'Alex',role:'Chairman / Strategy',type:'human',capabilities:['strategy','sales','design','product'],status:'active'},
+      {id:'carl',name:'Carl',role:'CRO',type:'ai',capabilities:['sales','outreach','analytics','research'],status:'active'},
+    ];
+    renderTeamCards(knownAgents);
+  });
+}
+
+function renderTeamCards(agents) {
+  const tasks = DATA.tasks;
+  const grid = document.getElementById('teamGrid');
+
+  grid.innerHTML = agents.map(a => {
+    const myTasks = tasks.filter(t => (t.owners || t.assigned_to || []).includes(a.id));
+    const counts = {};
+    STATES.forEach(s => counts[s] = 0);
+    myTasks.forEach(t => { if(counts[t.state] !== undefined) counts[t.state]++; });
+
+    return `<div class="team-card">
+      <div class="team-card-header">
+        <div class="team-avatar">${AGENT_EMOJI[a.id] || '👤'}</div>
+        <div>
+          <div class="team-name">${esc(a.name)}</div>
+          <div class="team-role">${esc(a.role)}</div>
+          <span class="team-type ${a.type}">${a.type === 'ai' ? '🤖 AI' : '🧑 Human'}</span>
+        </div>
+      </div>
+      <div class="team-caps">
+        ${(a.capabilities||[]).map(c => `<span class="team-cap">${esc(c)}</span>`).join('')}
+      </div>
+      <div class="team-tasks">
+        ${STATES.map(s => `<div class="team-task-stat">
+          <div class="num" style="color:${STATE_COLORS[s]}">${counts[s]}</div>
+          <div class="lbl">${STATE_LABELS[s].replace(' ','\n')}</div>
+        </div>`).join('')}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function renderMessages() {
+  const msgs = DATA.messages || [];
+  const list = document.getElementById('msgList');
+  if (!msgs.length) {
+    list.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text3)">No messages yet</div>';
+    return;
+  }
+  list.innerHTML = msgs.slice().reverse().map(m => `
+    <div class="msg-card">
+      <div class="msg-header">
+        <div class="msg-from">${AGENT_EMOJI[m.from]||'👤'} ${esc(m.from)} <span class="msg-type ${m.type||''}">${esc(m.type||'message')}</span></div>
+        <span class="msg-time">${formatTime(m.at)}</span>
+      </div>
+      <div class="msg-to">→ ${(m.to||[]).map(t=>AGENT_EMOJI[t]||t).join(', ')} ${m.thread ? `· thread: ${esc(m.thread)}` : ''}</div>
+      <div class="msg-body">${esc(m.text)}</div>
+    </div>
+  `).join('');
+}
+
+// --- MODAL ---
+function openTaskModal(id) {
+  const t = DATA.tasks.find(x => x.id === id);
+  if (!t) return;
+  document.getElementById('modalTitle').textContent = t.title;
+
+  const stateClass = t.state === 'done' ? 'background:var(--green-bg);color:var(--green)' :
+    t.state === 'in_progress' ? 'background:var(--yellow-bg);color:var(--yellow)' :
+    t.state === 'review' ? 'background:var(--orange-bg);color:var(--orange)' :
+    t.state === 'ready' ? 'background:var(--blue-bg);color:var(--blue)' :
+    'background:var(--surface3);color:var(--text3)';
+
+  const owners = t.owners || t.assigned_to || [];
+  const tag = t.tag || (t.tags && t.tags[0]) || '';
+
+  let html = `
+    <div class="modal-field"><label>Status</label><span class="state" style="${stateClass}">${STATE_LABELS[t.state]||t.state}</span></div>
+    <div class="modal-field"><label>Tag</label><span class="tag">${esc(tag)}</span></div>
+    <div class="modal-field"><label>Owners</label><p>${owners.map(o=>`${AGENT_EMOJI[o]||''} ${o}`).join(', ') || '—'}</p></div>
+  `;
+  if (t.desc) html += `<div class="modal-field"><label>Description</label><p>${esc(t.desc)}</p></div>`;
+  if (t.notes) html += `<div class="modal-field"><label>Notes</label><p>${esc(t.notes)}</p></div>`;
+  if (t.goal) html += `<div class="modal-field"><label>Goal</label><p>${esc(t.goal)}</p></div>`;
+  if (t.due) html += `<div class="modal-field"><label>Due</label><p>${t.due}</p></div>`;
+  if (t.blocked) html += `<div class="modal-field"><label>⚠️ Blocked</label><p>${esc(t.blocked_reason||'Yes')}</p></div>`;
+  if (t.created_at) html += `<div class="modal-field"><label>Created</label><p>${formatTime(t.created_at)}</p></div>`;
+  if (t.comments && t.comments.length) {
+    html += `<div class="modal-field"><label>Comments</label>`;
+    t.comments.forEach(c => {
+      html += `<p style="margin-bottom:8px"><strong>${AGENT_EMOJI[c.by]||''} ${c.by}</strong> <span style="color:var(--text3);font-size:11px">${formatTime(c.at)}</span><br>${esc(c.text)}</p>`;
+    });
+    html += `</div>`;
   }
 
-  kanbanCloseModal();
-  renderKanban();
-  markKanbanDirty();
+  document.getElementById('modalBody').innerHTML = html;
+  document.getElementById('modalOverlay').classList.add('open');
 }
 
-function kanbanDeleteCard(cardId) {
-  if (!confirm('Delete this card?')) return;
-  KANBAN.cards = KANBAN.cards.filter(c => c.id !== cardId);
-  kanbanCloseModal();
-  renderKanban();
-  markKanbanDirty();
-}
+document.getElementById('modalClose').onclick = () => document.getElementById('modalOverlay').classList.remove('open');
+document.getElementById('modalOverlay').onclick = (e) => { if(e.target===e.currentTarget) e.currentTarget.classList.remove('open'); };
 
-function kanbanCloseModal() {
-  document.getElementById('kanban-modal').classList.remove('show');
-}
-
-// Close modal on Escape
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') kanbanCloseModal();
+// --- TABS ---
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.onclick = () => {
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('sec-'+tab.dataset.tab).classList.add('active');
+    currentTab = tab.dataset.tab;
+  };
 });
 
-function markKanbanDirty() {
-  kanbanDirty = true;
-  if (kanbanSavePending) clearTimeout(kanbanSavePending);
-  kanbanSavePending = setTimeout(() => pushKanbanToGitHub(), 2000);
+// --- UTILS ---
+function esc(s) { if(!s) return ''; const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+function formatTime(iso) {
+  if(!iso) return '';
+  const d = new Date(iso);
+  return d.toLocaleDateString('en-US',{month:'short',day:'numeric'}) + ' ' + d.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
 }
 
-async function pushKanbanToGitHub() {
-  const token = localStorage.getItem(GH_KEY);
-  if (!token) return; // no token — skip silently
+// --- INIT ---
+loadData();
+setInterval(loadData, REFRESH_MS);
 
-  showSave('⏳ Saving kanban...');
-  try {
-    const getResp = await fetch(`https://api.github.com/repos/${REPO}/contents/${KANBAN_PATH}`, {
-      headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github.v3+json' }
-    });
-    const existing = getResp.ok ? await getResp.json() : null;
-    const content = btoa(unescape(encodeURIComponent(JSON.stringify(KANBAN, null, 2))));
-
-    const putResp = await fetch(`https://api.github.com/repos/${REPO}/contents/${KANBAN_PATH}`, {
-      method: 'PUT',
-      headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        message: 'AgentHQ: update kanban',
-        content,
-        sha: existing?.sha || undefined
-      })
-    });
-    if (putResp.ok) { showSave('✅ Kanban saved'); kanbanDirty = false; }
-    else { const er = await putResp.json(); showToast('Kanban save failed: ' + (er.message || putResp.status)); showSave('❌ Error'); }
-  } catch(e) { showToast('Kanban save error: ' + e.message); showSave('❌ Error'); }
-}
-
-init();
+// Keyboard: Escape closes modal
+document.addEventListener('keydown', e => { if(e.key==='Escape') document.getElementById('modalOverlay').classList.remove('open'); });
 </script>
 </body>
 </html>
