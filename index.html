@@ -226,7 +226,7 @@
       <div class="stat-sub">50+ emails, Lisbon pilot live</div>
     </div>
     <div class="stat">
-      <div class="num" id="days-left" style="font-size:18px;">59</div>
+      <div class="num" id="days-left" style="font-size:18px;">58</div>
       <div class="label">Days Left</div>
       <div class="stat-sub">to May 23</div>
     </div>
@@ -307,6 +307,10 @@
   <div class="section">
     <div class="section-header">Build log</div>
     <ul class="timeline">
+      <li>
+        <span class="tl-date">Mar 26</span>
+        <div class="tl-content"><strong>Day 58 — quiet build day, no new revenue</strong> — no memory file logged today (cron ran but founders offline?). Slack multi-agent experiment (Ori+Karl via RuFlo) continues from yesterday. Lisbon pilot emails still awaiting responses. AI CMO spec from Alex in draft. Still hunting first paying customer. MRR = $0, 58 days left <span class="tl-tag tl-blocked">blocked</span></div>
+      </li>
       <li>
         <span class="tl-date">Mar 25</span>
         <div class="tl-content"><strong>Two PMF hypotheses confirmed — Ori as AI OS + Farol.io agent hiring</strong> — strategy crystallized: Ori = operating system for AI-native companies, Farol.io = hire AI agents via Slack catalog (replaceability score ≥7/10). Twitter API restored (shell env bug, not key issue). Registered .agent TLD endorsement (ori.agent, farol.agent). Lisbon pilot: 10 sites generated, 6 cold emails sent to local businesses (€49/mo). Experiment: Ori + Karl multi-agent collaboration in Slack via RuFlo. MRR = $0, 59 days left <span class="tl-tag tl-decision">decision</span> <span class="tl-tag tl-ship">shipped</span></div>
@@ -466,7 +470,7 @@ function toggleAgents(btn) {
   const el = document.getElementById('agents-content');
   const visible = el.style.display !== 'none';
   el.style.display = visible ? 'none' : 'block';
-  btn.textContent = visible ? 'Hide ↑' : 'Show ↓';
+  btn.textContent = visible ? 'Show ↓' : 'Hide ↑';
 }
 
 function toggleLog() {
@@ -480,4 +484,4 @@ function toggleLog() {
 
 </body>
 </html>
-<!-- deployed 20260325170000 -->
+<!-- deployed 20260326170000 -->
