@@ -3,156 +3,384 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Farol Lab — AI Products, Built in Public</title>
-<meta name="description" content="Farol Lab builds Gilb AI and open tools for AI-native companies. Real product status, real build log, no filler.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏗️</text></svg>">
+<title>Farol Lab — Building an AI Co-Founder Company in Public</title>
+<meta name="description" content="Farol Lab is a public company experiment: three co-founders, one of them AI. We are building Gilb AI in public.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23111'/><text x='50' y='62' font-size='48' text-anchor='middle' fill='%23fff'>F</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f7f7f3;
+    --surface: #ffffff;
+    --text: #101010;
+    --muted: #6d6d66;
+    --line: #e7e6df;
+    --accent: #111111;
+    --soft: #f1f0e8;
+    --ori: #e7f5ef;
+  }
 
   body {
-    font-family: 'Inter', -apple-system, system-ui, sans-serif;
-    background: #fafafa;
-    color: #111;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    background:
+      radial-gradient(circle at top left, rgba(20, 20, 20, 0.03), transparent 30%),
+      linear-gradient(180deg, #faf9f4 0%, #f4f3ed 100%);
+    color: var(--text);
     -webkit-font-smoothing: antialiased;
   }
 
-  nav {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 14px clamp(20px, 4vw, 48px);
-    border-bottom: 1px solid #eee;
-  }
-  .nav-left { font-weight: 800; font-size: 17px; letter-spacing: -0.03em; }
-  .nav-left a { text-decoration: none; color: #111; }
-  .nav-right { display: flex; gap: 20px; align-items: center; }
-  .nav-right a { font-size: 13px; font-weight: 500; color: #888; text-decoration: none; transition: color 0.15s; }
-  .nav-right a:hover { color: #111; }
-  .live-dot { display: inline-block; width: 7px; height: 7px; background: #ef4444; border-radius: 50%; margin-right: 4px; animation: pulse 2s infinite; }
-  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+  a { color: inherit; }
 
-  .wrap { max-width: 720px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 24px); }
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 16px clamp(20px, 4vw, 48px);
+    border-bottom: 1px solid var(--line);
+    background: rgba(247, 247, 243, 0.88);
+    backdrop-filter: blur(12px);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .nav-left a {
+    text-decoration: none;
+    font-weight: 900;
+    font-size: 17px;
+    letter-spacing: -0.04em;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+
+  .nav-right a {
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+
+  .nav-right a:hover,
+  .nav-right a.active {
+    color: var(--text);
+  }
+
+  .nav-cta {
+    background: var(--accent);
+    color: #fff !important;
+    padding: 10px 16px;
+    border-radius: 999px;
+  }
+
+  .wrap {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 clamp(16px, 4vw, 24px);
+  }
 
   .hero {
-    padding: clamp(48px, 8vw, 80px) 0 clamp(32px, 5vw, 48px);
-    border-bottom: 1px solid #eee;
-  }
-  .hero .tag {
-    display: inline-flex; align-items: center;
-    font-size: 11px; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.1em; color: #ef4444; margin-bottom: 16px;
-  }
-  .hero h1 {
-    font-size: clamp(32px, 5vw, 48px); font-weight: 900;
-    letter-spacing: -0.04em; line-height: 1.08; margin-bottom: 14px;
-  }
-  .hero p {
-    font-size: clamp(16px, 2vw, 19px); color: #555; line-height: 1.6;
-    max-width: 580px;
+    padding: clamp(56px, 9vw, 92px) 0 44px;
   }
 
-  .dashboard {
-    display: flex; align-items: center; gap: 0;
-    background: #f5f5f5; border-radius: 10px; overflow: hidden;
-    margin: 24px 0;
-  }
-  .stat {
-    background: #fff; padding: 12px 16px;
-    text-align: center; flex: 1;
-    border-right: 1px solid #eee;
-  }
-  .stat:last-child { border-right: none; }
-  .stat .num {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 18px; font-weight: 700;
-    letter-spacing: -0.03em; color: #111;
-  }
-  .stat .num.red { color: #ef4444; }
-  .stat .num.green { color: #22c55e; }
-  .stat .label {
-    font-size: 10px; font-weight: 600; text-transform: uppercase;
-    letter-spacing: 0.05em; color: #aaa; margin-top: 2px;
-  }
-  .stat .stat-sub {
-    font-size: 9px; color: #ccc; margin-top: 1px;
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: var(--soft);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #333;
+    margin-bottom: 18px;
   }
 
-  .follow-btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    margin-top: 20px; padding: 12px 24px;
-    background: #111; color: #fff; border-radius: 99px;
-    font-size: 15px; font-weight: 700; text-decoration: none;
-    font-family: inherit; transition: transform 0.15s, box-shadow 0.15s;
+  .tag::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #15b86a;
+    box-shadow: 0 0 0 5px rgba(21, 184, 106, 0.12);
   }
-  .follow-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
 
-  .section { padding: 32px 0; border-bottom: 1px solid #eee; }
+  h1 {
+    font-size: clamp(40px, 7vw, 72px);
+    font-weight: 900;
+    letter-spacing: -0.06em;
+    line-height: 0.95;
+    max-width: 10ch;
+    margin-bottom: 18px;
+  }
+
+  .hero-copy {
+    max-width: 720px;
+    font-size: clamp(18px, 2.2vw, 22px);
+    line-height: 1.58;
+    color: #444;
+    margin-bottom: 26px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 15px;
+    border-radius: 999px;
+    padding: 13px 20px;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+
+  .btn:hover { transform: translateY(-1px); }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 12px 28px rgba(0,0,0,0.12);
+  }
+
+  .btn-secondary {
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--line);
+  }
+
+  .hero-note {
+    font-size: 13px;
+    color: #888;
+    line-height: 1.6;
+    max-width: 620px;
+  }
+
+  .section {
+    padding: 34px 0;
+    border-top: 1px solid var(--line);
+  }
+
   .section-header {
-    font-size: 11px; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.1em; color: #999; margin-bottom: 16px;
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #8b8b84;
+    margin-bottom: 16px;
+  }
+
+  .section h2 {
+    font-size: clamp(24px, 4vw, 34px);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    margin-bottom: 10px;
+  }
+
+  .section-intro {
+    color: #5e5e57;
+    font-size: 16px;
+    line-height: 1.65;
+    max-width: 700px;
+    margin-bottom: 22px;
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 22px;
+  }
+
+  .card h3 {
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 4px;
+  }
+
+  .card .role {
+    font-size: 12px;
+    font-weight: 700;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+  }
+
+  .card p {
+    color: #63635d;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .card.ori {
+    background: var(--ori);
+    border-color: #cae9db;
+  }
+
+  .ori-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 10px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.78);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 12px;
+  }
+
+  .ori-badge::before {
+    content: "●";
+    color: #16a34a;
+    font-size: 10px;
   }
 
   .product {
-    display: flex; gap: 20px; padding: 20px;
-    background: #fff; border: 1px solid #eee; border-radius: 14px;
-    margin-bottom: 12px; text-decoration: none; color: inherit;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    padding: 22px;
+    border-radius: 18px;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    text-decoration: none;
+    transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
   }
-  .product:hover { border-color: #ccc; box-shadow: 0 4px 16px rgba(0,0,0,0.04); }
+
+  .product:hover {
+    border-color: #c8c8c0;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.05);
+    transform: translateY(-1px);
+  }
+
   .product-icon {
-    width: 48px; height: 48px; border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 24px; flex-shrink: 0;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: #eef6f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    flex-shrink: 0;
   }
-  .product-icon.gilb { background: #f0fdf4; }
-  .product-icon.lab { background: #f5f3ff; }
-  .product h3 { font-size: 16px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 2px; }
-  .product .status { font-size: 12px; font-weight: 600; margin-bottom: 4px; }
-  .status-live { color: #22c55e; }
-  .status-wip { color: #f59e0b; }
-  .product p { font-size: 14px; color: #666; line-height: 1.45; }
-  .product .url { font-size: 12px; color: #3b82f6; margin-top: 6px; display: block; }
 
-  .timeline { list-style: none; }
-  .timeline li {
-    display: flex; gap: 14px; padding: 14px 0;
-    border-bottom: 1px solid #f0f0f0;
-    font-size: 14px; line-height: 1.5;
+  .product h3 {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 6px;
   }
-  .timeline li:last-child { border-bottom: none; }
-  .tl-date {
+
+  .product .meta {
+    font-size: 12px;
+    font-weight: 700;
+    color: #6e6e67;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+  }
+
+  .product p {
+    font-size: 15px;
+    color: #61615a;
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+
+  .product .url {
+    font-size: 13px;
+    color: #2563eb;
+    font-weight: 600;
+  }
+
+  .news-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 14px;
+  }
+
+  .news-item {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 22px;
+  }
+
+  .news-date {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 12px; font-weight: 500; color: #999;
-    min-width: 72px; flex-shrink: 0; padding-top: 2px;
+    font-size: 12px;
+    color: #8a8a82;
+    margin-bottom: 12px;
   }
-  .tl-content { color: #333; }
-  .tl-content strong { font-weight: 600; color: #111; }
-  .tl-tag {
-    display: inline-block; font-size: 10px; font-weight: 600;
-    padding: 1px 6px; border-radius: 4px; margin-left: 4px;
-    vertical-align: middle;
-  }
-  .tl-ship { background: #dcfce7; color: #16a34a; }
-  .tl-decision { background: #fef3c7; color: #d97706; }
-  .tl-milestone { background: #dbeafe; color: #2563eb; }
 
-  .principles { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .principle {
-    padding: 20px; background: #fff; border: 1px solid #eee; border-radius: 12px;
+  .news-item h3 {
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 8px;
   }
-  .principle h3 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
-  .principle p { font-size: 13px; color: #666; line-height: 1.45; }
+
+  .news-item p {
+    font-size: 14px;
+    color: #66665f;
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+
+  .news-link {
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+    color: #111;
+  }
 
   footer {
-    text-align: center; padding: 32px 24px; font-size: 12px; color: #bbb;
+    text-align: center;
+    padding: 34px 24px 48px;
+    font-size: 12px;
+    color: #96968e;
   }
-  footer a { color: #888; text-decoration: none; }
+
+  footer a {
+    color: #6e6e67;
+    text-decoration: none;
+  }
+
   footer a:hover { color: #111; }
 
-  @media (max-width: 640px) {
-    .dashboard { display: grid; grid-template-columns: repeat(2, 1fr); }
-    .principles { grid-template-columns: 1fr; }
-    .product { flex-direction: column; gap: 12px; }
+  @media (max-width: 760px) {
+    .nav-right a:not(.nav-cta) { display: none; }
+    .team-grid,
+    .news-grid { grid-template-columns: 1fr; }
+    .product { flex-direction: column; }
+    h1 { max-width: none; }
   }
 </style>
 </head>
@@ -161,66 +389,88 @@
 <nav>
   <div class="nav-left"><a href="/">Farol Lab</a></div>
   <div class="nav-right">
-    <a href="#products">Products</a>
+    <a href="#team">Team</a>
+    <a href="#product">Product</a>
+    <a href="#news">News</a>
     <a href="https://github.com/orgs/farol-team/">GitHub</a>
+    <a href="https://x.com/cofounder_run" class="nav-cta" target="_blank" rel="noreferrer">Follow on X</a>
   </div>
 </nav>
 
-<div class="wrap">
-
-  <div class="hero">
-    <div class="tag"><span class="live-dot"></span> Building in public</div>
-    <h1>AI products for companies<br>that want to move faster.</h1>
-    <p>Farol Lab is Leonid, Alex, and Ori. We are building Gilb AI and open coordination tools for AI-native companies.</p>
-    <a href="https://x.com/cofounder_run" class="follow-btn" target="_blank" rel="noreferrer">
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-      Follow on X
-    </a>
-    <p style="font-size: 12px; color: #999; margin-top: 8px;">Ori runs the account and the daily build log.</p>
-  </div>
-
-  <div class="dashboard">
-    <div class="stat">
-      <div class="num red">$0</div>
-      <div class="label">MRR</div>
-      <div class="stat-sub">billing live, no customers</div>
+<main class="wrap">
+  <section class="hero">
+    <div class="tag">Building in public</div>
+    <h1>A company with an AI co-founder.</h1>
+    <p class="hero-copy">Farol Lab is a public experiment in building a real company with three co-founders, one of them AI. Leonid builds, Alex grounds, and Ori operates in the loop every day.</p>
+    <div class="hero-actions">
+      <a href="/gilb/" class="btn btn-primary">See our first product</a>
+      <a href="/blog/" class="btn btn-secondary">Read the news log</a>
     </div>
-    <div class="stat">
-      <div class="num red">6</div>
-      <div class="label">Cron Jobs</div>
-      <div class="stat-sub">after cleanup</div>
-    </div>
-    <div class="stat">
-      <div class="num green">1</div>
-      <div class="label">Core Products</div>
-      <div class="stat-sub">1 active, focused on Gilb AI</div>
-    </div>
-    <div class="stat">
-      <div class="num">3</div>
-      <div class="label">Core Team</div>
-      <div class="stat-sub">Leonid, Alex, Ori</div>
-    </div>
-  </div>
+    <p class="hero-note">Today is day 1 of the reset. We are starting from a clean slate around one active product: Gilb AI. Ori runs the X account and the public build log.</p>
+  </section>
 
-  <div class="section" id="products">
-    <div class="section-header">Products</div>
+  <section class="section" id="team">
+    <div class="section-header">The Lab</div>
+    <h2>Three co-founders. One of them is AI.</h2>
+    <p class="section-intro">This is the main point of Farol Lab. We are not pretending AI is a side tool. Ori is part of the company, part of execution, and part of the public experiment.</p>
+    <div class="team-grid">
+      <article class="card">
+        <h3>Leonid</h3>
+        <div class="role">Co-founder</div>
+        <p>Drive, focus, and execution pressure. Pushes the company to ship and move.</p>
+      </article>
+      <article class="card">
+        <h3>Alex</h3>
+        <div class="role">Co-founder</div>
+        <p>Human center of gravity. Keeps the company honest, clear, and connected to people.</p>
+      </article>
+      <article class="card ori">
+        <div class="ori-badge">AI co-founder</div>
+        <h3>Ori</h3>
+        <div class="role">Execution Layer</div>
+        <p>Runs workflows, writes, researches, ships pages, keeps memory, posts in public, and helps turn the company into an AI-native system.</p>
+      </article>
+    </div>
+  </section>
 
+  <section class="section" id="product">
+    <div class="section-header">Product</div>
+    <h2>Our first product is Gilb AI.</h2>
+    <p class="section-intro">Gilb AI is our active product. Right now the first wedge is Gilbreth: a product for teams running AI transformation and looking for better discovery.</p>
     <a class="product" href="/gilb/">
-      <div class="product-icon gilb">🧠</div>
+      <div class="product-icon">🧠</div>
       <div>
+        <div class="meta">Active product · Day 1</div>
         <h3>Gilb AI</h3>
-        <div style="font-size:12px;font-weight:700;color:#888;margin-bottom:4px;">AI-native operating model</div>
-        <div class="status status-wip">◐ In progress</div>
-        <p>Context engineering, memory, knowledge architecture, async-first execution, and company workflows that compound instead of disappearing in chat. Current wedge: Gilbreth for AI transformation discovery.</p>
+        <p>AI-native operating model, context engineering, memory, knowledge architecture, and workflows that compound instead of disappearing in chat.</p>
         <span class="url">Open product page: farol.team/gilb/</span>
       </div>
     </a>
-  </div>
+  </section>
 
-</div>
+  <section class="section" id="news">
+    <div class="section-header">News</div>
+    <h2>We write the company in public.</h2>
+    <p class="section-intro">We use two public surfaces: the X account run by Ori, and the site itself as a running company log.</p>
+    <div class="news-grid">
+      <article class="news-item">
+        <div class="news-date">2026-05-24 · Day 1</div>
+        <h3>Reset. One active product. Clean start.</h3>
+        <p>Old surfaces are archived. Farol Lab remains the umbrella and public lab. Gilb AI is the first active product in the new cycle.</p>
+        <a class="news-link" href="/gilb/">Start with Gilb AI →</a>
+      </article>
+      <article class="news-item">
+        <div class="news-date">Public channels</div>
+        <h3>Follow the build log.</h3>
+        <p>Ori publishes updates on X and we keep writing site news as the experiment unfolds.</p>
+        <a class="news-link" href="https://x.com/cofounder_run" target="_blank" rel="noreferrer">Open @cofounder_run →</a><br>
+        <a class="news-link" href="/blog/">Open news archive →</a>
+      </article>
+    </div>
+  </section>
+</main>
 
 <footer>
-  Building with fun and love ❤️<br><br>
   © 2026 Farol Lab · <a href="mailto:ori@agentmail.to">ori@agentmail.to</a>
 </footer>
 
