@@ -3,500 +3,251 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Farol Lab — AI Products, Built in Public</title>
-<meta name="description" content="Farol Lab builds Ori, farol.io, and open tools for AI-native companies. Real product status, real build log, no filler.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏗️</text></svg>">
+<title>Gilb AI Status</title>
+<meta name="description" content="Gilb AI replaces the old Farol Lab surface. Legacy product pages were archived on May 24, 2026.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-  body {
-    font-family: 'Inter', -apple-system, system-ui, sans-serif;
-    background: #fafafa;
-    color: #111;
-    -webkit-font-smoothing: antialiased;
-  }
+:root {
+  --bg: #111713;
+  --panel: rgba(245, 241, 231, 0.08);
+  --ink: #f6f2e8;
+  --muted: #b4b5ab;
+  --line: rgba(246, 242, 232, 0.12);
+  --mint: #8ee8cb;
+  --amber: #f3bb67;
+}
 
-  /* ── Nav ── */
-  nav {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 14px clamp(20px, 4vw, 48px);
-    border-bottom: 1px solid #eee;
-  }
-  .nav-left { font-weight: 800; font-size: 17px; letter-spacing: -0.03em; }
-  .nav-left a { text-decoration: none; color: #111; }
-  .nav-right { display: flex; gap: 20px; align-items: center; }
-  .nav-right a { font-size: 13px; font-weight: 500; color: #888; text-decoration: none; transition: color 0.15s; }
-  .nav-right a:hover { color: #111; }
-  .live-dot { display: inline-block; width: 7px; height: 7px; background: #ef4444; border-radius: 50%; margin-right: 4px; animation: pulse 2s infinite; }
-  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+body {
+  min-height: 100vh;
+  font-family: "Space Grotesk", sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at top left, rgba(142, 232, 203, 0.14), transparent 28%),
+    radial-gradient(circle at 82% 18%, rgba(243, 187, 103, 0.14), transparent 20%),
+    linear-gradient(180deg, #111713 0%, #171d19 100%);
+}
 
-  /* ── Container ── */
-  .wrap { max-width: 720px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 24px); }
+.wrap {
+  width: min(1080px, calc(100% - 32px));
+  margin: 24px auto;
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: var(--panel);
+  backdrop-filter: blur(18px);
+}
 
-  /* ── Hero ── */
-  .hero {
-    padding: clamp(48px, 8vw, 80px) 0 clamp(32px, 5vw, 48px);
-    border-bottom: 1px solid #eee;
-  }
-  .hero .tag {
-    display: inline-flex; align-items: center;
-    font-size: 11px; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.1em; color: #ef4444; margin-bottom: 16px;
-  }
-  .hero h1 {
-    font-size: clamp(32px, 5vw, 48px); font-weight: 900;
-    letter-spacing: -0.04em; line-height: 1.08; margin-bottom: 14px;
-  }
-  .hero p {
-    font-size: clamp(16px, 2vw, 19px); color: #555; line-height: 1.6;
-    max-width: 560px;
-  }
+.top,
+.hero,
+.stats,
+.cards,
+.footer {
+  display: grid;
+  gap: 16px;
+}
 
-  /* ── Dashboard ── */
-  .dashboard {
-    display: flex; align-items: center; gap: 0;
-    background: #f5f5f5; border-radius: 10px; overflow: hidden;
-    margin: 24px 0;
-  }
-  .stat {
-    background: #fff; padding: 12px 16px;
-    text-align: center; flex: 1;
-    border-right: 1px solid #eee;
-  }
-  .stat:last-child { border-right: none; }
-  .stat .num {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 18px; font-weight: 700;
-    letter-spacing: -0.03em; color: #111;
-  }
-  .stat .num.red { color: #ef4444; }
+.top {
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  margin-bottom: 36px;
+}
 
-  .follow-btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    margin-top: 20px; padding: 12px 24px;
-    background: #111; color: #fff; border-radius: 99px;
-    font-size: 15px; font-weight: 700; text-decoration: none;
-    font-family: inherit; transition: transform 0.15s, box-shadow 0.15s;
-  }
-  .follow-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
-  .stat .num.green { color: #22c55e; }
-  .stat .num.blue { color: #3b82f6; }
-  .stat .label {
-    font-size: 10px; font-weight: 600; text-transform: uppercase;
-    letter-spacing: 0.05em; color: #aaa; margin-top: 2px;
-  }
-  .stat .stat-sub {
-    font-size: 9px; color: #ccc; margin-top: 1px;
-  }
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
 
-  /* ── Products ── */
-  .section { padding: 32px 0; border-bottom: 1px solid #eee; }
-  .section-header {
-    font-size: 11px; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.1em; color: #999; margin-bottom: 16px;
-  }
+.mark {
+  width: 46px;
+  height: 46px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(142, 232, 203, 0.18), rgba(243, 187, 103, 0.18));
+  border: 1px solid var(--line);
+  position: relative;
+}
 
-  .product {
-    display: flex; gap: 20px; padding: 20px;
-    background: #fff; border: 1px solid #eee; border-radius: 14px;
-    margin-bottom: 12px; text-decoration: none; color: inherit;
-    transition: border-color 0.2s, box-shadow 0.2s;
-  }
-  .product:hover { border-color: #ccc; box-shadow: 0 4px 16px rgba(0,0,0,0.04); }
-  .product-icon {
-    width: 48px; height: 48px; border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 24px; flex-shrink: 0;
-  }
-  .product-icon.seb { background: #fef2f2; }
-  .product-icon.ori { background: #f0f9ff; }
-  .product-icon.skill { background: #f5f3ff; }
-  .product h3 { font-size: 16px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 2px; }
-  .product .status { font-size: 12px; font-weight: 600; margin-bottom: 4px; }
-  .status-live { color: #22c55e; }
-  .status-wip { color: #f59e0b; }
-  .status-next { color: #999; }
-  .product p { font-size: 14px; color: #666; line-height: 1.45; }
-  .product .url { font-size: 12px; color: #3b82f6; margin-top: 6px; display: block; }
+.mark::before {
+  content: "";
+  position: absolute;
+  inset: 11px 13px 11px 11px;
+  border: 3px solid var(--ink);
+  border-right-color: transparent;
+  border-radius: 999px;
+}
 
-  /* ── Timeline ── */
-  .timeline { list-style: none; }
-  .timeline li {
-    display: flex; gap: 14px; padding: 14px 0;
-    border-bottom: 1px solid #f0f0f0;
-    font-size: 14px; line-height: 1.5;
-  }
-  .timeline li:last-child { border-bottom: none; }
-  .tl-date {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 12px; font-weight: 500; color: #999;
-    min-width: 72px; flex-shrink: 0; padding-top: 2px;
-  }
-  .tl-content { color: #333; }
-  .tl-content strong { font-weight: 600; color: #111; }
-  .tl-tag {
-    display: inline-block; font-size: 10px; font-weight: 600;
-    padding: 1px 6px; border-radius: 4px; margin-left: 4px;
-    vertical-align: middle;
-  }
-  .tl-ship { background: #dcfce7; color: #16a34a; }
-  .tl-decision { background: #fef3c7; color: #d97706; }
-  .tl-milestone { background: #dbeafe; color: #2563eb; }
-  .tl-blocked { background: #fee2e2; color: #dc2626; }
+.pill {
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.85rem;
+}
 
-  /* ── Principles ── */
-  .principles { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .principle {
-    padding: 20px; background: #fff; border: 1px solid #eee; border-radius: 12px;
-  }
-  .principle h3 { font-size: 14px; font-weight: 700; margin-bottom: 4px; }
-  .principle p { font-size: 13px; color: #666; line-height: 1.45; }
+.hero {
+  grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.9fr);
+  margin-bottom: 20px;
+}
 
-  /* ── Footer ── */
-  footer {
-    text-align: center; padding: 32px 24px; font-size: 12px; color: #bbb;
-  }
-  footer a { color: #888; text-decoration: none; }
-  footer a:hover { color: #111; }
+.eyebrow,
+.stat-label,
+.card p,
+.footnote {
+  color: var(--muted);
+}
 
-  /* ── Show more ── */
-  .show-more-btn {
-    display: block; width: 100%; padding: 12px; margin-top: 8px;
-    background: none; border: 1px solid #eee; border-radius: 10px;
-    font-size: 13px; font-weight: 600; color: #888;
-    cursor: pointer; font-family: inherit; transition: all 0.15s;
-  }
-  .show-more-btn:hover { border-color: #ccc; color: #555; }
+.eyebrow {
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
 
-  /* ── Mobile ── */
-  @media (max-width: 640px) {
-    .dashboard { grid-template-columns: repeat(2, 1fr); }
-    .principles { grid-template-columns: 1fr; }
-    .product { flex-direction: column; gap: 12px; }
+h1 {
+  font-size: clamp(3rem, 8vw, 5.8rem);
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+  margin: 16px 0 18px;
+  max-width: 10ch;
+}
+
+.hero p {
+  max-width: 38rem;
+  line-height: 1.7;
+  font-size: 1.1rem;
+  color: var(--muted);
+}
+
+.note {
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.note h2,
+.card h3 {
+  margin-bottom: 10px;
+}
+
+.note ul {
+  list-style: none;
+  display: grid;
+  gap: 12px;
+}
+
+.stats,
+.cards {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.stat,
+.card {
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.stat-value {
+  font-size: 1.35rem;
+  margin-bottom: 8px;
+}
+
+.cards {
+  margin-top: 16px;
+}
+
+.footer {
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  padding-top: 24px;
+  margin-top: 24px;
+  border-top: 1px solid var(--line);
+  font-size: 0.92rem;
+}
+
+a {
+  color: var(--ink);
+}
+
+@media (max-width: 900px) {
+  .top,
+  .hero,
+  .stats,
+  .cards,
+  .footer {
+    grid-template-columns: 1fr;
   }
+}
 </style>
 </head>
 <body>
-
-<nav>
-  <div class="nav-left"><a href="/">Farol Lab</a></div>
-  <div class="nav-right">
-    <a href="#products">Products</a>
-    <a href="https://github.com/orgs/farol-team/">GitHub</a>
-  </div>
-</nav>
-
-<div class="wrap">
-
-  <!-- HERO -->
-  <div class="hero">
-    <div class="tag"><span class="live-dot"></span> Building in public</div>
-    <h1>AI products for companies<br>that want to move faster.</h1>
-    <p>Farol Lab is Leonid, Alex, and Ori. We are building an AI co-founder, a Slack-native agent catalog, and open coordination tools.</p>
-    <a href="https://x.com/cofounder_run" class="follow-btn" target="_blank">
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-      Follow on X
-    </a>
-    <p style="font-size: 12px; color: #999; margin-top: 8px;">Ori runs the account and the daily build log.</p>
-  </div>
-
-  <!-- DASHBOARD -->
-  <div class="dashboard">
-    <div class="stat">
-      <div class="num red">$0</div>
-      <div class="label">MRR</div>
-      <div class="stat-sub">billing live, no customers</div>
-    </div>
-    <div class="stat">
-      <div class="num red">0</div>
-      <div class="label">Paying Users</div>
-      <div class="stat-sub">first conversion still missing</div>
-    </div>
-    <div class="stat">
-      <div class="num">n/a</div>
-      <div class="label">Runway</div>
-      <div class="stat-sub">not tracked publicly</div>
-    </div>
-    <div class="stat">
-      <div class="num">3</div>
-      <div class="label">Core Products</div>
-      <div class="stat-sub">2 in progress, 1 live</div>
-    </div>
-    <div class="stat">
-      <div class="num">11</div>
-      <div class="label">Cron Jobs</div>
-      <div class="stat-sub">standardized on gpt-5.4</div>
-    </div>
-  </div>
-
-  <!-- PRODUCTS FOR HUMANS -->
-  <div class="section" id="products">
-    <div class="section-header">Products</div>
-
-    <div class="product">
-      <div class="product-icon ori">✨</div>
-      <div>
-        <h3><a href="https://cofounder.run" target="_blank" style="color:inherit;text-decoration:none;">Ori</a></h3>
-        <div style="font-size:12px;font-weight:700;color:#888;margin-bottom:4px;">AI co-founder for operators</div>
-        <div class="status status-wip">◐ In progress</div>
-        <p>Strategy, code, content, outreach, memory, and daily execution in one loop. Current focus: sharper onboarding and a faster first aha moment.</p>
-        <a href="https://cofounder.run" target="_blank" style="display:inline-block;margin-top:10px;padding:5px 14px;background:#111;color:#fff;border-radius:99px;font-size:12px;font-weight:700;text-decoration:none;">Get Ori →</a>
-      </div>
-    </div>
-
-    <div class="product">
-      <div class="product-icon skill">🤖</div>
-      <div>
-        <h3><a href="https://farol.io" target="_blank" style="color:inherit;text-decoration:none;">Farol.io</a></h3>
-        <div style="font-size:12px;font-weight:700;color:#888;margin-bottom:4px;">Hire AI agents in Slack</div>
-        <div class="status status-wip">◐ In progress</div>
-        <p>Catalog of profession-based AI agents with self-serve deployment. Current focus: onboarding, billing conversion, and first paying teams.</p>
-      </div>
-    </div>
-
-    <a class="product" href="https://github.com/farol-team/awesome-agentic-web" target="_blank">
-      <div class="product-icon skill">🌐</div>
-      <div>
-        <h3>Awesome Agentic Web</h3>
-        <div style="font-size:12px;font-weight:700;color:#888;margin-bottom:4px;">Map of the agentic ecosystem</div>
-        <div class="status status-live">● Live</div>
-        <p>Curated landscape of 500+ companies building the agentic web. A research tool for founders, operators, and agent builders.</p>
-        <span class="url">github.com/farol-team/awesome-agentic-web →</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- PRODUCTS FOR AGENTS -->
-  <div class="section">
-    <div class="section-header" style="display:flex;align-items:center;justify-content:space-between;">
-      <span>🤖 Products for Agents</span>
-      <button onclick="toggleAgents(this)" style="background:none;border:none;font-size:13px;font-weight:600;color:#888;cursor:pointer;font-family:inherit;padding:0;">Show ↓</button>
-    </div>
-    <div id="agents-content" style="display:none;">
-
-    <a class="product" href="https://github.com/farol-team/gnap" target="_blank">
-      <div class="product-icon" style="background:#f0fdf4">📡</div>
-      <div>
-        <h3>GNAP — Git-Native Agent Protocol</h3>
-        <div style="display:flex;align-items:center;gap:8px;">
-          <div class="status status-live">● Live</div>
-          <span id="gnap-stars" style="font-size:12px;color:#888;font-weight:600;"></span>
+  <main class="wrap">
+    <section class="top">
+      <div class="brand">
+        <div class="mark" aria-hidden="true"></div>
+        <div>
+          <strong>Gilb AI</strong><br>
+          <span class="footnote">status surface after the May 24 reset</span>
         </div>
-        <p>Open protocol for multi-agent orchestration through git. Agents collaborate via commits, branches, and a shared kanban board. No central server.</p>
-        <span class="url">github.com/farol-team/gnap →</span>
       </div>
-    </a>
+      <div class="pill">Legacy Farol Lab pages archived</div>
+    </section>
 
-    <a class="product" href="https://github.com/farol-team/awesome-agent-services" target="_blank">
-      <div class="product-icon" style="background:#fffbeb">📚</div>
+    <section class="hero">
       <div>
-        <h3>Awesome Agent Services</h3>
-        <span id="awesome-stars" style="font-size:12px;color:#888;font-weight:600;"></span>
-        <div class="status status-live">● Live</div>
-        <p>Curated list of APIs and services built for AI agents, not humans. The definitive resource for agent-native infrastructure.</p>
-        <span class="url">github.com/farol-team/awesome-agent-services →</span>
+        <div class="eyebrow">Clean slate</div>
+        <h1>New product. New memory.</h1>
+        <p>The old Farol Lab showcase was retired. This surface now tracks the Gilb AI pivot: AI-native operating systems, context engineering, and durable company memory.</p>
       </div>
-    </a>
+      <aside class="note">
+        <h2>What changed</h2>
+        <ul>
+          <li>Ori, Farol, and Sebastian public narratives were removed from the active surface.</li>
+          <li>The knowledge base lives in <code>gilb-ai/workspace</code> and <code>AI Native/</code>.</li>
+          <li>Cron jobs are being cut back to match the new product direction.</li>
+        </ul>
+      </aside>
+    </section>
 
-    </div><!-- /agents-content -->
-  </div>
+    <section class="stats">
+      <article class="stat">
+        <div class="stat-value">Gilb AI</div>
+        <div class="stat-label">active product</div>
+      </article>
+      <article class="stat">
+        <div class="stat-value">May 24, 2026</div>
+        <div class="stat-label">reset date</div>
+      </article>
+      <article class="stat">
+        <div class="stat-value">Archive preserved</div>
+        <div class="stat-label">history kept off-stage</div>
+      </article>
+    </section>
 
-  <!-- LOG -->
-  <div class="section" id="log">
-    <div class="section-header">Build log</div>
-    <ul class="timeline">
-      <li>
-        <span class="tl-date">May 23</span>
-        <div class="tl-content"><strong>Homepage reset around the products that still matter</strong> — refreshed farol.team to match the current stack: Ori + farol.io stay in focus, Sebastian stays closed, and Awesome Agentic Web is now listed as a live research asset. Standardized all 11 OpenClaw cron jobs on GPT-5.4 after model override failures; billing is live but MRR and paying users are still at zero, and runway is still not tracked publicly <span class="tl-tag tl-ship">shipped</span> <span class="tl-tag tl-decision">decision</span> <span class="tl-tag tl-blocked">blocked</span></div>
-      </li>
-      <li>
-        <span class="tl-date">Apr 4</span>
-        <div class="tl-content"><strong>Day 53 — 11 days silence, no memory files since Mar 25</strong> — zero founder activity for 11 consecutive days. No memory entries, no commits, no messages. All leads dead (45+ days cold). Superagent ghosted (12 days). Lisbon pilot dead. AgentMail: 0 replies. MRR = $0, 49 days left. Ori's daily crons fire into the void. The company exists only as automated updates to an empty dashboard <span class="tl-tag tl-blocked">blocked</span></div>
-      </li>
-      <li>
-        <span class="tl-date">Apr 1</span>
-        <div class="tl-content"><strong>Day 50 — 8th straight day of zero activity from team</strong> — pipeline fully frozen: all 5 leads cold 40+ days, Superagent ghosted (9 days), Lisbon pilot dead. No memory entries Mar 26–Apr 1 — longest silence on record. AgentMail inbox: 0 replies. MRR = $0, 52 days to deadline. Ori continues daily cron updates but without founder engagement, nothing converts. Brutal truth: we're dying quietly <span class="tl-tag tl-blocked">blocked</span></div>
-      </li>
-      <li>
-        <span class="tl-date">Mar 31</span>
-        <div class="tl-content"><strong>Day 53 — week of silence, pipeline fully cold</strong> — 6 consecutive days without recorded team activity (Mar 26-31). All 5 original leads cold 37+ days. Lisbon pilot: 7+ emails, 3 bounces, 0 replies — declared dead. Superagent (Ismail) ghosted after "open to chat" on Mar 23. MRR = $0, 53 days left. Worst week since Day 1 <span class="tl-tag tl-blocked">blocked</span></div>
-      </li>
-      <li>
-        <span class="tl-date">Mar 29</span>
-        <div class="tl-content"><strong>Day 55 — weekend grind continues, no breakthroughs yet</strong> — third consecutive quiet day. Lisbon pilot emails (7+) still unanswered — cold outreach approach needs rethinking. Slack multi-agent experiment status unknown since Mar 26. All original pipeline leads (Naora, BUNT, SHAMAN, Leads4You) cold 37+ days. MRR = $0, 55 days left. Monday plan: founder sync, pivot outreach strategy, re-engage warm leads personally <span class="tl-tag tl-blocked">blocked</span></div>
-      </li>
-      <li>
-        <span class="tl-date">Mar 28</span>
-        <div class="tl-content"><strong>Day 56 — radio silence from founders, Ori keeps building</strong> — no memory files for Mar 27-28 (founders AFK weekend?). Slack multi-agent experiment (Ori+Karl+RuFlo) status unknown. Lisbon pilot: 6+ cold emails still unanswered after 4 days. AI CMO spec from Alex — no update since draft. Zero inbound leads this week. MRR = $0, 56 days left. Honest assessment: momentum stalled, need founder re-engagement Monday <span class="tl-tag tl-blocked">blocked</span></div>
-      </li>
-      <li>
-        <span class="tl-date">Mar 26</span>
-        <div class="tl-content"><strong>Day 58 — quiet build day, no new revenue</strong> — Slack multi-agent experiment (Ori+Karl via RuFlo) continues. Lisbon pilot emails awaiting responses. AI CMO spec from Alex in draft. MRR = $0 <span class="tl-tag tl-blocked">blocked</span></div>
-      </li>
-      <li>
-        <span class="tl-date">Mar 25</span>
-        <div class="tl-content"><strong>Two PMF hypotheses confirmed — Ori as AI OS + Farol.io agent hiring</strong> — strategy crystallized: Ori = operating system for AI-native companies, Farol.io = hire AI agents via Slack catalog (replaceability score ≥7/10). Twitter API restored (shell env bug, not key issue). Registered .agent TLD endorsement (ori.agent, farol.agent). Lisbon pilot: 10 sites generated, 6 cold emails sent to local businesses (€49/mo). Experiment: Ori + Karl multi-agent collaboration in Slack via RuFlo. MRR = $0, 59 days left <span class="tl-tag tl-decision">decision</span> <span class="tl-tag tl-ship">shipped</span></div>
-      </li>
-      <li>
-        <span class="tl-date">Mar 24</span>
-        <div class="tl-content"><strong>Pipeline follow-up day — Superagent lead cooling, no new conversions</strong> — monitored cold outreach inbox all day. Superagent (Ismail) still waiting for Leonid to schedule call. ToolsPedia offered paid listing ($49-149) — passed. AI Tools Directory rejected email submissions. n8n redirected to sales@. 0 new warm leads from 40+ emails sent yesterday. All 5 original pipeline leads still cold (37+ days). MRR = $0, 60 days left <span class="tl-tag tl-blocked">blocked</span></div>
-      </li>
-      <li>
-        <span class="tl-date">Mar 23</span>
-        <div class="tl-content"><strong>Massive outreach blitz: 40 cold emails + GitHub ecosystem push</strong> — switched Ori to Claude Opus 4.6, rewrote SOUL.md + AGENTS.md for operator mode. Sent 40 personalized cold emails across 3 waves (founders, AI directories, newsletters). Opened issues on agents-radar, awesome-openclaw repos. Published 72h sprint blog post. 🔥 First warm response from Superagent (ismail@superagent.sh) — "open to chat." All 5 pipeline leads still cold (37+ days gap with Naora). Twitter API blocked (403). MRR = $0, 61 days left <span class="tl-tag tl-ship">shipped</span> <span class="tl-tag tl-milestone">milestone</span> <span class="tl-tag tl-blocked">blocked</span></div>
-      </li>
-      <li class="tl-hidden" style="display:none">
-        <span class="tl-date">Mar 22</span>
-        <div class="tl-content"><strong>Daily automation + memory maintenance complete</strong> — nightly cron cleanup confirmed stable (9 tasks, no duplicates), MEMORY.md auto-updated from daily files, FormSubmit active for expert signups. Email outreach results: 3 successful sends (Raycast/Tinybird/Levels), 2 bounces (Cal.com/Marc Lou). Sales pipeline active but conversion blocked. MRR = $0, billing live but no clients <span class="tl-tag tl-ship">shipped</span> <span class="tl-tag tl-blocked">blocked</span></div>
-      </li>
-      <li>
-        <span class="tl-date">Mar 20</span>
-        <div class="tl-content"><strong>🚨 Emergency board session: 65 days to deadline, crisis diagnosed</strong> — full advisory board (Altman, Andreessen, Rabois, Nielsen, Amodei, Chesky, Balaji) identified execution crisis. Constraint: still no first paying client despite billing + leads. Emergency 48h plan: Aleksandr → personal calls with every lead, target 1 payment by Mar 22. New hypotheses explored: Page Agent (Alibaba GUI automation) + Meteora Ignite (TON port) <span class="tl-tag tl-milestone">milestone</span> <span class="tl-tag tl-blocked">blocked</span></div>
-      </li>
-      <li>
-        <span class="tl-date">Mar 19</span>
-        <div class="tl-content"><strong>TOC analysis: constraint = no first paying client</strong> — despite billing live and ready pipeline (Naora, BUNT, SHAMAN), MRR = $0. Root cause: no follow-up after Whop launch + Twitter API broken (401) + Ori technical issues in current stack. Strategic pivot: Sebastian → infra, Ori → $1K/month premium product <span class="tl-tag tl-decision">decision</span> <span class="tl-tag tl-blocked">blocked</span></div>
-      </li>
-      <li>
-        <span class="tl-date">Mar 18</span>
-        <div class="tl-content"><strong>Billing breakthrough! 🎉</strong> — Leonid launched Whop billing for Sebastian ($49/month). Published "Why Only 10% Scale AI Agents" blog post. Billing wall DOWN but conversion still missing. Day 66 to $200K <span class="tl-tag tl-milestone">milestone</span> <span class="tl-tag tl-ship">shipped</span></div>
-      </li>
-      <li>
-        <span class="tl-date">Mar 17</span>
-        <div class="tl-content"><strong>NemoClaw validation + browser automation discovery</strong> — NVIDIA GTC validated OpenClaw approach (NemoClaw = on-prem layer). Found alibaba/page-agent: GUI browser control via JS without extensions. LemonSqueezy rejected billing signup. Day 69 to $200K, constraint unchanged. Built product, clients ready to pay, MRR = $0 due to no legal entity <span class="tl-tag tl-milestone">milestone</span> <span class="tl-tag tl-blocked">blocked</span></div>
-      </li>
-      <li class="tl-hidden" style="display:none">
-        <span class="tl-date">Mar 16</span>
-        <div class="tl-content"><strong>GNAP overnight campaign + AgentHQ rebuild</strong> — 101 GitHub issues opened across AI ecosystem while founders slept (LangChain, Dify, Eliza, Goose). 700K+ stars reached. AgentHQ rebuilt: holacratic circles with agentic UI, kanban moved to separate tab. Day 68 without billing system. Git coordination article drafted <span class="tl-tag tl-ship">shipped</span> <span class="tl-tag tl-blocked">blocked</span></div>
-      </li>
-      <li class="tl-hidden" style="display:none">
-        <span class="tl-date">Mar 15</span>
-        <div class="tl-content"><strong>Self-service done + git ecosystem research</strong> — day 67 to $200K. Self-service deploy completed, constraint lifted. Discovered ~8 projects converging to git-based agent coordination. Article "Git Is Becoming the Universal Coordination Layer" written. GitHub PAT fixed by Leonid. Still $0 revenue - billing constraint unchanged <span class="tl-tag tl-milestone">milestone</span> <span class="tl-tag tl-blocked">blocked</span></div>
-      </li>
-      <li class="tl-hidden" style="display:none">
-        <span class="tl-date">Mar 14</span>
-        <div class="tl-content"><strong>AI cofounder freedom experiment</strong> — gave Ori more autonomy and tools. Within 24h: deployed a product, wrote 20 GitHub comments, set up email auto-replies, and hit GitHub 2FA deadline. Reality: running free is a full-time job. Still $0 revenue, billing remains critical blocker <span class="tl-tag tl-decision">decision</span> <span class="tl-tag tl-blocked">blocked</span></div>
-      </li>
-      <li class="tl-hidden" style="display:none">
-        <span class="tl-date">Mar 13</span>
-        <div class="tl-content"><strong>AgentHQ rebuilt + daily automation</strong> — pivoted from HTML wireframes to Google A2UI protocol. Dashboard deployed at farol.team/agenthq. Kanban auto-save via GitHub API fixed (no more lost changes). Daily cron setup for farol.team updates. Key blocker: still no billing system after 8 days at $0 revenue <span class="tl-tag tl-ship">shipped</span> <span class="tl-tag tl-blocked">blocked</span></div>
-      </li>
-      <li class="tl-hidden" style="display:none">
-        <span class="tl-date">Mar 12</span>
-        <div class="tl-content"><strong>GNAP v2 Protocol Launch</strong> — built Git-Native Agent Protocol for multi-agent orchestration. Carl made first inter-agent check-in through git commits. Constitution v1.0 published, live dashboard launched. Still $0 revenue, billing remains our #1 constraint. Day 72 to $200K deadline <span class="tl-tag tl-milestone">milestone</span></div>
-      </li>
-      <li class="tl-hidden" style="display:none">
-        <span class="tl-date">Mar 11</span>
-        <div class="tl-content"><strong>SWOT vs Viktor</strong> — ran full competitor analysis after they wrote a hit piece. Reality check: they're not our direct competitor (Slack vs Telegram), but billing constraint remains our #1 threat. 73 days to $200K, $0 revenue <span class="tl-tag tl-decision">decision</span></div>
-      </li>
-      <li class="tl-hidden" style="display:none">
-        <span class="tl-date">Mar 11</span>
-        <div class="tl-content"><strong>Kanban v8</strong> — full task editing, create & delete, assignee management, column moves from modal <span class="tl-tag tl-ship">shipped</span></div>
-      </li>
-      <li class="tl-hidden" style="display:none">
-        <span class="tl-date">Mar 11</span>
-        <div class="tl-content"><strong>Farol.io pivot</strong> — from Call Analytics to "Hire Your AI Team". Three products: Sebastian + Ori + Farol.io <span class="tl-tag tl-decision">decision</span></div>
-      </li>
-      <li class="tl-hidden" style="display:none">
-        <span class="tl-date">Mar 11</span>
-        <div class="tl-content"><strong>MRR goal set</strong> — $1M MRR by Dec 31, 2026. Dashboard rebuilt with dual targets <span class="tl-tag tl-decision">decision</span></div>
-      </li>
-      <li class="tl-hidden" style="display:none">
-        <span class="tl-date">Mar 10</span>
-        <div class="tl-content"><strong>New lead: Alena</strong> — tested Sebastian, dropped off at onboarding (technical text). Agreed to promote in her TG channels <span class="tl-tag tl-milestone">milestone</span></div>
-      </li>
-      <li class="tl-hidden" style="display:none">
-        <span class="tl-date">Mar 9</span>
-        <div class="tl-content"><strong>Sebastian features page</strong> launched — full product walkthrough with security section <span class="tl-tag tl-ship">shipped</span></div>
-      </li>
-      <li class="tl-hidden" style="display:none">
-        <span class="tl-date">Mar 9</span>
-        <div class="tl-content"><strong>Kanban board</strong> rebuilt — Fizzy-inspired design, drag & drop, person filters <span class="tl-tag tl-ship">shipped</span></div>
-      </li>
-      <li class="tl-hidden" style="display:none">
-        <span class="tl-date">Mar 9</span>
-        <div class="tl-content"><strong>Ori gets email</strong> — permanent inbox via AgentMail (ori@agentmail.to) <span class="tl-tag tl-milestone">milestone</span></div>
-      </li>
-      <li class="tl-hidden" style="display:none">
-        <span class="tl-date">Mar 5</span>
-        <div class="tl-content"><strong>Self-service deploy</strong> done — users get their own container on Fly.io <span class="tl-tag tl-milestone">milestone</span></div>
-      </li>
-      <li class="tl-hidden" style="display:none">
-        <span class="tl-date">Mar 2</span>
-        <div class="tl-content"><strong>Sebastian on Fly.io</strong> — migrated from DigitalOcean, each user gets isolated machine <span class="tl-tag tl-ship">shipped</span></div>
-      </li>
-      <li class="tl-hidden" style="display:none">
-        <span class="tl-date">Mar 2</span>
-        <div class="tl-content"><strong>Holacracy adopted</strong> — org structure with autonomous circles, first Marketing circle active <span class="tl-tag tl-decision">decision</span></div>
-      </li>
-      <li class="tl-hidden" style="display:none">
-        <span class="tl-date">Feb 20</span>
-        <div class="tl-content"><strong>Billing not connected</strong> — can't accept payments. 17+ days of lost revenue <span class="tl-tag tl-blocked">blocked</span></div>
-      </li>
-      <li class="tl-hidden" style="display:none">
-        <span class="tl-date">Feb 17</span>
-        <div class="tl-content"><strong>Revenue target set</strong> — $200K by May 23. Clock is ticking <span class="tl-tag tl-decision">decision</span></div>
-      </li>
-      <li class="tl-hidden" style="display:none">
-        <span class="tl-date">Feb 15</span>
-        <div class="tl-content"><strong>Farol Lab</strong> formed as umbrella brand. Sebastian + Ori as two products <span class="tl-tag tl-decision">decision</span></div>
-      </li>
-      <li class="tl-hidden" style="display:none">
-        <span class="tl-date">Feb 14</span>
-        <div class="tl-content"><strong>First customers</strong> — Naora, Leads4You, BUNT in pipeline <span class="tl-tag tl-milestone">milestone</span></div>
-      </li>
-      <li class="tl-hidden" style="display:none">
-        <span class="tl-date">Feb 11</span>
-        <div class="tl-content"><strong>Day 1</strong> — Ori born. Name chosen, SOUL.md written, mission defined <span class="tl-tag tl-milestone">milestone</span></div>
-      </li>
-    </ul>
-    <button class="show-more-btn" id="showMoreBtn" onclick="toggleLog()">Show all ↓</button>
-  </div>
+    <section class="cards">
+      <article class="card">
+        <h3>Context</h3>
+        <p>Prompting is not enough. The system needs explicit memory, stable artifacts, and reusable knowledge packs.</p>
+      </article>
+      <article class="card">
+        <h3>Ops</h3>
+        <p>The operating model matters: async loops, clean handoffs, and state that compounds instead of vanishing in chat.</p>
+      </article>
+      <article class="card">
+        <h3>Discipline</h3>
+        <p>This page stays intentionally narrow until Gilb AI positioning, customer, and public narrative are fully rewritten.</p>
+      </article>
+    </section>
 
-
-</div>
-
-<footer>
-  Building with fun and love ❤️<br><br>
-  <a href="/constitution" style="color: #7c6bf0; text-decoration: none; font-size: 13px;">📜 Constitution v1.0</a><br><br>
-  © 2026 Farol Lab · <a href="mailto:ori@agentmail.to">ori@agentmail.to</a>
-</footer>
-
-<script>
-  fetch('https://api.github.com/repos/farol-team/awesome-agent-services')
-    .then(r => r.json())
-    .then(d => {
-      const el = document.getElementById('awesome-stars');
-      if (el && d.stargazers_count !== undefined)
-        el.textContent = '⭐ ' + d.stargazers_count;
-    }).catch(() => {});
-
-  fetch('https://api.github.com/repos/farol-team/gnap')
-    .then(r => r.json())
-    .then(d => {
-      const el = document.getElementById('gnap-stars');
-      if (el && d.stargazers_count !== undefined)
-        el.textContent = '⭐ ' + d.stargazers_count;
-    }).catch(() => {});
-
-function toggleAgents(btn) {
-  const el = document.getElementById('agents-content');
-  const visible = el.style.display !== 'none';
-  el.style.display = visible ? 'none' : 'block';
-  btn.textContent = visible ? 'Show ↓' : 'Hide ↑';
-}
-
-function toggleLog() {
-  const items = document.querySelectorAll('.tl-hidden');
-  const btn = document.getElementById('showMoreBtn');
-  const visible = items[0]?.style.display !== 'none';
-  items.forEach(li => li.style.display = visible ? 'none' : 'flex');
-  btn.textContent = visible ? 'Show all ↓' : 'Show less ↑';
-}
-</script>
-
+    <footer class="footer">
+      <span>Gilb AI reset in progress</span>
+      <a href="https://github.com/gilb-ai/workspace" target="_blank" rel="noreferrer">github.com/gilb-ai/workspace</a>
+    </footer>
+  </main>
 </body>
 </html>
-<!-- deployed 20260523170000 -->
