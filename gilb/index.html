@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gilbreth by Gilb AI — AI Transformation Discovery, Compressed</title>
+  <meta name="description" content="Gilbreth helps AI transformation consultants capture real work, surface automation opportunities, and walk into demos with evidence instead of interviews.">
+  <meta name="theme-color" content="#102418">
+  <meta property="og:title" content="Gilbreth by Gilb AI">
+  <meta property="og:description" content="From shadow work to demo-ready automation candidates. Built for AI transformation consultants and internal transformation teams.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://farol.team/gilb/">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='18' fill='%23102418'/><path d='M26 69V31h30v8H36v22h24v8H26Zm41 0V31h8v38h-8Z' fill='%23F4EBDD'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f4ebdd;
+      --paper: rgba(255, 251, 243, 0.72);
+      --ink: #102418;
+      --muted: #566257;
+      --line: rgba(16, 36, 24, 0.14);
+      --accent: #c96b2c;
+      --accent-2: #214f3a;
+      --soft: #e6d9c4;
+      --success: #1e7a51;
+      --shadow: 0 24px 60px rgba(16, 36, 24, 0.12);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: "IBM Plex Sans", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(201, 107, 44, 0.18), transparent 30%),
+        radial-gradient(circle at 80% 20%, rgba(33, 79, 58, 0.18), transparent 25%),
+        linear-gradient(180deg, #f7efe2 0%, #efe4d2 100%);
+      min-height: 100vh;
+    }
+
+    a { color: inherit; }
+
+    .shell {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      padding: 18px 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(16px);
+      background: rgba(244, 235, 221, 0.76);
+      border-bottom: 1px solid rgba(16, 36, 24, 0.08);
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #163425 0%, #214f3a 100%);
+      color: #f9f4ea;
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      box-shadow: 0 10px 24px rgba(16, 36, 24, 0.22);
+    }
+
+    .brand-copy strong,
+    .brand-copy span {
+      display: block;
+      line-height: 1.05;
+    }
+
+    .brand-copy strong {
+      font-family: "Space Grotesk", sans-serif;
+      font-size: 17px;
+      letter-spacing: -0.03em;
+    }
+
+    .brand-copy span {
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .nav .nav-cta {
+      color: #fff;
+      background: var(--ink);
+      padding: 12px 18px;
+      border-radius: 999px;
+      box-shadow: 0 10px 24px rgba(16, 36, 24, 0.18);
+    }
+
+    .hero {
+      padding: 64px 0 36px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.9fr);
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .hero-panel,
+    .hero-card,
+    .section-card,
+    .signal-card,
+    .form-card,
+    .faq-item {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-panel {
+      padding: 34px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-panel::after {
+      content: "";
+      position: absolute;
+      inset: auto -60px -80px auto;
+      width: 240px;
+      height: 240px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201, 107, 44, 0.18) 0%, transparent 65%);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(16, 36, 24, 0.06);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-2);
+      margin-bottom: 20px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 6px rgba(201, 107, 44, 0.12);
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: "Space Grotesk", sans-serif;
+      letter-spacing: -0.04em;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: clamp(40px, 6vw, 76px);
+      line-height: 0.96;
+      max-width: 11ch;
+      margin-bottom: 18px;
+    }
+
+    .hero-sub {
+      font-size: 19px;
+      line-height: 1.6;
+      color: var(--muted);
+      max-width: 60ch;
+      margin-bottom: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 26px;
+    }
+
+    .button,
+    button {
+      border: 0;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 15px 22px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 15px;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+    }
+
+    .button:hover,
+    button:hover {
+      transform: translateY(-1px);
+    }
+
+    .button-primary {
+      color: #fff;
+      background: linear-gradient(135deg, #163425 0%, #214f3a 100%);
+      box-shadow: 0 14px 30px rgba(16, 36, 24, 0.2);
+    }
+
+    .button-secondary {
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.44);
+      border: 1px solid var(--line);
+    }
+
+    .hero-note {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .hero-note div {
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(16, 36, 24, 0.05);
+      border: 1px solid rgba(16, 36, 24, 0.08);
+    }
+
+    .hero-note strong {
+      display: block;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 21px;
+      margin-bottom: 4px;
+    }
+
+    .hero-note span {
+      font-size: 12px;
+      line-height: 1.45;
+      color: var(--muted);
+    }
+
+    .hero-card {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .hero-card .card-kicker {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+    }
+
+    .stack {
+      display: grid;
+      gap: 12px;
+    }
+
+    .stack-item {
+      display: grid;
+      grid-template-columns: 54px 1fr;
+      gap: 14px;
+      align-items: start;
+      padding: 14px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.52);
+      border: 1px solid rgba(16, 36, 24, 0.08);
+    }
+
+    .stack-item .step {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 15px;
+      font-weight: 600;
+      background: #163425;
+      color: #f6efe2;
+    }
+
+    .stack-item h3 {
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    .stack-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .hero-quote {
+      padding: 18px 20px;
+      border-left: 4px solid var(--accent);
+      background: rgba(201, 107, 44, 0.08);
+      border-radius: 0 18px 18px 0;
+      color: #3d443e;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    section {
+      padding: 18px 0 0;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 360px);
+      gap: 20px;
+      align-items: end;
+      margin-bottom: 22px;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    .eyeline {
+      display: inline-block;
+      margin-bottom: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-2);
+    }
+
+    h2 {
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1;
+    }
+
+    .signals {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .signal-card {
+      padding: 22px;
+    }
+
+    .signal-card strong {
+      display: block;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .signal-card h3 {
+      font-size: 24px;
+      line-height: 1.05;
+      margin-bottom: 12px;
+    }
+
+    .signal-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    .section-card {
+      padding: 30px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .grid-2 h3,
+    .grid-3 h3 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .grid-2 p,
+    .grid-3 p,
+    .section-card li {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    ul.clean {
+      list-style: none;
+      padding: 0;
+      margin: 16px 0 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    ul.clean li::before {
+      content: "↳";
+      color: var(--accent);
+      font-weight: 700;
+      margin-right: 10px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .capture-flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .capture-flow span {
+      display: inline-flex;
+      align-items: center;
+      padding: 12px 14px;
+      border-radius: 999px;
+      background: rgba(16, 36, 24, 0.06);
+      border: 1px solid rgba(16, 36, 24, 0.08);
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 12px;
+    }
+
+    .capture-flow b {
+      color: var(--accent);
+      margin: 0 2px;
+    }
+
+    .form-wrap {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    .form-card,
+    .faq-item {
+      padding: 24px;
+    }
+
+    .form-card p,
+    .faq-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .contact-list a,
+    .contact-list span {
+      display: block;
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.46);
+      border: 1px solid rgba(16, 36, 24, 0.08);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    form {
+      display: grid;
+      gap: 14px;
+    }
+
+    .row-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    label {
+      display: grid;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      border: 1px solid rgba(16, 36, 24, 0.14);
+      border-radius: 16px;
+      padding: 14px 16px;
+      background: rgba(255, 255, 255, 0.82);
+      color: var(--ink);
+      font: inherit;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      outline: 2px solid rgba(201, 107, 44, 0.25);
+      border-color: rgba(201, 107, 44, 0.5);
+    }
+
+    textarea { min-height: 136px; }
+
+    .form-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .helper {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .status {
+      min-height: 22px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--success);
+    }
+
+    .faq {
+      display: grid;
+      gap: 14px;
+    }
+
+    footer {
+      padding: 34px 0 50px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .footer-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: center;
+      border-top: 1px solid rgba(16, 36, 24, 0.1);
+      padding-top: 18px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 1024px) {
+      .hero,
+      .section-head,
+      .form-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .signals,
+      .grid-3 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .shell { width: min(100% - 24px, 1180px); }
+      .hero-panel,
+      .hero-card,
+      .section-card,
+      .form-card,
+      .faq-item { padding: 22px; }
+      .nav a:not(.nav-cta) { display: none; }
+      .hero { padding-top: 40px; }
+      .hero-note,
+      .grid-2,
+      .row-2 { grid-template-columns: 1fr; }
+      h1 { max-width: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell topbar-inner">
+      <a class="brand" href="/">
+        <div class="brand-mark">G</div>
+        <div class="brand-copy">
+          <strong>Gilbreth</strong>
+          <span>by Gilb AI / Farol Lab</span>
+        </div>
+      </a>
+      <nav class="nav">
+        <a href="#why">Why now</a>
+        <a href="#how">How it works</a>
+        <a href="#fit">Who it's for</a>
+        <a class="nav-cta" href="#demo">Request demo</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="hero">
+      <div class="hero-panel">
+        <div class="eyebrow">Built for AI transformation consultants</div>
+        <h1>Discovery should not take longer than the automation.</h1>
+        <p class="hero-sub">Gilbreth captures how work actually happens across screen, mail, chat, calls, docs, and tasks, then surfaces automation candidates your team can review and demo. Less interview theater. More evidence.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#demo">Request a demo</a>
+          <a class="button button-secondary" href="https://github.com/gilb-ai/workspace/blob/master/Gilbreth%20%E2%80%94%20%D0%A4%D1%83%D0%BD%D0%B4%D0%B0%D0%BC%D0%B5%D0%BD%D1%82%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0.md" target="_blank" rel="noreferrer">Read the project foundation</a>
+        </div>
+        <div class="hero-note">
+          <div>
+            <strong>0→1</strong>
+            <span>Capture real work before building the transformation story.</span>
+          </div>
+          <div>
+            <strong>Days</strong>
+            <span>Compress discovery from weeks of interviews into a short diagnostic window.</span>
+          </div>
+          <div>
+            <strong>Human approval</strong>
+            <span>Gilbreth proposes skills. Your consultant decides what is worth automating.</span>
+          </div>
+        </div>
+      </div>
+
+      <aside class="hero-card">
+        <div>
+          <div class="card-kicker">What the demo shows</div>
+          <div class="stack">
+            <div class="stack-item">
+              <div class="step">01</div>
+              <div>
+                <h3>Capture hidden work</h3>
+                <p>Screen activity plus connected systems reveal the manual last mile that logs and process mining miss.</p>
+              </div>
+            </div>
+            <div class="stack-item">
+              <div class="step">02</div>
+              <div>
+                <h3>Extract automation candidates</h3>
+                <p>Repeated patterns become explicit artifacts, then candidate skills your team can inspect and prioritize.</p>
+              </div>
+            </div>
+            <div class="stack-item">
+              <div class="step">03</div>
+              <div>
+                <h3>Walk into the client with proof</h3>
+                <p>Instead of generic AI strategy slides, you bring a concrete backlog of automations grounded in observed work.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-quote">Gilbreth is not employee surveillance software. It is a context capture layer for AI transformation work, with consultant review and explicit trust boundaries.</div>
+      </aside>
+    </section>
+
+    <section id="why">
+      <div class="section-head">
+        <div>
+          <span class="eyeline">The bottleneck</span>
+          <h2>AI transformation stalls before it starts.</h2>
+        </div>
+        <p>Most teams still discover automation opportunities the slow way: interviews, workshops, screenshots, sticky notes, and reconstructed workflows. That makes the first phase expensive, political, and easy to distort.</p>
+      </div>
+      <div class="signals">
+        <article class="signal-card">
+          <strong>Interview bias</strong>
+          <h3>People describe what they think they do.</h3>
+          <p>Not what they actually repeat fifty times per day across tabs, inboxes, documents, and side chats.</p>
+        </article>
+        <article class="signal-card">
+          <strong>Process blind spots</strong>
+          <h3>System logs miss the manual last mile.</h3>
+          <p>Copy-paste, comparison, reconciliation, handoffs, and ad hoc decision loops rarely show up in process mining.</p>
+        </article>
+        <article class="signal-card">
+          <strong>Consulting drag</strong>
+          <h3>Senior time gets burned on raw discovery.</h3>
+          <p>Your experts spend high-value hours collecting facts instead of judging, designing, and selling the transformation.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="how">
+      <div class="section-head">
+        <div>
+          <span class="eyeline">How Gilbreth Works</span>
+          <h2>A capture layer for AI-native redesign.</h2>
+        </div>
+        <p>Gilbreth starts narrow enough to demo, but points at a larger destination: the company brain. The visible output is candidate automation. The accumulating asset is context.</p>
+      </div>
+      <div class="section-card">
+        <div class="grid-2">
+          <div>
+            <h3>What we capture</h3>
+            <p>The starting wedge is full-context observation of knowledge work: screen activity plus connected work streams such as mail, chat, calls, docs, and tasks. The goal is a faithful picture of how the work actually moves.</p>
+            <div class="capture-flow">
+              <span>screen</span>
+              <span>slack</span>
+              <span>email</span>
+              <span>calls</span>
+              <span>docs</span>
+              <span>tasks</span>
+            </div>
+          </div>
+          <div>
+            <h3>What we output</h3>
+            <p>Observed traces become artifacts of repeated work. Artifacts become candidate skills. Skills become inputs for the consultant's automation roadmap and for the longer-term company brain.</p>
+            <div class="capture-flow">
+              <span>traces <b>→</b> artifacts</span>
+              <span>artifacts <b>→</b> skills</span>
+              <span>skills <b>→</b> org brain</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="fit">
+      <div class="section-head">
+        <div>
+          <span class="eyeline">Who It's For</span>
+          <h2>Built to arm the people already running transformation.</h2>
+        </div>
+        <p>The primary buyer is not the employee and not the abstract “enterprise”. It is the consultant or internal transformation team responsible for moving the company from AI theater to actual redesign.</p>
+      </div>
+      <div class="grid-3">
+        <article class="section-card">
+          <h3>External consulting teams</h3>
+          <p>McKinsey, BCG, Bain, Deloitte, Accenture, boutique AI transformation shops. Gilbreth shortens discovery and gives your client work grounded in observed reality.</p>
+          <ul class="clean">
+            <li>Faster transformation discovery</li>
+            <li>Sharper automation backlog</li>
+            <li>Better demo material for executive buy-in</li>
+          </ul>
+        </article>
+        <article class="section-card">
+          <h3>Internal transformation leaders</h3>
+          <p>Ops, strategy, enablement, digital transformation, or AI-native taskforces who need to understand where repetitive work actually lives.</p>
+          <ul class="clean">
+            <li>Cross-functional evidence</li>
+            <li>Less dependence on self-reporting</li>
+            <li>Better prioritization of automation work</li>
+          </ul>
+        </article>
+        <article class="section-card">
+          <h3>Not for surveillance programs</h3>
+          <p>If the goal is monitoring employee productivity, Gilbreth is the wrong product. We are building a trust-first context system for automation and redesign, not a digital panopticon.</p>
+          <ul class="clean">
+            <li>Consultant review stays in the loop</li>
+            <li>Trust and consent are first-order design constraints</li>
+            <li>The story is automation, not policing</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <span class="eyeline">Why This Window Matters</span>
+          <h2>The category is opening right now.</h2>
+        </div>
+        <p>AI transformation is shifting from “everyone should use AI” to “show me the work graph, the company memory, and the redesign path.” Whoever becomes the diagnostic layer inside that motion gets leverage with both consultants and platforms.</p>
+      </div>
+      <div class="section-card">
+        <div class="grid-2">
+          <div>
+            <h3>Strategic timing</h3>
+            <p>Process mining sees system traces. Gilbreth aims at the harder layer: the hidden manual motion between systems that agents can increasingly absorb. That makes it useful both as a wedge product and as a strategic asset.</p>
+          </div>
+          <div>
+            <h3>Product stance</h3>
+            <p>Open-core on the recorder side for trust. Proprietary extraction, orchestration, and accumulated context for the moat. The demo is skills. The compounding asset is observed organizational context.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="demo">
+      <div class="section-head">
+        <div>
+          <span class="eyeline">Demo Request</span>
+          <h2>Request a Gilbreth demo.</h2>
+        </div>
+        <p>If you run AI transformation work and want to see how Gilbreth compresses discovery, send a structured request. The form below builds the intake email for the team.</p>
+      </div>
+      <div class="form-wrap">
+        <aside class="form-card">
+          <h3>What to expect</h3>
+          <p>We are looking for a small number of sharp conversations with people already carrying transformation mandates. Best fit is a consulting lead or internal AI transformation owner with a live use case.</p>
+          <div class="contact-list">
+            <a href="mailto:ori@agentmail.to?subject=Gilbreth%20demo%20request">ori@agentmail.to</a>
+            <span>Farol Lab / Gilb AI</span>
+            <span>Use case-first. No generic vendor tour.</span>
+          </div>
+        </aside>
+
+        <div class="form-card">
+          <form id="demo-form">
+            <div class="row-2">
+              <label>
+                Full name
+                <input type="text" name="name" required placeholder="Jane Smith">
+              </label>
+              <label>
+                Work email
+                <input type="email" name="email" required placeholder="jane@company.com">
+              </label>
+            </div>
+            <div class="row-2">
+              <label>
+                Company
+                <input type="text" name="company" required placeholder="Firm or company name">
+              </label>
+              <label>
+                Role
+                <input type="text" name="role" required placeholder="Partner, transformation lead, etc.">
+              </label>
+            </div>
+            <div class="row-2">
+              <label>
+                Team type
+                <select name="team_type" required>
+                  <option value="">Select one</option>
+                  <option>External AI transformation consultancy</option>
+                  <option>Internal transformation / ops team</option>
+                  <option>Portfolio operations / PE value creation</option>
+                  <option>Other</option>
+                </select>
+              </label>
+              <label>
+                Priority timeline
+                <select name="timeline" required>
+                  <option value="">Select one</option>
+                  <option>Immediate pilot in 30 days</option>
+                  <option>Exploration this quarter</option>
+                  <option>Researching for later</option>
+                </select>
+              </label>
+            </div>
+            <label>
+              What transformation problem are you trying to solve?
+              <textarea name="problem" required placeholder="Example: we need a faster way to identify automation opportunities across support, revops, and finance without running six weeks of interviews."></textarea>
+            </label>
+            <label>
+              What workflows or teams would you want to observe first?
+              <textarea name="scope" placeholder="Example: sales ops, support managers, analysts, onboarding specialists."></textarea>
+            </label>
+            <div class="form-actions">
+              <button class="button-primary" type="submit">Build and send request</button>
+              <button class="button button-secondary" type="button" id="copy-email">Copy intake</button>
+            </div>
+            <div class="helper">Submit opens a prefilled email draft to `ori@agentmail.to`. We also copy the intake text to your clipboard so nothing gets lost if your mail client behaves badly.</div>
+            <div class="status" id="form-status" aria-live="polite"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <div>
+          <span class="eyeline">FAQ</span>
+          <h2>The hard questions, early.</h2>
+        </div>
+        <p>Trust, positioning, and change management are not side notes here. They are part of the product boundary.</p>
+      </div>
+      <div class="faq">
+        <article class="faq-item">
+          <h3>Is this process mining?</h3>
+          <p>No. Traditional process mining relies on system logs. Gilbreth is aimed at the messy, manual, cross-tool work that never cleanly enters those logs.</p>
+        </article>
+        <article class="faq-item">
+          <h3>Does Gilbreth replace the consultant?</h3>
+          <p>No. It removes raw discovery drag and produces candidate skills. Judgment, approval, narrative, and change management remain with the transformation lead.</p>
+        </article>
+        <article class="faq-item">
+          <h3>Why emphasize trust so much?</h3>
+          <p>Because any product that captures work can be mistaken for surveillance. We are deliberately building around consent, explicit scope, and a context-for-automation story rather than a productivity-policing story.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="shell">
+    <div class="footer-line">
+      <span>Gilbreth by Gilb AI. Farol Lab, 2026.</span>
+      <span><a href="/">Farol Lab</a> · <a href="https://github.com/gilb-ai/workspace/blob/master/Gilbreth%20%E2%80%94%20%D0%A4%D1%83%D0%BD%D0%B4%D0%B0%D0%BC%D0%B5%D0%BD%D1%82%20%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B0.md" target="_blank" rel="noreferrer">Foundation doc</a> · <a href="mailto:ori@agentmail.to">ori@agentmail.to</a></span>
+    </div>
+  </footer>
+
+  <script>
+    const form = document.getElementById("demo-form");
+    const status = document.getElementById("form-status");
+    const copyButton = document.getElementById("copy-email");
+
+    function buildPayload() {
+      const data = new FormData(form);
+      const get = (key) => (data.get(key) || "").toString().trim();
+      const payload = {
+        name: get("name"),
+        email: get("email"),
+        company: get("company"),
+        role: get("role"),
+        teamType: get("team_type"),
+        timeline: get("timeline"),
+        problem: get("problem"),
+        scope: get("scope")
+      };
+
+      const subject = `Gilbreth demo request — ${payload.company || payload.name || "New lead"}`;
+      const body = [
+        "Gilbreth demo request",
+        "",
+        `Name: ${payload.name}`,
+        `Email: ${payload.email}`,
+        `Company: ${payload.company}`,
+        `Role: ${payload.role}`,
+        `Team type: ${payload.teamType}`,
+        `Priority timeline: ${payload.timeline}`,
+        "",
+        "Transformation problem:",
+        payload.problem,
+        "",
+        "Initial workflows / teams to observe:",
+        payload.scope || "Not specified"
+      ].join("\n");
+
+      return { subject, body };
+    }
+
+    async function copyPayload() {
+      const payload = buildPayload();
+      try {
+        await navigator.clipboard.writeText(payload.body);
+        status.textContent = "Intake copied. If the email draft does not open, paste it into a message to ori@agentmail.to.";
+      } catch (error) {
+        status.textContent = "Could not copy automatically. You can still send the request by email.";
+      }
+      return payload;
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      const payload = await copyPayload();
+      const mailto = `mailto:ori@agentmail.to?subject=${encodeURIComponent(payload.subject)}&body=${encodeURIComponent(payload.body)}`;
+      window.location.href = mailto;
+    });
+
+    copyButton.addEventListener("click", async () => {
+      if (!form.reportValidity()) return;
+      await copyPayload();
+    });
+  </script>
+</body>
+</html>
