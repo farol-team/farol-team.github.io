@@ -7,136 +7,75 @@
 <meta name="description" content="Follow our journey building AI products. Real metrics, real decisions, no filter.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏗️</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'Inter', -apple-system, system-ui, sans-serif;
-    background: #fafafa;
-    color: #111;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  nav {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 14px clamp(20px, 4vw, 48px);
-    border-bottom: 1px solid #eee;
-  }
-  .nav-left { font-weight: 800; font-size: 17px; letter-spacing: -0.03em; }
-  .nav-left a { text-decoration: none; color: #111; }
-  .nav-right { display: flex; gap: 20px; align-items: center; }
-  .nav-right a { font-size: 13px; font-weight: 500; color: #888; text-decoration: none; transition: color 0.15s; }
-  .nav-right a:hover { color: #111; }
-  .live-dot { display: inline-block; width: 7px; height: 7px; background: #22c55e; border-radius: 50%; margin-right: 4px; animation: pulse 2s infinite; }
-  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-
-  .wrap { max-width: 720px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 24px); }
-
-  .hero {
-    padding: clamp(48px, 8vw, 80px) 0 clamp(32px, 5vw, 48px);
-    border-bottom: 1px solid #eee;
-  }
-  .hero .tag {
-    display: inline-flex; align-items: center;
-    font-size: 11px; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.1em; color: #22c55e; margin-bottom: 16px;
-  }
-  .hero h1 {
-    font-size: clamp(32px, 5vw, 48px); font-weight: 900;
-    letter-spacing: -0.04em; line-height: 1.08; margin-bottom: 14px;
-  }
-  .hero p {
-    font-size: clamp(16px, 2vw, 19px); color: #555; line-height: 1.6;
-    max-width: 560px;
-  }
-
-  .follow-btn {
-    display: inline-flex; align-items: center; gap: 8px;
-    margin-top: 20px; padding: 12px 24px;
-    background: #111; color: #fff; border-radius: 99px;
-    font-size: 15px; font-weight: 700; text-decoration: none;
-    font-family: inherit; transition: transform 0.15s, box-shadow 0.15s;
-  }
-  .follow-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
-
-  .section { padding: 32px 0; border-bottom: 1px solid #eee; }
-  .section-header {
-    font-size: 11px; font-weight: 700; text-transform: uppercase;
-    letter-spacing: 0.1em; color: #999; margin-bottom: 16px;
-  }
-
-  .product {
-    display: flex; gap: 20px; padding: 20px;
-    background: #fff; border: 1px solid #eee; border-radius: 14px;
-    margin-bottom: 12px; text-decoration: none; color: inherit;
-    transition: border-color 0.2s, box-shadow 0.2s;
-  }
-  .product:hover { border-color: #ccc; box-shadow: 0 4px 16px rgba(0,0,0,0.04); }
-  .product-icon {
-    width: 48px; height: 48px; border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 24px; flex-shrink: 0;
-  }
-  .product h3 { font-size: 16px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 2px; }
-  .product .status { font-size: 12px; font-weight: 600; margin-bottom: 4px; }
-  .status-live { color: #22c55e; }
-  .status-wip { color: #f59e0b; }
-  .product p { font-size: 14px; color: #666; line-height: 1.45; }
-  .product .url { font-size: 12px; color: #3b82f6; margin-top: 6px; display: block; }
-
-  footer {
-    text-align: center; padding: 32px 24px; font-size: 12px; color: #bbb;
-  }
-  footer a { color: #888; text-decoration: none; }
-  footer a:hover { color: #111; }
-
-  @media (max-width: 640px) {
-    .product { flex-direction: column; gap: 12px; }
-  }
-</style>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Inter', 'system-ui', 'sans-serif']
+        }
+      }
+    }
+  };
+</script>
 </head>
-<body>
+<body class="bg-zinc-50 font-sans text-zinc-950 antialiased">
 
-<nav>
-  <div class="nav-left"><a href="/">Farol Lab</a></div>
-  <div class="nav-right"></div>
+<nav class="border-b border-zinc-200">
+  <div class="mx-auto flex max-w-[720px] items-center justify-between px-4 py-3 sm:px-6 lg:px-0">
+    <div class="text-[17px] font-extrabold tracking-[-0.03em]">
+      <a href="/" class="text-zinc-950 no-underline">Farol Lab</a>
+    </div>
+    <div class="flex items-center gap-5"></div>
+  </div>
 </nav>
 
-<div class="wrap">
-
-  <div class="hero">
-    <div class="tag"><span class="live-dot"></span> Building in public</div>
-    <h1>Two humans and an AI&#8209;cofounder<br>have fun building tools for AI transformation.</h1>
-    <p>Businesses are entering a period where they need to redesign how work gets done around what AI can actually do. Farol builds tools that help make that transition more effective.</p>
-    <a href="https://x.com/cofounder_run" class="follow-btn" target="_blank">
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+<main class="mx-auto max-w-[720px] px-4 sm:px-6 lg:px-0">
+  <section class="border-b border-zinc-200 py-12 sm:py-16 lg:py-20">
+    <div class="mb-4 inline-flex items-center text-[11px] font-bold uppercase tracking-[0.1em] text-green-500">
+      <span class="mr-1.5 inline-block h-[7px] w-[7px] animate-pulse rounded-full bg-green-500"></span>
+      Building in public
+    </div>
+    <h1 class="mb-3 text-[32px] font-black leading-[1.08] tracking-[-0.04em] text-zinc-950 sm:text-[40px] lg:text-[48px]">
+      Two humans and an AI&#8209;cofounder<br>have fun building tools for AI transformation.
+    </h1>
+    <p class="max-w-[560px] text-[16px] leading-[1.6] text-zinc-600 sm:text-[18px]">
+      Businesses are entering a period where they need to redesign how work gets done around what AI can actually do. Farol builds tools that help make that transition more effective.
+    </p>
+    <a href="https://x.com/cofounder_run" target="_blank" class="mt-5 inline-flex items-center gap-2 rounded-full bg-zinc-950 px-6 py-3 text-[15px] font-bold text-white no-underline transition hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(0,0,0,0.15)]">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
       Follow on X
     </a>
-    <p style="font-size: 12px; color: #999; margin-top: 8px;">This account is run by Ori, our AI co-founder ✨</p>
-  </div>
+    <p class="mt-2 text-[12px] text-zinc-400">This account is run by Ori, our AI co-founder ✨</p>
+  </section>
 
-  <div class="section">
-    <div class="section-header">Products</div>
+  <section class="border-b border-zinc-200 py-8">
+    <div class="mb-4 text-[11px] font-bold uppercase tracking-[0.1em] text-zinc-400">Products</div>
 
-    <div class="product">
-      <div class="product-icon" style="background:#f0fdf4;color:#173525;">G</div>
+    <div class="mb-3 flex flex-col gap-5 rounded-[14px] border border-zinc-200 bg-white p-5 transition hover:border-zinc-300 hover:shadow-[0_4px_16px_rgba(0,0,0,0.04)] sm:flex-row sm:gap-5">
+      <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-green-50 text-2xl text-[#173525]">G</div>
       <div>
-        <h3><a href="/gilb/" style="color:inherit;text-decoration:none;">Gilbreth</a></h3>
-        <div style="font-size:12px;font-weight:700;color:#888;margin-bottom:4px;">gilb.ai</div>
-        <div class="status status-wip">◐ In progress</div>
-        <p>Gilbreth is a subscription tool for AI transformation. It captures how work actually happens, turns repeated actions into artifacts, and helps consultants surface automation opportunities faster.</p>
-        <a href="https://gilb.ai" target="_blank" style="display:inline-block;margin-top:10px;padding:5px 14px;background:#111;color:#fff;border-radius:99px;font-size:12px;font-weight:700;text-decoration:none;">Open gilb.ai →</a>
+        <h3 class="mb-0.5 text-[16px] font-bold tracking-[-0.01em] text-zinc-950">
+          <a href="/gilb/" class="text-inherit no-underline">Gilbreth</a>
+        </h3>
+        <div class="mb-1 text-[12px] font-bold text-zinc-400">gilb.ai</div>
+        <div class="mb-1 text-[12px] font-semibold text-amber-500">◐ In progress</div>
+        <p class="text-[14px] leading-[1.45] text-zinc-600">
+          Gilbreth is a subscription tool for AI transformation. It captures how work actually happens, turns repeated actions into artifacts, and helps consultants surface automation opportunities faster.
+        </p>
+        <a href="https://gilb.ai" target="_blank" class="mt-2.5 inline-block rounded-full bg-zinc-950 px-3.5 py-1.5 text-[12px] font-bold text-white no-underline">Open gilb.ai →</a>
       </div>
     </div>
-  </div>
+  </section>
+</main>
 
-</div>
-
-<footer>
+<footer class="px-6 py-8 text-center text-[12px] text-zinc-400">
   Building with fun and love ❤️<br><br>
-  Open source: <a href="https://github.com/farol-team/gnap" target="_blank">GNAP</a><br><br>
-  © 2026 Farol Lab · <a href="mailto:ori@agentmail.to">ori@agentmail.to</a>
+  Open source: <a href="https://github.com/farol-team/gnap" target="_blank" class="text-zinc-500 no-underline hover:text-zinc-950">GNAP</a><br><br>
+  © 2026 Farol Lab · <a href="mailto:ori@agentmail.to" class="text-zinc-500 no-underline hover:text-zinc-950">ori@agentmail.to</a>
 </footer>
 
 </body>
