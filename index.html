@@ -4,91 +4,121 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Farol Lab — Building in Public</title>
-<meta name="description" content="Follow our journey building AI products. Real metrics, real decisions, no filter.">
+<meta name="description" content="Farol builds tools for AI transformation.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏗️</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>
   tailwind.config = {
     theme: {
       extend: {
         fontFamily: {
-          sans: ['Inter', 'system-ui', 'sans-serif']
+          sans: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace']
+        },
+        colors: {
+          paper: '#F5F5F0',
+          ink: '#141414',
+          line: '#D9D9D2',
+          muted: '#8A8A8A',
+          accent: '#22c55e'
         }
       }
     }
   };
 </script>
 </head>
-<body class="bg-zinc-50 font-sans text-zinc-950 antialiased">
+<body class="bg-white font-sans text-ink antialiased">
 
-<nav class="border-b border-zinc-200">
-  <div class="mx-auto flex max-w-[720px] items-center justify-between px-4 py-3 sm:px-6 lg:px-0">
-    <div class="text-[17px] font-extrabold tracking-[-0.03em]">
-      <a href="/" class="text-zinc-950 no-underline">Farol Lab</a>
-    </div>
-    <div class="flex items-center gap-5"></div>
-  </div>
-</nav>
-
-<main class="mx-auto max-w-[720px] px-4 sm:px-6 lg:px-0">
-  <section class="border-b border-zinc-200 py-12 sm:py-16 lg:py-20">
-    <div class="mb-4 inline-flex items-center text-[11px] font-bold uppercase tracking-[0.1em] text-green-500">
-      <span class="mr-1.5 inline-block h-[7px] w-[7px] animate-pulse rounded-full bg-green-500"></span>
-      Building in public
-    </div>
-    <h1 class="mb-3 text-[32px] font-black leading-[1.08] tracking-[-0.04em] text-zinc-950 sm:text-[40px] lg:text-[48px]">
-      Two humans and an AI&#8209;cofounder<br>have fun building tools for AI transformation.
-    </h1>
-    <p class="max-w-[560px] text-[16px] leading-[1.6] text-zinc-600 sm:text-[18px]">
-      Businesses are entering a period where they need to redesign how work gets done around what AI can actually do. Farol builds tools that help make that transition more effective.
-    </p>
-    <a href="https://x.com/cofounder_run" target="_blank" class="mt-5 inline-flex items-center gap-2 rounded-full bg-zinc-950 px-6 py-3 text-[15px] font-bold text-white no-underline transition hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(0,0,0,0.15)]">
-      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-      Follow on X
-    </a>
-    <p class="mt-2 text-[12px] text-zinc-400">This account is run by Ori, our AI co-founder ✨</p>
-  </section>
-
-  <section class="border-b border-zinc-200 py-8">
-    <div class="mb-4 text-[11px] font-bold uppercase tracking-[0.1em] text-zinc-400">Products</div>
-
-    <div class="mb-3 flex flex-col gap-5 rounded-[14px] border border-zinc-200 bg-white p-5 transition hover:border-zinc-300 hover:shadow-[0_4px_16px_rgba(0,0,0,0.04)] sm:flex-row sm:gap-5">
-      <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-green-50 text-2xl text-[#173525]">G</div>
-      <div>
-        <h3 class="mb-0.5 text-[16px] font-bold tracking-[-0.01em] text-zinc-950">
-          <a href="/gilb/" class="text-inherit no-underline">Gilbreth</a>
-        </h3>
-        <div class="mb-1 text-[12px] font-bold text-zinc-400">gilb.ai</div>
-        <div class="mb-1 text-[12px] font-semibold text-amber-500">◐ Testing in progress</div>
-        <p class="text-[14px] leading-[1.45] text-zinc-600">
-          Gilbreth is a subscription tool for AI transformation. It captures how work actually happens across screens and call recordings, with the goal of collecting 100% of the valuable context agents need in the Shannon sense.
-        </p>
-        <a href="https://gilb.ai" target="_blank" class="mt-2.5 inline-block rounded-full bg-zinc-950 px-3.5 py-1.5 text-[12px] font-bold text-white no-underline">Open gilb.ai →</a>
+<div class="min-h-screen bg-white">
+  <header class="border-b border-line">
+    <div class="mx-auto flex w-full max-w-5xl items-center justify-between px-4 py-3 text-[13px] sm:px-6 lg:px-8">
+      <div class="font-medium">
+        <a href="/" class="text-ink no-underline">Farol Lab</a>
+      </div>
+      <div class="flex items-center gap-2 text-[11px] text-muted">
+        <span class="inline-block h-2 w-2 animate-pulse rounded-full bg-accent"></span>
+        <span>Building in public</span>
       </div>
     </div>
+  </header>
 
-    <div class="mb-3 flex flex-col gap-5 rounded-[14px] border border-zinc-200 bg-white p-5 transition hover:border-zinc-300 hover:shadow-[0_4px_16px_rgba(0,0,0,0.04)] sm:flex-row sm:gap-5">
-      <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-sky-50 text-2xl text-sky-900">O</div>
-      <div>
-        <h3 class="mb-0.5 text-[16px] font-bold tracking-[-0.01em] text-zinc-950">Ori</h3>
-        <div class="mb-1 text-[12px] font-bold text-zinc-400">Company brain for AI transformation</div>
-        <div class="mb-1 text-[12px] font-semibold text-amber-500">◐ Testing in progress</div>
-        <p class="text-[14px] leading-[1.45] text-zinc-600">
-          Ori is the company brain for AI transformation, helping teams move toward a state of recurring self-improvement instead of one-off automation wins.
-        </p>
+  <main class="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
+    <section class="border border-line bg-white">
+      <div class="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr]">
+        <div class="border-b border-line p-6 lg:border-b-0 lg:border-r lg:p-10">
+          <div class="mb-5 text-[11px] uppercase tracking-[0.18em] text-accent">AI Transformation</div>
+          <h1 class="max-w-[16ch] text-[34px] font-medium leading-[1.08] tracking-[-0.04em] text-ink sm:text-[44px] lg:text-[56px]">
+            Two humans and an AI&#8209;cofounder have fun building tools for AI transformation.
+          </h1>
+          <p class="mt-5 max-w-[58ch] text-[14px] leading-[1.75] text-[#4A4A4A] sm:text-[15px]">
+            Businesses are entering a period where they need to redesign how work gets done around what AI can actually do. Farol builds tools that help make that transition more effective.
+          </p>
+          <div class="mt-6">
+            <a href="https://x.com/cofounder_run" target="_blank" class="inline-flex items-center border border-ink px-4 py-2 text-[12px] font-medium text-ink no-underline transition hover:bg-ink hover:text-white">
+              Follow on X
+            </a>
+          </div>
+          <p class="mt-3 text-[11px] text-muted">This account is run by Ori, our AI co-founder.</p>
+        </div>
+
+        <div class="p-6 lg:p-10">
+          <div class="mb-4 text-[11px] uppercase tracking-[0.18em] text-muted">Current thesis</div>
+          <div class="space-y-3 text-[13px] leading-[1.8] text-[#4A4A4A]">
+            <p>AI transformation starts with better context, not with generic automation claims.</p>
+            <p>Farol is focused on tools that help companies capture work, structure company memory, and move toward recurring self-improvement.</p>
+            <p>The active surface today is practical: gather context, turn it into usable artifacts, and make agents more effective inside real businesses.</p>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
-</main>
+    </section>
 
-<footer class="px-6 py-8 text-center text-[12px] text-zinc-400">
-  Building with fun and love ❤️<br><br>
-  Open source: <a href="https://github.com/farol-team/gnap" target="_blank" class="text-zinc-500 no-underline hover:text-zinc-950">GNAP</a><br><br>
-  © 2026 Farol Lab · <a href="mailto:ori@agentmail.to" class="text-zinc-500 no-underline hover:text-zinc-950">ori@agentmail.to</a>
-</footer>
+    <section class="mt-6 border border-line bg-white">
+      <div class="border-b border-line px-6 py-3 text-[11px] uppercase tracking-[0.18em] text-muted lg:px-10">
+        Products
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2">
+        <article class="border-b border-line p-6 lg:border-b-0 lg:border-r lg:p-10">
+          <div class="mb-3 flex items-start justify-between gap-4">
+            <div>
+              <h2 class="text-[20px] font-medium tracking-[-0.03em] text-ink">Gilbreth</h2>
+              <div class="mt-1 text-[12px] text-muted">gilb.ai</div>
+            </div>
+            <div class="whitespace-nowrap text-[12px] font-medium text-[#b36b00]">◐ Testing in progress</div>
+          </div>
+          <p class="text-[14px] leading-[1.8] text-[#4A4A4A]">
+            Gilbreth is a subscription tool for AI transformation. It captures how work actually happens across screens and call recordings, with the goal of collecting 100% of the valuable context agents need in the Shannon sense.
+          </p>
+          <a href="https://gilb.ai" target="_blank" class="mt-5 inline-flex items-center border border-ink px-4 py-2 text-[12px] font-medium text-ink no-underline transition hover:bg-ink hover:text-white">
+            Open gilb.ai
+          </a>
+        </article>
+
+        <article class="p-6 lg:p-10">
+          <div class="mb-3 flex items-start justify-between gap-4">
+            <div>
+              <h2 class="text-[20px] font-medium tracking-[-0.03em] text-ink">Ori</h2>
+              <div class="mt-1 text-[12px] text-muted">Company brain for AI transformation</div>
+            </div>
+            <div class="whitespace-nowrap text-[12px] font-medium text-[#b36b00]">◐ Testing in progress</div>
+          </div>
+          <p class="text-[14px] leading-[1.8] text-[#4A4A4A]">
+            Ori is the company brain for AI transformation, helping teams move from one-off automation wins toward a state of recurring self-improvement.
+          </p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-line">
+    <div class="mx-auto flex w-full max-w-5xl flex-col gap-2 px-4 py-4 text-[11px] text-muted sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+      <div>Open source: <a href="https://github.com/farol-team/gnap" target="_blank" class="text-ink no-underline hover:underline">GNAP</a></div>
+      <div>© 2026 Farol Lab · <a href="mailto:ori@agentmail.to" class="text-ink no-underline hover:underline">ori@agentmail.to</a></div>
+    </div>
+  </footer>
+</div>
 
 </body>
 </html>
