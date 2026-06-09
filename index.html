@@ -29,7 +29,36 @@
   };
 </script>
 <script>
+  const APPS_SCRIPT_URL = '';
   const WAITLIST_ENDPOINT = 'https://formsubmit.co/ajax/6562c4076bcc26d7ab7f7b81f61862b8';
+
+  async function postLead(payload, fallbackFormData) {
+    if (APPS_SCRIPT_URL) {
+      const response = await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      });
+      const result = await response.json();
+      if (!response.ok || !result.ok) {
+        throw new Error(result.error || 'Apps Script submission failed.');
+      }
+      return result;
+    }
+
+    const fallbackResponse = await fetch(WAITLIST_ENDPOINT, {
+      method: 'POST',
+      headers: { Accept: 'application/json' },
+      body: fallbackFormData
+    });
+    const fallbackResult = await fallbackResponse.json();
+
+    if (!fallbackResponse.ok || fallbackResult.success !== 'true') {
+      throw new Error(fallbackResult.message || 'Fallback submission failed.');
+    }
+
+    return fallbackResult;
+  }
 
   async function submitFarolTeamWaitlist(event) {
     event.preventDefault();
@@ -54,16 +83,11 @@
     const data = new FormData(form);
 
     try {
-      const response = await fetch(WAITLIST_ENDPOINT, {
-        method: 'POST',
-        headers: { Accept: 'application/json' },
-        body: data
-      });
-      const result = await response.json();
-
-      if (!response.ok || result.success !== 'true') {
-        throw new Error(result.message || 'Submission failed.');
-      }
+      await postLead({
+        email: email,
+        product: 'Ori',
+        source: 'farol.team'
+      }, data);
 
       form.reset();
       status.textContent = 'Done. We will notify you when Ori is ready.';
@@ -171,7 +195,7 @@
                 Email when ready
               </button>
             </div>
-            <p id="ori-waitlist-status" class="mt-3 text-[11px] text-muted">Leaves a waitlist signup and forwards it to our inbox monitor.</p>
+            <p id="ori-waitlist-status" class="mt-3 text-[11px] text-muted">After Apps Script deploy, this sends directly to the team chat. Until then it uses fallback delivery.</p>
           </form>
         </article>
 
