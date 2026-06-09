@@ -28,6 +28,58 @@
     }
   };
 </script>
+<script>
+  const WAITLIST_ENDPOINT = 'https://formsubmit.co/ajax/6562c4076bcc26d7ab7f7b81f61862b8';
+
+  async function submitFarolTeamWaitlist(event) {
+    event.preventDefault();
+
+    const form = document.getElementById('ori-waitlist-form');
+    const input = document.getElementById('ori-waitlist-email');
+    const status = document.getElementById('ori-waitlist-status');
+    const button = document.getElementById('ori-waitlist-button');
+    const email = input.value.trim();
+
+    if (!email) {
+      status.textContent = 'Enter your email first.';
+      status.className = 'mt-3 text-[11px] text-red-600';
+      return;
+    }
+
+    button.disabled = true;
+    button.classList.add('opacity-60');
+    status.textContent = 'Sending...';
+    status.className = 'mt-3 text-[11px] text-muted';
+
+    const data = new FormData(form);
+
+    try {
+      const response = await fetch(WAITLIST_ENDPOINT, {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+        body: data
+      });
+      const result = await response.json();
+
+      if (!response.ok || result.success !== 'true') {
+        throw new Error(result.message || 'Submission failed.');
+      }
+
+      form.reset();
+      status.textContent = 'Done. We will notify you when Ori is ready.';
+      status.className = 'mt-3 text-[11px] text-accent';
+    } catch (error) {
+      status.textContent = 'Something failed. Use email instead: ori@agentmail.to';
+      status.className = 'mt-3 text-[11px] text-red-600';
+      button.disabled = false;
+      button.classList.remove('opacity-60');
+      return;
+    }
+
+    button.disabled = false;
+    button.classList.remove('opacity-60');
+  }
+</script>
 </head>
 <body class="bg-white font-sans text-ink antialiased">
 
@@ -107,9 +159,20 @@
           <p class="text-[14px] leading-[1.8] text-[#4A4A4A]">
             Ori is the company brain for AI transformation, helping teams move from one-off automation wins toward a state of recurring self-improvement.
           </p>
-          <a href="mailto:ori@agentmail.to?subject=Ori%20waitlist" class="mt-5 inline-flex items-center border border-line px-4 py-2 text-[12px] font-medium text-ink no-underline transition hover:border-ink hover:bg-ink hover:text-white">
-            Email when ready
-          </a>
+          <form id="ori-waitlist-form" class="mt-5 space-y-3" onsubmit="submitFarolTeamWaitlist(event)">
+            <input type="hidden" name="_subject" value="[Farol.team] Ori waitlist signup">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="product" value="Ori">
+            <input type="hidden" name="source" value="farol.team">
+            <div class="flex flex-col gap-2 sm:flex-row">
+              <input id="ori-waitlist-email" type="email" name="email" placeholder="your@email.com" required class="w-full border border-line px-3 py-2 text-[12px] text-ink outline-none transition focus:border-ink">
+              <button id="ori-waitlist-button" type="submit" class="inline-flex items-center justify-center border border-line px-4 py-2 text-[12px] font-medium text-ink transition hover:border-ink hover:bg-ink hover:text-white">
+                Email when ready
+              </button>
+            </div>
+            <p id="ori-waitlist-status" class="mt-3 text-[11px] text-muted">Leaves a waitlist signup and forwards it to our inbox monitor.</p>
+          </form>
         </article>
 
         <article class="border-t border-line p-6 lg:border-t-0 lg:border-l lg:p-10">
