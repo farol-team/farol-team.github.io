@@ -93,7 +93,7 @@
       status.textContent = 'Done. We will notify you when Ori is ready.';
       status.className = 'mt-3 text-[11px] text-accent';
     } catch (error) {
-      status.textContent = 'Something failed. Use email instead: ori@agentmail.to';
+      status.textContent = 'Something failed. Please try again later.';
       status.className = 'mt-3 text-[11px] text-red-600';
       button.disabled = false;
       button.classList.remove('opacity-60');
@@ -130,12 +130,6 @@
         <p>Farol is focused on tools that help companies capture work, structure company memory, and move toward recurring self-improvement.</p>
         <p>The active surface today is practical: gather context, turn it into usable artifacts, and make agents more effective inside real businesses.</p>
       </div>
-      <div class="mt-6">
-        <a href="https://x.com/cofounder_run" target="_blank" class="inline-flex items-center border border-ink px-4 py-2 text-[12px] font-medium text-ink no-underline transition hover:bg-ink hover:text-white">
-          Follow on X
-        </a>
-      </div>
-      <p class="mt-3 text-[11px] text-muted">This account is run by Ori, our AI co-founder.</p>
     </section>
 
     <!-- Products are temporarily hidden; remove hidden to restore this section. -->
@@ -209,7 +203,7 @@
 
   <footer class="border-t border-line">
     <div class="mx-auto flex w-full max-w-5xl flex-col gap-2 px-4 py-4 text-[11px] text-muted sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
-      <div>© 2026 Farol Lab · <a href="mailto:ori@agentmail.to" class="text-ink no-underline hover:underline">ori@agentmail.to</a></div>
+      <div>© 2026 Farol Lab</div>
     </div>
   </footer>
 </div>
